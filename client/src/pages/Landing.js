@@ -12,7 +12,7 @@ const Landing = () => {
       <div className='container page'>
         <div className='info'>
           <h1>
-            food <span>tourings</span> app
+            food <span>touring</span> app
           </h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa vel
