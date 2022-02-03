@@ -1101,7 +1101,7 @@ if (action.type === REGISTER_USER_SUCCESS) {
     user: action.payload.user,
     token: action.payload.token,
     userLocation: action.payload.location,
-    jobLocation: action.payload.location,
+    foodyLocation: action.payload.location,
     isLoading: false,
     showAlert: true,
     alertType: 'success',
@@ -1123,9 +1123,55 @@ if (action.type === REGISTER_USER_ERROR) {
 
 - [JS Nuggets Dynamic Object Keys](https://youtu.be/_qxCYtWm0tw)
 
+#### Create More Foodys
+
+- [Mockaroo](https://www.mockaroo.com/)
+- setup mock-data.json in the root
+
+#### Populate Database
+
+- create populate.js in the root
+
+```js
+populate.js;
+
+import { readFile } from 'fs/promises';
+
+import dotenv from 'dotenv';
+dotenv.config();
+
+import connectDB from './db/connect.js';
+import Foody from './models/Foody.js';
+
+const start = async () => {
+  try {
+    await connectDB(process.env.MONGO_URL);
+    await Foody.deleteMany();
+
+    const jsonFoodys = JSON.parse(
+      await readFile(new URL('./mock-data.json', import.meta.url))
+    );
+    await Foody.create(jsonFoodys);
+    console.log('Success!!!!');
+    process.exit(0);
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  }
+};
+
+start();
+```
+
+#### Show Stats - Structure
+
+- aggregation pipeline
+- step by step
+- [Aggregation Pipeline](https://docs.mongodb.com/manual/core/aggregation-pipeline/)
+
 #### Production Setup - Fix Warnings and logoutUser
 
-- getJobs,deleteJob,showStats - invoke logoutUser()
+- getFoodys,deleteFoody,showStats - invoke logoutUser()
 - fix warnings
 
 ```sh
@@ -1162,7 +1208,7 @@ app.use(express.static(path.resolve(__dirname, './client/build')));
 
 // routes
 app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/jobs', authenticateUser, jobsRouter);
+app.use('/api/v1/foodys', authenticateUser, foodysRouter);
 
 // only when ready to deploy
 app.get('*', function (request, response) {

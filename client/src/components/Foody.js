@@ -20,16 +20,13 @@ const Foody = ({
   createdAt,
   updatedAt,
   foody,
-  status,
-  preference,
+  // status,
+  // preference,
 }) => {
-  const { editFoody, deleteFoody } = useAppContext();
+  const { setFoodyToUpdate, deleteFoody } = useAppContext();
   const createDate = moment(createdAt).format('MMM Do YYYY');
   const relativeUpdate = moment(updatedAt).startOf('day').fromNow();
-  console.log(relativeUpdate);
   const costObj = mapEnumObject(cost, costs);
-  console.log('costObj', costObj);
-  console.log('cost', cost);
   return (
     <Wrapper>
       <header>
@@ -43,7 +40,7 @@ const Foody = ({
               text={village}
             />
           </div>
-          <div className={`status ${status}`}>{status}</div>
+          {/* <div className={`status ${status}`}>{status}</div> */}
         </div>
       </header>
       <div className='content'>
@@ -51,7 +48,7 @@ const Foody = ({
           <FoodyInfo
             tooltip='Distance'
             icon={<GiPathDistance size={24} />}
-            text={`13 Km`}
+            text={`Coming soon...`}
           />
           <FoodyInfo
             tooltip='Created'
@@ -74,21 +71,18 @@ const Foody = ({
             text={costObj.icon}
           />
           <div className={`cost ${costObj.text}`}>{costObj.text}</div>
-          <div className={`preference ${preference}`}>{preference}</div>
+          {/* <div className={`preference ${preference}`}>{preference}</div> */}
         </div>
         <footer>
           <div className='actions'>
             <Link
               to='/add-foody'
-              onClick={() => editFoody(_id)}
+              onClick={() => setFoodyToUpdate(_id)}
               className='btn edit-btn'
             >
               edit
             </Link>
-            <button
-              onClick={() => deleteFoody(title)}
-              className='btn delete-btn'
-            >
+            <button onClick={() => deleteFoody(_id)} className='btn delete-btn'>
               delete
             </button>
           </div>

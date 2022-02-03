@@ -1,5 +1,12 @@
+import { StatsContainer, ChartsContainer } from '../../components';
+
 const Stats = () => {
-  return <div>STATS</div>;
+  return (
+    <>
+      <StatsContainer all />
+      <ChartsContainer />
+    </>
+  );
 };
 
 export default Stats;

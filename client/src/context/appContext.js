@@ -20,6 +20,14 @@ import {
   GET_FOODYS_BEGIN,
   GET_FOODYS_SUCCESS,
   SET_EDIT_FOODY,
+  UPDATE_FOODY_BEGIN,
+  UPDATE_FOODY_SUCCESS,
+  UPDATE_FOODY_ERROR,
+  DELETE_FOODY_BEGIN,
+  DELETE_FOODY_SUCCESS,
+  DELETE_FOODY_ERROR,
+  SHOW_STATS_BEGIN,
+  SHOW_STATS_SUCCESS,
 } from './actions';
 import costs from '../utils/costs';
 
@@ -37,7 +45,7 @@ const initialState = {
   token: token,
   userLocation: userLocation || '',
   isEditing: false,
-  placeEditId: '',
+  editFoodyId: '',
   title: '',
   village: '',
   remarks: '',
@@ -47,16 +55,17 @@ const initialState = {
   status: 'unpublished',
   preference: 'pending',
   cuisineOptions: ['greek', 'asian', 'italian', 'mexican'],
-  foodyOptions: ['pending', 'meze', 'ala-kart', 'buffet'],
+  foodyOptions: ['pending', 'meze', 'a la carte', 'buffet'],
   costOptions: costs,
   statusOptions: ['unpublished', 'published'],
   preferenceOptions: ['pending', 'not-interested', 'visited', 'interested'],
   foodLocation: userLocation || '',
   foodys: [],
-  myFoodys: [],
   totalFoodys: 0,
   page: 1,
   numOfPages: 1,
+  stats: {},
+  monthlyCreations: [],
 };
 
 const AppContext = createContext();
@@ -117,8 +126,8 @@ const AppProvider = ({ children }) => {
         type: SIGN_USER_ERROR,
         payload: { msg: error.response.data.msg },
       });
-      clearAlert();
     }
+    clearAlert();
   };
 
   const updateUser = async (userToUpdate) => {
@@ -167,13 +176,61 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
-  const editFoody = async (id) => {
+  const setFoodyToUpdate = async (id) => {
     console.log('EDIT FOODY', id);
     dispatch({ type: SET_EDIT_FOODY, payload: { id } });
   };
 
-  const deleteFoody = async (title) => {
-    console.log('EDIT FOODY', title);
+  const editFoody = async () => {
+    dispatch({ type: UPDATE_FOODY_BEGIN });
+    try {
+      const {
+        editFoodyId,
+        title,
+        village,
+        remarks,
+        cuisine,
+        foody,
+        cost,
+        status,
+      } = state;
+      await clientApi.patch(`/foodys/${editFoodyId}`, {
+        title,
+        village,
+        remarks,
+        cuisine,
+        foody,
+        cost,
+        status,
+      });
+      dispatch({ type: UPDATE_FOODY_SUCCESS });
+      dispatch({ type: CLEAR_VALUES });
+    } catch (error) {
+      if (error.response.status === 401) return;
+      dispatch({
+        type: UPDATE_FOODY_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
+  };
+
+  const deleteFoody = async (foodyId) => {
+    dispatch({ type: DELETE_FOODY_BEGIN });
+    try {
+      const { data } = await clientApi.delete(`/foodys/${foodyId}`);
+      dispatch({
+        type: DELETE_FOODY_SUCCESS,
+        payload: { id: foodyId, msg: data.msg },
+      });
+    } catch (error) {
+      if (error.response.status === 401) return;
+      dispatch({
+        type: DELETE_FOODY_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
   };
 
   const clearValues = () => {
@@ -190,7 +247,8 @@ const AppProvider = ({ children }) => {
         payload: { foodys, totalFoodys, numOfPages },
       });
     } catch (error) {
-      logoutUser();
+      //logoutUser();
+      console.log('error', error.response);
     }
     clearAlert();
   };
@@ -205,7 +263,39 @@ const AppProvider = ({ children }) => {
         payload: { foodys: myFoodys, totalFoodys, numOfPages },
       });
     } catch (error) {
-      logoutUser();
+      //logoutUser();
+      console.log('error', error.response);
+    }
+    clearAlert();
+  };
+
+  const getUserStats = async () => {
+    dispatch({ type: SHOW_STATS_BEGIN });
+    try {
+      const { data } = await clientApi.get('/foodys/user-stats');
+      const { defaultUserStats, monthlyCreations } = data;
+      dispatch({
+        type: SHOW_STATS_SUCCESS,
+        payload: { stats: defaultUserStats, monthlyCreations },
+      });
+    } catch (error) {
+      console.log(error.response);
+    }
+    clearAlert();
+  };
+
+  const getAllStats = async () => {
+    dispatch({ type: SHOW_STATS_BEGIN });
+    try {
+      const { data } = await clientApi.get('/foodys/all-stats');
+      console.log('data', data.defaultAllStats);
+      const { defaultAllStats, monthlyCreations } = data;
+      dispatch({
+        type: SHOW_STATS_SUCCESS,
+        payload: { stats: defaultAllStats, monthlyCreations },
+      });
+    } catch (error) {
+      console.log(error.response);
     }
     clearAlert();
   };
@@ -221,11 +311,14 @@ const AppProvider = ({ children }) => {
         toggleSidebar,
         logoutUser,
         createFoody,
+        setFoodyToUpdate,
         editFoody,
         deleteFoody,
         clearValues,
         getMyFoodys,
         getAllFoodys,
+        getUserStats,
+        getAllStats,
       }}
     >
       {children}

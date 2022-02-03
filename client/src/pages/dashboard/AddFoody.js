@@ -46,7 +46,8 @@ const AddFoody = () => {
 
     if (isEditing) {
       console.log('is editing...');
-      return editFoody();
+      editFoody();
+      return;
     }
 
     createFoody();

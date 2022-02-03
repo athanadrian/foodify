@@ -11,6 +11,9 @@ import Loading from './Loading';
 import Foody from './Foody';
 import SearchContainer from './SearchContainer';
 import FoodysContainer from './FoodysContainer';
+import StatsContainer from './StatsContainer';
+import StatsContainerRow from './StatsContainerRow';
+import ChartsContainer from './ChartsContainer';
 
 export {
   Logo,
@@ -26,4 +29,7 @@ export {
   Foody,
   SearchContainer,
   FoodysContainer,
+  StatsContainer,
+  StatsContainerRow,
+  ChartsContainer,
 };

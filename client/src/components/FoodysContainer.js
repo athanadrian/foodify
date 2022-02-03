@@ -9,15 +9,16 @@ const FoodysContainer = ({ all }) => {
     totalFoodys,
     //numOfPages,
     isLoading,
+    getAllFoodys,
     getMyFoodys,
   } = useAppContext();
 
   console.log(foodys, totalFoodys);
 
   useEffect(() => {
-    getMyFoodys();
+    all ? getAllFoodys() : getMyFoodys();
     // eslint-disable-next-line
-  }, []);
+  }, [all]);
 
   if (isLoading) return <Loading center />;
 

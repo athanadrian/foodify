@@ -17,6 +17,14 @@ import {
   GET_FOODYS_BEGIN,
   GET_FOODYS_SUCCESS,
   SET_EDIT_FOODY,
+  UPDATE_FOODY_BEGIN,
+  UPDATE_FOODY_SUCCESS,
+  UPDATE_FOODY_ERROR,
+  DELETE_FOODY_BEGIN,
+  DELETE_FOODY_SUCCESS,
+  DELETE_FOODY_ERROR,
+  SHOW_STATS_BEGIN,
+  SHOW_STATS_SUCCESS,
 } from './actions';
 
 import { initialState } from './appContext';
@@ -128,7 +136,7 @@ const reducer = (state, action) => {
       isLoading: false,
       showAlert: true,
       alertType: 'success',
-      alertText: 'New Foody Added Successfully!',
+      alertText: 'Foody Created Successfully!',
     };
   }
 
@@ -201,7 +209,7 @@ const reducer = (state, action) => {
     return {
       ...state,
       isEditing: true,
-      editJobId: _id,
+      editFoodyId: _id,
       title,
       village,
       cuisine,
@@ -210,6 +218,76 @@ const reducer = (state, action) => {
       status,
       preference,
       remarks,
+    };
+  }
+
+  if (action.type === UPDATE_FOODY_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === UPDATE_FOODY_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'success',
+      alertText: 'Foody Updated Successfully!',
+    };
+  }
+  if (action.type === UPDATE_FOODY_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'danger',
+      alertText: action.payload.msg,
+    };
+  }
+  if (action.type === DELETE_FOODY_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === DELETE_FOODY_SUCCESS) {
+    const remainingFoodys = state.foodys.filter(
+      (foody) => foody._id !== action.payload.id
+    );
+    return {
+      ...state,
+      foodys: remainingFoodys,
+      totalFoodys: remainingFoodys.length,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'success',
+      alertText: action.payload.msg,
+    };
+  }
+  if (action.type === DELETE_FOODY_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'danger',
+      alertText: action.payload.msg,
+    };
+  }
+
+  if (action.type === SHOW_STATS_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+      showAlert: false,
+    };
+  }
+  if (action.type === SHOW_STATS_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      stats: action.payload.stats,
+      monthlyCreations: action.payload.monthlyCreations,
     };
   }
 

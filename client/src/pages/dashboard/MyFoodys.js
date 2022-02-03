@@ -4,7 +4,7 @@ const MyFoodys = () => {
   return (
     <>
       <SearchContainer />
-      <FoodysContainer all />
+      <FoodysContainer />
     </>
   );
 };

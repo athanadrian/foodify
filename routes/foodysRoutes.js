@@ -2,7 +2,8 @@ import express from 'express';
 import {
   getAllFoodys,
   getFoody,
-  getStats,
+  getUserStats,
+  getAllStats,
   createFoody,
   updateFoody,
   deleteFoody,
@@ -14,7 +15,8 @@ const router = express.Router();
 
 router.route('/').get(getAllFoodys).post(authenticateUser, createFoody);
 router.get('/my', authenticateUser, getMyFoodys);
-router.get('/stats', getStats);
+router.get('/user-stats', authenticateUser, getUserStats);
+router.get('/all-stats', getAllStats);
 router
   .route('/:id')
   .get(getFoody)
