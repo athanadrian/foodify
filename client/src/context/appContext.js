@@ -28,6 +28,7 @@ import {
   DELETE_FOODY_ERROR,
   SHOW_STATS_BEGIN,
   SHOW_STATS_SUCCESS,
+  CLEAR_FILTERS,
 } from './actions';
 import costs from '../utils/costs';
 
@@ -50,12 +51,12 @@ const initialState = {
   village: '',
   remarks: '',
   cuisine: 'greek',
-  foody: 'pending',
+  foody: 'a la carte',
   cost: 'pending',
   status: 'unpublished',
   preference: 'pending',
   cuisineOptions: ['greek', 'asian', 'italian', 'mexican'],
-  foodyOptions: ['pending', 'meze', 'a la carte', 'buffet'],
+  foodyOptions: ['meze', 'a la carte', 'buffet'],
   costOptions: costs,
   statusOptions: ['unpublished', 'published'],
   preferenceOptions: ['pending', 'not-interested', 'visited', 'interested'],
@@ -66,12 +67,31 @@ const initialState = {
   numOfPages: 1,
   stats: {},
   monthlyCreations: [],
+  search: '',
+  searchCuisine: 'all',
+  searchFoody: 'all',
+  searchCost: 'all',
+  searchStatus: 'all',
+  searchPreference: 'all',
+  sort: 'latest-created',
+  sortOptions: [
+    'latest-created',
+    'oldest-created',
+    'latest-updated',
+    'oldest-updated',
+    'a-z',
+    'z-a',
+  ],
 };
 
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const clearFilters = () => {
+    dispatch({ type: CLEAR_FILTERS });
+  };
 
   const clearAlert = () => {
     setTimeout(() => {
@@ -89,7 +109,6 @@ const AppProvider = ({ children }) => {
   };
 
   const handleChange = ({ name, value }) => {
-    console.log('dispatch', value);
     dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
   };
 
@@ -177,7 +196,6 @@ const AppProvider = ({ children }) => {
   };
 
   const setFoodyToUpdate = async (id) => {
-    console.log('EDIT FOODY', id);
     dispatch({ type: SET_EDIT_FOODY, payload: { id } });
   };
 
@@ -238,9 +256,24 @@ const AppProvider = ({ children }) => {
   };
 
   const getAllFoodys = async () => {
+    const {
+      search,
+      searchCuisine,
+      searchFoody,
+      searchCost,
+      searchStatus,
+      searchPreference,
+      sort,
+    } = state;
+
+    let url = `/foodys?cuisine=${searchCuisine}&cost=${searchCost}&status=${searchStatus}&foody=${searchFoody}&preference=${searchPreference}&sort=${sort}`;
+    if (search) {
+      url = `${url}&search=${search}`;
+    }
+
     dispatch({ type: GET_FOODYS_BEGIN });
     try {
-      const { data } = await clientApi.get('/foodys');
+      const { data } = await clientApi.get(url);
       const { foodys, totalFoodys, numOfPages } = data;
       dispatch({
         type: GET_FOODYS_SUCCESS,
@@ -288,7 +321,6 @@ const AppProvider = ({ children }) => {
     dispatch({ type: SHOW_STATS_BEGIN });
     try {
       const { data } = await clientApi.get('/foodys/all-stats');
-      console.log('data', data.defaultAllStats);
       const { defaultAllStats, monthlyCreations } = data;
       dispatch({
         type: SHOW_STATS_SUCCESS,
@@ -299,6 +331,8 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   };
+
+  //const
 
   return (
     <AppContext.Provider
@@ -319,6 +353,7 @@ const AppProvider = ({ children }) => {
         getAllFoodys,
         getUserStats,
         getAllStats,
+        clearFilters,
       }}
     >
       {children}

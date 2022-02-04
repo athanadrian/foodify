@@ -17,7 +17,7 @@ const Wrapper = styled.section`
   }
   @media (min-width: 1120px) {
     .container-row {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       column-gap: 1rem;
     }
   }

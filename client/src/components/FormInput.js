@@ -1,4 +1,4 @@
-const FormInput = ({ labelText, handleChange, name, type, value }) => {
+const FormInput = ({ labelText, handleChange, name, type, value, ...rest }) => {
   return (
     <div className='form-row'>
       <label htmlFor={name} className='form-label'>
@@ -10,6 +10,7 @@ const FormInput = ({ labelText, handleChange, name, type, value }) => {
         onChange={handleChange}
         type={type}
         value={value}
+        {...rest}
       />
     </div>
   );

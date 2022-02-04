@@ -36,19 +36,19 @@ const FoodySchema = new mongoose.Schema(
       type: String,
       required: [true, 'Type of food is required.'],
       enum: {
-        values: ['pending', 'meze', 'a la carte', 'buffet'],
+        values: ['meze', 'alaCarte', 'buffet'],
         message: 'Foody type is either meze, a la carte, buffet',
       },
-      default: 'pending',
+      default: 'a la carte',
     },
     cost: {
       type: String,
       required: [true, 'Cost is required.'],
       enum: {
-        values: ['pending', 'cheap', 'average', 'expensive'],
+        values: ['cheap', 'average', 'expensive'],
         message: 'Cost is either cheap, average, expensive',
       },
-      default: 'pending',
+      default: 'average',
     },
     status: {
       type: String,

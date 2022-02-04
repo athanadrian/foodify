@@ -7,18 +7,34 @@ const FoodysContainer = ({ all }) => {
   const {
     foodys,
     totalFoodys,
+    search,
+    searchCuisine,
+    searchFoody,
+    searchCost,
+    searchStatus,
+    searchPreference,
+    sort,
     //numOfPages,
     isLoading,
     getAllFoodys,
     getMyFoodys,
   } = useAppContext();
 
-  console.log(foodys, totalFoodys);
+  console.log(totalFoodys);
 
   useEffect(() => {
     all ? getAllFoodys() : getMyFoodys();
     // eslint-disable-next-line
-  }, [all]);
+  }, [
+    all,
+    search,
+    searchCuisine,
+    searchFoody,
+    searchCost,
+    searchStatus,
+    searchPreference,
+    sort,
+  ]);
 
   if (isLoading) return <Loading center />;
 

@@ -7,7 +7,7 @@ const StatsContainerRow = ({ title, list }) => {
       <h3>{title}</h3>
       <div className='container-row'>
         {list.map((item, i) => (
-          <StatsItem key={i} {...item} />
+          <StatsItem stat={title} key={i} {...item} />
         ))}
       </div>
     </Wrapper>

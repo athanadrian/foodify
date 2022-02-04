@@ -1,11 +1,12 @@
 import Wrapper from '../wrappers/StatsItem';
 
-const StatItem = ({ count, title, icon, color, bcg }) => {
+const StatItem = ({ stat, count, title, icon, color, bcg }) => {
+  const isCost = stat === 'cost';
   return (
     <Wrapper color={color} bcg={bcg}>
       <header>
         <span className='count'>{count}</span>
-        <span className='icon'>{icon}</span>
+        <span className={`${isCost ? 'cost-' : ''}icon`}>{icon}</span>
       </header>
       <h5 className='title'>{title}</h5>
     </Wrapper>

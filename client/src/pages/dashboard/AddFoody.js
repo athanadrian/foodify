@@ -17,13 +17,13 @@ const AddFoody = () => {
     village,
     remarks,
     foody,
-    foodyOptions,
     cost,
-    costOptions,
     status,
-    statusOptions,
     preference,
     cuisine,
+    statusOptions,
+    costOptions,
+    foodyOptions,
     preferenceOptions,
     cuisineOptions,
     handleChange,
@@ -35,7 +35,6 @@ const AddFoody = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log(value);
     handleChange({ name, value });
   };
   const handleSubmit = (e) => {
@@ -45,7 +44,6 @@ const AddFoody = () => {
     }
 
     if (isEditing) {
-      console.log('is editing...');
       editFoody();
       return;
     }

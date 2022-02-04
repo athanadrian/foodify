@@ -1,4 +1,5 @@
-const FormSelect = ({ labelText, name, value, handleChange, list }) => {
+const FormSelect = ({ all, labelText, name, value, handleChange, list }) => {
+  if (all) list = ['all', ...list];
   return (
     <div className='form-row'>
       <label htmlFor={name} className='form-label'>

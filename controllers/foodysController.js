@@ -1,19 +1,70 @@
 import mongoose from 'mongoose';
+import moment from 'moment';
 import { StatusCodes } from 'http-status-codes';
 import BadRequestError from '../errors/bad-request.js';
 import NotFoundError from '../errors/not-found.js';
 import Foody from '../models/Foody.js';
 import checkPermissions from '../utils/checkPermissions.js';
+import { query } from 'express';
 
 export const getAllFoodys = async (req, res, next) => {
-  const foodys = await Foody.find({});
+  const { status, cost, foody, preference, cuisine, sort, search } = req.query;
 
+  const queryObj = {};
+
+  if (status !== 'all') {
+    queryObj.status = status;
+  }
+
+  if (cost !== 'all') {
+    queryObj.cost = cost;
+  }
+
+  if (foody !== 'all') {
+    queryObj.foody = foody;
+  }
+
+  if (preference !== 'all') {
+    queryObj.preference = preference;
+  }
+
+  if (cuisine !== 'all') {
+    queryObj.cuisine = cuisine;
+  }
+
+  if (search) {
+    queryObj.village = { $regex: search, $options: 'i' };
+  }
+
+  let result = Foody.find(queryObj);
+
+  if (sort === 'latest-created') {
+    result = result.sort('-createdAt');
+  }
+  if (sort === 'oldest-created') {
+    result = result.sort('createdAt');
+  }
+  if (sort === 'latest-updated') {
+    result = result.sort('-updatedAt');
+  }
+  if (sort === 'oldest-updated') {
+    result = result.sort('updatedAt');
+  }
+  if (sort === 'a-z') {
+    result = result.sort('village');
+  }
+  if (sort === 'z-a') {
+    result = result.sort('-village');
+  }
+
+  const foodys = await result;
   res
     .status(StatusCodes.OK)
     .json({ foodys, totalFoodys: foodys.length, numOfPages: 1 });
 };
 export const getMyFoodys = async (req, res, next) => {
-  const myFoodys = await Foody.find({ createdBy: req.user.userId });
+  const queryObj = { createdBy: req.user.userId };
+  const myFoodys = await Foody.find(queryObj);
 
   res
     .status(StatusCodes.OK)
@@ -23,88 +74,121 @@ export const getFoody = async (req, res, next) => {
   await res.send('get-Foody');
 };
 
+////////////////// Helper functions /////////////////
+
+const arrayToObject = (array) => {
+  return array.reduce((acc, curr) => {
+    const { _id: title, count } = curr;
+    acc[title] = count;
+    return acc;
+  }, {});
+};
+
+const fetchCuisineStats = (stats) => {
+  return {
+    italian: stats.italian || 0,
+    mexican: stats.mexican || 0,
+    asian: stats.asian || 0,
+    greek: stats.greek || 0,
+  };
+};
+
+const fetchCostStats = (stats) => {
+  return {
+    cheap: stats.cheap || 0,
+    average: stats.average || 0,
+    expensive: stats.expensive || 0,
+  };
+};
+
+const fetchFoodyStats = (stats) => {
+  return {
+    meze: stats.meze || 0,
+    alaCarte: stats.alaCarte || 0,
+    buffet: stats.buffet || 0,
+  };
+};
+
+const mapMonthlyCreations = (data) => {
+  return data
+    .map((item) => {
+      const {
+        _id: { year, month },
+        count,
+      } = item;
+      const date = moment()
+        .month(month - 1)
+        .year(year)
+        .format('MMM Y');
+      return { date, count };
+    })
+    .reverse();
+};
+
+////////////////// Helper functions /////////////////
+
 export const getAllStats = async (req, res, next) => {
-  const query = 'cuisine';
   let defaultAllStats = {};
-  //let defaultCuisineStats = {};
+  let monthlyCreations = [];
 
   const fetchStatsByKey = async (key) => {
     let stats = await Foody.aggregate([
       { $group: { _id: `$${key}`, count: { $sum: 1 } } },
     ]);
-
-    stats = stats.reduce((acc, curr) => {
-      const { _id: title, count } = curr;
-      acc[title] = count;
-      return acc;
-    }, {});
-    return stats;
+    return arrayToObject(stats);
   };
 
-  const fetchCuisineStats = async () => {
-    const stats = await fetchStatsByKey('cuisine');
-    console.log(stats);
-    const cuisineStats = {
-      italian: stats.italian || 0,
-      mexican: stats.mexican || 0,
-      asian: stats.asian || 0,
-      greek: stats.greek || 0,
-    };
-    return cuisineStats;
+  const defaultCuisineStats = fetchCuisineStats(
+    await fetchStatsByKey('cuisine')
+  );
+  const defaultCostStats = fetchCostStats(await fetchStatsByKey('cost'));
+  const defaultFoodyStats = fetchFoodyStats(await fetchStatsByKey('foody'));
+  defaultAllStats = {
+    defaultCuisineStats,
+    defaultCostStats,
+    defaultFoodyStats,
   };
 
-  const fetchCostStats = async () => {
-    const stats = await fetchStatsByKey('cost');
-    console.log(stats);
-    const costStats = {
-      cheap: stats.cheap || 0,
-      average: stats.average || 0,
-      expensive: stats.expensive || 0,
-    };
-    return costStats;
-  };
+  monthlyCreations = await Foody.aggregate([
+    {
+      $group: {
+        _id: {
+          year: { $year: '$createdAt' },
+          month: { $month: '$createdAt' },
+        },
+        count: { $sum: 1 },
+      },
+    },
+    { $sort: { '_id.year': -1, '_id.month': -1 } },
+    { $limit: 6 },
+  ]);
 
-  const defaultCuisineStats = await fetchCuisineStats();
-  const defaultCostStats = await fetchCostStats();
-  defaultAllStats = { defaultCuisineStats, defaultCostStats };
-  //}
-  // if (query === 'cost') {
-  // const defaultCostStats = {
-  //   cheap: stats.cheap || 0,
-  //   average: stats.average || 0,
-  //   expensive: stats.expensive || 0,
-  // };
-  // defaultAllStats = { ...defaultCostStats };
-  //}
-  let monthlyCreations = [];
+  monthlyCreations = mapMonthlyCreations(monthlyCreations);
+
   res.status(StatusCodes.OK).json({ defaultAllStats, monthlyCreations });
 };
 
 export const getUserStats = async (req, res, next) => {
-  const query = 'cuisine';
   let defaultUserStats = {};
-  let stats = await Foody.aggregate([
-    { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
-    { $group: { _id: `$${query}`, count: { $sum: 1 } } },
-  ]);
 
-  stats = stats.reduce((acc, curr) => {
-    const { _id: title, count } = curr;
-    acc[title] = count;
-    return acc;
-  }, {});
+  const fetchStatsByKey = async (key) => {
+    let stats = await Foody.aggregate([
+      { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
+      { $group: { _id: `$${key}`, count: { $sum: 1 } } },
+    ]);
+    return arrayToObject(stats);
+  };
 
-  if (query === 'cuisine') {
-    defaultUserStats = {
-      italian: stats.italian || 0,
-      mexican: stats.mexican || 0,
-      asian: stats.asian || 0,
-      greek: stats.greek || 0,
-    };
-  }
+  const defaultCuisineStats = fetchCuisineStats(
+    await fetchStatsByKey('cuisine')
+  );
+  const defaultCostStats = fetchCostStats(await fetchStatsByKey('cost'));
+  defaultAllStats = { defaultCuisineStats, defaultCostStats };
+
   let monthlyCreations = [];
   res.status(StatusCodes.OK).json({ defaultUserStats, monthlyCreations });
 };
+
 export const createFoody = async (req, res, next) => {
   const { title, village } = req.body;
   if (!title || !village) {

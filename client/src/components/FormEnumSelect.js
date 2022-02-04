@@ -1,4 +1,23 @@
-const FormEnumSelect = ({ labelText, name, value, handleChange, list }) => {
+const FormEnumSelect = ({
+  all,
+  labelText,
+  name,
+  value,
+  handleChange,
+  list,
+}) => {
+  if (all) {
+    list = [
+      {
+        desc: 'all',
+        enum: 'all',
+        icon: 'all',
+        id: 0,
+        text: 'all',
+      },
+      ...list,
+    ];
+  }
   return (
     <div className='form-row'>
       <label htmlFor={name} className='form-label'>

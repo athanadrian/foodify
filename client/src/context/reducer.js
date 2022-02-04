@@ -25,6 +25,7 @@ import {
   DELETE_FOODY_ERROR,
   SHOW_STATS_BEGIN,
   SHOW_STATS_SUCCESS,
+  CLEAR_FILTERS,
 } from './actions';
 
 import { initialState } from './appContext';
@@ -168,8 +169,8 @@ const reducer = (state, action) => {
       status: 'unpublished',
       preference: 'pending',
       cuisine: 'greek',
-      cost: 'pending',
-      foody: 'pending',
+      cost: 'average',
+      foody: 'a la carte',
       foodLocation: state.userLocation,
     };
   }
@@ -282,6 +283,7 @@ const reducer = (state, action) => {
       showAlert: false,
     };
   }
+
   if (action.type === SHOW_STATS_SUCCESS) {
     return {
       ...state,
@@ -291,6 +293,18 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === CLEAR_FILTERS) {
+    return {
+      ...state,
+      search: '',
+      searchCuisine: 'all',
+      searchFoody: 'all',
+      searchCost: 'all',
+      searchStatus: 'all',
+      searchReference: 'all',
+      sort: 'latest-created',
+    };
+  }
   throw new Error(`Error can not find action: ${action.type}`);
 };
 

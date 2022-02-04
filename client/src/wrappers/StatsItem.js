@@ -24,7 +24,20 @@ const Wrapper = styled.article`
     margin-top: 0.5rem;
   }
   .icon {
-    width: 80px;
+    width: 70px;
+    height: 60px;
+    background: ${(props) => props.bcg};
+    border-radius: var(--borderRadius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      font-size: 2rem;
+      color: ${(props) => props.color};
+    }
+  }
+  .cost-icon {
+    width: 180px;
     height: 60px;
     background: ${(props) => props.bcg};
     border-radius: var(--borderRadius);
@@ -33,6 +46,14 @@ const Wrapper = styled.article`
     justify-content: center;
     font-size: 2rem;
     color: ${(props) => props.color};
+  }
+
+  @media (min-width: 1120px) {
+    .cost-icon {
+      width: 130px;
+      height: 60px;
+      font-size: 1.5rem;
+    }
   }
 `;
 
