@@ -28,7 +28,7 @@ TODO
 
 > 14. Implement (Viewed-Visited-Declined-Interested)
 
-> 15. Lookup-Data fix.
+> ~~15. Lookup-Data fix.~~
 
 > ~~16. My Foodys pagination~~
 

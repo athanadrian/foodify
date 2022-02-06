@@ -108,11 +108,14 @@ const Wrapper = styled.article`
     width: 100px;
     height: 30px;
   }
-
-  .remarks-text {
+  .remarks-container {
+    border-radius: var(--borderRadius);
     background-color: var(--grey-50);
+    margin-top: 0.5rem;
+  }
+  .remarks-text {
+    padding: 0.5rem 1rem;
     letter-spacing: var(--letterSpacing);
-    padding: 0.5rem;
   }
 
   footer {

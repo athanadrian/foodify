@@ -78,22 +78,24 @@ const Foody = ({
             text={costObj.icon}
           />
           <div className={`cost ${costObj.enum}`}>{costObj.enum}</div>
-          <div className='remarks-container'>
-            <FoodyInfo
-              tooltip='remarks'
-              icon={
-                showRemarks ? (
-                  <BsChevronUp size={22} />
-                ) : (
-                  <BsChevronDown size={22} />
-                )
-              }
-              text='remarks'
-              onClick={() => setShowRemarks(!showRemarks)}
-            />
-            {showRemarks && <div className='remarks-text'>{remarks}</div>}
-          </div>
+          <FoodyInfo
+            tooltip='remarks'
+            icon={
+              showRemarks ? (
+                <BsChevronUp size={22} />
+              ) : (
+                <BsChevronDown size={22} />
+              )
+            }
+            text='remarks'
+            onClick={() => setShowRemarks(!showRemarks)}
+          />
         </div>
+        {showRemarks && (
+          <div className='remarks-container'>
+            <p className='remarks-text'>{remarks}</p>
+          </div>
+        )}
         {!all && (
           <footer>
             <div className='actions'>

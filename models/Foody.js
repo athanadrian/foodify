@@ -52,7 +52,7 @@ const FoodySchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      //required: [true, 'Status is required.'],
+      required: [true, 'Status is required.'],
       enum: {
         values: ['published', 'unpublished'],
         message: 'Foody status is either viewed, visited, interested',

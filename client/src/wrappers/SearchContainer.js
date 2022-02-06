@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Wrapper = styled.section`
   .form {
@@ -36,9 +36,9 @@ const Wrapper = styled.section`
       grid-template-columns: 1fr 1fr 1fr;
     }
     .btn-block {
-      margin-top: 0;
+      //margin-top: 0;
     }
   }
-`
+`;
 
-export default Wrapper
+export default Wrapper;
