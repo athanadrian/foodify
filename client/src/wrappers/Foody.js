@@ -100,7 +100,7 @@ const Wrapper = styled.article`
     height: 30px;
   }
 
-  .preference {
+  .cost {
     border-radius: var(--borderRadius);
     text-transform: capitalize;
     letter-spacing: var(--letterSpacing);
@@ -109,13 +109,10 @@ const Wrapper = styled.article`
     height: 30px;
   }
 
-  .cost {
-    border-radius: var(--borderRadius);
-    text-transform: capitalize;
+  .remarks-text {
+    background-color: var(--grey-50);
     letter-spacing: var(--letterSpacing);
-    text-align: center;
-    width: 100px;
-    height: 30px;
+    padding: 0.5rem;
   }
 
   footer {

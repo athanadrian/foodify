@@ -2,27 +2,27 @@ import { AiOutlineTable } from 'react-icons/ai';
 import { BiFoodMenu } from 'react-icons/bi';
 import { MdOutlineRestaurantMenu } from 'react-icons/md';
 
-const foodys = [
+const preferences = [
   {
     id: 1,
-    text: 'Meze',
-    enum: 'meze',
+    text: 'not-interested',
+    enum: 'notInterested',
     icon: <MdOutlineRestaurantMenu />,
-    desc: 'meze',
+    desc: 'not-interested',
   },
   {
     id: 2,
-    text: 'Al a Carte',
-    enum: 'alaCarte',
+    text: 'visited',
+    enum: 'visited',
     icon: <BiFoodMenu />,
-    desc: 'al a carte',
+    desc: 'visited',
   },
   {
     id: 3,
-    text: 'Buffet',
-    enum: 'buffet',
+    text: 'Interested',
+    enum: 'interested',
     icon: <AiOutlineTable />,
-    desc: 'buffet',
+    desc: 'interested',
   },
 ];
-export default foodys;
+export default preferences;

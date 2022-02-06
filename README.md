@@ -2,18 +2,35 @@ TODO
 
 ##
 
-> 1. Change Select Enum Input elements
-> 2. Remarks implementation
+> ~~1. Change Select Enum Input elements~~
+
+> ~~2. Remarks implementation~~
+
 > 3. Add Single Foody Page/modal
+
 > 4. Maps Implementation
+
 > 5. Calculate Distance
-> 6. Fix Preference
-> 7. User Stats
+
+> ~~6. Fix Preference~~
+
+> ~~7. User Stats (profile page)~~
+
 > 8. Followers/Following implementation
+
 > 9. Likes Implementation
+
 > 10. Comments Implementation
-> 11. Live Chat
-> 12. Users Tab
+
+> 11. Live Chat 12.
+
+> 13. Users Tab
+
+> 14. Implement (Viewed-Visited-Declined-Interested)
+
+> 15. Lookup-Data fix.
+
+> ~~16. My Foodys pagination~~
 
 # Foodify
 

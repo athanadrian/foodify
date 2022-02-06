@@ -19,12 +19,10 @@ const AddFoody = () => {
     foody,
     cost,
     status,
-    // preference,
     cuisine,
     statusOptions,
     costOptions,
     foodyOptions,
-    // preferenceOptions,
     cuisineOptions,
     handleChange,
     displayAlert,
@@ -72,7 +70,7 @@ const AddFoody = () => {
             handleChange={handleInputChange}
           />
 
-          <FormSelect
+          <FormEnumSelect
             name='cuisine'
             value={cuisine}
             labelText='cuisine'
@@ -93,20 +91,13 @@ const AddFoody = () => {
             handleChange={handleInputChange}
             list={costOptions}
           />
-          <FormSelect
+          <FormEnumSelect
             name='status'
             value={status}
             labelText='status'
             handleChange={handleInputChange}
             list={statusOptions}
           />
-          {/* <FormSelect
-            name='preference'
-            value={preference}
-            labelText='preference'
-            handleChange={handleInputChange}
-            list={preferenceOptions}
-          /> */}
         </div>
         <div className='text-area'>
           <FormTextArea

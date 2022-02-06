@@ -1,8 +1,8 @@
 import Wrapper from '../wrappers/FoodyInfo';
 
-const FoodyInfo = ({ icon, tooltip, text, className }) => {
+const FoodyInfo = ({ onClick, icon, tooltip, text, className }) => {
   return (
-    <Wrapper className={className}>
+    <Wrapper className={className} onClick={onClick}>
       <span title={tooltip} className='icon'>
         {icon}
       </span>

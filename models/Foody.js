@@ -59,16 +59,6 @@ const FoodySchema = new mongoose.Schema(
       },
       default: 'unpublished',
     },
-    preference: {
-      type: String,
-      //required: [true, 'Status is required.'],
-      enum: {
-        values: ['pending', 'not-interested', 'visited', 'interested'],
-        message:
-          'Foody preference is either not-interested, visited, interested',
-      },
-      default: 'pending',
-    },
     picUrl: { type: String },
     createdBy: {
       type: mongoose.Types.ObjectId,

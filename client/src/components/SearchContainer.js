@@ -10,12 +10,10 @@ const SearchContainer = ({ all }) => {
     searchFoody,
     searchCost,
     searchStatus,
-    searchPreference,
     sort,
     statusOptions,
     costOptions,
     foodyOptions,
-    preferenceOptions,
     cuisineOptions,
     sortOptions,
     handleChange,
@@ -46,7 +44,7 @@ const SearchContainer = ({ all }) => {
             handleChange={handleSearch}
             placeholder='village'
           />
-          <FormSelect
+          <FormEnumSelect
             name='searchCuisine'
             value={searchCuisine}
             labelText='cuisine'
@@ -70,26 +68,6 @@ const SearchContainer = ({ all }) => {
             list={costOptions}
             allOption
           />
-          {!all && (
-            <>
-              <FormSelect
-                name='searchStatus'
-                value={searchStatus}
-                labelText='status'
-                handleChange={handleSearch}
-                list={statusOptions}
-                allOption
-              />
-              <FormSelect
-                name='searchPreference'
-                value={searchPreference}
-                labelText='preference'
-                handleChange={handleSearch}
-                list={preferenceOptions}
-                allOption
-              />
-            </>
-          )}
           <FormSelect
             name='sort'
             value={sort}
@@ -97,6 +75,16 @@ const SearchContainer = ({ all }) => {
             handleChange={handleSearch}
             list={sortOptions}
           />
+          {!all && (
+            <FormEnumSelect
+              name='searchStatus'
+              value={searchStatus}
+              labelText='status'
+              handleChange={handleSearch}
+              list={statusOptions}
+              allOption
+            />
+          )}
           <button
             className='btn btn-block btn-danger'
             disabled={isLoading}

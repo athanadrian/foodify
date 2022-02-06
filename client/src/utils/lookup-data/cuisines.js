@@ -2,28 +2,28 @@ import { FaFlag } from 'react-icons/fa';
 
 const cuisines = [
   {
-    id: 0,
+    id: 1,
     text: 'Greek',
     enum: 'greek',
     icon: <FaFlag />,
     desc: 'greek',
   },
   {
-    id: 1,
+    id: 2,
     text: 'italian',
     enum: 'italian',
     icon: <FaFlag />,
     desc: 'italian',
   },
   {
-    id: 2,
+    id: 3,
     text: 'Asian',
     enum: 'asian',
     icon: <FaFlag />,
     desc: 'asian',
   },
   {
-    id: 3,
+    id: 4,
     text: 'Mexican',
     enum: 'mexican',
     icon: <FaFlag />,

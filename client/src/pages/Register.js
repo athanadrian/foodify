@@ -23,7 +23,6 @@ const Register = () => {
   };
 
   const handleToggleMember = () => {
-    //setValues((prev) => ({ ...prev, isMember: !values.isMember }));
     setValues({ ...values, isMember: !values.isMember });
   };
 

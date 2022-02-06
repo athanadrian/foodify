@@ -62,7 +62,7 @@ export const getAllFoodys = async (req, res, next) => {
 };
 
 export const getMyFoodys = async (req, res, next) => {
-  const { status, cost, foody, preference, cuisine, sort, search } = req.query;
+  const { status, cost, foody, cuisine, sort, search } = req.query;
 
   const queryObj = { createdBy: req.user.userId };
 
@@ -76,10 +76,6 @@ export const getMyFoodys = async (req, res, next) => {
 
   if (foody !== 'all') {
     queryObj.foody = foody;
-  }
-
-  if (preference !== 'all') {
-    queryObj.preference = preference;
   }
 
   if (cuisine !== 'all') {
@@ -111,11 +107,16 @@ export const getMyFoodys = async (req, res, next) => {
     result = result.sort('-village');
   }
 
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
+
+  result = result.skip(skip).limit(limit);
   const myFoodys = await result;
 
-  res
-    .status(StatusCodes.OK)
-    .json({ myFoodys, totalFoodys: myFoodys.length, numOfPages: 1 });
+  const totalFoodys = await Foody.countDocuments(queryObj);
+  const numOfPages = Math.ceil(totalFoodys / limit);
+  res.status(StatusCodes.OK).json({ myFoodys, totalFoodys, numOfPages });
 };
 export const getFoody = async (req, res, next) => {
   await res.send('get-Foody');
@@ -176,9 +177,9 @@ const mapMonthlyCreations = (data) => {
 
 export const getAllStats = async (req, res, next) => {
   let defaultAllStats = {};
-  let monthlyCreations = [];
+  let monthlyAllCreations = [];
 
-  const fetchStatsByKey = async (key) => {
+  const fetchAllStatsByKey = async (key) => {
     let stats = await Foody.aggregate([
       { $group: { _id: `$${key}`, count: { $sum: 1 } } },
     ]);
@@ -186,17 +187,17 @@ export const getAllStats = async (req, res, next) => {
   };
 
   const defaultCuisineStats = fetchCuisineStats(
-    await fetchStatsByKey('cuisine')
+    await fetchAllStatsByKey('cuisine')
   );
-  const defaultCostStats = fetchCostStats(await fetchStatsByKey('cost'));
-  const defaultFoodyStats = fetchFoodyStats(await fetchStatsByKey('foody'));
+  const defaultCostStats = fetchCostStats(await fetchAllStatsByKey('cost'));
+  const defaultFoodyStats = fetchFoodyStats(await fetchAllStatsByKey('foody'));
   defaultAllStats = {
     defaultCuisineStats,
     defaultCostStats,
     defaultFoodyStats,
   };
 
-  monthlyCreations = await Foody.aggregate([
+  monthlyAllCreations = await Foody.aggregate([
     {
       $group: {
         _id: {
@@ -210,15 +211,16 @@ export const getAllStats = async (req, res, next) => {
     { $limit: 6 },
   ]);
 
-  monthlyCreations = mapMonthlyCreations(monthlyCreations);
+  monthlyAllCreations = mapMonthlyCreations(monthlyAllCreations);
 
-  res.status(StatusCodes.OK).json({ defaultAllStats, monthlyCreations });
+  res.status(StatusCodes.OK).json({ defaultAllStats, monthlyAllCreations });
 };
 
 export const getUserStats = async (req, res, next) => {
   let defaultUserStats = {};
+  let monthlyUserCreations = [];
 
-  const fetchStatsByKey = async (key) => {
+  const fetchUserStatsByKey = async (key) => {
     let stats = await Foody.aggregate([
       { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
       { $group: { _id: `$${key}`, count: { $sum: 1 } } },
@@ -227,13 +229,34 @@ export const getUserStats = async (req, res, next) => {
   };
 
   const defaultCuisineStats = fetchCuisineStats(
-    await fetchStatsByKey('cuisine')
+    await fetchUserStatsByKey('cuisine')
   );
-  const defaultCostStats = fetchCostStats(await fetchStatsByKey('cost'));
-  defaultAllStats = { defaultCuisineStats, defaultCostStats };
+  const defaultCostStats = fetchCostStats(await fetchUserStatsByKey('cost'));
+  const defaultFoodyStats = fetchFoodyStats(await fetchUserStatsByKey('foody'));
+  defaultUserStats = {
+    defaultCuisineStats,
+    defaultCostStats,
+    defaultFoodyStats,
+  };
 
-  let monthlyCreations = [];
-  res.status(StatusCodes.OK).json({ defaultUserStats, monthlyCreations });
+  monthlyUserCreations = await Foody.aggregate([
+    { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
+    {
+      $group: {
+        _id: {
+          year: { $year: '$createdAt' },
+          month: { $month: '$createdAt' },
+        },
+        count: { $sum: 1 },
+      },
+    },
+    { $sort: { '_id.year': -1, '_id.month': -1 } },
+    { $limit: 6 },
+  ]);
+
+  monthlyUserCreations = mapMonthlyCreations(monthlyUserCreations);
+
+  res.status(StatusCodes.OK).json({ defaultUserStats, monthlyUserCreations });
 };
 
 export const createFoody = async (req, res, next) => {

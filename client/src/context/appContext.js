@@ -32,7 +32,7 @@ import {
   CLEAR_FILTERS,
   CHANGE_PAGE,
 } from './actions';
-import { costs, foodys } from '../utils/lookup-data';
+import { costs, cuisines, foodys, statuses } from '../utils/lookup-data';
 
 const token = localStorage.getItem('token');
 const user = localStorage.getItem('user');
@@ -56,12 +56,10 @@ const initialState = {
   foody: 'a la carte',
   cost: 'pending',
   status: 'unpublished',
-  preference: 'pending',
-  cuisineOptions: ['greek', 'asian', 'italian', 'mexican'],
+  cuisineOptions: cuisines,
   foodyOptions: foodys,
   costOptions: costs,
-  statusOptions: ['unpublished', 'published'],
-  preferenceOptions: ['pending', 'not-interested', 'visited', 'interested'],
+  statusOptions: statuses,
   foodLocation: userLocation || '',
   foodys: [],
   totalFoodys: 0,
@@ -310,12 +308,12 @@ const AppProvider = ({ children }) => {
       searchFoody,
       searchCost,
       searchStatus,
-      searchPreference,
+      //searchPreference,
       sort,
       page,
     } = state;
 
-    let url = `/foodys/my?cuisine=${searchCuisine}&cost=${searchCost}&status=${searchStatus}&foody=${searchFoody}&preference=${searchPreference}&sort=${sort}&page=${page}`;
+    let url = `/foodys/my?cuisine=${searchCuisine}&cost=${searchCost}&status=${searchStatus}&foody=${searchFoody}&sort=${sort}&page=${page}`;
     if (search) {
       url = `${url}&search=${search}`;
     }
@@ -338,10 +336,13 @@ const AppProvider = ({ children }) => {
     dispatch({ type: SHOW_STATS_BEGIN });
     try {
       const { data } = await clientApi.get('/foodys/user-stats');
-      const { defaultUserStats, monthlyCreations } = data;
+      const { defaultUserStats, monthlyUserCreations } = data;
       dispatch({
         type: SHOW_STATS_SUCCESS,
-        payload: { stats: defaultUserStats, monthlyCreations },
+        payload: {
+          stats: defaultUserStats,
+          monthlyCreations: monthlyUserCreations,
+        },
       });
     } catch (error) {
       console.log(error.response);
@@ -353,10 +354,13 @@ const AppProvider = ({ children }) => {
     dispatch({ type: SHOW_STATS_BEGIN });
     try {
       const { data } = await clientApi.get('/foodys/all-stats');
-      const { defaultAllStats, monthlyCreations } = data;
+      const { defaultAllStats, monthlyAllCreations } = data;
       dispatch({
         type: SHOW_STATS_SUCCESS,
-        payload: { stats: defaultAllStats, monthlyCreations },
+        payload: {
+          stats: defaultAllStats,
+          monthlyCreations: monthlyAllCreations,
+        },
       });
     } catch (error) {
       console.log(error.response);

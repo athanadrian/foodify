@@ -4,7 +4,7 @@ export const cuisineDefaultStats = (stats) => {
   return [
     {
       title: cuisines[0].text,
-      count: stats?.greek || 0,
+      count: stats?.greek || 1,
       icon: cuisines[0].icon,
       color: '#1e40af',
       bcg: '#60a5fa',

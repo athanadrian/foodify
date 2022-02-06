@@ -13,7 +13,7 @@ const FormEnumSelect = ({
         enum: 'all',
         icon: 'all',
         id: 0,
-        text: 'all',
+        text: 'All',
       },
       ...list,
     ];

@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
-  .title {
-    //margin-top: 0;
+  .user-statistics {
+    margin-top: 2rem;
+    margin-bottom: 0;
+    text-align: center;
   }
   .container-row {
     display: grid;

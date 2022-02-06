@@ -3,6 +3,7 @@ import { FaRegFlag, FaRegCalendarPlus } from 'react-icons/fa';
 import { GiPathDistance } from 'react-icons/gi';
 import { FiMapPin } from 'react-icons/fi';
 import { AiOutlineEuro } from 'react-icons/ai';
+import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 import { MdOutlineUpdate, MdOutlineRestaurant } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../context/appContext';
@@ -11,6 +12,7 @@ import Wrapper from '../wrappers/Foody';
 import FoodyInfo from './FoodyInfo';
 import { mapEnumObject } from '../utils/functions';
 import { costs, foodys } from '../utils/lookup-data';
+import { useState } from 'react';
 const Foody = ({
   all,
   _id,
@@ -22,9 +24,11 @@ const Foody = ({
   updatedAt,
   foody,
   status,
+  remarks,
   // preference,
 }) => {
   const { setFoodyToUpdate, deleteFoody, changeFoodyStatus } = useAppContext();
+  const [showRemarks, setShowRemarks] = useState(false);
   const createDate = moment(createdAt).format('MMM Do YYYY');
   const relativeUpdate = moment(updatedAt).startOf('day').fromNow();
   const costObj = mapEnumObject(cost, costs);
@@ -73,8 +77,22 @@ const Foody = ({
             icon={<AiOutlineEuro size={22} />}
             text={costObj.icon}
           />
-          <div className={`cost ${costObj.text}`}>{costObj.text}</div>
-          {/* <div className={`preference ${preference}`}>{preference}</div> */}
+          <div className={`cost ${costObj.enum}`}>{costObj.enum}</div>
+          <div className='remarks-container'>
+            <FoodyInfo
+              tooltip='remarks'
+              icon={
+                showRemarks ? (
+                  <BsChevronUp size={22} />
+                ) : (
+                  <BsChevronDown size={22} />
+                )
+              }
+              text='remarks'
+              onClick={() => setShowRemarks(!showRemarks)}
+            />
+            {showRemarks && <div className='remarks-text'>{remarks}</div>}
+          </div>
         </div>
         {!all && (
           <footer>
