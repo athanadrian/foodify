@@ -2,7 +2,7 @@ TODO
 
 ##
 
-> 1. Change Select Input elements
+> 1. Change Select Enum Input elements
 > 2. Remarks implementation
 > 3. Add Single Foody Page/modal
 > 4. Maps Implementation
