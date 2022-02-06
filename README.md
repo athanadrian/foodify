@@ -1,3 +1,20 @@
+TODO
+
+##
+
+> 1. Change Select Input elements
+> 2. Remarks implementation
+> 3. Add Single Foody Page/modal
+> 4. Maps Implementation
+> 5. Calculate Distance
+> 6. Fix Preference
+> 7. User Stats
+> 8. Followers/Following implementation
+> 9. Likes Implementation
+> 10. Comments Implementation
+> 11. Live Chat
+> 12. Users Tab
+
 # Foodify
 
 #### Track Your Cyprus Tour-Place Search

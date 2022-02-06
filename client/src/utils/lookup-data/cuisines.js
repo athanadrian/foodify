@@ -1,32 +1,32 @@
-import { FaRegFlag } from 'react-icons/fa';
+import { FaFlag } from 'react-icons/fa';
 
 const cuisines = [
   {
     id: 0,
     text: 'Greek',
     enum: 'greek',
-    icon: <FaRegFlag />,
+    icon: <FaFlag />,
     desc: 'greek',
   },
   {
     id: 1,
     text: 'italian',
     enum: 'italian',
-    icon: <FaRegFlag />,
+    icon: <FaFlag />,
     desc: 'italian',
   },
   {
     id: 2,
     text: 'Asian',
     enum: 'asian',
-    icon: <FaRegFlag />,
+    icon: <FaFlag />,
     desc: 'asian',
   },
   {
     id: 3,
     text: 'Mexican',
     enum: 'mexican',
-    icon: <FaRegFlag />,
+    icon: <FaFlag />,
     desc: 'mexican',
   },
 ];

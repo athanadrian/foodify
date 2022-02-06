@@ -1,12 +1,12 @@
 const FormEnumSelect = ({
-  all,
+  allOption,
   labelText,
   name,
   value,
   handleChange,
   list,
 }) => {
-  if (all) {
+  if (allOption) {
     list = [
       {
         desc: 'all',

@@ -52,7 +52,7 @@ const SearchContainer = ({ all }) => {
             labelText='cuisine'
             handleChange={handleSearch}
             list={cuisineOptions}
-            all
+            allOption
           />
           <FormEnumSelect
             name='searchFoody'
@@ -60,7 +60,7 @@ const SearchContainer = ({ all }) => {
             labelText='foody type'
             handleChange={handleSearch}
             list={foodyOptions}
-            all
+            allOption
           />
           <FormEnumSelect
             name='searchCost'
@@ -68,7 +68,7 @@ const SearchContainer = ({ all }) => {
             labelText='cost'
             handleChange={handleSearch}
             list={costOptions}
-            all
+            allOption
           />
           {!all && (
             <>
@@ -78,7 +78,7 @@ const SearchContainer = ({ all }) => {
                 labelText='status'
                 handleChange={handleSearch}
                 list={statusOptions}
-                all
+                allOption
               />
               <FormSelect
                 name='searchPreference'
@@ -86,7 +86,7 @@ const SearchContainer = ({ all }) => {
                 labelText='preference'
                 handleChange={handleSearch}
                 list={preferenceOptions}
-                all
+                allOption
               />
             </>
           )}

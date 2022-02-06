@@ -19,12 +19,12 @@ const AddFoody = () => {
     foody,
     cost,
     status,
-    preference,
+    // preference,
     cuisine,
     statusOptions,
     costOptions,
     foodyOptions,
-    preferenceOptions,
+    // preferenceOptions,
     cuisineOptions,
     handleChange,
     displayAlert,
@@ -100,13 +100,13 @@ const AddFoody = () => {
             handleChange={handleInputChange}
             list={statusOptions}
           />
-          <FormSelect
+          {/* <FormSelect
             name='preference'
             value={preference}
             labelText='preference'
             handleChange={handleInputChange}
             list={preferenceOptions}
-          />
+          /> */}
         </div>
         <div className='text-area'>
           <FormTextArea
