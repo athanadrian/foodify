@@ -79,7 +79,7 @@ const AddFoody = () => {
             handleChange={handleInputChange}
             list={cuisineOptions}
           />
-          <FormSelect
+          <FormEnumSelect
             name='foody'
             value={foody}
             labelText='foody type'

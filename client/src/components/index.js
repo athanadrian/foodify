@@ -14,6 +14,7 @@ import FoodysContainer from './FoodysContainer';
 import StatsContainer from './StatsContainer';
 import StatsContainerRow from './StatsContainerRow';
 import ChartsContainer from './ChartsContainer';
+import PaginationContainer from './PaginationContainer';
 
 export {
   Logo,
@@ -32,4 +33,5 @@ export {
   StatsContainer,
   StatsContainerRow,
   ChartsContainer,
+  PaginationContainer,
 };

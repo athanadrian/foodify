@@ -26,11 +26,13 @@ import {
   DELETE_FOODY_BEGIN,
   DELETE_FOODY_SUCCESS,
   DELETE_FOODY_ERROR,
+  CHANGE_FOODY_STATUS,
   SHOW_STATS_BEGIN,
   SHOW_STATS_SUCCESS,
   CLEAR_FILTERS,
+  CHANGE_PAGE,
 } from './actions';
-import costs from '../utils/costs';
+import { costs, foodys } from '../utils/lookup-data';
 
 const token = localStorage.getItem('token');
 const user = localStorage.getItem('user');
@@ -56,7 +58,7 @@ const initialState = {
   status: 'unpublished',
   preference: 'pending',
   cuisineOptions: ['greek', 'asian', 'italian', 'mexican'],
-  foodyOptions: ['meze', 'a la carte', 'buffet'],
+  foodyOptions: foodys,
   costOptions: costs,
   statusOptions: ['unpublished', 'published'],
   preferenceOptions: ['pending', 'not-interested', 'visited', 'interested'],
@@ -106,6 +108,10 @@ const AppProvider = ({ children }) => {
 
   const toggleSidebar = () => {
     dispatch({ type: TOGGLE_SIDEBAR });
+  };
+
+  const changePage = (page) => {
+    dispatch({ type: CHANGE_PAGE, payload: { page } });
   };
 
   const handleChange = ({ name, value }) => {
@@ -251,22 +257,33 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const changeFoodyStatus = async (foodyId, status) => {
+    dispatch({ type: UPDATE_FOODY_BEGIN });
+    try {
+      await clientApi.put(`/foodys/${foodyId}/status`, {
+        status,
+      });
+      dispatch({ type: CHANGE_FOODY_STATUS, payload: status });
+      getMyFoodys();
+    } catch (error) {
+      if (error.response.status === 401) return;
+      dispatch({
+        type: UPDATE_FOODY_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
+  };
+
   const clearValues = () => {
     dispatch({ type: CLEAR_VALUES });
   };
 
   const getAllFoodys = async () => {
-    const {
-      search,
-      searchCuisine,
-      searchFoody,
-      searchCost,
-      searchStatus,
-      searchPreference,
-      sort,
-    } = state;
+    const { search, searchCuisine, searchFoody, searchCost, sort, page } =
+      state;
 
-    let url = `/foodys?cuisine=${searchCuisine}&cost=${searchCost}&status=${searchStatus}&foody=${searchFoody}&preference=${searchPreference}&sort=${sort}`;
+    let url = `/foodys?status=published&cuisine=${searchCuisine}&cost=${searchCost}&foody=${searchFoody}&sort=${sort}&page=${page}`;
     if (search) {
       url = `${url}&search=${search}`;
     }
@@ -280,23 +297,38 @@ const AppProvider = ({ children }) => {
         payload: { foodys, totalFoodys, numOfPages },
       });
     } catch (error) {
-      //logoutUser();
+      logoutUser();
       console.log('error', error.response);
     }
     clearAlert();
   };
 
   const getMyFoodys = async () => {
+    const {
+      search,
+      searchCuisine,
+      searchFoody,
+      searchCost,
+      searchStatus,
+      searchPreference,
+      sort,
+      page,
+    } = state;
+
+    let url = `/foodys/my?cuisine=${searchCuisine}&cost=${searchCost}&status=${searchStatus}&foody=${searchFoody}&preference=${searchPreference}&sort=${sort}&page=${page}`;
+    if (search) {
+      url = `${url}&search=${search}`;
+    }
     dispatch({ type: GET_FOODYS_BEGIN });
     try {
-      const { data } = await clientApi.get('/foodys/my');
+      const { data } = await clientApi.get(url);
       const { myFoodys, totalFoodys, numOfPages } = data;
       dispatch({
         type: GET_FOODYS_SUCCESS,
         payload: { foodys: myFoodys, totalFoodys, numOfPages },
       });
     } catch (error) {
-      //logoutUser();
+      logoutUser();
       console.log('error', error.response);
     }
     clearAlert();
@@ -354,6 +386,8 @@ const AppProvider = ({ children }) => {
         getUserStats,
         getAllStats,
         clearFilters,
+        changeFoodyStatus,
+        changePage,
       }}
     >
       {children}

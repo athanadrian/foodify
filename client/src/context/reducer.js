@@ -23,9 +23,11 @@ import {
   DELETE_FOODY_BEGIN,
   DELETE_FOODY_SUCCESS,
   DELETE_FOODY_ERROR,
+  CHANGE_FOODY_STATUS,
   SHOW_STATS_BEGIN,
   SHOW_STATS_SUCCESS,
   CLEAR_FILTERS,
+  CHANGE_PAGE,
 } from './actions';
 
 import { initialState } from './appContext';
@@ -134,6 +136,7 @@ const reducer = (state, action) => {
   if (action.type === ADD_FOODY_SUCCESS) {
     return {
       ...state,
+      numOfPages: action.payload.numOfPages,
       isLoading: false,
       showAlert: true,
       alertType: 'success',
@@ -154,6 +157,7 @@ const reducer = (state, action) => {
   if (action.type === HANDLE_CHANGE) {
     return {
       ...state,
+      page: 1,
       [action.payload.name]: action.payload.value,
     };
   }
@@ -237,6 +241,18 @@ const reducer = (state, action) => {
       alertText: 'Foody Updated Successfully!',
     };
   }
+
+  if (action.type === CHANGE_FOODY_STATUS) {
+    return {
+      ...state,
+      status: action.payload.changedStatus,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'success',
+      alertText: 'Foody Published Successfully!',
+    };
+  }
+
   if (action.type === UPDATE_FOODY_ERROR) {
     return {
       ...state,
@@ -305,6 +321,14 @@ const reducer = (state, action) => {
       sort: 'latest-created',
     };
   }
+
+  if (action.type === CHANGE_PAGE) {
+    return {
+      ...state,
+      page: action.payload.page,
+    };
+  }
+
   throw new Error(`Error can not find action: ${action.type}`);
 };
 

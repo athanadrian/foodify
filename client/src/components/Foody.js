@@ -10,8 +10,9 @@ import { useAppContext } from '../context/appContext';
 import Wrapper from '../wrappers/Foody';
 import FoodyInfo from './FoodyInfo';
 import { mapEnumObject } from '../utils/functions';
-import costs from '../utils/costs';
+import { costs, foodys } from '../utils/lookup-data';
 const Foody = ({
+  all,
   _id,
   title,
   village,
@@ -20,13 +21,15 @@ const Foody = ({
   createdAt,
   updatedAt,
   foody,
-  // status,
+  status,
   // preference,
 }) => {
-  const { setFoodyToUpdate, deleteFoody } = useAppContext();
+  const { setFoodyToUpdate, deleteFoody, changeFoodyStatus } = useAppContext();
   const createDate = moment(createdAt).format('MMM Do YYYY');
   const relativeUpdate = moment(updatedAt).startOf('day').fromNow();
   const costObj = mapEnumObject(cost, costs);
+  const foodyObj = mapEnumObject(foody, foodys);
+  const isPublished = status === 'published';
   return (
     <Wrapper>
       <header>
@@ -63,7 +66,7 @@ const Foody = ({
           <FoodyInfo
             tooltip='Type of Restaurant'
             icon={<MdOutlineRestaurant size={20} />}
-            text={foody}
+            text={foodyObj.text}
           />
           <FoodyInfo
             tooltip='Cost'
@@ -73,20 +76,40 @@ const Foody = ({
           <div className={`cost ${costObj.text}`}>{costObj.text}</div>
           {/* <div className={`preference ${preference}`}>{preference}</div> */}
         </div>
-        <footer>
-          <div className='actions'>
-            <Link
-              to='/add-foody'
-              onClick={() => setFoodyToUpdate(_id)}
-              className='btn edit-btn'
-            >
-              edit
-            </Link>
-            <button onClick={() => deleteFoody(_id)} className='btn delete-btn'>
-              delete
-            </button>
-          </div>
-        </footer>
+        {!all && (
+          <footer>
+            <div className='actions'>
+              <Link
+                to='/add-foody'
+                onClick={() => setFoodyToUpdate(_id)}
+                className='btn edit-btn'
+              >
+                edit
+              </Link>
+              <button
+                onClick={() => deleteFoody(_id)}
+                className='btn delete-btn'
+              >
+                delete
+              </button>
+              {!isPublished ? (
+                <button
+                  onClick={() => changeFoodyStatus(_id, 'published')}
+                  className='btn publish-btn'
+                >
+                  publish
+                </button>
+              ) : (
+                <button
+                  onClick={() => changeFoodyStatus(_id, 'unpublished')}
+                  className='btn unpublish-btn'
+                >
+                  unpublish
+                </button>
+              )}
+            </div>
+          </footer>
+        )}
         <FoodyInfo
           className='content-update'
           icon={<MdOutlineUpdate size={22} />}

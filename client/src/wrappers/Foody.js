@@ -122,7 +122,9 @@ const Wrapper = styled.article`
     margin-top: 1.5rem;
   }
   .edit-btn,
-  .delete-btn {
+  .delete-btn,
+  .publish-btn,
+  .unpublish-btn {
     letter-spacing: var(--letterSpacing);
     cursor: pointer;
     height: 30px;
@@ -130,11 +132,19 @@ const Wrapper = styled.article`
   .edit-btn {
     color: var(--green-dark);
     background: var(--green-light);
-    margin-right: 0.5rem;
   }
   .delete-btn {
     color: var(--red-dark);
     background: var(--red-light);
+    margin: 0 0.5rem;
+  }
+  .publish-btn {
+    color: var(--grey-900);
+    background: var(--grey-200);
+  }
+  .unpublish-btn {
+    color: var(--yellow-dark); //#e9b949;
+    background: #fcefc7;
   }
   &:hover .actions {
     visibility: visible;

@@ -5,12 +5,66 @@ import BadRequestError from '../errors/bad-request.js';
 import NotFoundError from '../errors/not-found.js';
 import Foody from '../models/Foody.js';
 import checkPermissions from '../utils/checkPermissions.js';
-import { query } from 'express';
 
 export const getAllFoodys = async (req, res, next) => {
+  const { status, cost, foody, cuisine, sort, search } = req.query;
+
+  const queryObj = { status };
+
+  if (cost !== 'all') {
+    queryObj.cost = cost;
+  }
+
+  if (foody !== 'all') {
+    queryObj.foody = foody;
+  }
+
+  if (cuisine !== 'all') {
+    queryObj.cuisine = cuisine;
+  }
+
+  if (search) {
+    queryObj.village = { $regex: search, $options: 'i' };
+  }
+
+  let result = Foody.find(queryObj);
+
+  if (sort === 'latest-created') {
+    result = result.sort('-createdAt');
+  }
+  if (sort === 'oldest-created') {
+    result = result.sort('createdAt');
+  }
+  if (sort === 'latest-updated') {
+    result = result.sort('-updatedAt');
+  }
+  if (sort === 'oldest-updated') {
+    result = result.sort('updatedAt');
+  }
+  if (sort === 'a-z') {
+    result = result.sort('village');
+  }
+  if (sort === 'z-a') {
+    result = result.sort('-village');
+  }
+
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
+
+  result = result.skip(skip).limit(limit);
+  const foodys = await result;
+
+  const totalFoodys = await Foody.countDocuments(queryObj);
+  const numOfPages = Math.ceil(totalFoodys / limit);
+
+  res.status(StatusCodes.OK).json({ foodys, totalFoodys, numOfPages });
+};
+
+export const getMyFoodys = async (req, res, next) => {
   const { status, cost, foody, preference, cuisine, sort, search } = req.query;
 
-  const queryObj = {};
+  const queryObj = { createdBy: req.user.userId };
 
   if (status !== 'all') {
     queryObj.status = status;
@@ -57,14 +111,7 @@ export const getAllFoodys = async (req, res, next) => {
     result = result.sort('-village');
   }
 
-  const foodys = await result;
-  res
-    .status(StatusCodes.OK)
-    .json({ foodys, totalFoodys: foodys.length, numOfPages: 1 });
-};
-export const getMyFoodys = async (req, res, next) => {
-  const queryObj = { createdBy: req.user.userId };
-  const myFoodys = await Foody.find(queryObj);
+  const myFoodys = await result;
 
   res
     .status(StatusCodes.OK)
@@ -222,6 +269,27 @@ export const updateFoody = async (req, res, next) => {
     { new: true, runValidators: true }
   );
   res.status(StatusCodes.OK).json({ updatedFoody });
+};
+
+export const changeFoodyStatus = async (req, res, next) => {
+  const { id: foodyId } = req.params;
+
+  const foody = await Foody.findOne({ _id: foodyId });
+
+  if (!foody) {
+    throw new NotFoundError(`Foody with id ${foodyId} does not exist!`);
+  }
+
+  // sending the user if in the future want to check for the role also
+  checkPermissions(req.user, foody.createdBy);
+
+  const changedStatusFoody = await Foody.findOneAndUpdate(
+    { _id: foodyId },
+    req.body,
+    { new: true, runValidators: true }
+  );
+
+  res.status(StatusCodes.OK).json({ changedStatusFoody });
 };
 
 export const deleteFoody = async (req, res, next) => {

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Foody, Loading } from '../components';
 import { useAppContext } from '../context/appContext';
 import Wrapper from '../wrappers/FoodysContainer';
+import PaginationContainer from './PaginationContainer';
 
 const FoodysContainer = ({ all }) => {
   const {
@@ -14,18 +15,20 @@ const FoodysContainer = ({ all }) => {
     searchStatus,
     searchPreference,
     sort,
-    //numOfPages,
+    numOfPages,
+    page,
     isLoading,
     getAllFoodys,
     getMyFoodys,
   } = useAppContext();
 
-  console.log(totalFoodys);
+  console.log('T', totalFoodys, 'P', page, 'NP', numOfPages);
 
   useEffect(() => {
     all ? getAllFoodys() : getMyFoodys();
     // eslint-disable-next-line
   }, [
+    page,
     all,
     search,
     searchCuisine,
@@ -53,10 +56,10 @@ const FoodysContainer = ({ all }) => {
       </h5>
       <div className='foodys'>
         {foodys.map((foody) => (
-          <Foody key={foody._id} {...foody} />
+          <Foody all={all} key={foody._id} {...foody} />
         ))}
       </div>
-      {/* {numOfPages > 1 && <PageBtnContainer />} */}
+      {numOfPages > 1 && <PaginationContainer />}
     </Wrapper>
   );
 };

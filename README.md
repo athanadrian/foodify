@@ -1,8 +1,8 @@
-# Tourify
+# Foodify
 
 #### Track Your Cyprus Tour-Place Search
 
-Project in Action - [Tourify](https://www.tourify.live/)
+Project in Action - [Foodify](https://www.tourify.live/)
 
 #### Run The App Locally
 
@@ -1168,6 +1168,1115 @@ start();
 - aggregation pipeline
 - step by step
 - [Aggregation Pipeline](https://docs.mongodb.com/manual/core/aggregation-pipeline/)
+
+```js
+foodysController.js;
+
+import mongoose from 'mongoose';
+
+const showStats = async (req, res) => {
+  let stats = await Foody.aggregate([
+    { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
+    { $group: { _id: '$status', count: { $sum: 1 } } },
+  ]);
+
+  res.status(StatusCodes.OK).json({ stats });
+};
+```
+
+#### Show Stats - Object Setup
+
+- [Reduce Basics](https://youtu.be/3WkW9nrS2mw)
+- [Reduce Object Example ](https://youtu.be/5BFkp8JjLEY)
+
+```js
+foodysController.js;
+
+const showStats = async (req, res) => {
+  let stats = await Foody.aggregate([
+    { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
+    { $group: { _id: '$status', count: { $sum: 1 } } },
+  ]);
+
+  stats = stats.reduce((acc, curr) => {
+    const { _id: title, count } = curr;
+    acc[title] = count;
+    return acc;
+  }, {});
+
+  res.status(StatusCodes.OK).json({ stats });
+};
+```
+
+#### Show Stats - Default Stats
+
+```js
+foodysController.js;
+
+const showStats = async (req, res) => {
+  let stats = await Foody.aggregate([
+    { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
+    { $group: { _id: '$status', count: { $sum: 1 } } },
+  ]);
+  stats = stats.reduce((acc, curr) => {
+    const { _id: title, count } = curr;
+    acc[title] = count;
+    return acc;
+  }, {});
+
+  const defaultStats = {
+    pending: stats.pending || 0,
+    interview: stats.interview || 0,
+    declined: stats.declined || 0,
+  };
+  let monthlyApplications = [];
+  res.status(StatusCodes.OK).json({ defaultStats, monthlyApplications });
+};
+```
+
+#### Show Stats - Function Setup
+
+```js
+actions.js;
+
+export const SHOW_STATS_BEGIN = 'SHOW_STATS_BEGIN';
+export const SHOW_STATS_SUCCESS = 'SHOW_STATS_SUCCESS';
+```
+
+```js
+appContext.js
+
+const initialState = {
+  stats: {},
+  monthlyApplications: []
+
+}
+
+const showStats = async () => {
+    dispatch({ type: SHOW_STATS_BEGIN })
+    try {
+      const { data } = await authFetch('/foodys/stats')
+      dispatch({
+        type: SHOW_STATS_SUCCESS,
+        payload: {
+          stats: data.defaultStats,
+          monthlyApplications: data.monthlyApplications,
+        },
+      })
+    } catch (error) {
+console.log(error.response)
+      // logoutUser()
+    }
+
+clearAlert()
+  }
+  value={{showStats}}
+```
+
+```js
+reducers.js;
+if (action.type === SHOW_STATS_BEGIN) {
+  return { ...state, isLoading: true, showAlert: false };
+}
+if (action.type === SHOW_STATS_SUCCESS) {
+  return {
+    ...state,
+    isLoading: false,
+    stats: action.payload.stats,
+    monthlyApplications: action.payload.monthlyApplications,
+  };
+}
+```
+
+#### Stats Page - Structure
+
+- components
+- StatsContainer.js
+- ChartsContainer.js
+- StatsItem.js
+- simple return
+- import/export index.js
+
+```js
+Stats.js;
+
+import { useEffect } from 'react';
+import { useAppContext } from '../../context/appContext';
+import { StatsContainer, Loading, ChartsContainer } from '../../components';
+
+const Stats = () => {
+  const { showStats, isLoading, monthlyApplications } = useAppContext();
+  useEffect(() => {
+    showStats();
+  }, []);
+
+  if (isLoading) {
+    return <Loading center />;
+  }
+
+  return (
+    <>
+      <StatsContainer />
+      {monthlyApplications.length > 0 && <ChartsContainer />}
+    </>
+  );
+};
+
+export default Stats;
+```
+
+#### StatsContainer
+
+```js
+StatsContainer.js;
+
+import { useAppContext } from '../context/appContext';
+import StatItem from './StatItem';
+import { FaSuitcaseRolling, FaCalendarCheck, FaBug } from 'react-icons/fa';
+import Wrapper from '../assets/wrappers/StatsContainer';
+const StatsContainer = () => {
+  const { stats } = useAppContext();
+  const defaultStats = [
+    {
+      title: 'pending applications',
+      count: stats.pending || 0,
+      icon: <FaSuitcaseRolling />,
+      color: '#e9b949',
+      bcg: '#fcefc7',
+    },
+    {
+      title: 'interviews scheduled',
+      count: stats.interview || 0,
+      icon: <FaCalendarCheck />,
+      color: '#647acb',
+      bcg: '#e0e8f9',
+    },
+    {
+      title: 'foodys declined',
+      count: stats.declined || 0,
+      icon: <FaBug />,
+      color: '#d66a6a',
+      bcg: '#ffeeee',
+    },
+  ];
+
+  return (
+    <Wrapper>
+      {defaultStats.map((item, index) => {
+        return <StatItem key={index} {...item} />;
+      })}
+    </Wrapper>
+  );
+};
+
+export default StatsContainer;
+```
+
+#### StatItem
+
+```js
+StatItem.js;
+
+import Wrapper from '../assets/wrappers/StatItem';
+
+function StatItem({ count, title, icon, color, bcg }) {
+  return (
+    <Wrapper color={color} bcg={bcg}>
+      <header>
+        <span className='count'>{count}</span>
+        <div className='icon'>{icon}</div>
+      </header>
+      <h5 className='title'>{title}</h5>
+    </Wrapper>
+  );
+}
+
+export default StatItem;
+```
+
+#### Aggregate Foodys Based on Year and Month
+
+```js
+foodysController.js;
+
+let monthlyApplications = await Foody.aggregate([
+  { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
+  {
+    $group: {
+      _id: {
+        year: {
+          $year: '$createdAt',
+        },
+        month: {
+          $month: '$createdAt',
+        },
+      },
+      count: { $sum: 1 },
+    },
+  },
+  { $sort: { '_id.year': -1, '_id.month': -1 } },
+  { $limit: 6 },
+]);
+```
+
+#### Refactor Data
+
+- install moment.js on the SERVER
+
+```sh
+npm install moment
+
+```
+
+```js
+foodysController.js;
+
+import moment from 'moment';
+
+monthlyApplications = monthlyApplications
+  .map((item) => {
+    const {
+      _id: { year, month },
+      count,
+    } = item;
+    // accepts 0-11
+    const date = moment()
+      .month(month - 1)
+      .year(year)
+      .format('MMM Y');
+    return { date, count };
+  })
+  .reverse();
+```
+
+#### Charts Container
+
+- BarChart.js
+- AreaChart.js
+
+```js
+ChartsContainer.js;
+import React, { useState } from 'react';
+
+import BarChart from './BarChart';
+import AreaChart from './AreaChart';
+import { useAppContext } from '../context/appContext';
+import Wrapper from '../assets/wrappers/ChartsContainer';
+
+export default function ChartsContainer() {
+  const [barChart, setBarChart] = useState(true);
+  const { monthlyApplications: data } = useAppContext();
+
+  return (
+    <Wrapper>
+      <h4>Monthly Applications</h4>
+
+      <button type='button' onClick={() => setBarChart(!barChart)}>
+        {barChart ? 'AreaChart' : 'BarChart'}
+      </button>
+      {barChart ? <BarChart data={data} /> : <AreaChart data={data} />}
+    </Wrapper>
+  );
+}
+```
+
+#### Recharts Library
+
+- install in the Client!!!
+
+[Recharts](https://recharts.org)
+
+```sh
+npm install recharts
+```
+
+#### Bar Chart
+
+```js
+BarChart.js;
+
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
+
+const BarChartComponent = ({ data }) => {
+  return (
+    <ResponsiveContainer width='100%' height={300}>
+      <BarChart
+        data={data}
+        margin={{
+          top: 50,
+        }}
+      >
+        <CartesianGrid strokeDasharray='3 3' />
+        <XAxis dataKey='date' />
+        <YAxis allowDecimals={false} />
+        <Tooltip />
+        <Bar dataKey='count' fill='#2cb1bc' barSize={75} />
+      </BarChart>
+    </ResponsiveContainer>
+  );
+};
+```
+
+#### Area Chart
+
+```js
+import {
+  ResponsiveContainer,
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+} from 'recharts';
+
+const AreaChartComponent = ({ data }) => {
+  return (
+    <ResponsiveContainer width='100%' height={300}>
+      <AreaChart
+        data={data}
+        margin={{
+          top: 50,
+        }}
+      >
+        <CartesianGrid strokeDasharray='3 3' />
+        <XAxis dataKey='date' />
+        <YAxis allowDecimals={false} />
+        <Tooltip />
+        <Area type='monotone' dataKey='count' stroke='#2cb1bc' fill='#bef8fd' />
+      </AreaChart>
+    </ResponsiveContainer>
+  );
+};
+```
+
+#### Filter
+
+#### Get All Foodys - Initial Setup
+
+```js
+foodysController.js;
+
+const getAllFoodys = async (req, res) => {
+  const { search, status, foodyType, sort } = req.query;
+
+  const queryObject = {
+    createdBy: req.user.userId,
+  };
+
+  // NO AWAIT
+  let result = Foody.find(queryObject);
+
+  // chain sort conditions
+
+  const foodys = await result;
+
+  res
+    .status(StatusCodes.OK)
+    .json({ foodys, totalFoodys: foodys.length, numOfPages: 1 });
+};
+```
+
+#### Status
+
+```js
+foodysController.js;
+
+const getAllFoodys = async (req, res) => {
+  const { search, status, foodyType, sort } = req.query;
+
+  const queryObject = {
+    createdBy: req.user.userId,
+  };
+
+  if (status !== 'all') {
+    queryObject.status = status;
+  }
+
+  // NO AWAIT
+  let result = Foody.find(queryObject);
+
+  // chain sort conditions
+
+  const foodys = await result;
+
+  res
+    .status(StatusCodes.OK)
+    .json({ foodys, totalFoodys: foodys.length, numOfPages: 1 });
+};
+```
+
+#### FoodyType
+
+```js
+foodysController.js;
+
+const getAllFoodys = async (req, res) => {
+  const { search, status, foodyType, sort } = req.query;
+
+  const queryObject = {
+    createdBy: req.user.userId,
+  };
+
+  if (status !== 'all') {
+    queryObject.status = status;
+  }
+  if (foodyType !== 'all') {
+    queryObject.foodyType = foodyType;
+  }
+  // NO AWAIT
+  let result = Foody.find(queryObject);
+
+  // chain sort conditions
+
+  const foodys = await result;
+
+  res
+    .status(StatusCodes.OK)
+    .json({ foodys, totalFoodys: foodys.length, numOfPages: 1 });
+};
+```
+
+#### Search
+
+```js
+foodysController.js;
+
+const getAllFoodys = async (req, res) => {
+  const { search, status, foodyType, sort } = req.query;
+
+  const queryObject = {
+    createdBy: req.user.userId,
+  };
+
+  if (status !== 'all') {
+    queryObject.status = status;
+  }
+  if (foodyType !== 'all') {
+    queryObject.foodyType = foodyType;
+  }
+  if (search) {
+    queryObject.position = { $regex: search, $options: 'i' };
+  }
+  // NO AWAIT
+  let result = Foody.find(queryObject);
+
+  // chain sort conditions
+  if (sort === 'latest') {
+    result = result.sort('-createdAt');
+  }
+  if (sort === 'oldest') {
+    result = result.sort('createdAt');
+  }
+  if (sort === 'a-z') {
+    result = result.sort('position');
+  }
+  if (sort === 'z-a') {
+    result = result.sort('-position');
+  }
+  const foodys = await result;
+
+  res
+    .status(StatusCodes.OK)
+    .json({ foodys, totalFoodys: foodys.length, numOfPages: 1 });
+};
+```
+
+#### Search Context Setup
+
+```js
+appContext.js
+
+const initialState = {
+  foodyType: 'full-time',
+  foodyTypeOptions: ['full-time', 'part-time', 'remote', 'internship'],
+  status: 'pending',
+  statusOptions: ['pending', 'interview', 'declined']
+  //
+  //
+  //
+  search: '',
+  searchStatus: 'all',
+  searchType: 'all',
+  sort: 'latest',
+  sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
+}
+
+const clearFilters = () =>{
+console.log('clear filters')
+}
+
+value={{clearFilters}}
+
+// remember this function :)
+const handleChange = ({ name, value }) => {
+    dispatch({
+      type: HANDLE_CHANGE,
+      payload: { name, value },
+    })
+  }
+
+```
+
+#### Search Container - Setup
+
+```js
+SearchContainer.js;
+
+import { FormRow, FormRowSelect } from '.';
+import { useAppContext } from '../context/appContext';
+import Wrapper from '../assets/wrappers/SearchContainer';
+const SearchContainer = () => {
+  const {
+    isLoading,
+    search,
+    searchStatus,
+    searchType,
+    sort,
+    sortOptions,
+    statusOptions,
+    foodyTypeOptions,
+    handleChange,
+    clearFilters,
+  } = useAppContext();
+
+  const handleSearch = (e) => {
+    if (isLoading) return;
+    handleChange({ name: e.target.name, value: e.target.value });
+  };
+
+  return (
+    <Wrapper>
+      <form className='form'>
+        <h4>search form</h4>
+        {/* search position */}
+        <div className='form-center'>
+          <FormRow
+            type='text'
+            name='search'
+            value={search}
+            handleChange={handleSearch}
+          ></FormRow>
+          {/* rest of the inputs */}
+        </div>
+      </form>
+    </Wrapper>
+  );
+};
+
+export default SearchContainer;
+```
+
+#### Search Container - Complete
+
+```js
+SearchContainer.js;
+
+import { FormRow, FormRowSelect } from '.';
+import { useAppContext } from '../context/appContext';
+import Wrapper from '../assets/wrappers/SearchContainer';
+
+const SearchContainer = () => {
+  const {
+    isLoading,
+    search,
+    handleChange,
+    searchStatus,
+    statusOptions,
+    foodyTypeOptions,
+    searchType,
+    clearFilters,
+    sort,
+    sortOptions,
+  } = useAppContext();
+
+  const handleSearch = (e) => {
+    if (isLoading) return;
+    handleChange({ name: e.target.name, value: e.target.value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    clearFilters();
+  };
+  return (
+    <Wrapper>
+      <form className='form'>
+        <h4>search form</h4>
+        {/* search position */}
+        <div className='form-center'>
+          <FormRow
+            type='text'
+            name='search'
+            value={search}
+            handleChange={handleSearch}
+          ></FormRow>
+          {/* search by status */}
+          <FormRowSelect
+            labelText='foody status'
+            name='searchStatus'
+            value={searchStatus}
+            handleChange={handleSearch}
+            list={['all', ...statusOptions]}
+          ></FormRowSelect>
+          {/* search by type */}
+
+          <FormRowSelect
+            labelText='foody type'
+            name='searchType'
+            value={searchType}
+            handleChange={handleSearch}
+            list={['all', ...foodyTypeOptions]}
+          ></FormRowSelect>
+          {/* sort */}
+
+          <FormRowSelect
+            name='sort'
+            value={sort}
+            handleChange={handleSearch}
+            list={sortOptions}
+          ></FormRowSelect>
+          <button
+            className='btn btn-block btn-danger'
+            disabled={isLoading}
+            onClick={handleSubmit}
+          >
+            clear filters
+          </button>
+        </div>
+      </form>
+    </Wrapper>
+  );
+};
+
+export default SearchContainer;
+```
+
+#### Clear Filters
+
+```js
+actions.js;
+
+export const CLEAR_FILTERS = 'CLEAR_FILTERS';
+```
+
+```js
+appContext.js;
+
+const clearFilters = () => {
+  dispatch({ type: CLEAR_FILTERS });
+};
+```
+
+```js
+reducer.js;
+
+if (action.type === CLEAR_FILTERS) {
+  return {
+    ...state,
+    search: '',
+    searchStatus: 'all',
+    searchType: 'all',
+    sort: 'latest',
+  };
+}
+```
+
+#### Refactor Get All Foodys
+
+```js
+const getFoodys = async () => {
+  // will add page later
+  const { search, searchStatus, searchType, sort } = state;
+  let url = `/foodys?status=${searchStatus}&foodyType=${searchType}&sort=${sort}`;
+  if (search) {
+    url = url + `&search=${search}`;
+  }
+  dispatch({ type: GET_JOBS_BEGIN });
+  try {
+    const { data } = await authFetch(url);
+    const { foodys, totalFoodys, numOfPages } = data;
+    dispatch({
+      type: GET_JOBS_SUCCESS,
+      payload: {
+        foodys,
+        totalFoodys,
+        numOfPages,
+      },
+    });
+  } catch (error) {
+    // logoutUser()
+  }
+  clearAlert();
+};
+```
+
+```js
+FoodysContainer.js
+
+const FoodysContainer = () => {
+  const {
+    getFoodys,
+    foodys,
+    isLoading,
+    page,
+    totalFoodys,
+    search,
+    searchStatus,
+    searchType,
+    sort,
+
+  } = useAppContext()
+  useEffect(() => {
+    getFoodys()
+  }, [ search, searchStatus, searchType, sort])
+
+```
+
+#### Limit and Skip
+
+```js
+foodysController.js;
+
+const getAllFoodys = async (req, res) => {
+  const { search, status, foodyType, sort } = req.query;
+  const queryObject = {
+    createdBy: req.user.userId,
+  };
+  if (search) {
+    queryObject.position = { $regex: search, $options: 'i' };
+  }
+  if (status !== 'all') {
+    queryObject.status = status;
+  }
+  if (foodyType !== 'all') {
+    queryObject.foodyType = foodyType;
+  }
+  let result = Foody.find(queryObject);
+
+  if (sort === 'latest') {
+    result = result.sort('-createdAt');
+  }
+  if (sort === 'oldest') {
+    result = result.sort('createdAt');
+  }
+  if (sort === 'a-z') {
+    result = result.sort('position');
+  }
+  if (sort === 'z-a') {
+    result = result.sort('-position');
+  }
+
+  const totalFoodys = await result;
+
+  // setup pagination
+  const limit = 10;
+  const skip = 1;
+
+  result = result.skip(skip).limit(limit);
+  // 23
+  // 4 7 7 7 2
+  const foodys = await result;
+  res
+    .status(StatusCodes.OK)
+    .json({ foodys, totalFoodys: foodys.length, numOfPages: 1 });
+};
+```
+
+#### Page and Limit
+
+```js
+foodysController.js;
+
+const getAllFoodys = async (req, res) => {
+  const { search, status, foodyType, sort } = req.query;
+  const queryObject = {
+    createdBy: req.user.userId,
+  };
+  if (search) {
+    queryObject.position = { $regex: search, $options: 'i' };
+  }
+  if (status !== 'all') {
+    queryObject.status = status;
+  }
+  if (foodyType !== 'all') {
+    queryObject.foodyType = foodyType;
+  }
+  let result = Foody.find(queryObject);
+
+  if (sort === 'latest') {
+    result = result.sort('-createdAt');
+  }
+  if (sort === 'oldest') {
+    result = result.sort('createdAt');
+  }
+  if (sort === 'a-z') {
+    result = result.sort('position');
+  }
+  if (sort === 'z-a') {
+    result = result.sort('-position');
+  }
+
+  // setup pagination
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 10;
+  const skip = (page - 1) * limit; //10
+  result = result.skip(skip).limit(limit);
+  // 75
+  // 10 10 10 10 10 10 10 5
+  const foodys = await result;
+  res
+    .status(StatusCodes.OK)
+    .json({ foodys, totalFoodys: foodys.length, numOfPages: 1 });
+};
+```
+
+#### Total Foodys and Number Of Pages
+
+```js
+foodysController.js;
+
+const getAllFoodys = async (req, res) => {
+  const { search, status, foodyType, sort } = req.query;
+  const queryObject = {
+    createdBy: req.user.userId,
+  };
+  if (search) {
+    queryObject.position = { $regex: search, $options: 'i' };
+  }
+  if (status !== 'all') {
+    queryObject.status = status;
+  }
+  if (foodyType !== 'all') {
+    queryObject.foodyType = foodyType;
+  }
+  let result = Foody.find(queryObject);
+
+  if (sort === 'latest') {
+    result = result.sort('-createdAt');
+  }
+  if (sort === 'oldest') {
+    result = result.sort('createdAt');
+  }
+  if (sort === 'a-z') {
+    result = result.sort('position');
+  }
+  if (sort === 'z-a') {
+    result = result.sort('-position');
+  }
+
+  // setup pagination
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
+
+  result = result.skip(skip).limit(limit);
+
+  const foodys = await result;
+
+  const totalFoodys = await Foody.countDocuments(queryObject);
+  const numOfPages = Math.ceil(totalFoodys / limit);
+
+  res.status(StatusCodes.OK).json({ foodys, totalFoodys, numOfPages });
+};
+```
+
+#### PaginationContainer Setup
+
+- PaginationContainer.js
+
+```js
+FoodysContainer.js;
+
+import PaginationContainer from './PaginationContainer';
+
+const { numOfPages } = useAppContext();
+
+return (
+  <Wrapper>
+    <h5>
+      {totalFoodys} foody{foodys.length > 1 && 's'} found
+    </h5>
+    <div className='foodys'>
+      {foodys.map((foody) => {
+        return <Foody key={foody._id} {...foody} />;
+      })}
+    </div>
+    {numOfPages > 1 && <PaginationContainer />}
+  </Wrapper>
+);
+```
+
+#### PaginationContainer - Structure
+
+```js
+PaginationContainer.js;
+
+import { useAppContext } from '../context/appContext';
+import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
+import Wrapper from '../assets/wrappers/PaginationContainer';
+
+const PageButtonContainer = () => {
+  const { numOfPages, page } = useAppContext();
+
+  const prevPage = () => {
+    console.log('prev page');
+  };
+  const nextPage = () => {
+    console.log('next page');
+  };
+
+  return (
+    <Wrapper>
+      <button className='prev-btn' onClick={prevPage}>
+        <HiChevronDoubleLeft />
+        prev
+      </button>
+
+      <div className='btn-container'>buttons</div>
+
+      <button className='next-btn' onClick={nextPage}>
+        next
+        <HiChevronDoubleRight />
+      </button>
+    </Wrapper>
+  );
+};
+
+export default PageButtonContainer;
+```
+
+#### Button Container
+
+- [Array.from] (https://youtu.be/zg1Bv4xubwo)
+
+```js
+PaginationContainer.js;
+
+const pages = Array.from({ length: numOfPages }, (_, index) => {
+  return index + 1;
+});
+
+return (
+  <div className='btn-container'>
+    {pages.map((pageNumber) => {
+      return (
+        <button
+          type='button'
+          className={pageNumber === page ? 'pageBtn active' : 'pageBtn'}
+          key={pageNumber}
+          onClick={() => console.log(page)}
+        >
+          {pageNumber}
+        </button>
+      );
+    })}
+  </div>
+);
+```
+
+#### Change Page
+
+```js
+actions.js;
+export const CHANGE_PAGE = 'CHANGE_PAGE';
+```
+
+```js
+appContext.js
+const changePage = (page) => {
+  dispatch({ type: CHANGE_PAGE, payload: { page } })
+}
+value={{changePage}}
+```
+
+```js
+reducer.js;
+
+if (action.type === CHANGE_PAGE) {
+  return { ...state, page: action.payload.page };
+}
+```
+
+```js
+PaginationContainer.js;
+
+const { changePage } = useAppContext();
+return (
+  <button
+    type='button'
+    className={pageNumber === page ? 'pageBtn active' : 'pageBtn'}
+    key={pageNumber}
+    onClick={() => changePage(pageNumber)}
+  >
+    {pageNumber}
+  </button>
+);
+```
+
+#### Prev and Next Buttons
+
+```js
+PaginationContainer.js;
+const prevPage = () => {
+  let newPage = page - 1;
+  if (newPage < 1) {
+    // newPage = 1
+    // alternative
+    newPage = numOfPages;
+  }
+  changePage(newPage);
+};
+const nextPage = () => {
+  let newPage = page + 1;
+  if (newPage > numOfPages) {
+    // newPage = numOfPages
+    // alternative
+    newPage = 1;
+  }
+  changePage(newPage);
+};
+```
+
+#### Trigger New Page
+
+```js
+appContext.js;
+
+const getFoodys = async () => {
+  const { page, search, searchStatus, searchType, sort } = state;
+
+  let url = `/foodys?page=${page}&status=${searchStatus}&foodyType=${searchType}&sort=${sort}`;
+  // rest of the code
+};
+```
+
+```js
+FoodysContainer.js;
+
+const { page } = useAppContext();
+useEffect(() => {
+  getFoodys();
+}, [page, search, searchStatus, searchType, sort]);
+```
+
+```js
+reducer.js;
+
+if (action.type === HANDLE_CHANGE) {
+  // *****IMPORTANT******
+  // set back to first page
+
+  return { ...state, page: 1, [action.payload.name]: action.payload.value };
+}
+```
 
 #### Production Setup - Fix Warnings and logoutUser
 

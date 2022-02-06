@@ -8,6 +8,7 @@ import {
   updateFoody,
   deleteFoody,
   getMyFoodys,
+  changeFoodyStatus,
 } from '../controllers/foodysController.js';
 import authenticateUser from '../middleware/authenticate.js';
 
@@ -22,5 +23,5 @@ router
   .get(getFoody)
   .patch(authenticateUser, updateFoody)
   .delete(authenticateUser, deleteFoody);
-
+router.put('/:id/status', authenticateUser, changeFoodyStatus);
 export default router;

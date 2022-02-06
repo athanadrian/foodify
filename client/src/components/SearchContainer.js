@@ -2,7 +2,7 @@ import { useAppContext } from '../context/appContext';
 import Wrapper from '../wrappers/SearchContainer';
 import { FormInput, FormSelect, FormEnumSelect } from '.';
 
-const SearchContainer = () => {
+const SearchContainer = ({ all }) => {
   const {
     isLoading,
     search,
@@ -54,7 +54,7 @@ const SearchContainer = () => {
             list={cuisineOptions}
             all
           />
-          <FormSelect
+          <FormEnumSelect
             name='searchFoody'
             value={searchFoody}
             labelText='foody type'
@@ -70,22 +70,26 @@ const SearchContainer = () => {
             list={costOptions}
             all
           />
-          <FormSelect
-            name='searchStatus'
-            value={searchStatus}
-            labelText='status'
-            handleChange={handleSearch}
-            list={statusOptions}
-            all
-          />
-          <FormSelect
-            name='searchPreference'
-            value={searchPreference}
-            labelText='preference'
-            handleChange={handleSearch}
-            list={preferenceOptions}
-            all
-          />
+          {!all && (
+            <>
+              <FormSelect
+                name='searchStatus'
+                value={searchStatus}
+                labelText='status'
+                handleChange={handleSearch}
+                list={statusOptions}
+                all
+              />
+              <FormSelect
+                name='searchPreference'
+                value={searchPreference}
+                labelText='preference'
+                handleChange={handleSearch}
+                list={preferenceOptions}
+                all
+              />
+            </>
+          )}
           <FormSelect
             name='sort'
             value={sort}

@@ -3,7 +3,7 @@ import { FoodysContainer, SearchContainer } from '../../components';
 const AllFoodies = () => {
   return (
     <>
-      <SearchContainer />
+      <SearchContainer all />
       <FoodysContainer all />
     </>
   );
