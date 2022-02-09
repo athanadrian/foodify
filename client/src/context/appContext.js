@@ -1,4 +1,4 @@
-import { useContext, createContext, useReducer } from 'react';
+import { useContext, createContext, useReducer, useEffect } from 'react';
 import useClientApi from '../hooks/useClientApi';
 import reducer from './reducer';
 import {
@@ -53,7 +53,7 @@ const initialState = {
   showInfoWindow: false,
   alertText: '',
   alertType: '',
-  googleApiKey: 'AIzaSyBZ2XtW_eLHJMGYnoLdznK65WV6tfhBVDM',
+  googleApiKey: '',
   user: user ? JSON.parse(user) : null,
   token: token,
   userLocation: JSON.parse(userLocation) || {
@@ -168,13 +168,19 @@ const AppProvider = ({ children }) => {
   const { clientApi } = useClientApi(logoutUser);
 
   const getGoogleApiKey = async () => {
-    //   try {
-    //     const { data } = await clientApi.get('/config/google');
-    //     dispatch({ type: GET_GOOGLE_API_KEY, payload: { key: data } });
-    //   } catch (error) {
-    //     console.log('Google API Key Error: ', error);
-    //   }
+    try {
+      const { data } = await clientApi.get('/config/google');
+      dispatch({ type: GET_GOOGLE_API_KEY, payload: { key: data } });
+    } catch (error) {
+      console.log('Google API Key Error: ', error);
+    }
   };
+
+  useEffect(() => {
+    getGoogleApiKey();
+
+    // eslint-disable-next-line
+  }, []);
 
   const signUser = async ({ endPoint, currentUser, alertText }) => {
     dispatch({ type: SIGN_USER_BEGIN });

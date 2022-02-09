@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BsFillPinMapFill } from 'react-icons/bs';
 import {
   Alert,
@@ -22,7 +22,6 @@ const Profile = () => {
     isLoading,
     monthlyCreations,
     toggleModal,
-    getGoogleApiKey,
   } = useAppContext();
 
   const initialState = {
@@ -32,14 +31,6 @@ const Profile = () => {
     home: user?.home,
   };
   const [values, setValues] = useState(initialState);
-
-  useEffect(() => {
-    const fetchGoogleKey = async () => {
-      await getGoogleApiKey();
-    };
-    fetchGoogleKey();
-    // eslint-disable-next-line
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

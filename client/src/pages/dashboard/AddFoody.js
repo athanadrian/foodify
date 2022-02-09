@@ -9,7 +9,6 @@ import {
 } from '../../components';
 import { useAppContext } from '../../context/appContext';
 import { BsFillPinMapFill } from 'react-icons/bs';
-import { useEffect } from 'react';
 
 const AddFoody = () => {
   const {
@@ -34,16 +33,7 @@ const AddFoody = () => {
     editFoody,
     clearValues,
     toggleModal,
-    getGoogleApiKey,
   } = useAppContext();
-
-  useEffect(() => {
-    const fetchGoogleKey = async () => {
-      await getGoogleApiKey();
-    };
-    fetchGoogleKey();
-    // eslint-disable-next-line
-  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
