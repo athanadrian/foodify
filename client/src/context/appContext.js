@@ -53,7 +53,7 @@ const initialState = {
   showInfoWindow: false,
   alertText: '',
   alertType: '',
-  googleApiKey: 'AIzaSyCojGqU1jUpO0J_9CzHuOh511PUWpf5EZI',
+  googleApiKey: 'AIzaSyBZ2XtW_eLHJMGYnoLdznK65WV6tfhBVDM',
   user: user ? JSON.parse(user) : null,
   token: token,
   userLocation: JSON.parse(userLocation) || {

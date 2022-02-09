@@ -22,7 +22,9 @@ TODO
 
 > 10. Comments Implementation
 
-> 11. Live Chat 12.
+> 11. Live Chat
+
+> 12. Live Video Chat
 
 > 13. Users Tab
 
