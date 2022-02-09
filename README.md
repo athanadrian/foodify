@@ -32,6 +32,16 @@ TODO
 
 > ~~16. My Foodys pagination~~
 
+> ~~17. Add Foody location coordinates~~
+
+> ~~18. Add User location coordinates~~
+
+> 19. Forget Password functionality
+
+> ~~20. Add Map Add location Page/modal~~
+
+> ~~21. Fix fetch google api maps key~~
+
 # Foodify
 
 #### Track Your Cyprus Tour-Place Search

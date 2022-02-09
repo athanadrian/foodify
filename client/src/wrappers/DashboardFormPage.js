@@ -27,7 +27,7 @@ const Wrapper = styled.section`
   .form-center button {
     align-self: end;
     height: 35px;
-    margin-top: 1rem;
+    margin-top: 0rem;
   }
 
   .text-area {
@@ -44,11 +44,29 @@ const Wrapper = styled.section`
       height: 35px;
     }
   }
+
   .clear-btn {
     background: var(--grey-500);
   }
   .clear-btn:hover {
     background: var(--black);
+  }
+
+  .map-btn {
+    background: var(--yellow-light);
+    color: var(--yellow-dark);
+    margin-top: 0px;
+  }
+  .map-btn:hover {
+    background: var(--yellow-dark);
+    color: var(--yellow-light);
+  }
+
+  .icon {
+    svg {
+      vertical-align: middle;
+      color: var(--grey-900);
+    }
   }
   @media (min-width: 992px) {
     .form-center {
@@ -56,6 +74,7 @@ const Wrapper = styled.section`
       align-items: center;
       column-gap: 1rem;
     }
+
     .btn-container {
       margin-top: 0;
     }

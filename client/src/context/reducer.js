@@ -5,6 +5,9 @@ import {
   SIGN_USER_SUCCESS,
   SIGN_USER_ERROR,
   TOGGLE_SIDEBAR,
+  TOGGLE_MODAL,
+  OPEN_INFO_WINDOW,
+  CLOSE_INFO_WINDOW,
   LOGOUT_USER,
   UPDATE_USER_BEGIN,
   UPDATE_USER_SUCCESS,
@@ -28,6 +31,9 @@ import {
   SHOW_STATS_SUCCESS,
   CLEAR_FILTERS,
   CHANGE_PAGE,
+  ADD_FOODY_MARKER,
+  ADD_USER_MARKER,
+  GET_GOOGLE_API_KEY,
 } from './actions';
 
 import { initialState } from './appContext';
@@ -62,7 +68,8 @@ const reducer = (state, action) => {
       token: action.payload.token,
       user: action.payload.user,
       userLocation: action.payload.location,
-      jobLocation: action.payload.location,
+      home: action.payload.home,
+      //jobLocation: action.payload.location,
       showAlert: true,
       alertType: 'success',
       alertText: action.payload.alertText,
@@ -82,6 +89,13 @@ const reducer = (state, action) => {
     return {
       ...state,
       showSidebar: !state.showSidebar,
+    };
+  }
+
+  if (action.type === TOGGLE_MODAL) {
+    return {
+      ...state,
+      showModal: !state.showModal,
     };
   }
 
@@ -109,7 +123,8 @@ const reducer = (state, action) => {
       token: action.payload.token,
       user: action.payload.user,
       userLocation: action.payload.location,
-      jobLocation: action.payload.location,
+      home: action.payload.home,
+      //jobLocation: action.payload.location,
       showAlert: true,
       alertType: 'success',
       alertText: 'Profile successfully updated',
@@ -136,7 +151,6 @@ const reducer = (state, action) => {
   if (action.type === ADD_FOODY_SUCCESS) {
     return {
       ...state,
-      numOfPages: action.payload.numOfPages,
       isLoading: false,
       showAlert: true,
       alertType: 'success',
@@ -169,12 +183,16 @@ const reducer = (state, action) => {
       placeEditId: '',
       title: '',
       village: '',
+      location: {
+        lat: 0,
+        lng: 0,
+      },
       description: '',
       status: 'unpublished',
-      preference: 'pending',
       cuisine: 'greek',
       cost: 'average',
-      foody: 'a la carte',
+      foody: 'alaCarte',
+      remarks: '',
       foodLocation: state.userLocation,
     };
   }
@@ -204,6 +222,7 @@ const reducer = (state, action) => {
       _id,
       title,
       village,
+      location,
       cuisine,
       foody,
       cost,
@@ -217,6 +236,7 @@ const reducer = (state, action) => {
       editFoodyId: _id,
       title,
       village,
+      location,
       cuisine,
       foody,
       cost,
@@ -326,6 +346,40 @@ const reducer = (state, action) => {
     return {
       ...state,
       page: action.payload.page,
+    };
+  }
+
+  if (action.type === ADD_FOODY_MARKER) {
+    return {
+      ...state,
+      location: action.payload.location,
+    };
+  }
+
+  if (action.type === ADD_USER_MARKER) {
+    return {
+      ...state,
+      userLocation: action.payload.userLocation,
+    };
+  }
+
+  if (action.type === OPEN_INFO_WINDOW) {
+    return {
+      ...state,
+      showInfoWindow: true,
+    };
+  }
+  if (action.type === CLOSE_INFO_WINDOW) {
+    return {
+      ...state,
+      showInfoWindow: false,
+    };
+  }
+
+  if (action.type === GET_GOOGLE_API_KEY) {
+    return {
+      ...state,
+      googleApiKey: action.payload.key,
     };
   }
 

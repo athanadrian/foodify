@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { FaRegFlag, FaRegCalendarPlus } from 'react-icons/fa';
 import { GiPathDistance } from 'react-icons/gi';
@@ -5,14 +7,13 @@ import { FiMapPin } from 'react-icons/fi';
 import { AiOutlineEuro } from 'react-icons/ai';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 import { MdOutlineUpdate, MdOutlineRestaurant } from 'react-icons/md';
-import { Link } from 'react-router-dom';
-import { useAppContext } from '../context/appContext';
 
+import { useAppContext } from '../context/appContext';
 import Wrapper from '../wrappers/Foody';
 import FoodyInfo from './FoodyInfo';
 import { mapEnumObject } from '../utils/functions';
 import { costs, foodys } from '../utils/lookup-data';
-import { useState } from 'react';
+
 const Foody = ({
   all,
   _id,

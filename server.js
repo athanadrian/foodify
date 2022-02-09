@@ -62,6 +62,9 @@ app.use(xss());
 // Use routes
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/foodys', foodyRouter);
+app.use('/api/v1/config/google', (req, res) => {
+  res.send(process.env.GOOGLE_API_KEY || '');
+});
 
 // only when ready to deploy
 app.get('*', (req, res) => {

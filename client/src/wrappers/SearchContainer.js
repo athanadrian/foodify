@@ -26,6 +26,17 @@ const Wrapper = styled.section`
     align-self: end;
     margin-top: 1rem;
   }
+  .distance {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .distance-value {
+    margin-left: 0.5rem;
+    letter-spacing: var(--letterSpacing);
+    color: var(--primary-500);
+  }
+
   @media (min-width: 768px) {
     .form-center {
       grid-template-columns: 1fr 1fr;

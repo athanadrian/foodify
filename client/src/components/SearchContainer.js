@@ -1,6 +1,11 @@
 import { useAppContext } from '../context/appContext';
 import Wrapper from '../wrappers/SearchContainer';
-import { FormInput, FormSelect, FormEnumSelect } from '.';
+import {
+  FormInput,
+  FormSelect,
+  FormEnumSelect,
+  //  FormRangeInput
+} from '.';
 
 const SearchContainer = ({ all }) => {
   const {
@@ -10,6 +15,9 @@ const SearchContainer = ({ all }) => {
     searchFoody,
     searchCost,
     searchStatus,
+    //searchDistance,
+    //min_distance,
+    //max_distance,
     sort,
     statusOptions,
     costOptions,
@@ -75,6 +83,13 @@ const SearchContainer = ({ all }) => {
             handleChange={handleSearch}
             list={sortOptions}
           />
+          {/* <FormRangeInput
+            name='distance'
+            value={searchDistance}
+            handleChange={handleChange}
+            min={min_distance}
+            max={max_distance}
+          /> */}
           {!all && (
             <FormEnumSelect
               name='searchStatus'

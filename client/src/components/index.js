@@ -3,6 +3,7 @@ import FormInput from './FormInput';
 import FormTextArea from './FormTextArea';
 import FormSelect from './FormSelect';
 import FormEnumSelect from './FormEnumSelect';
+import FormRangeInput from './FormRangeInput';
 import Alert from './Alert';
 import Navbar from './Navbar';
 import SmallSidebar from './SmallSidebar';
@@ -15,6 +16,9 @@ import StatsContainer from './StatsContainer';
 import StatsContainerRow from './StatsContainerRow';
 import ChartsContainer from './ChartsContainer';
 import PaginationContainer from './PaginationContainer';
+import Modal from './Modal';
+import FoodyModal from './FoodyModal';
+import MapModal from './MapModal';
 
 export {
   Logo,
@@ -22,6 +26,7 @@ export {
   FormTextArea,
   FormSelect,
   FormEnumSelect,
+  FormRangeInput,
   Alert,
   Navbar,
   SmallSidebar,
@@ -34,4 +39,7 @@ export {
   StatsContainerRow,
   ChartsContainer,
   PaginationContainer,
+  Modal,
+  FoodyModal,
+  MapModal,
 };

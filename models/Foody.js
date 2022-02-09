@@ -15,13 +15,8 @@ const FoodySchema = new mongoose.Schema(
       default: 'greek',
     },
     location: {
-      name: {
-        type: String,
-        default: 'pending',
-        required: true,
-      },
-      //   latitude: { type: Number, required: true },
-      //   longitude: { type: Number, required: true },
+      lat: { type: Number },
+      lng: { type: Number },
     },
     tour: {
       type: String,

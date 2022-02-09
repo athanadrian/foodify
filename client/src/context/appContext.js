@@ -8,6 +8,9 @@ import {
   SIGN_USER_SUCCESS,
   SIGN_USER_ERROR,
   TOGGLE_SIDEBAR,
+  TOGGLE_MODAL,
+  CLOSE_INFO_WINDOW,
+  OPEN_INFO_WINDOW,
   LOGOUT_USER,
   UPDATE_USER_BEGIN,
   UPDATE_USER_SUCCESS,
@@ -31,36 +34,51 @@ import {
   SHOW_STATS_SUCCESS,
   CLEAR_FILTERS,
   CHANGE_PAGE,
+  ADD_FOODY_MARKER,
+  ADD_USER_MARKER,
+  GET_GOOGLE_API_KEY,
 } from './actions';
 import { costs, cuisines, foodys, statuses } from '../utils/lookup-data';
 
 const token = localStorage.getItem('token');
 const user = localStorage.getItem('user');
 const userLocation = localStorage.getItem('location');
+const home = localStorage.getItem('home');
 
 const initialState = {
   isLoading: false,
   showAlert: false,
+  showModal: false,
+  showSidebar: false,
+  showInfoWindow: false,
   alertText: '',
   alertType: '',
-  showSidebar: false,
+  googleApiKey: '',
   user: user ? JSON.parse(user) : null,
   token: token,
-  userLocation: userLocation || '',
+  userLocation: JSON.parse(userLocation) || {
+    lat: 0,
+    lng: 0,
+  },
+  home: home || '',
   isEditing: false,
   editFoodyId: '',
   title: '',
   village: '',
   remarks: '',
   cuisine: 'greek',
-  foody: 'a la carte',
-  cost: 'pending',
+  foody: 'alaCarte',
+  cost: 'average',
   status: 'unpublished',
+  location: {
+    lat: 0,
+    lng: 0,
+  },
   cuisineOptions: cuisines,
   foodyOptions: foodys,
   costOptions: costs,
   statusOptions: statuses,
-  foodLocation: userLocation || '',
+  foodLocation: home || '',
   foodys: [],
   totalFoodys: 0,
   page: 1,
@@ -72,7 +90,9 @@ const initialState = {
   searchFoody: 'all',
   searchCost: 'all',
   searchStatus: 'all',
-  searchPreference: 'all',
+  searchDistance: 0,
+  min_distance: 0,
+  max_distance: 0,
   sort: 'latest-created',
   sortOptions: [
     'latest-created',
@@ -88,7 +108,6 @@ const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
   const clearFilters = () => {
     dispatch({ type: CLEAR_FILTERS });
   };
@@ -108,6 +127,17 @@ const AppProvider = ({ children }) => {
     dispatch({ type: TOGGLE_SIDEBAR });
   };
 
+  const toggleModal = () => {
+    dispatch({ type: TOGGLE_MODAL });
+  };
+
+  const openInfoWindow = () => {
+    dispatch({ type: OPEN_INFO_WINDOW });
+  };
+  const closeInfoWindow = () => {
+    dispatch({ type: CLOSE_INFO_WINDOW });
+  };
+
   const changePage = (page) => {
     dispatch({ type: CHANGE_PAGE, payload: { page } });
   };
@@ -116,17 +146,20 @@ const AppProvider = ({ children }) => {
     dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
   };
 
-  const addUserToLocalStorage = ({ user, token, location }) => [
+  const addUserToLocalStorage = ({ user, token, location, home }) => [
     localStorage.setItem('user', JSON.stringify(user)),
     localStorage.setItem('token', token),
-    localStorage.setItem('location', location),
+    localStorage.setItem('location', JSON.stringify(location)),
+    localStorage.setItem('home', home),
   ];
 
   const removeUserFromLocalStorage = () => [
     localStorage.removeItem('user'),
     localStorage.removeItem('token'),
     localStorage.removeItem('location'),
+    localStorage.removeItem('home'),
   ];
+
   const logoutUser = () => {
     dispatch({ type: LOGOUT_USER });
     removeUserFromLocalStorage();
@@ -134,16 +167,25 @@ const AppProvider = ({ children }) => {
 
   const { clientApi } = useClientApi(logoutUser);
 
+  const getGoogleApiKey = async () => {
+    try {
+      const { data } = await clientApi.get('/config/google');
+      dispatch({ type: GET_GOOGLE_API_KEY, payload: { key: data } });
+    } catch (error) {
+      console.log('Google API Key Error: ', error);
+    }
+  };
+
   const signUser = async ({ endPoint, currentUser, alertText }) => {
     dispatch({ type: SIGN_USER_BEGIN });
     try {
       const { data } = await clientApi.post(`/auth/${endPoint}`, currentUser);
-      const { user, token, location } = data;
+      const { user, token, location, home } = data;
       dispatch({
         type: SIGN_USER_SUCCESS,
-        payload: { user, token, location, alertText },
+        payload: { user, token, location, home, alertText },
       });
-      addUserToLocalStorage({ user, token, location });
+      addUserToLocalStorage({ user, token, location, home });
     } catch (error) {
       dispatch({
         type: SIGN_USER_ERROR,
@@ -157,12 +199,12 @@ const AppProvider = ({ children }) => {
     dispatch({ type: UPDATE_USER_BEGIN });
     try {
       const { data } = await clientApi.patch('/auth/update-user', userToUpdate);
-      const { user, token, location } = data;
+      const { user, token, location, home } = data;
       dispatch({
         type: UPDATE_USER_SUCCESS,
-        payload: { user, token, location },
+        payload: { user, token, location, home },
       });
-      addUserToLocalStorage({ user, token, location });
+      addUserToLocalStorage({ user, token, location, home });
     } catch (error) {
       if (error.response.status !== 401) {
         dispatch({
@@ -177,10 +219,20 @@ const AppProvider = ({ children }) => {
   const createFoody = async () => {
     dispatch({ type: ADD_FOODY_BEGIN });
     try {
-      const { title, village, remarks, cuisine, foody, cost, status } = state;
+      const {
+        title,
+        village,
+        location,
+        remarks,
+        cuisine,
+        foody,
+        cost,
+        status,
+      } = state;
       await clientApi.post('/foodys', {
         title,
         village,
+        location,
         remarks,
         cuisine,
         foody,
@@ -203,6 +255,13 @@ const AppProvider = ({ children }) => {
     dispatch({ type: SET_EDIT_FOODY, payload: { id } });
   };
 
+  const addUserLocation = (location) => {
+    dispatch({ type: ADD_USER_MARKER, payload: { userLocation: location } });
+  };
+  const addFoodyLocation = (location) => {
+    dispatch({ type: ADD_FOODY_MARKER, payload: { location } });
+  };
+
   const editFoody = async () => {
     dispatch({ type: UPDATE_FOODY_BEGIN });
     try {
@@ -210,6 +269,7 @@ const AppProvider = ({ children }) => {
         editFoodyId,
         title,
         village,
+        location,
         remarks,
         cuisine,
         foody,
@@ -219,6 +279,7 @@ const AppProvider = ({ children }) => {
       await clientApi.patch(`/foodys/${editFoodyId}`, {
         title,
         village,
+        location,
         remarks,
         cuisine,
         foody,
@@ -262,6 +323,7 @@ const AppProvider = ({ children }) => {
         status,
       });
       dispatch({ type: CHANGE_FOODY_STATUS, payload: status });
+      dispatch({ type: CLEAR_VALUES });
       getMyFoodys();
     } catch (error) {
       if (error.response.status === 401) return;
@@ -368,8 +430,6 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
-  //const
-
   return (
     <AppContext.Provider
       value={{
@@ -379,7 +439,10 @@ const AppProvider = ({ children }) => {
         signUser,
         updateUser,
         toggleSidebar,
+        toggleModal,
         logoutUser,
+        openInfoWindow,
+        closeInfoWindow,
         createFoody,
         setFoodyToUpdate,
         editFoody,
@@ -392,6 +455,9 @@ const AppProvider = ({ children }) => {
         clearFilters,
         changeFoodyStatus,
         changePage,
+        addFoodyLocation,
+        addUserLocation,
+        getGoogleApiKey,
       }}
     >
       {children}

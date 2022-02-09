@@ -1,3 +1,5 @@
+@import 'react-responsive-modal/styles.css';
+
 *,
 ::after,
 ::before {
@@ -42,8 +44,10 @@ html {
   --red-dark: #842029;
   --green-light: #d1e7dd;
   --green-dark: #0f5132;
-  --yellow-light: #fcefc7;
-  --yellow-dark: #8d6b1b;
+  --blue-light: #7dd3fc;
+  --blue-dark: #0369a1;
+  --yellow-light: #fde68a;
+  --yellow-dark: #92400e;
 
   /* fonts  */
   --headingFont: 'Roboto Condensed', Sans-Serif;

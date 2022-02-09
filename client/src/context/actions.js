@@ -1,6 +1,11 @@
 export const DISPLAY_ALERT = 'SHOW_ALERT';
 export const CLEAR_ALERT = 'CLEAR_ALERT';
+
 export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR';
+export const TOGGLE_MODAL = 'TOGGLE_MODAL';
+
+export const OPEN_INFO_WINDOW = 'OPEN_INFO_WINDOW';
+export const CLOSE_INFO_WINDOW = 'CLOSE_INFO_WINDOW';
 
 export const SIGN_USER_BEGIN = 'SIGN_USER_BEGIN';
 export const SIGN_USER_SUCCESS = 'SIGN_USER_SUCCESS';
@@ -40,3 +45,8 @@ export const SHOW_STATS_SUCCESS = 'SHOW_STATS_SUCCESS';
 export const CLEAR_FILTERS = 'CLEAR_FILTERS';
 
 export const CHANGE_PAGE = 'CHANGE_PAGE';
+
+export const GET_GOOGLE_API_KEY = 'GET_GOOGLE_API_KEY';
+
+export const ADD_FOODY_MARKER = 'ADD_FOODY_MARKER';
+export const ADD_USER_MARKER = 'ADD_USER_MARKER';

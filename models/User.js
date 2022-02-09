@@ -39,11 +39,15 @@ const UserSchema = new mongoose.Schema(
       maxlength: [20, 'Lastname must be at the most 20 characters'],
       default: 'lastName',
     },
-    location: {
+    home: {
       type: String,
       trim: true,
-      maxlength: [20, 'Location must be at the most 20 characters'],
-      default: 'my city',
+      maxlength: [20, 'Home must be at the most 20 characters'],
+      default: 'my home',
+    },
+    location: {
+      lat: { type: Number, default: 0 },
+      lng: { type: Number, default: 0 },
     },
     profilePicUrl: { type: String },
   },

@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { BsFillPinMapFill } from 'react-icons/bs';
 import {
   Alert,
   ChartsContainer,
   FormInput,
+  MapModal,
+  Modal,
   StatsContainer,
 } from '../../components';
 import { useAppContext } from '../../context/appContext';
@@ -11,19 +14,32 @@ import StatsWrapper from '../../wrappers/StatsContainer';
 const Profile = () => {
   const {
     user,
+    userLocation,
     showAlert,
+    showModal,
     displayAlert,
     updateUser,
     isLoading,
     monthlyCreations,
+    toggleModal,
+    getGoogleApiKey,
   } = useAppContext();
+
   const initialState = {
     name: user?.name,
     email: user?.email,
     lastName: user?.lastName,
-    location: user?.location,
+    home: user?.home,
   };
   const [values, setValues] = useState(initialState);
+
+  useEffect(() => {
+    const fetchGoogleKey = async () => {
+      await getGoogleApiKey();
+    };
+    fetchGoogleKey();
+    // eslint-disable-next-line
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,11 +48,11 @@ const Profile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { name, email, lastName, location } = values;
-    if (!name || !email || !lastName || !location) {
+    const { name, email, lastName, home } = values;
+    if (!name || !email || !lastName || !home) {
       return displayAlert();
     }
-    updateUser({ name, email, lastName, location });
+    updateUser({ name, email, lastName, home, location: userLocation });
   };
 
   return (
@@ -64,16 +80,30 @@ const Profile = () => {
               name='lastName'
               type='text'
               value={values.lastName}
-              labelText='lastName'
+              labelText='last name'
               handleChange={handleChange}
             />
-            <FormInput
-              name='location'
-              type='text'
-              value={values.location}
-              labelText='location'
-              handleChange={handleChange}
-            />
+            <div className='btn-container'>
+              <FormInput
+                name='home'
+                type='text'
+                value={values.home}
+                labelText='home city'
+                handleChange={handleChange}
+              />
+              <div className='form-row'>
+                <label title='Pin it on Map!' className='form-label icon'>
+                  <BsFillPinMapFill />
+                </label>
+                <button
+                  type='button'
+                  className='btn btn-block map-btn'
+                  onClick={toggleModal}
+                >
+                  Pin it on Map!
+                </button>
+              </div>
+            </div>
             <button
               className='btn btn-block'
               type='submit'
@@ -89,6 +119,11 @@ const Profile = () => {
         <StatsContainer />
         {monthlyCreations.length > 0 && <ChartsContainer />}
       </StatsWrapper>
+      <div>
+        <Modal open={showModal} onClose={toggleModal} center>
+          <MapModal profile />
+        </Modal>
+      </div>
     </>
   );
 };

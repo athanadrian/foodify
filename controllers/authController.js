@@ -51,11 +51,13 @@ export const register = async (req, res, next) => {
     user: {
       email: user.email.toLowerCase(),
       lastName: user.lastName,
+      home: user.home,
       location: user.location,
       name: user.name,
     },
     token,
     location: user.location,
+    home: user.home,
   });
 };
 
@@ -80,23 +82,27 @@ export const login = async (req, res, next) => {
   res.status(StatusCodes.OK).json({
     user,
     token,
+    home: user.home,
     location: user.location,
   });
 };
 
 export const updateUser = async (req, res, next) => {
-  const { email, name, lastName, location } = req.body;
-  if (!name || !email || !lastName || !location) {
+  const { email, name, lastName, home, location } = req.body;
+  if (!name || !email || !lastName || !home || !location) {
     throw new BadRequestError('Please provide all values!');
   }
   const user = await User.findById(req.user.userId);
   user.name = name;
   user.email = email;
   user.lastName = lastName;
+  user.home = home;
   user.location = location;
 
   await user.save();
   const token = user.createJWT();
 
-  res.status(StatusCodes.OK).json({ user, token, location: user.location });
+  res
+    .status(StatusCodes.OK)
+    .json({ user, token, home: user.home, location: user.location });
 };
