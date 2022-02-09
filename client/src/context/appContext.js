@@ -53,7 +53,7 @@ const initialState = {
   showInfoWindow: false,
   alertText: '',
   alertType: '',
-  googleApiKey: '',
+  googleApiKey: 'AIzaSyCojGqU1jUpO0J_9CzHuOh511PUWpf5EZI',
   user: user ? JSON.parse(user) : null,
   token: token,
   userLocation: JSON.parse(userLocation) || {
@@ -168,12 +168,12 @@ const AppProvider = ({ children }) => {
   const { clientApi } = useClientApi(logoutUser);
 
   const getGoogleApiKey = async () => {
-    try {
-      const { data } = await clientApi.get('/config/google');
-      dispatch({ type: GET_GOOGLE_API_KEY, payload: { key: data } });
-    } catch (error) {
-      console.log('Google API Key Error: ', error);
-    }
+    //   try {
+    //     const { data } = await clientApi.get('/config/google');
+    //     dispatch({ type: GET_GOOGLE_API_KEY, payload: { key: data } });
+    //   } catch (error) {
+    //     console.log('Google API Key Error: ', error);
+    //   }
   };
 
   const signUser = async ({ endPoint, currentUser, alertText }) => {
