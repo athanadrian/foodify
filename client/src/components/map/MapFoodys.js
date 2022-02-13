@@ -27,7 +27,8 @@ const mapOptions = {
 };
 
 const MapFoodys = () => {
-  const { foodys, googleApiKey, myLocation, getAllFoodys } = useAppContext();
+  const { foodys, googleApiKey, myLocation, getAllFoodys, isMyFoodys } =
+    useAppContext();
   const [selected, setSelected] = useState(null);
 
   const { isLoaded, loadError } = useJsApiLoader({
@@ -112,11 +113,7 @@ const MapFoodys = () => {
             }}
             onCloseClick={() => setSelected(null)}
           >
-            <Foody
-              //all={all}
-              key={selected._id}
-              {...selected}
-            />
+            <Foody all={!isMyFoodys} key={selected._id} {...selected} />
           </InfoWindow>
         ) : null}
       </GoogleMap>

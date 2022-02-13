@@ -22,6 +22,7 @@ import {
   ADD_FOODY_ERROR,
   GET_FOODYS_BEGIN,
   GET_FOODYS_SUCCESS,
+  SET_FOODYS_ORIGIN,
   SET_EDIT_FOODY,
   UPDATE_FOODY_BEGIN,
   UPDATE_FOODY_SUCCESS,
@@ -65,6 +66,7 @@ const initialState = {
   myLocation: null,
   home: home || '',
   isEditing: false,
+  isMyFoodys: false,
   editFoodyId: '',
   title: '',
   village: '',
@@ -356,9 +358,9 @@ const AppProvider = ({ children }) => {
     dispatch({ type: CLEAR_VALUES });
   };
 
-  // const toggleFoodys = ()=>{
-
-  // }
+  const setFoodysOrigin = (value) => {
+    dispatch({ type: SET_FOODYS_ORIGIN, payload: { value } });
+  };
 
   const getAllFoodys = async () => {
     const { search, searchCuisine, searchFoody, searchCost, sort, page } =
@@ -377,6 +379,7 @@ const AppProvider = ({ children }) => {
         type: GET_FOODYS_SUCCESS,
         payload: { foodys, totalFoodys, numOfPages },
       });
+      setFoodysOrigin(false);
     } catch (error) {
       //logoutUser();
       console.log('error', error.response);
@@ -408,6 +411,7 @@ const AppProvider = ({ children }) => {
         type: GET_FOODYS_SUCCESS,
         payload: { foodys: myFoodys, totalFoodys, numOfPages },
       });
+      setFoodysOrigin(true);
     } catch (error) {
       //logoutUser();
       console.log('error', error.response);

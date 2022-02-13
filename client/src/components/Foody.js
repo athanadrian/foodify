@@ -41,6 +41,7 @@ const Foody = ({
     changeFoodyStatus,
     homeLocation,
     myLocation,
+    isMyFoodys,
   } = useAppContext();
   const [showRemarks, setShowRemarks] = useState(false);
   const [calcLocation, setCalcLocation] = useState(false);
@@ -150,7 +151,7 @@ const Foody = ({
             <p className='remarks-text'>{remarks}</p>
           </div>
         )}
-        {!all && (
+        {isMyFoodys && (
           <footer>
             <div className='actions'>
               <Link

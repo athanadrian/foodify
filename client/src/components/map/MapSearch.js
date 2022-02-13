@@ -25,13 +25,12 @@ const MapSearch = ({ panTo }) => {
       radius: 100 * 1000,
     },
   });
-  console.log('data suggestions', data);
+
   const handleInput = (e) => {
     setValue(e.target.value);
   };
 
   const handleSelect = async (address) => {
-    console.log('address', address);
     setValue(address, false);
     clearSuggestions();
     try {

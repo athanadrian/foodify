@@ -19,6 +19,7 @@ import {
   ADD_FOODY_ERROR,
   GET_FOODYS_BEGIN,
   GET_FOODYS_SUCCESS,
+  SET_FOODYS_ORIGIN,
   SET_EDIT_FOODY,
   UPDATE_FOODY_BEGIN,
   UPDATE_FOODY_SUCCESS,
@@ -265,7 +266,6 @@ const reducer = (state, action) => {
   if (action.type === CHANGE_FOODY_STATUS) {
     return {
       ...state,
-      status: action.payload.changedStatus,
       isLoading: false,
       showAlert: true,
       alertType: 'success',
@@ -367,6 +367,12 @@ const reducer = (state, action) => {
     return {
       ...state,
       showInfoWindow: true,
+    };
+  }
+  if (action.type === SET_FOODYS_ORIGIN) {
+    return {
+      ...state,
+      isMyFoodys: action.payload.value,
     };
   }
   if (action.type === CLOSE_INFO_WINDOW) {

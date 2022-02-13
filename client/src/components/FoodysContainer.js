@@ -20,6 +20,7 @@ const FoodysContainer = ({ all }) => {
     isLoading,
     getAllFoodys,
     getMyFoodys,
+    isMyFoodys,
   } = useAppContext();
 
   useEffect(() => {
@@ -50,11 +51,11 @@ const FoodysContainer = ({ all }) => {
     <Wrapper>
       <h5>
         {totalFoodys} foody{foodys.length > 1 && 's'}{' '}
-        {all ? 'found' : 'created'}
+        {isMyFoodys ? 'found' : 'created'}
       </h5>
       <div className='foodys'>
         {foodys.map((foody) => (
-          <Foody all={all} key={foody._id} {...foody} />
+          <Foody all={!isMyFoodys} key={foody._id} {...foody} />
         ))}
       </div>
       {numOfPages > 1 && <PaginationContainer />}
