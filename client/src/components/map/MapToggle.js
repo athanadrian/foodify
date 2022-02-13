@@ -8,12 +8,14 @@ const MapToggle = () => {
   const { getAllFoodys, getMyFoodys } = useAppContext();
   return (
     <Wrapper>
-      <button className='btn-cover all-foodys' onClick={getAllFoodys}>
-        <img src={Foody} alt='All Foodys' />
-      </button>
-      <button className='btn-cover my-foodys' onClick={getMyFoodys}>
-        <img src={MyFoody} alt='My Foodys' />
-      </button>
+      <div className='btn-container'>
+        <button className='btn-cover all-foodys' onClick={getAllFoodys}>
+          <img src={Foody} alt='All Foodys' />
+        </button>
+        <button className='btn-cover my-foodys' onClick={getMyFoodys}>
+          <img src={MyFoody} alt='My Foodys' />
+        </button>
+      </div>
     </Wrapper>
   );
 };

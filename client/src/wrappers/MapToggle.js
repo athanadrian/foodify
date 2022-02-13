@@ -1,6 +1,16 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
+  .btn-container {
+    position: absolute;
+    top: 1.3rem;
+    left: 1.2rem;
+    width: 100px;
+    max-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
   .btn-cover {
     width: 45px;
     height: 40px;
@@ -12,9 +22,6 @@ const Wrapper = styled.section`
     cursor: pointer;
   }
   .all-foodys {
-    position: absolute;
-    top: 1.3rem;
-    left: 1.2rem;
     background: none;
     border: none;
     z-index: 10;
@@ -23,14 +30,17 @@ const Wrapper = styled.section`
     }
   }
   .my-foodys {
-    position: absolute;
-    top: 1.3rem;
-    left: 5.2rem;
     background: none;
     border: none;
     z-index: 10;
     img {
       width: 25px;
+    }
+  }
+  @media (max-width: 574px) {
+    .btn-container {
+      height: 100px;
+      flex-direction: column;
     }
   }
 `;
