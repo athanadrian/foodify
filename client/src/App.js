@@ -7,6 +7,7 @@ import {
   Profile,
   Stats,
   MyFoodys,
+  Map,
 } from './pages/dashboard';
 import ProtectedRoute from './pages/ProtectedRoute';
 
@@ -30,6 +31,7 @@ const App = () => {
           <Route path='my-foodys' element={<MyFoodys />} />
           <Route path='add-foody' element={<AddFoody />} />
           <Route path='profile' element={<Profile />} />
+          <Route path='map' element={<Map />} />
         </Route>
       </Routes>
     </BrowserRouter>

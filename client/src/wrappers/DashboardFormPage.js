@@ -45,6 +45,10 @@ const Wrapper = styled.section`
     }
   }
 
+  .save-btn {
+    margin-top: 1rem;
+  }
+
   .clear-btn {
     background: var(--grey-500);
   }
@@ -61,11 +65,27 @@ const Wrapper = styled.section`
     background: var(--yellow-dark);
     color: var(--yellow-light);
   }
+  .current-btn {
+    background: var(--blue-light);
+    color: var(--blue-dark);
+    margin-top: 0px;
+  }
+  .current-btn:hover {
+    background: var(--blue-dark);
+    color: var(--blue-light);
+  }
+
+  .icon-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
   .icon {
     svg {
       vertical-align: middle;
       color: var(--grey-900);
+      font-size: 1.2rem;
     }
   }
   @media (min-width: 992px) {
@@ -88,6 +108,15 @@ const Wrapper = styled.section`
     }
     .text-area textarea {
       height: 4rem;
+    }
+  }
+  @media (max-width: 992px) {
+    .icon {
+      display: none;
+    }
+
+    .icon-btn {
+      margin-top: 1rem;
     }
   }
 `;

@@ -34,6 +34,8 @@ import {
   ADD_FOODY_MARKER,
   ADD_USER_MARKER,
   GET_GOOGLE_API_KEY,
+  SET_USER_CURRENT_LOCATION,
+  SET_FOODY_CURRENT_LOCATION,
 } from './actions';
 
 import { initialState } from './appContext';
@@ -67,9 +69,8 @@ const reducer = (state, action) => {
       isLoading: false,
       token: action.payload.token,
       user: action.payload.user,
-      userLocation: action.payload.location,
+      homeLocation: action.payload.location,
       home: action.payload.home,
-      //jobLocation: action.payload.location,
       showAlert: true,
       alertType: 'success',
       alertText: action.payload.alertText,
@@ -104,8 +105,7 @@ const reducer = (state, action) => {
       ...initialState,
       user: null,
       token: null,
-      userLocation: null,
-      jobLocation: null,
+      homeLocation: null,
     };
   }
 
@@ -122,7 +122,7 @@ const reducer = (state, action) => {
       isLoading: false,
       token: action.payload.token,
       user: action.payload.user,
-      userLocation: action.payload.location,
+      homeLocation: action.payload.location,
       home: action.payload.home,
       //jobLocation: action.payload.location,
       showAlert: true,
@@ -183,17 +183,17 @@ const reducer = (state, action) => {
       placeEditId: '',
       title: '',
       village: '',
-      location: {
+      foodyLocation: {
         lat: 0,
         lng: 0,
       },
-      description: '',
+      //description: '',
       status: 'unpublished',
       cuisine: 'greek',
       cost: 'average',
       foody: 'alaCarte',
       remarks: '',
-      foodLocation: state.userLocation,
+      //foodLocation: state.userLocation,
     };
   }
 
@@ -236,7 +236,7 @@ const reducer = (state, action) => {
       editFoodyId: _id,
       title,
       village,
-      location,
+      foodyLocation: location,
       cuisine,
       foody,
       cost,
@@ -352,14 +352,14 @@ const reducer = (state, action) => {
   if (action.type === ADD_FOODY_MARKER) {
     return {
       ...state,
-      location: action.payload.location,
+      foodyLocation: action.payload.foodyLocation,
     };
   }
 
   if (action.type === ADD_USER_MARKER) {
     return {
       ...state,
-      userLocation: action.payload.userLocation,
+      homeLocation: action.payload.homeLocation,
     };
   }
 
@@ -380,6 +380,32 @@ const reducer = (state, action) => {
     return {
       ...state,
       googleApiKey: action.payload.key,
+    };
+  }
+
+  if (action.type === SET_USER_CURRENT_LOCATION) {
+    return {
+      ...state,
+      homeLocation: {
+        lat: state.myLocation.coordinates.lat,
+        lng: state.myLocation.coordinates.lng,
+      },
+      showAlert: true,
+      alertType: 'success',
+      alertText: action.payload.alertText,
+    };
+  }
+
+  if (action.type === SET_FOODY_CURRENT_LOCATION) {
+    return {
+      ...state,
+      foodyLocation: {
+        lat: state.myLocation.coordinates.lat,
+        lng: state.myLocation.coordinates.lng,
+      },
+      showAlert: true,
+      alertType: 'success',
+      alertText: action.payload.alertText,
     };
   }
 

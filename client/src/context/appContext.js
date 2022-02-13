@@ -37,13 +37,18 @@ import {
   ADD_FOODY_MARKER,
   ADD_USER_MARKER,
   GET_GOOGLE_API_KEY,
+  SET_USER_CURRENT_LOCATION,
+  SET_FOODY_CURRENT_LOCATION,
 } from './actions';
 import { costs, cuisines, foodys, statuses } from '../utils/lookup-data';
+import useGeoLocation from '../hooks/useGeolocation';
+import { MAP_CENTER } from '../utils/constants';
 
 const token = localStorage.getItem('token');
 const user = localStorage.getItem('user');
-const userLocation = localStorage.getItem('location');
-const home = localStorage.getItem('home');
+const homeLocation = localStorage.getItem('home-location');
+//const myLocation = localStorage.getItem('my-location');
+const home = localStorage.getItem('home-city');
 
 const initialState = {
   isLoading: false,
@@ -53,13 +58,11 @@ const initialState = {
   showInfoWindow: false,
   alertText: '',
   alertType: '',
-  googleApiKey: '',
+  googleApiKey: 'AIzaSyBZ2XtW_eLHJMGYnoLdznK65WV6tfhBVDM',
   user: user ? JSON.parse(user) : null,
   token: token,
-  userLocation: JSON.parse(userLocation) || {
-    lat: 0,
-    lng: 0,
-  },
+  homeLocation: JSON.parse(homeLocation) || MAP_CENTER,
+  myLocation: null,
   home: home || '',
   isEditing: false,
   editFoodyId: '',
@@ -70,15 +73,12 @@ const initialState = {
   foody: 'alaCarte',
   cost: 'average',
   status: 'unpublished',
-  location: {
-    lat: 0,
-    lng: 0,
-  },
+  distance: '',
+  foodyLocation: MAP_CENTER,
   cuisineOptions: cuisines,
   foodyOptions: foodys,
   costOptions: costs,
   statusOptions: statuses,
-  foodLocation: home || '',
   foodys: [],
   totalFoodys: 0,
   page: 1,
@@ -108,6 +108,9 @@ const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const currentLocation = useGeoLocation();
+  state.myLocation = currentLocation;
+
   const clearFilters = () => {
     dispatch({ type: CLEAR_FILTERS });
   };
@@ -149,15 +152,15 @@ const AppProvider = ({ children }) => {
   const addUserToLocalStorage = ({ user, token, location, home }) => [
     localStorage.setItem('user', JSON.stringify(user)),
     localStorage.setItem('token', token),
-    localStorage.setItem('location', JSON.stringify(location)),
-    localStorage.setItem('home', home),
+    localStorage.setItem('home-location', JSON.stringify(location)),
+    localStorage.setItem('home-city', home),
   ];
 
   const removeUserFromLocalStorage = () => [
     localStorage.removeItem('user'),
     localStorage.removeItem('token'),
-    localStorage.removeItem('location'),
-    localStorage.removeItem('home'),
+    localStorage.removeItem('home-location'),
+    localStorage.removeItem('home-city'),
   ];
 
   const logoutUser = () => {
@@ -176,9 +179,17 @@ const AppProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    getGoogleApiKey();
+  const setUserCurrentLocation = ({ alertText }) => {
+    dispatch({ type: SET_USER_CURRENT_LOCATION, payload: { alertText } });
+    clearAlert();
+  };
+  const setFoodyCurrentLocation = ({ alertText }) => {
+    dispatch({ type: SET_FOODY_CURRENT_LOCATION, payload: { alertText } });
+    clearAlert();
+  };
 
+  useEffect(() => {
+    // getGoogleApiKey();
     // eslint-disable-next-line
   }, []);
 
@@ -228,7 +239,7 @@ const AppProvider = ({ children }) => {
       const {
         title,
         village,
-        location,
+        foodyLocation,
         remarks,
         cuisine,
         foody,
@@ -238,7 +249,7 @@ const AppProvider = ({ children }) => {
       await clientApi.post('/foodys', {
         title,
         village,
-        location,
+        location: foodyLocation,
         remarks,
         cuisine,
         foody,
@@ -262,10 +273,10 @@ const AppProvider = ({ children }) => {
   };
 
   const addUserLocation = (location) => {
-    dispatch({ type: ADD_USER_MARKER, payload: { userLocation: location } });
+    dispatch({ type: ADD_USER_MARKER, payload: { homeLocation: location } });
   };
   const addFoodyLocation = (location) => {
-    dispatch({ type: ADD_FOODY_MARKER, payload: { location } });
+    dispatch({ type: ADD_FOODY_MARKER, payload: { foodyLocation: location } });
   };
 
   const editFoody = async () => {
@@ -275,7 +286,7 @@ const AppProvider = ({ children }) => {
         editFoodyId,
         title,
         village,
-        location,
+        foodyLocation,
         remarks,
         cuisine,
         foody,
@@ -285,7 +296,7 @@ const AppProvider = ({ children }) => {
       await clientApi.patch(`/foodys/${editFoodyId}`, {
         title,
         village,
-        location,
+        location: foodyLocation,
         remarks,
         cuisine,
         foody,
@@ -345,6 +356,10 @@ const AppProvider = ({ children }) => {
     dispatch({ type: CLEAR_VALUES });
   };
 
+  // const toggleFoodys = ()=>{
+
+  // }
+
   const getAllFoodys = async () => {
     const { search, searchCuisine, searchFoody, searchCost, sort, page } =
       state;
@@ -363,7 +378,7 @@ const AppProvider = ({ children }) => {
         payload: { foodys, totalFoodys, numOfPages },
       });
     } catch (error) {
-      logoutUser();
+      //logoutUser();
       console.log('error', error.response);
     }
     clearAlert();
@@ -394,7 +409,7 @@ const AppProvider = ({ children }) => {
         payload: { foodys: myFoodys, totalFoodys, numOfPages },
       });
     } catch (error) {
-      logoutUser();
+      //logoutUser();
       console.log('error', error.response);
     }
     clearAlert();
@@ -464,6 +479,8 @@ const AppProvider = ({ children }) => {
         addFoodyLocation,
         addUserLocation,
         getGoogleApiKey,
+        setUserCurrentLocation,
+        setFoodyCurrentLocation,
       }}
     >
       {children}

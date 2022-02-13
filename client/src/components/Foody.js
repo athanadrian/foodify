@@ -1,17 +1,23 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+
 import { FaRegFlag, FaRegCalendarPlus } from 'react-icons/fa';
 import { GiPathDistance } from 'react-icons/gi';
 import { FiMapPin } from 'react-icons/fi';
 import { AiOutlineEuro } from 'react-icons/ai';
-import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
+import { BsChevronDown, BsChevronUp, BsFillPinMapFill } from 'react-icons/bs';
 import { MdOutlineUpdate, MdOutlineRestaurant } from 'react-icons/md';
 
 import { useAppContext } from '../context/appContext';
 import Wrapper from '../wrappers/Foody';
 import FoodyInfo from './FoodyInfo';
-import { mapEnumObject } from '../utils/functions';
+import {
+  mapEnumObject,
+  //getFoodyDistance,
+  //getPreciseFoodyDistance,
+  computeDistance,
+} from '../utils/functions';
 import { costs, foodys } from '../utils/lookup-data';
 
 const Foody = ({
@@ -26,17 +32,61 @@ const Foody = ({
   foody,
   status,
   remarks,
+  location: foodyLocation,
   // preference,
 }) => {
-  const { setFoodyToUpdate, deleteFoody, changeFoodyStatus } = useAppContext();
+  const {
+    setFoodyToUpdate,
+    deleteFoody,
+    changeFoodyStatus,
+    homeLocation,
+    myLocation,
+  } = useAppContext();
   const [showRemarks, setShowRemarks] = useState(false);
+  const [calcLocation, setCalcLocation] = useState(false);
+  const [distance, setDistance] = useState(
+    computeDistance(homeLocation, foodyLocation)
+  );
   const createDate = moment(createdAt).format('MMM Do YYYY');
   const relativeUpdate = moment(updatedAt).startOf('day').fromNow();
   const costObj = mapEnumObject(cost, costs);
   const foodyObj = mapEnumObject(foody, foodys);
   const isPublished = status === 'published';
+
+  const toggleLocation = () => {
+    setCalcLocation(!calcLocation);
+  };
+
+  const calcDistanceMyLocation = () => {
+    console.log('current');
+    toggleLocation();
+    setDistance(computeDistance(myLocation.coordinates, foodyLocation));
+  };
+
+  const calcDistanceHomeLocation = () => {
+    console.log('home');
+    toggleLocation();
+    setDistance(computeDistance(homeLocation, foodyLocation));
+  };
+
+  let calculationConfig = calcLocation
+    ? {
+        Icon: BsFillPinMapFill,
+        TopIcon: GiPathDistance,
+        iconColor: '#0369a1',
+        func: calcDistanceHomeLocation,
+        text: 'CURRENT',
+      }
+    : {
+        Icon: GiPathDistance,
+        TopIcon: BsFillPinMapFill,
+        iconColor: '#92400e',
+        func: calcDistanceMyLocation,
+        text: 'HOME',
+      };
+
   return (
-    <Wrapper>
+    <Wrapper iconColor={calculationConfig.iconColor}>
       <header>
         <div className='main-icon'>{title.charAt(0)}</div>
         <div className='header-items'>
@@ -48,15 +98,18 @@ const Foody = ({
               text={village}
             />
           </div>
+          <div className='location' onClick={calculationConfig.func}>
+            <calculationConfig.TopIcon />
+          </div>
           {/* <div className={`status ${status}`}>{status}</div> */}
         </div>
       </header>
       <div className='content'>
         <div className='content-center'>
           <FoodyInfo
-            tooltip='Distance'
-            icon={<GiPathDistance size={24} />}
-            text={`Coming soon...`}
+            tooltip='Distance from home'
+            icon={<calculationConfig.Icon size={24} />}
+            text={`${distance} Km -> ${!calcLocation ? 'HOME' : 'CURRENT'}`}
           />
           <FoodyInfo
             tooltip='Created'

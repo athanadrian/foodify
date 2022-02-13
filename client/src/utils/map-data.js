@@ -147,7 +147,7 @@ export const mapStyles = [
     elementType: 'geometry.fill',
     stylers: [
       {
-        color: '#bef8fd',
+        color: '#87eaf2',
       },
     ],
   },

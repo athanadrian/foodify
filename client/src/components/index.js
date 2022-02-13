@@ -1,9 +1,12 @@
 import Logo from './Logo';
-import FormInput from './FormInput';
-import FormTextArea from './FormTextArea';
-import FormSelect from './FormSelect';
-import FormEnumSelect from './FormEnumSelect';
-import FormRangeInput from './FormRangeInput';
+import {
+  FormEnumSelect,
+  FormInput,
+  FormSelect,
+  FormRangeInput,
+  FormTextArea,
+  FormButton,
+} from './form-elements';
 import Alert from './Alert';
 import Navbar from './Navbar';
 import SmallSidebar from './SmallSidebar';
@@ -18,7 +21,7 @@ import ChartsContainer from './ChartsContainer';
 import PaginationContainer from './PaginationContainer';
 import Modal from './Modal';
 import FoodyModal from './FoodyModal';
-import MapModal from './MapModal';
+import { MapFoodys, MapModal } from './map';
 
 export {
   Logo,
@@ -27,6 +30,7 @@ export {
   FormSelect,
   FormEnumSelect,
   FormRangeInput,
+  FormButton,
   Alert,
   Navbar,
   SmallSidebar,
@@ -42,4 +46,5 @@ export {
   Modal,
   FoodyModal,
   MapModal,
+  MapFoodys,
 };

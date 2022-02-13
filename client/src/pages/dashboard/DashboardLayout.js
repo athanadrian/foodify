@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import { AddFoody, Map } from '.';
 import { Navbar, SmallSidebar, BigSidebar } from '../../components';
 import Wrapper from '../../wrappers/DashboardLayoutPage';
 
@@ -10,9 +11,7 @@ const DashboardLayout = () => {
         <SmallSidebar />
         <div>
           <Navbar />
-          <div className='dashboard-page'>
-            <Outlet />
-          </div>
+          <Outlet />
         </div>
       </main>
     </Wrapper>

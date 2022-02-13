@@ -10,6 +10,7 @@ const ModalComponent = ({ open, onClose, children }) => {
         onClose={onClose}
         closeIcon={<CgCloseO size={20} />}
         center
+        showCloseIcon={false}
       >
         {children}
       </Modal>

@@ -90,6 +90,13 @@ const Wrapper = styled.article`
   .content-update {
     justify-content: flex-end;
   }
+  .location {
+    cursor: pointer;
+    svg {
+      color: ${(props) => props.iconColor};
+      font-size: 1.8rem;
+    }
+  }
 
   .status {
     border-radius: var(--borderRadius);

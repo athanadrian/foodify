@@ -22,8 +22,6 @@ const FoodysContainer = ({ all }) => {
     getMyFoodys,
   } = useAppContext();
 
-  console.log('T', totalFoodys, 'P', page, 'NP', numOfPages);
-
   useEffect(() => {
     all ? getAllFoodys() : getMyFoodys();
     // eslint-disable-next-line
@@ -38,7 +36,7 @@ const FoodysContainer = ({ all }) => {
     searchPreference,
     sort,
   ]);
-
+  console.log('T', totalFoodys, 'P', page, 'NP', numOfPages);
   if (isLoading) return <Loading center />;
 
   if (totalFoodys === 0)

@@ -10,7 +10,7 @@ TODO
 
 > 4. Maps Implementation
 
-> 5. Calculate Distance
+> ~~5. Calculate Distance~~
 
 > ~~6. Fix Preference~~
 
@@ -43,6 +43,10 @@ TODO
 > ~~20. Add Map Add location Page/modal~~
 
 > ~~21. Fix fetch google api maps key~~
+
+> 22. Fix google api key
+
+> 23. MapContainer?
 
 # Foodify
 

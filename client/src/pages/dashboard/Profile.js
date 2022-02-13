@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { AiOutlineSave } from 'react-icons/ai';
 import { BsFillPinMapFill } from 'react-icons/bs';
+import { RiRoadMapLine } from 'react-icons/ri';
 import {
   Alert,
   ChartsContainer,
@@ -8,13 +10,14 @@ import {
   Modal,
   StatsContainer,
 } from '../../components';
+import FormButton from '../../components/form-elements/FormButton';
 import { useAppContext } from '../../context/appContext';
 import Wrapper from '../../wrappers/DashboardFormPage';
 import StatsWrapper from '../../wrappers/StatsContainer';
 const Profile = () => {
   const {
     user,
-    userLocation,
+    homeLocation,
     showAlert,
     showModal,
     displayAlert,
@@ -22,6 +25,7 @@ const Profile = () => {
     isLoading,
     monthlyCreations,
     toggleModal,
+    setUserCurrentLocation,
   } = useAppContext();
 
   const initialState = {
@@ -43,38 +47,38 @@ const Profile = () => {
     if (!name || !email || !lastName || !home) {
       return displayAlert();
     }
-    updateUser({ name, email, lastName, home, location: userLocation });
+    updateUser({ name, email, lastName, home, location: homeLocation });
   };
 
   return (
     <>
-      <Wrapper>
-        <form className='form' onSubmit={handleSubmit}>
-          <h3>profile</h3>
-          {showAlert && <Alert />}
-          <div className='form-center'>
-            <FormInput
-              name='name'
-              type='text'
-              value={values.name}
-              labelText='name'
-              handleChange={handleChange}
-            />
-            <FormInput
-              name='email'
-              type='text'
-              value={values.email}
-              labelText='email'
-              handleChange={handleChange}
-            />
-            <FormInput
-              name='lastName'
-              type='text'
-              value={values.lastName}
-              labelText='last name'
-              handleChange={handleChange}
-            />
-            <div className='btn-container'>
+      <div className='dashboard-page'>
+        <Wrapper>
+          <form className='form' onSubmit={handleSubmit}>
+            <h3>profile</h3>
+            {showAlert && <Alert />}
+            <div className='form-center'>
+              <FormInput
+                name='name'
+                type='text'
+                value={values.name}
+                labelText='name'
+                handleChange={handleChange}
+              />
+              <FormInput
+                name='email'
+                type='text'
+                value={values.email}
+                labelText='email'
+                handleChange={handleChange}
+              />
+              <FormInput
+                name='lastName'
+                type='text'
+                value={values.lastName}
+                labelText='last name'
+                handleChange={handleChange}
+              />
               <FormInput
                 name='home'
                 type='text'
@@ -82,34 +86,40 @@ const Profile = () => {
                 labelText='home city'
                 handleChange={handleChange}
               />
-              <div className='form-row'>
-                <label title='Pin it on Map!' className='form-label icon'>
-                  <BsFillPinMapFill />
-                </label>
-                <button
-                  type='button'
-                  className='btn btn-block map-btn'
-                  onClick={toggleModal}
-                >
-                  Pin it on Map!
-                </button>
-              </div>
+              <FormButton
+                Icon={RiRoadMapLine}
+                onClick={toggleModal}
+                btnText='Pin it on Map!'
+                className='map-btn'
+              />
+              <FormButton
+                Icon={BsFillPinMapFill}
+                onClick={() =>
+                  setUserCurrentLocation({
+                    alertText: 'User set to current location!',
+                  })
+                }
+                btnText='use current position!'
+                className='current-btn'
+              />
+              <FormButton
+                Icon={AiOutlineSave}
+                type='submit'
+                btnText={isLoading ? 'Please Wait...' : 'save changes'}
+                disabled={isLoading}
+                className='save-btn'
+              />
             </div>
-            <button
-              className='btn btn-block'
-              type='submit'
-              disabled={isLoading}
-            >
-              {isLoading ? 'Please Wait...' : 'save changes'}
-            </button>
-          </div>
-        </form>
-      </Wrapper>
-      <StatsWrapper>
-        <h2 className='user-statistics'>My Creations</h2>
-        <StatsContainer />
-        {monthlyCreations.length > 0 && <ChartsContainer />}
-      </StatsWrapper>
+          </form>
+        </Wrapper>
+      </div>
+      <div className='dashboard-page'>
+        <StatsWrapper>
+          <h2 className='user-statistics'>My Creations</h2>
+          <StatsContainer />
+          {monthlyCreations.length > 0 && <ChartsContainer />}
+        </StatsWrapper>
+      </div>
       <div>
         <Modal open={showModal} onClose={toggleModal} center>
           <MapModal profile />
