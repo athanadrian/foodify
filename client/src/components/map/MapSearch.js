@@ -10,6 +10,7 @@ import {
   ComboboxList,
   ComboboxOption,
 } from '@reach/combobox';
+
 import { MAP_CENTER } from '../../utils/constants';
 
 const MapSearch = ({ panTo }) => {
