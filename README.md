@@ -8,7 +8,7 @@ TODO
 
 > 3. Add Single Foody Page/modal
 
-> 4. Maps Implementation
+> ~~4. Maps Implementation~~
 
 > ~~5. Calculate Distance~~
 
@@ -47,6 +47,8 @@ TODO
 > 22. Fix google api key
 
 > 23. MapContainer?
+
+> 24. Remove Geolib from server
 
 # Foodify
 

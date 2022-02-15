@@ -1,5 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Error, Landing, Register } from './pages';
+import {
+  Error,
+  Landing,
+  Register,
+  ForgotPassword,
+  ResetPassword,
+} from './pages';
 import {
   DashboardLayout,
   AddFoody,
@@ -16,6 +22,13 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path='/register' element={<Register />} />
+        <Route path='/reset-password' element={<Register />} />
+        <Route exact path='/forgot-password' element={<ForgotPassword />} />
+        <Route
+          exact
+          path='/reset-password/:token'
+          element={<ResetPassword />}
+        />
         <Route path='/landing' element={<Landing />} />
         <Route path='*' element={<Error />} />
         <Route

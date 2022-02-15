@@ -4,6 +4,12 @@ import {
   SIGN_USER_BEGIN,
   SIGN_USER_SUCCESS,
   SIGN_USER_ERROR,
+  FORGOT_PASSWORD_BEGIN,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_ERROR,
+  RESET_PASSWORD_BEGIN,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_ERROR,
   TOGGLE_SIDEBAR,
   TOGGLE_MODAL,
   OPEN_INFO_WINDOW,
@@ -81,6 +87,56 @@ const reducer = (state, action) => {
     return {
       ...state,
       isLoading: false,
+      showAlert: true,
+      alertType: 'danger',
+      alertText: action.payload.msg,
+    };
+  }
+  if (action.type === FORGOT_PASSWORD_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === FORGOT_PASSWORD_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'success',
+      alertText: action.payload.alertText,
+    };
+  }
+  if (action.type === FORGOT_PASSWORD_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'danger',
+      alertText: action.payload.msg,
+    };
+  }
+  if (action.type === RESET_PASSWORD_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === RESET_PASSWORD_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      isSuccess: true,
+      showAlert: true,
+      alertType: 'success',
+      alertText: action.payload.alertText,
+    };
+  }
+  if (action.type === RESET_PASSWORD_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      isSuccess: false,
       showAlert: true,
       alertType: 'danger',
       alertText: action.payload.msg,

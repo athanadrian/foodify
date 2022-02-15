@@ -24,9 +24,21 @@ const Wrapper = styled.section`
     margin-top: 1rem;
   }
   .member-btn {
+    margin-top: 1rem;
     background: transparent;
     border: transparent;
     color: var(--primary-500);
+    cursor: pointer;
+    letter-spacing: var(--letterSpacing);
+  }
+  .forgot-container {
+    text-align: right;
+  }
+
+  .forgot-btn {
+    background: transparent;
+    border: transparent;
+    color: var(--red-dark);
     cursor: pointer;
     letter-spacing: var(--letterSpacing);
   }

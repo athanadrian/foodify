@@ -7,6 +7,12 @@ import {
   SIGN_USER_BEGIN,
   SIGN_USER_SUCCESS,
   SIGN_USER_ERROR,
+  FORGOT_PASSWORD_BEGIN,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_ERROR,
+  RESET_PASSWORD_BEGIN,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_ERROR,
   TOGGLE_SIDEBAR,
   TOGGLE_MODAL,
   CLOSE_INFO_WINDOW,
@@ -53,6 +59,7 @@ const home = localStorage.getItem('home-city');
 
 const initialState = {
   isLoading: false,
+  isSuccess: false,
   showAlert: false,
   showModal: false,
   showSidebar: false,
@@ -208,6 +215,44 @@ const AppProvider = ({ children }) => {
     } catch (error) {
       dispatch({
         type: SIGN_USER_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
+  };
+
+  const forgotPassword = async ({ email, alertText }) => {
+    dispatch({ type: FORGOT_PASSWORD_BEGIN });
+    try {
+      await clientApi.post(`/auth/forgot-password`, { email });
+
+      dispatch({
+        type: FORGOT_PASSWORD_SUCCESS,
+        payload: { alertText },
+      });
+      dispatch({ type: CLEAR_VALUES });
+    } catch (error) {
+      dispatch({
+        type: FORGOT_PASSWORD_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
+  };
+
+  const resetPassword = async ({ password, token, alertText }) => {
+    dispatch({ type: RESET_PASSWORD_BEGIN });
+    try {
+      await clientApi.put(`/auth/reset-password/${token}`, { password });
+
+      dispatch({
+        type: RESET_PASSWORD_SUCCESS,
+        payload: { alertText, isSuccess: true },
+      });
+      dispatch({ type: CLEAR_VALUES });
+    } catch (error) {
+      dispatch({
+        type: RESET_PASSWORD_ERROR,
         payload: { msg: error.response.data.msg },
       });
     }
@@ -462,6 +507,8 @@ const AppProvider = ({ children }) => {
         displayAlert,
         handleChange,
         signUser,
+        forgotPassword,
+        resetPassword,
         updateUser,
         toggleSidebar,
         toggleModal,

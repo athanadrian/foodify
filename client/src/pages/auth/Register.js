@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Logo, FormInput, Alert } from '../components';
-import { useAppContext } from '../context/appContext';
-import Wrapper from '../wrappers/RegisterPage';
+import { Link, useNavigate } from 'react-router-dom';
+import { Logo, FormInput, Alert } from 'components';
+import { useAppContext } from 'context/appContext';
+import Wrapper from 'wrappers/RegisterPage';
 
 const initialState = {
   name: '',
@@ -89,7 +89,7 @@ const Register = () => {
         <button className='btn btn-block' type='submit' disabled={isLoading}>
           {values.isMember ? 'Login' : 'Register'}
         </button>
-        <p>
+        <>
           {values.isMember ? 'Not a member yet ?' : 'Already a member ?'}
           <button
             className='member-btn'
@@ -98,7 +98,12 @@ const Register = () => {
           >
             {values.isMember ? 'Register' : 'Login'}
           </button>
-        </p>
+          <p className='forgot-container'>
+            <Link to='/forgot-password' className='forgot-btn'>
+              forgot password ?
+            </Link>
+          </p>
+        </>
       </form>
     </Wrapper>
   );
