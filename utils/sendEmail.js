@@ -1,5 +1,4 @@
 import nodemailer from 'nodemailer';
-import { BASE_URL } from '../utils/constants.js';
 
 const sendEmail = async (options) => {
   const transporter = nodemailer.createTransport({
@@ -12,7 +11,7 @@ const sendEmail = async (options) => {
     },
   });
 
-  const href = `${BASE_URL}/reset-password/${options.token}`;
+  const href = `${process.env.APP_URL_PROD}/reset-password/${options.token}`;
   const message = {
     from: `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}>`, // sender address
     to: options.email, // list of receivers

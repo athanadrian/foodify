@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Logo, FormInput, Alert } from 'components';
 import { useAppContext } from 'context/appContext';
 import Wrapper from 'wrappers/RegisterPage';
 
 const ForgetPassword = () => {
-  const { isLoading, showAlert, displayAlert, forgotPassword } =
+  const { isSuccess, isLoading, showAlert, displayAlert, forgotPassword } =
     useAppContext();
-  const [email, setEmail] = useState('atanadev@gmail.com');
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,6 +21,14 @@ const ForgetPassword = () => {
     });
     setEmail('');
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
+    }
+  }, [isSuccess, navigate]);
 
   return (
     <Wrapper className='full-page'>

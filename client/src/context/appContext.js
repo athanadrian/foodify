@@ -197,10 +197,10 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
-  useEffect(() => {
-    // getGoogleApiKey();
-    // eslint-disable-next-line
-  }, []);
+  // useEffect(() => {
+  //   // getGoogleApiKey();
+  //   // eslint-disable-next-line
+  // }, []);
 
   const signUser = async ({ endPoint, currentUser, alertText }) => {
     dispatch({ type: SIGN_USER_BEGIN });
@@ -228,7 +228,7 @@ const AppProvider = ({ children }) => {
 
       dispatch({
         type: FORGOT_PASSWORD_SUCCESS,
-        payload: { alertText },
+        payload: { alertText, isSuccess: true },
       });
       dispatch({ type: CLEAR_VALUES });
     } catch (error) {
