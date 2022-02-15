@@ -161,6 +161,7 @@ export const forgotPassword = async (req, res, next) => {
 //@access       Public
 export const resetPassword = async (req, res, next) => {
   // Get hashed password
+  console.log(req.params.resetToken);
   const resetPasswordToken = crypto
     .createHash('sha256')
     .update(req.params.resetToken)
@@ -172,9 +173,6 @@ export const resetPassword = async (req, res, next) => {
   });
 
   if (!user) {
-    user.resetPasswordAttempts.push({ success: false, date: Date.now() });
-
-    await user.save({ validateBeforeSave: false });
     throw new UnAuthenticatedError('Invalid token. Token expired!');
   }
 
