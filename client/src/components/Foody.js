@@ -22,6 +22,7 @@ import {
 import { costs, foodys } from '../utils/lookup-data';
 import { LikesModal } from '.';
 import Modal from './Modal';
+import LikeButton from './LikeButton';
 
 const Foody = ({
   all,
@@ -41,7 +42,7 @@ const Foody = ({
   // preference,
 }) => {
   const {
-    foodyDetail,
+    user,
     setFoodyToUpdate,
     deleteFoody,
     changeFoodyStatus,
@@ -220,22 +221,29 @@ const Foody = ({
 
           <div className='like-container'>
             <div className={'space-between'}>
-              <div
+              {/* <div
                 className={`${
                   isLiked ? 'space-between liked' : 'space-between'
                 }`}
               >
-                <span className='center' onClick={handleLikes}>
+                <span className='center'>
                   <FaHeart size={24} />
-                </span>
+                </span> */}
+              <LikeButton
+                size={22}
+                isLiked={isLiked}
+                foodyId={_id}
+                userId={user._id}
+              >
                 {!isLiked ? (
                   <span> Not liked yet</span>
                 ) : (
-                  <span>
-                    {likes.length} Like{likes.length === 1 ? '' : 's'}
+                  <span className='likes-btn' onClick={handleLikes}>
+                    {likes.length} Like{renderText(likes.length)}
                   </span>
                 )}
-              </div>
+              </LikeButton>
+              {/* </div> */}
               <FoodyInfo
                 className='content-update'
                 icon={<MdOutlineUpdate size={22} />}
@@ -255,3 +263,7 @@ const Foody = ({
   );
 };
 export default Foody;
+
+const renderText = (num) => {
+  return num === 1 ? '' : 's';
+};

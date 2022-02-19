@@ -192,6 +192,14 @@ const Wrapper = styled.article`
       margin-right: 1rem;
     }
   }
+  .likes-btn {
+    color: var(--blue-dark);
+    cursor: pointer;
+  }
+  .likes-btn:hover {
+    color: var(--blue-light);
+    text-decoration: underline;
+  }
 `;
 
 export default Wrapper;
