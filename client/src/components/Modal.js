@@ -2,7 +2,7 @@ import { CgCloseO } from 'react-icons/cg';
 import { Modal } from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
 
-const ModalComponent = ({ open, onClose, children }) => {
+const ModalComponent = ({ open, onClose, children, classNames }) => {
   return (
     <div>
       <Modal
@@ -11,6 +11,7 @@ const ModalComponent = ({ open, onClose, children }) => {
         closeIcon={<CgCloseO size={20} />}
         center
         showCloseIcon={false}
+        classNames={classNames}
       >
         {children}
       </Modal>

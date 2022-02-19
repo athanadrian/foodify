@@ -13,6 +13,9 @@ import Follow from '../models/Follow.js';
 const userDefaultAvatar =
   'https://res.cloudinary.com/indersingh/image/upload/v1593464618/App/user_mklcpl.png';
 
+//@desc         Register User
+//@route        POST /api/v1/auth/update-user
+//@access       Public
 export const register = async (req, res, next) => {
   const { name, email, password, bio, facebook, youtube, twitter, instagram } =
     req.body;
@@ -69,6 +72,9 @@ export const register = async (req, res, next) => {
   });
 };
 
+//@desc         Login User
+//@route        POST /api/v1/auth/login
+//@access       Public
 export const login = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -95,6 +101,9 @@ export const login = async (req, res, next) => {
   });
 };
 
+//@desc         Update User
+//@route        PATCH /api/v1/auth/update-user
+//@access       Private
 export const updateUser = async (req, res, next) => {
   const { email, name, lastName, home, location } = req.body;
   if (!name || !email || !lastName || !home || !location) {
@@ -161,7 +170,6 @@ export const forgotPassword = async (req, res, next) => {
 //@access       Public
 export const resetPassword = async (req, res, next) => {
   // Get hashed password
-  console.log(req.params.resetToken);
   const resetPasswordToken = crypto
     .createHash('sha256')
     .update(req.params.resetToken)

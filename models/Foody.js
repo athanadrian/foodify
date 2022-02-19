@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import slugify from 'slugify';
 
 const FoodySchema = new mongoose.Schema(
   {
@@ -54,13 +55,19 @@ const FoodySchema = new mongoose.Schema(
       },
       default: 'unpublished',
     },
+    slug: String,
     picUrl: { type: String },
     createdBy: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: [true, 'Please provide user'],
     },
-    likes: [{ user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' } }],
+    likes: [
+      {
+        user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        liked: { type: Date, default: Date.now },
+      },
+    ],
     comments: [
       {
         _id: { type: String, required: true },
@@ -72,5 +79,10 @@ const FoodySchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+FoodySchema.pre('save', function (next) {
+  this.slug = slugify(this.title, { lower: true });
+  next();
+});
 
 export default mongoose.model('Foody', FoodySchema);

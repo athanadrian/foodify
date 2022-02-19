@@ -21,6 +21,8 @@ import ChartsContainer from './ChartsContainer';
 import PaginationContainer from './PaginationContainer';
 import Modal from './Modal';
 import FoodyModal from './FoodyModal';
+import LikesModal from './LikesModal';
+import FoodyDetail from './FoodyDetail';
 import { MapFoodys, MapModal } from './map';
 
 export {
@@ -45,6 +47,8 @@ export {
   PaginationContainer,
   Modal,
   FoodyModal,
+  LikesModal,
   MapModal,
   MapFoodys,
+  FoodyDetail,
 };

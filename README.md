@@ -6,7 +6,7 @@ TODO
 
 > ~~2. Remarks implementation~~
 
-> 3. Add Single Foody Page/modal
+> ~~3. Add Single Foody modal~~
 
 > ~~4. Maps Implementation~~
 
@@ -18,7 +18,7 @@ TODO
 
 > 8. Followers/Following implementation
 
-> 9. Likes Implementation
+> ~~9. Likes Implementation~~
 
 > 10. Comments Implementation
 
@@ -38,7 +38,7 @@ TODO
 
 > ~~18. Add User location coordinates~~
 
-> 19. Forget Password functionality
+> ~~19. Forget Password functionality~~
 
 > ~~20. Add Map Add location Page/modal~~
 
@@ -46,9 +46,11 @@ TODO
 
 > 22. Fix google api key
 
-> 23. MapContainer?
+> ~~23. Remove MapContainer, MapModal_original ?~~
 
 > 24. Remove Geolib from server
+
+> 25. Merge reset/forgot password
 
 # Foodify
 

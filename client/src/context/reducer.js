@@ -27,6 +27,14 @@ import {
   GET_FOODYS_SUCCESS,
   SET_FOODYS_ORIGIN,
   SET_EDIT_FOODY,
+  GET_FOODY_DETAIL,
+  GET_FOODY_LIKES_BEGIN,
+  GET_FOODY_LIKES_SUCCESS,
+  GET_FOODY_LIKES_ERROR,
+  LIKE_UNLIKE_BEGIN,
+  LIKE_FOODY,
+  UNLIKE_FOODY,
+  LIKE_UNLIKE_ERROR,
   UPDATE_FOODY_BEGIN,
   UPDATE_FOODY_SUCCESS,
   UPDATE_FOODY_ERROR,
@@ -181,7 +189,6 @@ const reducer = (state, action) => {
       user: action.payload.user,
       homeLocation: action.payload.location,
       home: action.payload.home,
-      //jobLocation: action.payload.location,
       showAlert: true,
       alertType: 'success',
       alertText: 'Profile successfully updated',
@@ -244,13 +251,11 @@ const reducer = (state, action) => {
         lat: 0,
         lng: 0,
       },
-      //description: '',
       status: 'unpublished',
       cuisine: 'greek',
       cost: 'average',
       foody: 'alaCarte',
       remarks: '',
-      //foodLocation: state.userLocation,
     };
   }
 
@@ -300,6 +305,92 @@ const reducer = (state, action) => {
       status,
       preference,
       remarks,
+    };
+  }
+
+  if (action.type === GET_FOODY_DETAIL) {
+    const foodyDetail = state.foodys.find(
+      (foody) => foody.slug === action.payload.slug
+    );
+    return {
+      ...state,
+      foodyDetail,
+    };
+  }
+
+  if (action.type === GET_FOODY_LIKES_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === GET_FOODY_LIKES_SUCCESS) {
+    const foodyDetail = state.foodys.find(
+      (foody) => foody._id === action.payload.foodyId
+    );
+    foodyDetail.likes = action.payload.data || [];
+    return {
+      ...state,
+      foodyDetail,
+      foodyLikes: action.payload.data,
+      isLoading: false,
+    };
+  }
+
+  if (action.type === GET_FOODY_LIKES_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'danger',
+      alertText: action.payload.msg,
+    };
+  }
+
+  if (action.type === LIKE_UNLIKE_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === LIKE_FOODY) {
+    const foodyDetail = state.foodys.find(
+      (foody) => foody._id === action.payload.foodyId
+    );
+    foodyDetail.likes = action.payload.data || [];
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'success',
+      alertText: action.payload.alertText,
+      //foodyDetail,
+    };
+  }
+
+  if (action.type === UNLIKE_FOODY) {
+    const foodyDetail = state.foodys.find(
+      (foody) => foody._id === action.payload.foodyId
+    );
+    foodyDetail.likes = action.payload.data || [];
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'success',
+      alertText: action.payload.alertText,
+      //foodyDetail,
+    };
+  }
+
+  if (action.type === LIKE_UNLIKE_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'danger',
+      alertText: action.payload.msg,
     };
   }
 

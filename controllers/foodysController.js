@@ -4,8 +4,12 @@ import { StatusCodes } from 'http-status-codes';
 import BadRequestError from '../errors/bad-request.js';
 import NotFoundError from '../errors/not-found.js';
 import Foody from '../models/Foody.js';
+import User from '../models/User.js';
 import checkPermissions from '../utils/checkPermissions.js';
 
+//@desc         Get User foodys
+//@route        GET /api/v1/foodys
+//@access       Private
 export const getAllFoodys = async (req, res, next) => {
   const { status, cost, foody, cuisine, sort, search } = req.query;
 
@@ -52,7 +56,12 @@ export const getAllFoodys = async (req, res, next) => {
   const limit = Number(req.query.limit) || 10;
   const skip = (page - 1) * limit;
 
-  result = result.skip(skip).limit(limit);
+  result = result
+    .skip(skip)
+    .limit(limit)
+    .populate('createdBy')
+    .populate({ path: 'likes.user', select: '-resetPasswordAttempts' })
+    .populate('likes.liked');
   const foodys = await result;
 
   const totalFoodys = await Foody.countDocuments(queryObj);
@@ -61,6 +70,9 @@ export const getAllFoodys = async (req, res, next) => {
   res.status(StatusCodes.OK).json({ foodys, totalFoodys, numOfPages });
 };
 
+//@desc         Get User foodys
+//@route        GET /api/v1/foodys/my
+//@access       Private
 export const getMyFoodys = async (req, res, next) => {
   const { status, cost, foody, cuisine, sort, search } = req.query;
 
@@ -111,18 +123,39 @@ export const getMyFoodys = async (req, res, next) => {
   const limit = Number(req.query.limit) || 10;
   const skip = (page - 1) * limit;
 
-  result = result.skip(skip).limit(limit);
+  result = result
+    .skip(skip)
+    .limit(limit)
+    .populate('createdBy')
+    .populate({ path: 'likes.user', select: '-resetPasswordAttempts' })
+    .populate('likes.liked');
   const myFoodys = await result;
 
   const totalFoodys = await Foody.countDocuments(queryObj);
   const numOfPages = Math.ceil(totalFoodys / limit);
   res.status(StatusCodes.OK).json({ myFoodys, totalFoodys, numOfPages });
 };
+
+//@desc         Get single foody
+//@route        GET /api/v1/foodys/:id (foodyId)
+//@access       Private
 export const getFoody = async (req, res, next) => {
-  await res.send('get-Foody');
+  const { id: foodyId } = req.params;
+
+  const foody = await Foody.findOne({ _id: foodyId })
+    .populate({ path: 'createdBy', select: '-resetPasswordAttempts' })
+    .populate({ path: 'likes.user', select: '-resetPasswordAttempts' })
+    .populate({ path: 'comments.user', select: '-resetPasswordAttempts' })
+    .exec();
+
+  if (!foody) {
+    throw new NotFoundError(`Foody with id ${foodyId} does not exist!`);
+  }
+
+  res.status(StatusCodes.OK).json({ foody });
 };
 
-////////////////// Helper functions /////////////////
+////////////////// START Helper functions /////////////////
 
 const arrayToObject = (array) => {
   return array.reduce((acc, curr) => {
@@ -173,8 +206,11 @@ const mapMonthlyCreations = (data) => {
     .reverse();
 };
 
-////////////////// Helper functions /////////////////
+////////////////// END Helper functions /////////////////
 
+//@desc         Get All User statistics
+//@route        GET /api/v1/foodys/all-stats
+//@access       Private
 export const getAllStats = async (req, res, next) => {
   let defaultAllStats = {};
   let monthlyAllCreations = [];
@@ -216,6 +252,9 @@ export const getAllStats = async (req, res, next) => {
   res.status(StatusCodes.OK).json({ defaultAllStats, monthlyAllCreations });
 };
 
+//@desc         Get User statistics
+//@route        GET /api/v1/foodys/my-stats
+//@access       Private
 export const getUserStats = async (req, res, next) => {
   let defaultUserStats = {};
   let monthlyUserCreations = [];
@@ -259,6 +298,9 @@ export const getUserStats = async (req, res, next) => {
   res.status(StatusCodes.OK).json({ defaultUserStats, monthlyUserCreations });
 };
 
+//@desc         Create a foody
+//@route        POST /api/v1/foodys
+//@access       Private
 export const createFoody = async (req, res, next) => {
   const { title, village } = req.body;
   if (!title || !village) {
@@ -270,6 +312,9 @@ export const createFoody = async (req, res, next) => {
   res.status(StatusCodes.CREATED).json({ foody });
 };
 
+//@desc         Update a foody
+//@route        PATCH /api/v1/foodys/:id (foodyId)
+//@access       Private
 export const updateFoody = async (req, res, next) => {
   const { id: foodyId } = req.params;
 
@@ -315,6 +360,9 @@ export const changeFoodyStatus = async (req, res, next) => {
   res.status(StatusCodes.OK).json({ changedStatusFoody });
 };
 
+//@desc         Delete a foody
+//@route        DELETE /api/v1/foodys/:id (foodyId)
+//@access       Private
 export const deleteFoody = async (req, res, next) => {
   const { id: foodyId } = req.params;
 
@@ -330,4 +378,93 @@ export const deleteFoody = async (req, res, next) => {
   await foody.remove();
 
   res.status(StatusCodes.OK).json({ msg: 'Foody removed successfully!' });
+};
+
+//@desc         Like a foody
+//@route        POST /api/v1/foodys/like/:id (foodyId)
+//@access       Private
+export const likeFoody = async (req, res) => {
+  const foodyId = req.params.id;
+  const { userId } = req.user;
+
+  const foody = await Foody.findOne({ _id: foodyId })
+    .populate({ path: 'likes.user', select: '-resetPasswordAttempts' })
+    .exec();
+
+  if (!foody) {
+    throw new NotFoundError(`Foody with id ${foodyId} does not exist!`);
+  }
+
+  const isLiked =
+    foody.likes.filter((like) => like.user._id.toString() === userId).length >
+    0;
+
+  if (isLiked) {
+    throw new BadRequestError('Foody already liked');
+  }
+  const user = await User.findOne({ _id: userId }).select(
+    '-resetPasswordAttempts'
+  );
+  await foody.likes.unshift({ user, liked: Date.now() });
+
+  await foody.save();
+  // if (foody.createdBy.toString() !== userId) {
+  //   await newLikeNotification(userId, foodyId, foody.user.toString());
+  // }
+
+  return res.status(StatusCodes.OK).json(foody.likes);
+};
+
+//@desc         Unlike a foody
+//@route        POST /api/v1/foodys/unlike/:id (foodyId)
+//@access       Private
+export const unlikeFoody = async (req, res) => {
+  const foodyId = req.params.id;
+  const { userId } = req.user;
+
+  const foody = await Foody.findOne({ _id: foodyId })
+    .populate({ path: 'likes.user', select: '-resetPasswordAttempts' })
+    .exec();
+  if (!foody) {
+    throw new NotFoundError(`Foody with id ${foodyId} does not exist!`);
+  }
+
+  const isLiked =
+    foody.likes.filter((like) => like.user._id.toString() === userId).length ===
+    0;
+
+  if (isLiked) {
+    throw new BadRequestError('Foody not liked before');
+  }
+
+  const index = foody.likes
+    .map((like) => like.user._id.toString())
+    .indexOf(userId);
+
+  await foody.likes.splice(index, 1);
+
+  await foody.save();
+
+  // if (foody.user.toString() !== userId) {
+  //   await removeLikeNotification(userId, foodyId, foody.user.toString());
+  // }
+
+  return res.status(StatusCodes.OK).json(foody.likes);
+};
+
+//@desc         Get all likes of a foody
+//@route        GET /api/v1/foodys/like/:id (foodyId)
+//@access       Private
+export const getFoodyLikes = async (req, res) => {
+  const { id: foodyId } = req.params;
+
+  const foody = await Foody.findOne({ _id: foodyId })
+    .populate({ path: 'likes.user', select: '-resetPasswordAttempts' })
+    .exec();
+
+  if (!foody) {
+    throw new NotFoundError(`Foody with id ${foodyId} does not exist!`);
+  }
+
+  return res.status(StatusCodes.OK).json(foody.likes);
 };

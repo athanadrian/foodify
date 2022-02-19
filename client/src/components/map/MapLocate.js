@@ -8,7 +8,8 @@ const MapLocate = ({ panTo }) => {
   return (
     <Wrapper>
       <button
-        className='locate'
+        title='Show my location'
+        className='btn-cover locate'
         onClick={() =>
           panTo({
             lat: myLocation.coordinates.lat,

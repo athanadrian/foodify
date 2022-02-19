@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Foody, Loading } from '../components';
+import { Foody, Loading, Modal } from '../components';
 import { useAppContext } from '../context/appContext';
 import Wrapper from '../wrappers/FoodysContainer';
 import PaginationContainer from './PaginationContainer';
@@ -21,6 +21,8 @@ const FoodysContainer = ({ all }) => {
     getAllFoodys,
     getMyFoodys,
     isMyFoodys,
+    showModal,
+    toggleModal,
   } = useAppContext();
 
   useEffect(() => {
@@ -48,18 +50,20 @@ const FoodysContainer = ({ all }) => {
     );
 
   return (
-    <Wrapper>
-      <h5>
-        {totalFoodys} foody{foodys.length > 1 && 's'}{' '}
-        {isMyFoodys ? 'found' : 'created'}
-      </h5>
-      <div className='foodys'>
-        {foodys.map((foody) => (
-          <Foody all={!isMyFoodys} key={foody._id} {...foody} />
-        ))}
-      </div>
-      {numOfPages > 1 && <PaginationContainer />}
-    </Wrapper>
+    <>
+      <Wrapper>
+        <h5>
+          {totalFoodys} foody{foodys.length > 1 && 's'}{' '}
+          {isMyFoodys ? 'found' : 'created'}
+        </h5>
+        <div className='foodys'>
+          {foodys.map((foody) => (
+            <Foody all={!isMyFoodys} key={foody._id} {...foody} />
+          ))}
+        </div>
+        {numOfPages > 1 && <PaginationContainer />}
+      </Wrapper>
+    </>
   );
 };
 

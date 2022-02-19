@@ -9,12 +9,18 @@ import {
   deleteFoody,
   getMyFoodys,
   changeFoodyStatus,
+  likeFoody,
+  unlikeFoody,
+  getFoodyLikes,
 } from '../controllers/foodysController.js';
 import authenticateUser from '../middleware/authenticate.js';
 
 const router = express.Router();
 
 router.route('/').get(getAllFoodys).post(authenticateUser, createFoody);
+router.get('/like/:id', authenticateUser, getFoodyLikes);
+router.post('/like/:id', authenticateUser, likeFoody);
+router.post('/unlike/:id', authenticateUser, unlikeFoody);
 router.get('/my', authenticateUser, getMyFoodys);
 router.get('/user-stats', authenticateUser, getUserStats);
 router.get('/all-stats', getAllStats);

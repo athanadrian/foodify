@@ -1,4 +1,5 @@
 import { getDistance, getPreciseDistance } from 'geolib';
+import moment from 'moment';
 
 export const mapEnumObject = (label, enumList) => {
   let obj = {};
@@ -52,3 +53,11 @@ export const computeDistance = (user, foody) => {
 function toRad(angle) {
   return (angle * Math.PI) / 180;
 }
+
+export const relativeDate = (date) => {
+  return moment(date).startOf('day').fromNow();
+};
+
+export const formatDate = (date) => {
+  return moment(date).format('MMM Do YYYY');
+};

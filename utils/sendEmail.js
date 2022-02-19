@@ -11,7 +11,6 @@ const sendEmail = async (options) => {
     },
   });
 
-  console.log('URL', process.env.APP_URL_PROD);
   const href = `${process.env.APP_URL_PROD}/reset-password/${options.token}`;
   const message = {
     from: `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}>`, // sender address

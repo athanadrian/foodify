@@ -9,10 +9,18 @@ const MapToggle = () => {
   return (
     <Wrapper>
       <div className='btn-container'>
-        <button className='btn-cover all-foodys' onClick={getAllFoodys}>
+        <button
+          title='All Foodys'
+          className='btn-cover all-foodys'
+          onClick={getAllFoodys}
+        >
           <img src={Foody} alt='All Foodys' />
         </button>
-        <button className='btn-cover my-foodys' onClick={getMyFoodys}>
+        <button
+          title='My Foodys'
+          className='btn-cover my-foodys'
+          onClick={getMyFoodys}
+        >
           <img src={MyFoody} alt='My Foodys' />
         </button>
       </div>

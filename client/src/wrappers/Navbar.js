@@ -50,6 +50,7 @@ const Wrapper = styled.nav`
     text-align: center;
     visibility: hidden;
     border-radius: var(--borderRadius);
+    z-index: 1;
   }
   .show-dropdown {
     visibility: visible;

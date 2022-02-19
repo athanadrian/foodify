@@ -1,4 +1,4 @@
-import { useContext, createContext, useReducer, useEffect } from 'react';
+import { useContext, createContext, useReducer } from 'react';
 import useClientApi from '../hooks/useClientApi';
 import reducer from './reducer';
 import {
@@ -30,6 +30,14 @@ import {
   GET_FOODYS_SUCCESS,
   SET_FOODYS_ORIGIN,
   SET_EDIT_FOODY,
+  GET_FOODY_DETAIL,
+  GET_FOODY_LIKES_BEGIN,
+  GET_FOODY_LIKES_SUCCESS,
+  GET_FOODY_LIKES_ERROR,
+  LIKE_UNLIKE_BEGIN,
+  LIKE_FOODY,
+  UNLIKE_FOODY,
+  LIKE_UNLIKE_ERROR,
   UPDATE_FOODY_BEGIN,
   UPDATE_FOODY_SUCCESS,
   UPDATE_FOODY_ERROR,
@@ -89,11 +97,13 @@ const initialState = {
   costOptions: costs,
   statusOptions: statuses,
   foodys: [],
+  foodyDetail: null,
   totalFoodys: 0,
   page: 1,
   numOfPages: 1,
   stats: {},
   monthlyCreations: [],
+  foodyLikes: [],
   search: '',
   searchCuisine: 'all',
   searchFoody: 'all',
@@ -399,6 +409,63 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const likeUnlikeFoody = async ({
+    foodyId,
+    userId,
+    alertText,
+    like = true,
+  }) => {
+    dispatch({ type: LIKE_UNLIKE_BEGIN });
+    try {
+      if (like) {
+        const { data } = await clientApi.post(`/foodys/like/${foodyId}`);
+        dispatch({
+          type: LIKE_FOODY,
+          payload: { foodyId, data, userId, alertText },
+        });
+        //getFoodyLikes({ foodyId });
+        //state.isMyFoodys ? getMyFoodys() : getAllFoodys();
+      } else {
+        console.log('unlike');
+        const { data } = await clientApi.post(`/foodys/unlike/${foodyId}`);
+        dispatch({
+          type: UNLIKE_FOODY,
+          payload: { foodyId, data, userId, alertText },
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: LIKE_UNLIKE_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
+  };
+
+  const getFoodyLikes = async ({ foodyId }) => {
+    console.log('appctx', foodyId);
+    //e.preventDefault();
+    dispatch({ type: GET_FOODY_LIKES_BEGIN });
+    try {
+      const { data } = await clientApi.get(`/foodys/like/${foodyId}`);
+      console.log('ctx data', data);
+      dispatch({
+        type: GET_FOODY_LIKES_SUCCESS,
+        payload: {
+          data,
+          foodyId,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_FOODY_LIKES_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+      console.log(error.response);
+    }
+    clearAlert();
+  };
+
   const clearValues = () => {
     dispatch({ type: CLEAR_VALUES });
   };
@@ -464,6 +531,10 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const getFoody = (slug) => {
+    dispatch({ type: GET_FOODY_DETAIL, payload: { slug } });
+  };
+
   const getUserStats = async () => {
     dispatch({ type: SHOW_STATS_BEGIN });
     try {
@@ -518,6 +589,7 @@ const AppProvider = ({ children }) => {
         createFoody,
         setFoodyToUpdate,
         editFoody,
+        getFoody,
         deleteFoody,
         clearValues,
         getMyFoodys,
@@ -532,6 +604,8 @@ const AppProvider = ({ children }) => {
         getGoogleApiKey,
         setUserCurrentLocation,
         setFoodyCurrentLocation,
+        likeUnlikeFoody,
+        getFoodyLikes,
       }}
     >
       {children}

@@ -305,31 +305,26 @@ ul {
   min-height: 100vh;
 }
 
-.coffee-info {
-  text-align: center;
-  text-transform: capitalize;
-  margin-bottom: 1rem;
-  letter-spacing: var(--letterSpacing);
-}
-.coffee-info span {
-  display: block;
-}
-.coffee-info a {
-  color: var(--primary-500);
-}
+/* Apply General CSS  */
 
-@media screen and (min-width: 992px) {
-  .coffee-info {
-    text-align: left;
-  }
-  .coffee-info span {
-    display: inline-block;
-    margin-right: 0.5rem;
-  }
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .dashboard-page {
   width: 90vw;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+.modal-page {
+  width: 80vw;
   margin: 0 auto;
   padding: 2rem 0;
 }
@@ -345,5 +340,8 @@ ul {
 @media (min-width: 992px) {
   .dashboard-page {
     width: 90%;
+  }
+  .modal-page {
+    width: 80%;
   }
 }

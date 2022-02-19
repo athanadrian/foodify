@@ -1,8 +1,15 @@
-import Wrapper from '../wrappers/FoodyModal.js';
-const FoodyModal = () => {
+import { FoodyDetail } from '.';
+import Wrapper from '../wrappers/FoodyModal';
+import FoodySocial from './FoodySocial';
+const FoodyModal = ({ children }) => {
   return (
     <Wrapper>
-      <div className='modal-container'>FoodyModal</div>
+      <div className='container'>
+        <div className='container-center'>
+          <FoodyDetail />
+          <FoodySocial />
+        </div>
+      </div>
     </Wrapper>
   );
 };
