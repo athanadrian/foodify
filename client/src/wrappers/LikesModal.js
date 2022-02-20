@@ -17,8 +17,7 @@ const Wrapper = styled.section`
   }
 
   .like-container {
-    padding: 1rem 1.5rem;
-
+    padding: 1rem 1rem;
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
@@ -39,6 +38,7 @@ const Wrapper = styled.section`
     text-transform: uppercase;
     color: var(--white);
     margin-right: 1rem;
+    align-self: center;
   }
   .profile-info {
     display: flex;
@@ -58,17 +58,14 @@ const Wrapper = styled.section`
     .like-date {
       color: var(--red-dark);
     }
-    .like-text {
-      color: var(--grey-600);
-    }
   }
 
   @media (max-width: 578px) {
     .likes-container-center {
-      grid-template-columns: 1fr 1fr;
-    }
-    .profile-info {
-      flex-direction: column;
+      .profile-info {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
   }
 `;

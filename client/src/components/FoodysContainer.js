@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Foody, Loading, Modal } from '../components';
+import { Foody, Loading } from '../components';
 import { useAppContext } from '../context/appContext';
 import Wrapper from '../wrappers/FoodysContainer';
 import PaginationContainer from './PaginationContainer';
@@ -21,8 +21,6 @@ const FoodysContainer = ({ all }) => {
     getAllFoodys,
     getMyFoodys,
     isMyFoodys,
-    showModal,
-    toggleModal,
   } = useAppContext();
 
   useEffect(() => {

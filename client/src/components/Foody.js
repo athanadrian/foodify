@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { FaRegFlag, FaRegCalendarPlus, FaHeart } from 'react-icons/fa';
+import { FaRegFlag, FaRegCalendarPlus } from 'react-icons/fa';
 import { GiPathDistance } from 'react-icons/gi';
 import { FiMapPin } from 'react-icons/fi';
 import { AiOutlineEuro } from 'react-icons/ai';
@@ -20,9 +20,7 @@ import {
   formatDate,
 } from '../utils/functions';
 import { costs, foodys } from '../utils/lookup-data';
-import { LikesModal } from '.';
-import Modal from './Modal';
-import LikeButton from './LikeButton';
+import { LikesModal, Modal, LikeButton } from '.';
 
 const Foody = ({
   all,
@@ -63,8 +61,8 @@ const Foody = ({
   const costObj = mapEnumObject(cost, costs);
   const foodyObj = mapEnumObject(foody, foodys);
   const isPublished = status === 'published';
-  const isLiked = likes.length > 0;
-
+  const isLiked = likes.filter((like) => like.user._id === user._id).length > 0;
+  const hasLikes = likes.length > 0;
   const toggleLocation = () => {
     setCalcLocation(!calcLocation);
   };
@@ -221,29 +219,20 @@ const Foody = ({
 
           <div className='like-container'>
             <div className={'space-between'}>
-              {/* <div
-                className={`${
-                  isLiked ? 'space-between liked' : 'space-between'
-                }`}
-              >
-                <span className='center'>
-                  <FaHeart size={24} />
-                </span> */}
               <LikeButton
                 size={22}
                 isLiked={isLiked}
                 foodyId={_id}
                 userId={user._id}
               >
-                {!isLiked ? (
-                  <span> Not liked yet</span>
+                {!hasLikes ? (
+                  <span> No likes</span>
                 ) : (
                   <span className='likes-btn' onClick={handleLikes}>
                     {likes.length} Like{renderText(likes.length)}
                   </span>
                 )}
               </LikeButton>
-              {/* </div> */}
               <FoodyInfo
                 className='content-update'
                 icon={<MdOutlineUpdate size={22} />}

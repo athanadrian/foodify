@@ -173,10 +173,6 @@ const Wrapper = styled.article`
   }
 
   .like-container {
-    /* padding: 0.5rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between; */
     svg {
       margin-right: 1rem;
       color: var(--grey-400);

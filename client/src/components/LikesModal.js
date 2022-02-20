@@ -1,12 +1,7 @@
-import { useAppContext } from 'context/appContext';
 import { relativeDate } from 'utils/functions';
 import Wrapper from '../wrappers/LikesModal';
 
 const LikesModal = ({ likes }) => {
-  const { getFoodyLikes, foodyLikes } = useAppContext();
-
-  console.log('likesModal', likes);
-
   return (
     <Wrapper>
       <div className='likes-container'>
@@ -26,7 +21,7 @@ const ListItem = ({ user }) => {
   return (
     <div className='like-container'>
       <div className='profile-icon'>{name.charAt(0)}</div>
-      <div className='profile-info space-between'>
+      <div className='profile-info'>
         <div className='info-container'>
           <h5>{name}</h5>
           <p>{email}</p>

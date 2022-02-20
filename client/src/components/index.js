@@ -23,6 +23,7 @@ import Modal from './Modal';
 import FoodyModal from './FoodyModal';
 import LikesModal from './LikesModal';
 import FoodyDetail from './FoodyDetail';
+import LikeButton from './LikeButton';
 import { MapFoodys, MapModal } from './map';
 
 export {
@@ -51,4 +52,5 @@ export {
   MapModal,
   MapFoodys,
   FoodyDetail,
+  LikeButton,
 };

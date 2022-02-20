@@ -271,6 +271,19 @@ ul {
   }
 }
 
+.loading-min {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 5px solid var(--grey-400);
+  border-radius: 50%;
+  border-top-color: var(--primary-500);
+  animation: spinner 2s linear infinite;
+  margin-right: 1rem;
+}
+.loading-min-center {
+  margin: 0 auto;
+}
+
 .loading {
   width: 6rem;
   height: 6rem;

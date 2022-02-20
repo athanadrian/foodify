@@ -68,6 +68,7 @@ const home = localStorage.getItem('home-city');
 const initialState = {
   isLoading: false,
   isSuccess: false,
+  isLiking: false,
   showAlert: false,
   showModal: false,
   showSidebar: false,
@@ -409,28 +410,20 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
-  const likeUnlikeFoody = async ({
-    foodyId,
-    userId,
-    alertText,
-    like = true,
-  }) => {
+  const likeUnlikeFoody = async ({ foodyId, userId, like = true }) => {
     dispatch({ type: LIKE_UNLIKE_BEGIN });
     try {
       if (like) {
         const { data } = await clientApi.post(`/foodys/like/${foodyId}`);
         dispatch({
           type: LIKE_FOODY,
-          payload: { foodyId, data, userId, alertText },
+          payload: { foodyId, data, userId },
         });
-        //getFoodyLikes({ foodyId });
-        //state.isMyFoodys ? getMyFoodys() : getAllFoodys();
       } else {
-        console.log('unlike');
         const { data } = await clientApi.post(`/foodys/unlike/${foodyId}`);
         dispatch({
           type: UNLIKE_FOODY,
-          payload: { foodyId, data, userId, alertText },
+          payload: { foodyId, data, userId },
         });
       }
     } catch (error) {
@@ -443,8 +436,6 @@ const AppProvider = ({ children }) => {
   };
 
   const getFoodyLikes = async ({ foodyId }) => {
-    console.log('appctx', foodyId);
-    //e.preventDefault();
     dispatch({ type: GET_FOODY_LIKES_BEGIN });
     try {
       const { data } = await clientApi.get(`/foodys/like/${foodyId}`);

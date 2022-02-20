@@ -1,16 +1,15 @@
 import { useAppContext } from 'context/appContext';
 import { FaHeart } from 'react-icons/fa';
-import Alert from './Alert';
+import Loading from './Loading';
 
 const LikeButton = ({ foodyId, userId, children, isLiked, size = 18 }) => {
-  const { showAlert, likeUnlikeFoody } = useAppContext();
+  const { isLiking, likeUnlikeFoody } = useAppContext();
 
   const handleLike = () => {
     likeUnlikeFoody({
       like: true,
       foodyId: foodyId,
       userId: userId,
-      alertText: 'LIKED',
     });
   };
   const handleUnlike = () => {
@@ -18,18 +17,25 @@ const LikeButton = ({ foodyId, userId, children, isLiked, size = 18 }) => {
       like: false,
       foodyId: foodyId,
       userId: userId,
-      alertText: 'UNLIKED',
     });
+  };
+  const toggleLIke = () => {
+    return isLiked ? handleUnlike() : handleLike();
   };
   return (
     <div className={`${isLiked ? 'like-container liked' : 'like-container'}`}>
       <div className='center'>
-        <span className='center' onClick={isLiked ? handleUnlike : handleLike}>
-          <FaHeart size={size} />
-        </span>
+        {isLiking ? (
+          <span className='center'>
+            <Loading min />
+          </span>
+        ) : (
+          <span className='center' onClick={toggleLIke}>
+            <FaHeart size={size} />
+          </span>
+        )}
         {children}
       </div>
-      <div>{showAlert && <Alert />}</div>
     </div>
   );
 };

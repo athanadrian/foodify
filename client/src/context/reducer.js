@@ -350,7 +350,7 @@ const reducer = (state, action) => {
   if (action.type === LIKE_UNLIKE_BEGIN) {
     return {
       ...state,
-      isLoading: true,
+      isLiking: true,
     };
   }
 
@@ -361,11 +361,7 @@ const reducer = (state, action) => {
     foodyDetail.likes = action.payload.data || [];
     return {
       ...state,
-      isLoading: false,
-      showAlert: true,
-      alertType: 'success',
-      alertText: action.payload.alertText,
-      //foodyDetail,
+      isLiking: false,
     };
   }
 
@@ -376,18 +372,14 @@ const reducer = (state, action) => {
     foodyDetail.likes = action.payload.data || [];
     return {
       ...state,
-      isLoading: false,
-      showAlert: true,
-      alertType: 'success',
-      alertText: action.payload.alertText,
-      //foodyDetail,
+      isLiking: false,
     };
   }
 
   if (action.type === LIKE_UNLIKE_ERROR) {
     return {
       ...state,
-      isLoading: false,
+      isLiking: false,
       showAlert: true,
       alertType: 'danger',
       alertText: action.payload.msg,
