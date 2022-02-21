@@ -58,7 +58,7 @@ const Wrapper = styled.article`
     color: #d66a6a;
     background: #ffeeee;
   }
-  .visited,
+  //.visited,
   .cheap,
   .published {
     color: var(--grey-600);
@@ -88,9 +88,7 @@ const Wrapper = styled.article`
     align-items: center;
     justify-content: space-between;
   }
-  .content-update {
-    justify-content: flex-end;
-  }
+
   .location {
     cursor: pointer;
     svg {
@@ -174,6 +172,7 @@ const Wrapper = styled.article`
 
   .like-container {
     svg {
+      cursor: pointer;
       margin-right: 1rem;
       color: var(--grey-400);
     }
@@ -188,11 +187,39 @@ const Wrapper = styled.article`
       margin-right: 1rem;
     }
   }
+
+  .visit-container {
+    svg {
+      cursor: pointer;
+      margin-right: 1rem;
+      color: var(--grey-400);
+    }
+  }
+
+  .visited {
+    span {
+      letter-spacing: var(--letterSpacing);
+    }
+    svg {
+      color: var(--blue-dark);
+      margin-right: 1rem;
+    }
+  }
+
   .likes-btn {
-    color: var(--blue-dark);
+    color: var(--red-dark);
     cursor: pointer;
   }
   .likes-btn:hover {
+    color: var(--red-light);
+    text-decoration: underline;
+  }
+
+  .visits-btn {
+    color: var(--blue-dark);
+    cursor: pointer;
+  }
+  .visits-btn:hover {
     color: var(--blue-light);
     text-decoration: underline;
   }

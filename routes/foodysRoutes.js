@@ -12,6 +12,8 @@ import {
   likeFoody,
   unlikeFoody,
   getFoodyLikes,
+  unVisitFoody,
+  visitFoody,
 } from '../controllers/foodysController.js';
 import authenticateUser from '../middleware/authenticate.js';
 
@@ -21,6 +23,8 @@ router.route('/').get(getAllFoodys).post(authenticateUser, createFoody);
 router.get('/like/:id', authenticateUser, getFoodyLikes);
 router.post('/like/:id', authenticateUser, likeFoody);
 router.post('/unlike/:id', authenticateUser, unlikeFoody);
+router.post('/visit/:id', authenticateUser, visitFoody);
+router.post('/remove-visit/:id', authenticateUser, unVisitFoody);
 router.get('/my', authenticateUser, getMyFoodys);
 router.get('/user-stats', authenticateUser, getUserStats);
 router.get('/all-stats', getAllStats);

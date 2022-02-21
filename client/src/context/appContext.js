@@ -38,6 +38,10 @@ import {
   LIKE_FOODY,
   UNLIKE_FOODY,
   LIKE_UNLIKE_ERROR,
+  VISIT_UNVISIT_BEGIN,
+  VISIT_FOODY,
+  UNVISIT_FOODY,
+  VISIT_UNVISIT_ERROR,
   UPDATE_FOODY_BEGIN,
   UPDATE_FOODY_SUCCESS,
   UPDATE_FOODY_ERROR,
@@ -69,6 +73,7 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   isLiking: false,
+  isVisiting: false,
   showAlert: false,
   showModal: false,
   showSidebar: false,
@@ -435,6 +440,33 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const visitUnVisitFoody = async ({ foodyId, userId, visit = true }) => {
+    dispatch({ type: VISIT_UNVISIT_BEGIN });
+    try {
+      if (visit) {
+        const { data } = await clientApi.post(`/foodys/visit/${foodyId}`);
+        dispatch({
+          type: VISIT_FOODY,
+          payload: { foodyId, data, userId },
+        });
+      } else {
+        const { data } = await clientApi.post(
+          `/foodys/remove-visit/${foodyId}`
+        );
+        dispatch({
+          type: UNVISIT_FOODY,
+          payload: { foodyId, data, userId },
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: VISIT_UNVISIT_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
+  };
+
   const getFoodyLikes = async ({ foodyId }) => {
     dispatch({ type: GET_FOODY_LIKES_BEGIN });
     try {
@@ -597,6 +629,7 @@ const AppProvider = ({ children }) => {
         setFoodyCurrentLocation,
         likeUnlikeFoody,
         getFoodyLikes,
+        visitUnVisitFoody,
       }}
     >
       {children}

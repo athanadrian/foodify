@@ -35,6 +35,10 @@ import {
   LIKE_FOODY,
   UNLIKE_FOODY,
   LIKE_UNLIKE_ERROR,
+  VISIT_UNVISIT_BEGIN,
+  VISIT_FOODY,
+  UNVISIT_FOODY,
+  VISIT_UNVISIT_ERROR,
   UPDATE_FOODY_BEGIN,
   UPDATE_FOODY_SUCCESS,
   UPDATE_FOODY_ERROR,
@@ -380,6 +384,45 @@ const reducer = (state, action) => {
     return {
       ...state,
       isLiking: false,
+      showAlert: true,
+      alertType: 'danger',
+      alertText: action.payload.msg,
+    };
+  }
+
+  if (action.type === VISIT_UNVISIT_BEGIN) {
+    return {
+      ...state,
+      isVisiting: true,
+    };
+  }
+
+  if (action.type === VISIT_FOODY) {
+    const foodyDetail = state.foodys.find(
+      (foody) => foody._id === action.payload.foodyId
+    );
+    foodyDetail.visits = action.payload.data || [];
+    return {
+      ...state,
+      isVisiting: false,
+    };
+  }
+
+  if (action.type === UNVISIT_FOODY) {
+    const foodyDetail = state.foodys.find(
+      (foody) => foody._id === action.payload.foodyId
+    );
+    foodyDetail.visits = action.payload.data || [];
+    return {
+      ...state,
+      isVisiting: false,
+    };
+  }
+
+  if (action.type === VISIT_UNVISIT_ERROR) {
+    return {
+      ...state,
+      isVisiting: false,
       showAlert: true,
       alertType: 'danger',
       alertText: action.payload.msg,

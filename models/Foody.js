@@ -68,6 +68,12 @@ const FoodySchema = new mongoose.Schema(
         liked: { type: Date, default: Date.now },
       },
     ],
+    visits: [
+      {
+        user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        visited: { type: Date, default: Date.now },
+      },
+    ],
     comments: [
       {
         _id: { type: String, required: true },

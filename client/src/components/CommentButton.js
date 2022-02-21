@@ -1,8 +1,8 @@
 import { useAppContext } from 'context/appContext';
-import { FaHeart } from 'react-icons/fa';
+import { AiOutlineComment } from 'react-icons/ai';
 import Loading from './Loading';
 
-const LikeButton = ({ foodyId, userId, children, isLiked, size = 18 }) => {
+const CommentButton = ({ foodyId, userId, children, isLiked, size = 18 }) => {
   const { isLiking, likeUnlikeFoody } = useAppContext();
 
   const handleLike = () => {
@@ -30,8 +30,8 @@ const LikeButton = ({ foodyId, userId, children, isLiked, size = 18 }) => {
             <Loading min />
           </span>
         ) : (
-          <span title='I like it!' className='center' onClick={toggleLIke}>
-            <FaHeart size={size} />
+          <span className='center' onClick={toggleLIke}>
+            <AiOutlineComment size={size} />
           </span>
         )}
         {children}
@@ -40,4 +40,4 @@ const LikeButton = ({ foodyId, userId, children, isLiked, size = 18 }) => {
   );
 };
 
-export default LikeButton;
+export default CommentButton;

@@ -20,7 +20,7 @@ import {
   formatDate,
 } from '../utils/functions';
 import { costs, foodys } from '../utils/lookup-data';
-import { LikesModal, Modal, LikeButton } from '.';
+import { LikesModal, Modal, LikeButton, VisitButton, CommentButton } from '.';
 
 const Foody = ({
   all,
@@ -37,6 +37,7 @@ const Foody = ({
   slug,
   location: foodyLocation,
   likes,
+  visits,
   // preference,
 }) => {
   const {
@@ -52,8 +53,10 @@ const Foody = ({
     //getFoodyLikes,
   } = useAppContext();
 
+  console.log('visits', visits);
   const [showRemarks, setShowRemarks] = useState(false);
   const [openLikesModal, setOpenLikesModal] = useState(false);
+  const [openVisitsModal, setOpenVisitsModal] = useState(false);
   const [calcLocation, setCalcLocation] = useState(false);
   const [distance, setDistance] = useState(
     computeDistance(homeLocation, foodyLocation)
@@ -62,13 +65,19 @@ const Foody = ({
   const foodyObj = mapEnumObject(foody, foodys);
   const isPublished = status === 'published';
   const isLiked = likes.filter((like) => like.user._id === user._id).length > 0;
+  const isVisited =
+    visits.filter((visit) => visit.user._id === user._id).length > 0;
   const hasLikes = likes.length > 0;
+  const hasVisits = visits.length > 0;
   const toggleLocation = () => {
     setCalcLocation(!calcLocation);
   };
 
   const toggleLikesModal = () => {
     setOpenLikesModal(!openLikesModal);
+  };
+  const toggleVisitsModal = () => {
+    setOpenVisitsModal(!openVisitsModal);
   };
 
   const calcDistanceMyLocation = () => {
@@ -109,6 +118,10 @@ const Foody = ({
     toggleLikesModal();
   };
 
+  const handleVisits = () => {
+    toggleVisitsModal();
+  };
+
   return (
     <>
       <Wrapper iconColor={calculationConfig.iconColor}>
@@ -132,14 +145,14 @@ const Foody = ({
         <div className='content'>
           <div className='content-center'>
             <FoodyInfo
-              tooltip='Distance from home'
-              icon={<calculationConfig.Icon size={24} />}
-              text={`${!calcLocation ? '(Home)' : '(Current)'} ${distance} Km`}
-            />
-            <FoodyInfo
               tooltip='Created'
               icon={<FaRegCalendarPlus />}
               text={formatDate(createdAt)}
+            />
+            <FoodyInfo
+              icon={<MdOutlineUpdate size={22} />}
+              text={relativeDate(updatedAt)}
+              tooltip='Updated'
             />
             <FoodyInfo
               tooltip='Cuisine Origin'
@@ -157,6 +170,11 @@ const Foody = ({
               text={costObj.icon}
             />
             <div className={`cost ${costObj.enum}`}>{costObj.enum}</div>
+            <FoodyInfo
+              tooltip='Distance from home'
+              icon={<calculationConfig.Icon size={24} />}
+              text={`${!calcLocation ? '(Home)' : '(Current)'} ${distance} Km`}
+            />
             <FoodyInfo
               tooltip='remarks'
               icon={
@@ -233,18 +251,43 @@ const Foody = ({
                   </span>
                 )}
               </LikeButton>
-              <FoodyInfo
-                className='content-update'
-                icon={<MdOutlineUpdate size={22} />}
-                text={relativeDate(updatedAt)}
-                tooltip='Updated'
-              />
+              <VisitButton
+                size={22}
+                isVisited={isVisited}
+                foodyId={_id}
+                userId={user._id}
+              >
+                {!hasVisits ? (
+                  <span> No Visits</span>
+                ) : (
+                  <span className='visits-btn' onClick={handleVisits}>
+                    {visits.length} Visit{renderText(visits.length)}
+                  </span>
+                )}
+              </VisitButton>
+              <CommentButton
+                size={22}
+                isLiked={isLiked}
+                foodyId={_id}
+                userId={user._id}
+              >
+                {/* {!hasLikes ? ( */}
+                <span> No Comments</span>
+                {/* ) : (
+                  <span className='likes-btn' onClick={handleLikes}>
+                    {likes.length} Comment{renderText(likes.length)}
+                  </span>
+                )} */}
+              </CommentButton>
             </div>
           </div>
         </div>
         <div>
           <Modal open={openLikesModal} onClose={toggleLikesModal} center>
-            <LikesModal likes={likes} />
+            <LikesModal list={likes} />
+          </Modal>
+          <Modal open={openVisitsModal} onClose={toggleVisitsModal} center>
+            <LikesModal list={visits} />
           </Modal>
         </div>
       </Wrapper>

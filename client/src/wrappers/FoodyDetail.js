@@ -91,9 +91,6 @@ const Wrapper = styled.article`
     align-items: center;
     justify-content: space-between;
   }
-  .content-update {
-    justify-content: flex-end;
-  }
 
   .status {
     border-radius: var(--borderRadius);
@@ -109,16 +106,6 @@ const Wrapper = styled.article`
     justify-content: space-between;
   }
 
-  .dates-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    /* @media (min-width: 992px) {
-      flex-direction: column;
-      align-items: flex-start;
-    } */
-  }
   .cost {
     border-radius: var(--borderRadius);
     text-transform: capitalize;

@@ -1,13 +1,13 @@
 import { relativeDate } from 'utils/functions';
 import Wrapper from '../wrappers/LikesModal';
 
-const LikesModal = ({ likes }) => {
+const LikesModal = ({ list }) => {
   return (
     <Wrapper>
       <div className='likes-container'>
         <div className='likes-container-center'>
-          {likes.length > 0 &&
-            likes.map((like) => <ListItem key={like._id} user={like.user} />)}
+          {list.length > 0 &&
+            list.map((item) => <ListItem key={item._id} user={item.user} />)}
         </div>
       </div>
     </Wrapper>

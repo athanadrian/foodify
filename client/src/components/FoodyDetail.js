@@ -121,9 +121,21 @@ const FoodyDetail = () => {
             {remarks.length > 0 ? remarks : 'no remarks yet'}
           </p>
         </div>
+        <FoodyInfo
+          tooltip='Created'
+          icon={<FaRegCalendarPlus />}
+          label='Created'
+          text={relativeCreated}
+        />
+        <FoodyInfo
+          icon={<MdOutlineUpdate size={18} />}
+          label='Updated'
+          text={relativeUpdate}
+          tooltip='Updated'
+        />
         <footer>
           <div className='actions-container'>
-            <button onClick={toggleModal} className='btn detail-btn'>
+            <button onClick={toggleModal} className='btn btn-block detail-btn'>
               {showModal ? 'close' : 'details'}
             </button>
             {isMyFoodys && (
@@ -160,22 +172,6 @@ const FoodyDetail = () => {
             )}
           </div>
         </footer>
-        <div className='dates-container'>
-          <FoodyInfo
-            className='content-update'
-            tooltip='Created'
-            icon={<FaRegCalendarPlus />}
-            label='Created'
-            text={relativeCreated}
-          />
-          <FoodyInfo
-            className='content-update'
-            icon={<MdOutlineUpdate size={21} />}
-            label='Updated'
-            text={relativeUpdate}
-            tooltip='Updated'
-          />
-        </div>
       </div>
     </Wrapper>
   );
