@@ -20,7 +20,7 @@ const CommentButton = ({ foodyId, userId, children, isLiked, size = 18 }) => {
     });
   };
   const toggleLIke = () => {
-    return isLiked ? handleUnlike() : handleLike();
+    // return isLiked ? handleUnlike() : handleLike();
   };
   return (
     <div className={`${isLiked ? 'like-container liked' : 'like-container'}`}>
