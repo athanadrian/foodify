@@ -23,17 +23,11 @@ const CommentButton = ({ foodyId, userId, children, isLiked, size = 18 }) => {
     // return isLiked ? handleUnlike() : handleLike();
   };
   return (
-    <div className={`${isLiked ? 'like-container liked' : 'like-container'}`}>
+    <div className='comment-container'>
       <div className='center'>
-        {isLiking ? (
-          <span className='center'>
-            <Loading min />
-          </span>
-        ) : (
-          <span className='center' onClick={toggleLIke}>
-            <AiOutlineComment size={size} />
-          </span>
-        )}
+        <span className='center' onClick={toggleLIke}>
+          <AiOutlineComment size={size} />
+        </span>
         {children}
       </div>
     </div>

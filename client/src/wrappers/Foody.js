@@ -173,7 +173,7 @@ const Wrapper = styled.article`
   .like-container {
     svg {
       cursor: pointer;
-      margin-right: 1rem;
+      margin-right: 0.5rem;
       color: var(--grey-400);
     }
   }
@@ -184,14 +184,13 @@ const Wrapper = styled.article`
     }
     svg {
       color: var(--red-dark);
-      margin-right: 1rem;
     }
   }
 
   .visit-container {
     svg {
       cursor: pointer;
-      margin-right: 1rem;
+      margin-right: 0.5rem;
       color: var(--grey-400);
     }
   }
@@ -202,7 +201,14 @@ const Wrapper = styled.article`
     }
     svg {
       color: var(--blue-dark);
-      margin-right: 1rem;
+    }
+  }
+
+  .comment-container {
+    svg {
+      cursor: unset;
+      margin-right: 0.5rem;
+      color: var(--grey-400);
     }
   }
 
@@ -222,6 +228,16 @@ const Wrapper = styled.article`
   .visits-btn:hover {
     color: var(--blue-light);
     text-decoration: underline;
+  }
+
+  .action-label {
+    @media (max-width: 1050px) {
+      display: none;
+    }
+    @media (max-width: 992px) {
+      //display: none;
+      display: block;
+    }
   }
 `;
 

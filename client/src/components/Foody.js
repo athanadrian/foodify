@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { FaRegFlag, FaRegCalendarPlus } from 'react-icons/fa';
 import { GiPathDistance } from 'react-icons/gi';
 import { FiMapPin } from 'react-icons/fi';
-import { AiOutlineEuro } from 'react-icons/ai';
+import { AiOutlineComment, AiOutlineEuro } from 'react-icons/ai';
 import { BsChevronDown, BsChevronUp, BsFillPinMapFill } from 'react-icons/bs';
 import { MdOutlineUpdate, MdOutlineRestaurant } from 'react-icons/md';
 
@@ -244,9 +244,12 @@ const Foody = ({
                 userId={user._id}
               >
                 {!hasLikes ? (
-                  <span> No likes</span>
+                  <span className='action-label'> No likes</span>
                 ) : (
-                  <span className='likes-btn' onClick={handleLikes}>
+                  <span
+                    className='likes-btn action-label'
+                    onClick={handleLikes}
+                  >
                     {likes.length} Like{renderText(likes.length)}
                   </span>
                 )}
@@ -258,27 +261,30 @@ const Foody = ({
                 userId={user._id}
               >
                 {!hasVisits ? (
-                  <span> No Visits</span>
+                  <span className='action-label'> No Visits</span>
                 ) : (
-                  <span className='visits-btn' onClick={handleVisits}>
+                  <span
+                    className='visits-btn action-label'
+                    onClick={handleVisits}
+                  >
                     {visits.length} Visit{renderText(visits.length)}
                   </span>
                 )}
               </VisitButton>
-              <CommentButton
-                size={22}
-                isLiked={isLiked}
-                foodyId={_id}
-                userId={user._id}
-              >
-                {/* {!hasLikes ? ( */}
-                <span> No Comments</span>
-                {/* ) : (
-                  <span className='likes-btn' onClick={handleLikes}>
+              <div className='comment-container'>
+                <div className='center'>
+                  <span className='center' onClick={showFoodyDetails}>
+                    <AiOutlineComment size={26} />
+                  </span>
+                  {/* {!hasLikes ? ( */}
+                  <span className='action-label'> No Comments</span>
+                  {/* ) : (
+                  <span className='likes-btn action-label' onClick={handleLikes}>
                     {likes.length} Comment{renderText(likes.length)}
                   </span>
                 )} */}
-              </CommentButton>
+                </div>
+              </div>
             </div>
           </div>
         </div>
