@@ -20,7 +20,7 @@ TODO
 
 > ~~9. Likes Implementation~~
 
-> 10. Comments Implementation
+> 10. Comments Implementation ~~server~~ client
 
 > 11. Live Chat
 
@@ -28,7 +28,7 @@ TODO
 
 > 13. Users Tab
 
-> 14. Implement (Viewed-Visited-Declined-Interested)
+> 14. Implement ~~Visited~~ -Interested
 
 > ~~15. Lookup-Data fix.~~
 
@@ -51,6 +51,8 @@ TODO
 > 24. Remove Geolib from server
 
 > 25. Merge reset/forgot password
+
+> ~~26. Open foody to google maps page~~
 
 # Foodify
 

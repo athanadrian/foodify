@@ -73,20 +73,6 @@ const MapFoodys = () => {
         options={mapOptions}
       >
         <>
-          {myLocation.loaded && (
-            <Marker
-              icon={{
-                url: ProfileIcon,
-                origin: new window.google.maps.Point(0, 0),
-                anchor: new window.google.maps.Point(15, 15),
-                scaledSize: new window.google.maps.Size(30, 30),
-              }}
-              position={{
-                lat: myLocation.coordinates.lat,
-                lng: myLocation.coordinates.lng,
-              }}
-            />
-          )}
           {foodys.map((foody) => (
             <Marker
               key={foody._id}
@@ -104,6 +90,22 @@ const MapFoodys = () => {
               onClick={() => setSelected(foody)}
             />
           ))}
+          {myLocation.loaded && (
+            <div style={{ zIndex: -1 }}>
+              <Marker
+                icon={{
+                  url: ProfileIcon,
+                  origin: new window.google.maps.Point(0, 0),
+                  anchor: new window.google.maps.Point(20, 20),
+                  scaledSize: new window.google.maps.Size(30, 30),
+                }}
+                position={{
+                  lat: myLocation.coordinates.lat,
+                  lng: myLocation.coordinates.lng,
+                }}
+              />
+            </div>
+          )}
         </>
         {selected ? (
           <InfoWindow

@@ -50,7 +50,7 @@ const MapSearch = ({ panTo }) => {
             value={value}
             onChange={handleInput}
             disabled={!ready}
-            placeholder='Search your location'
+            placeholder='Search location'
             className='form-input'
           />
           <ComboboxPopover portal={false}>
