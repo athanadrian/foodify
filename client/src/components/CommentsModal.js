@@ -1,36 +1,39 @@
 import { relativeDate } from 'utils/functions';
 import Wrapper from '../wrappers/SocialModal';
 
-const LikesModal = ({ likes }) => {
+const CommentsModal = ({ comments }) => {
   return (
     <Wrapper>
       <div className='socials-container'>
         <div className='socials-container-center'>
-          {likes.length > 0 &&
-            likes.map((like) => <ListItem key={like._id} like={like} />)}
+          {comments.length > 0 &&
+            comments.map((comment) => (
+              <ListItem key={comment._id} comment={comment} />
+            ))}
         </div>
       </div>
     </Wrapper>
   );
 };
 
-export default LikesModal;
+export default CommentsModal;
 
-const ListItem = ({ like }) => {
+const ListItem = ({ comment }) => {
   const {
-    user: { name, email },
+    user: { name },
     date,
-  } = like;
+    text,
+  } = comment;
   return (
     <div className='social-container'>
       <div className='profile-icon'>{name.charAt(0)}</div>
       <div className='profile-info'>
         <div className='info-container'>
           <h5>{name}</h5>
-          <p>{email}</p>
+          <p>{text}</p>
         </div>
         <p>
-          <span className='social-text'>Liked: </span>
+          <span className='social-text'>Added: </span>
           <span className='social-date'>{relativeDate(date)}</span>
         </p>
       </div>

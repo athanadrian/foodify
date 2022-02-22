@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
-  .likes-container {
+  .socials-container {
     width: 80vw;
     max-width: 100%;
     border-radius: var(--borderRadius);
   }
 
-  .likes-container-center {
+  .socials-container-center {
     display: grid;
     grid-template-columns: 1fr;
     row-gap: 0.1rem;
@@ -16,7 +16,7 @@ const Wrapper = styled.section`
     border-radius: var(--borderRadius);
   }
 
-  .like-container {
+  .social-container {
     padding: 1rem 1rem;
     display: grid;
     grid-template-columns: auto 1fr;
@@ -52,16 +52,16 @@ const Wrapper = styled.section`
       color: var(--grey-400);
       letter-spacing: var(--letterSpacing);
     }
-    .like-text {
+    .social-text {
       color: var(--grey-600);
     }
-    .like-date {
+    .social-date {
       color: var(--red-dark);
     }
   }
 
   @media (max-width: 578px) {
-    .likes-container-center {
+    .social-container-center {
       .profile-info {
         flex-direction: column;
         align-items: flex-start;

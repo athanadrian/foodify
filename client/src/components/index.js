@@ -22,10 +22,12 @@ import PaginationContainer from './PaginationContainer';
 import Modal from './Modal';
 import FoodyModal from './FoodyModal';
 import LikesModal from './LikesModal';
+import CommentsModal from './CommentsModal';
+import VisitsModal from './VisitsModal';
 import FoodyDetail from './FoodyDetail';
 import LikeButton from './LikeButton';
 import VisitButton from './VisitButton';
-import CommentButton from './CommentButton';
+import GoogleMapsLink from './GoogleMapsLink';
 import { MapFoodys, MapModal } from './map';
 
 export {
@@ -51,10 +53,12 @@ export {
   Modal,
   FoodyModal,
   LikesModal,
+  CommentsModal,
+  VisitsModal,
   MapModal,
   MapFoodys,
   FoodyDetail,
   LikeButton,
   VisitButton,
-  CommentButton,
+  GoogleMapsLink,
 };

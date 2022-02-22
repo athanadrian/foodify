@@ -1,11 +1,13 @@
 import mongoose from 'mongoose';
 import moment from 'moment';
+import { v4 as uuidv4 } from 'uuid';
 import { StatusCodes } from 'http-status-codes';
 import BadRequestError from '../errors/bad-request.js';
 import NotFoundError from '../errors/not-found.js';
 import Foody from '../models/Foody.js';
 import User from '../models/User.js';
 import checkPermissions from '../utils/checkPermissions.js';
+import UnAuthenticatedError from '../errors/unauthenticated.js';
 
 //@desc         Get User foodys
 //@route        GET /api/v1/foodys
@@ -59,8 +61,9 @@ export const getAllFoodys = async (req, res, next) => {
   result = result
     .skip(skip)
     .limit(limit)
-    .populate('createdBy')
+    .populate({ path: 'createdBy', select: '-resetPasswordAttempts' })
     .populate({ path: 'likes.user', select: '-resetPasswordAttempts' })
+    .populate({ path: 'comments.user', select: '-resetPasswordAttempts' })
     .populate({ path: 'visits.user', select: '-resetPasswordAttempts' });
   const foodys = await result;
 
@@ -126,9 +129,10 @@ export const getMyFoodys = async (req, res, next) => {
   result = result
     .skip(skip)
     .limit(limit)
-    .populate('createdBy')
+    .populate({ path: 'createdBy', select: '-resetPasswordAttempts' })
     .populate({ path: 'likes.user', select: '-resetPasswordAttempts' })
-    .populate({ path: 'visits.user', select: '-resetPasswordAttempts' });
+    .populate({ path: 'visits.user', select: '-resetPasswordAttempts' })
+    .populate({ path: 'comments.user', select: '-resetPasswordAttempts' });
   const myFoodys = await result;
 
   const totalFoodys = await Foody.countDocuments(queryObj);
@@ -406,7 +410,11 @@ export const likeFoody = async (req, res) => {
   const user = await User.findOne({ _id: userId }).select(
     '-resetPasswordAttempts'
   );
-  await foody.likes.unshift({ user, liked: Date.now() });
+  const like = {
+    user,
+    date: Date.now(),
+  };
+  await foody.likes.unshift(like);
 
   await foody.save();
   // if (foody.createdBy.toString() !== userId) {
@@ -478,8 +486,8 @@ export const visitFoody = async (req, res) => {
   const user = await User.findOne({ _id: userId }).select(
     '-resetPasswordAttempts'
   );
-  console.log('user', user);
-  await foody.visits.unshift({ user, visited: Date.now() });
+  const visit = { user, date: Date.now() };
+  await foody.visits.unshift(visit);
 
   await foody.save();
   // if (foody.createdBy.toString() !== userId) {
@@ -541,4 +549,95 @@ export const getFoodyLikes = async (req, res) => {
   }
 
   return res.status(StatusCodes.OK).json(foody.likes);
+};
+
+//@desc         Add comment to foody
+//@route        POST /api/v1/foodys/comment/:id (foodyId)
+//@access       Private
+export const addComment = async (req, res) => {
+  const foodyId = req.params.id;
+  const { userId } = req.user;
+  const { text } = req.body;
+
+  if (text.length < 1)
+    throw new BadRequestError('Comment should be at least 1 character');
+
+  const foody = await Foody.findOne({ _id: foodyId });
+
+  if (!foody) {
+    throw new NotFoundError(`Foody with id ${foodyId} does not exist!`);
+  }
+
+  const newComment = {
+    _id: uuidv4(),
+    text,
+    user: userId,
+    date: Date.now(),
+  };
+  await foody.comments.unshift(newComment);
+
+  await foody.save();
+
+  // if (foody.createdBy.toString() !== userId) {
+  //   await newCommentNotification(
+  //     foodyId,
+  //     newComment._id,
+  //     userId,
+  //     foody.createdBy.toString(),
+  //     text
+  //   );
+  // }
+
+  return res.status(StatusCodes.OK).json(newComment);
+};
+
+//@desc         Delete comment from foody
+//@route        DELETE /api/v1/foodys/:foodyId/:commentId
+//@access       Private
+export const deleteComment = async (req, res) => {
+  const { foodyId, commentId } = req.params;
+  const { userId } = req.user;
+
+  const foody = await Foody.findOne({ _id: foodyId });
+
+  if (!foody) {
+    throw new NotFoundError(`Foody with id ${foodyId} does not exist!`);
+  }
+
+  const comment = foody.comments.find((comment) => comment._id === commentId);
+  if (!comment) {
+    throw new NotFoundError('No Comment found');
+  }
+
+  const user = await Foody.findOne({ _id: userId });
+
+  const deleteFoundComment = async () => {
+    const indexOf = foody.comments
+      .map((comment) => comment._id)
+      .indexOf(commentId);
+
+    await foody.comments.splice(indexOf, 1);
+
+    await foody.save();
+
+    // if (foody.createdBy.toString() !== userId) {
+    //   await removeCommentNotification(
+    //     foodyId,
+    //     commentId,
+    //     userId,
+    //     foody.createdBy.toString()
+    //   );
+    // }
+
+    return res.status(StatusCodes.OK).send('Deleted Successfully');
+  };
+  if (comment.user.toString() !== userId) {
+    if (user.role === 'root') {
+      await deleteFoundComment();
+    } else {
+      throw new UnAuthenticatedError('Unauthorized');
+    }
+  }
+
+  await deleteFoundComment();
 };

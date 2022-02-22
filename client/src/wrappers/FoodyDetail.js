@@ -77,6 +77,23 @@ const Wrapper = styled.article`
     background: var(--primary-300);
   }
 
+  .google-link {
+    color: var(--primary-800);
+    ::after {
+      content: 'Google Maps';
+      position: relative;
+      left: -7px;
+    }
+  }
+  .google-link:hover {
+    color: var(--primary-500);
+    text-decoration: underline;
+  }
+  .google-icon {
+    position: relative;
+    left: -10px;
+  }
+
   .content {
     padding: 1rem 1.5rem;
   }

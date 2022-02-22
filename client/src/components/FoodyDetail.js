@@ -20,6 +20,7 @@ import {
   computeDistance,
 } from '../utils/functions';
 import { costs, foodys } from '../utils/lookup-data';
+import GoogleMapsLink from './GoogleMapsLink';
 
 const FoodyDetail = () => {
   const {
@@ -71,6 +72,7 @@ const FoodyDetail = () => {
       </header>
       <div className='content'>
         <div className='content-center'>
+          <GoogleMapsLink lat={foodyLocation.lat} lng={foodyLocation.lng} />
           <FoodyInfo
             tooltip='Village'
             icon={<FiMapPin size={20} />}

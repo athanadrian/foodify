@@ -1,26 +1,26 @@
 import { relativeDate } from 'utils/functions';
 import Wrapper from '../wrappers/SocialModal';
 
-const LikesModal = ({ likes }) => {
+const VisitsModal = ({ visits }) => {
   return (
     <Wrapper>
       <div className='socials-container'>
         <div className='socials-container-center'>
-          {likes.length > 0 &&
-            likes.map((like) => <ListItem key={like._id} like={like} />)}
+          {visits.length > 0 &&
+            visits.map((visit) => <ListItem key={visit._id} visit={visit} />)}
         </div>
       </div>
     </Wrapper>
   );
 };
 
-export default LikesModal;
+export default VisitsModal;
 
-const ListItem = ({ like }) => {
+const ListItem = ({ visit }) => {
   const {
     user: { name, email },
     date,
-  } = like;
+  } = visit;
   return (
     <div className='social-container'>
       <div className='profile-icon'>{name.charAt(0)}</div>
@@ -30,7 +30,7 @@ const ListItem = ({ like }) => {
           <p>{email}</p>
         </div>
         <p>
-          <span className='social-text'>Liked: </span>
+          <span className='social-text'>Visited: </span>
           <span className='social-date'>{relativeDate(date)}</span>
         </p>
       </div>

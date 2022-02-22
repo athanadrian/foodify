@@ -20,7 +20,16 @@ import {
   formatDate,
 } from '../utils/functions';
 import { costs, foodys } from '../utils/lookup-data';
-import { LikesModal, Modal, LikeButton, VisitButton, CommentButton } from '.';
+import {
+  LikesModal,
+  VisitsModal,
+  Modal,
+  LikeButton,
+  VisitButton,
+  CommentsModal,
+  GoogleMapsLink,
+} from '.';
+import { SiGooglemaps } from 'react-icons/si';
 
 const Foody = ({
   all,
@@ -38,6 +47,7 @@ const Foody = ({
   location: foodyLocation,
   likes,
   visits,
+  comments,
   // preference,
 }) => {
   const {
@@ -52,11 +62,11 @@ const Foody = ({
     getFoody,
     //getFoodyLikes,
   } = useAppContext();
-
-  console.log('visits', visits);
+  console.log('comments', comments);
   const [showRemarks, setShowRemarks] = useState(false);
   const [openLikesModal, setOpenLikesModal] = useState(false);
   const [openVisitsModal, setOpenVisitsModal] = useState(false);
+  const [openCommentsModal, setOpenCommentsModal] = useState(false);
   const [calcLocation, setCalcLocation] = useState(false);
   const [distance, setDistance] = useState(
     computeDistance(homeLocation, foodyLocation)
@@ -69,6 +79,8 @@ const Foody = ({
     visits.filter((visit) => visit.user._id === user._id).length > 0;
   const hasLikes = likes.length > 0;
   const hasVisits = visits.length > 0;
+  const hasComments = comments.length > 0;
+
   const toggleLocation = () => {
     setCalcLocation(!calcLocation);
   };
@@ -78,6 +90,9 @@ const Foody = ({
   };
   const toggleVisitsModal = () => {
     setOpenVisitsModal(!openVisitsModal);
+  };
+  const toggleCommentsModal = () => {
+    setOpenCommentsModal(!openCommentsModal);
   };
 
   const calcDistanceMyLocation = () => {
@@ -121,6 +136,9 @@ const Foody = ({
   const handleVisits = () => {
     toggleVisitsModal();
   };
+  const handleComments = () => {
+    toggleCommentsModal();
+  };
 
   return (
     <>
@@ -128,13 +146,11 @@ const Foody = ({
         <header>
           <div className='main-icon'>{title.charAt(0)}</div>
           <div className='header-items'>
-            <div className='info'>
-              <h5>{title}</h5>
-              <FoodyInfo
-                tooltip='Village'
-                icon={<FiMapPin size={20} />}
-                text={village}
-              />
+            <div className='info center'>
+              <div>
+                <h5>{title}</h5>
+                <p>{village}</p>
+              </div>
             </div>
             <div className='location' onClick={calculationConfig.func}>
               <calculationConfig.TopIcon />
@@ -143,6 +159,7 @@ const Foody = ({
           </div>
         </header>
         <div className='content'>
+          <GoogleMapsLink lat={foodyLocation.lat} lng={foodyLocation.lng} />
           <div className='content-center'>
             <FoodyInfo
               tooltip='Created'
@@ -276,13 +293,16 @@ const Foody = ({
                   <span className='center' onClick={showFoodyDetails}>
                     <AiOutlineComment size={26} />
                   </span>
-                  {/* {!hasLikes ? ( */}
-                  <span className='action-label'> No Comments</span>
-                  {/* ) : (
-                  <span className='likes-btn action-label' onClick={handleLikes}>
-                    {likes.length} Comment{renderText(likes.length)}
-                  </span>
-                )} */}
+                  {!hasComments ? (
+                    <span className='action-label'> No Comments</span>
+                  ) : (
+                    <span
+                      className='comments-btn action-label'
+                      onClick={toggleCommentsModal}
+                    >
+                      {comments.length} Comment{renderText(comments.length)}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
@@ -290,10 +310,13 @@ const Foody = ({
         </div>
         <div>
           <Modal open={openLikesModal} onClose={toggleLikesModal} center>
-            <LikesModal list={likes} />
+            <LikesModal likes={likes} />
           </Modal>
           <Modal open={openVisitsModal} onClose={toggleVisitsModal} center>
-            <LikesModal list={visits} />
+            <VisitsModal visits={visits} />
+          </Modal>
+          <Modal open={openCommentsModal} onClose={toggleCommentsModal} center>
+            <CommentsModal comments={comments} />
           </Modal>
         </div>
       </Wrapper>

@@ -65,6 +65,22 @@ const Wrapper = styled.article`
     background: var(--primary-300);
   }
 
+  .google-link {
+    color: var(--primary-800);
+    ::after {
+      content: 'Google Maps';
+      position: relative;
+      left: -7px;
+    }
+  }
+  .google-link:hover {
+    color: var(--primary-500);
+    text-decoration: underline;
+  }
+  .google-icon {
+    position: relative;
+    left: -10px;
+  }
   .content {
     padding: 1rem 1.5rem;
   }
@@ -206,7 +222,7 @@ const Wrapper = styled.article`
 
   .comment-container {
     svg {
-      cursor: unset;
+      cursor: pointer;
       margin-right: 0.5rem;
       color: var(--grey-400);
     }
@@ -227,6 +243,16 @@ const Wrapper = styled.article`
   }
   .visits-btn:hover {
     color: var(--blue-light);
+    text-decoration: underline;
+  }
+
+  .comments-btn {
+    color: var(--grey-700);
+    cursor: pointer;
+    letter-spacing: var(--letterSpacing);
+  }
+  .comments-btn:hover {
+    color: var(--grey-200);
     text-decoration: underline;
   }
 
