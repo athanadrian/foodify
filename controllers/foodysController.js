@@ -562,16 +562,22 @@ export const addComment = async (req, res) => {
   if (text.length < 1)
     throw new BadRequestError('Comment should be at least 1 character');
 
-  const foody = await Foody.findOne({ _id: foodyId });
-
+  const foody = await Foody.findOne({ _id: foodyId }).populate({
+    path: 'comments.user',
+    select: '-resetPasswordAttempts',
+  });
   if (!foody) {
     throw new NotFoundError(`Foody with id ${foodyId} does not exist!`);
   }
 
+  const user = await User.findOne({ _id: userId }).select(
+    '-resetPasswordAttempts'
+  );
+
   const newComment = {
     _id: uuidv4(),
     text,
-    user: userId,
+    user,
     date: Date.now(),
   };
   await foody.comments.unshift(newComment);
@@ -588,7 +594,7 @@ export const addComment = async (req, res) => {
   //   );
   // }
 
-  return res.status(StatusCodes.OK).json(newComment);
+  return res.status(StatusCodes.OK).json(foody.comments);
 };
 
 //@desc         Delete comment from foody
@@ -629,7 +635,7 @@ export const deleteComment = async (req, res) => {
     //   );
     // }
 
-    return res.status(StatusCodes.OK).send('Deleted Successfully');
+    return res.status(StatusCodes.OK).json('Comment Deleted');
   };
   if (comment.user.toString() !== userId) {
     if (user.role === 'root') {

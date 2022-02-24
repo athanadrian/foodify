@@ -17,7 +17,7 @@ import MapSearch from './MapSearch';
 import MapLocate from './MapLocate';
 
 const containerStyle = {
-  width: '450px',
+  width: '100%',
   height: '100vh',
 };
 

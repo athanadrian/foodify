@@ -23,6 +23,8 @@ import {
   ADD_FOODY_BEGIN,
   ADD_FOODY_SUCCESS,
   ADD_FOODY_ERROR,
+  ADD_COMMENT,
+  REMOVE_COMMENT,
   GET_FOODYS_BEGIN,
   GET_FOODYS_SUCCESS,
   SET_FOODYS_ORIGIN,
@@ -31,14 +33,10 @@ import {
   GET_FOODY_LIKES_BEGIN,
   GET_FOODY_LIKES_SUCCESS,
   GET_FOODY_LIKES_ERROR,
-  LIKE_UNLIKE_BEGIN,
   LIKE_FOODY,
   UNLIKE_FOODY,
-  LIKE_UNLIKE_ERROR,
-  VISIT_UNVISIT_BEGIN,
   VISIT_FOODY,
-  UNVISIT_FOODY,
-  VISIT_UNVISIT_ERROR,
+  UN_VISIT_FOODY,
   UPDATE_FOODY_BEGIN,
   UPDATE_FOODY_SUCCESS,
   UPDATE_FOODY_ERROR,
@@ -260,6 +258,7 @@ const reducer = (state, action) => {
       cost: 'average',
       foody: 'alaCarte',
       remarks: '',
+      commentText: '',
     };
   }
 
@@ -351,13 +350,6 @@ const reducer = (state, action) => {
     };
   }
 
-  if (action.type === LIKE_UNLIKE_BEGIN) {
-    return {
-      ...state,
-      isLiking: true,
-    };
-  }
-
   if (action.type === LIKE_FOODY) {
     const foodyDetail = state.foodys.find(
       (foody) => foody._id === action.payload.foodyId
@@ -380,23 +372,6 @@ const reducer = (state, action) => {
     };
   }
 
-  if (action.type === LIKE_UNLIKE_ERROR) {
-    return {
-      ...state,
-      isLiking: false,
-      showAlert: true,
-      alertType: 'danger',
-      alertText: action.payload.msg,
-    };
-  }
-
-  if (action.type === VISIT_UNVISIT_BEGIN) {
-    return {
-      ...state,
-      isVisiting: true,
-    };
-  }
-
   if (action.type === VISIT_FOODY) {
     const foodyDetail = state.foodys.find(
       (foody) => foody._id === action.payload.foodyId
@@ -408,7 +383,7 @@ const reducer = (state, action) => {
     };
   }
 
-  if (action.type === UNVISIT_FOODY) {
+  if (action.type === UN_VISIT_FOODY) {
     const foodyDetail = state.foodys.find(
       (foody) => foody._id === action.payload.foodyId
     );
@@ -419,13 +394,28 @@ const reducer = (state, action) => {
     };
   }
 
-  if (action.type === VISIT_UNVISIT_ERROR) {
+  if (action.type === ADD_COMMENT) {
+    const foodyDetail = state.foodys.find(
+      (foody) => foody._id === action.payload.foodyId
+    );
+    foodyDetail.comments = action.payload.data || [];
     return {
       ...state,
-      isVisiting: false,
-      showAlert: true,
-      alertType: 'danger',
-      alertText: action.payload.msg,
+      isCommenting: false,
+    };
+  }
+
+  if (action.type === REMOVE_COMMENT) {
+    const foodyDetail = state.foodys.find(
+      (foody) => foody._id === action.payload.foodyId
+    );
+    foodyDetail.comments = foodyDetail.comments.filter(
+      (comment) => comment._id !== action.payload.commentId
+    );
+
+    return {
+      ...state,
+      isCommenting: false,
     };
   }
 

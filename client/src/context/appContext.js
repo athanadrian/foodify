@@ -26,6 +26,8 @@ import {
   ADD_FOODY_BEGIN,
   ADD_FOODY_SUCCESS,
   ADD_FOODY_ERROR,
+  ADD_COMMENT,
+  REMOVE_COMMENT,
   GET_FOODYS_BEGIN,
   GET_FOODYS_SUCCESS,
   SET_FOODYS_ORIGIN,
@@ -34,14 +36,10 @@ import {
   GET_FOODY_LIKES_BEGIN,
   GET_FOODY_LIKES_SUCCESS,
   GET_FOODY_LIKES_ERROR,
-  LIKE_UNLIKE_BEGIN,
   LIKE_FOODY,
   UNLIKE_FOODY,
-  LIKE_UNLIKE_ERROR,
-  VISIT_UNVISIT_BEGIN,
   VISIT_FOODY,
-  UNVISIT_FOODY,
-  VISIT_UNVISIT_ERROR,
+  UN_VISIT_FOODY,
   UPDATE_FOODY_BEGIN,
   UPDATE_FOODY_SUCCESS,
   UPDATE_FOODY_ERROR,
@@ -74,6 +72,7 @@ const initialState = {
   isSuccess: false,
   isLiking: false,
   isVisiting: false,
+  isCommenting: false,
   showAlert: false,
   showModal: false,
   showSidebar: false,
@@ -97,6 +96,7 @@ const initialState = {
   cost: 'average',
   status: 'unpublished',
   distance: '',
+  commentText: '',
   foodyLocation: MAP_CENTER,
   cuisineOptions: cuisines,
   foodyOptions: foodys,
@@ -415,54 +415,71 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
-  const likeUnlikeFoody = async ({ foodyId, userId, like = true }) => {
-    dispatch({ type: LIKE_UNLIKE_BEGIN });
+  const likeUnlikeFoody = async ({ foodyId, like = true }) => {
     try {
       if (like) {
         const { data } = await clientApi.post(`/foodys/like/${foodyId}`);
         dispatch({
           type: LIKE_FOODY,
-          payload: { foodyId, data, userId },
+          payload: { foodyId, data },
         });
       } else {
         const { data } = await clientApi.post(`/foodys/unlike/${foodyId}`);
         dispatch({
           type: UNLIKE_FOODY,
-          payload: { foodyId, data, userId },
+          payload: { foodyId, data },
         });
       }
     } catch (error) {
-      dispatch({
-        type: LIKE_UNLIKE_ERROR,
-        payload: { msg: error.response.data.msg },
-      });
+      console.log('Likes Functionality: ', error.response.data.msg);
     }
     clearAlert();
   };
 
-  const visitUnVisitFoody = async ({ foodyId, userId, visit = true }) => {
-    dispatch({ type: VISIT_UNVISIT_BEGIN });
+  const addComment = async ({ foodyId, text }) => {
+    try {
+      const { data } = await clientApi.post(`/foodys/comment/${foodyId}`, {
+        text,
+      });
+      dispatch({
+        type: ADD_COMMENT,
+        payload: { foodyId, data },
+      });
+      dispatch({ type: CLEAR_VALUES });
+    } catch (error) {
+      console.log('Add Comment Functionality: ', error.response.data.msg);
+    }
+    clearAlert();
+  };
+
+  const removeComment = async ({ foodyId, commentId }) => {
+    try {
+      await clientApi.delete(`/foodys/${foodyId}/${commentId}`);
+      dispatch({ type: REMOVE_COMMENT, payload: { foodyId, commentId } });
+    } catch (error) {
+      console.log('Remove Comment Functionality: ', error.response.data.msg);
+    }
+  };
+
+  const visitUnVisitFoody = async ({ foodyId, visit = true }) => {
     try {
       if (visit) {
         const { data } = await clientApi.post(`/foodys/visit/${foodyId}`);
         dispatch({
           type: VISIT_FOODY,
-          payload: { foodyId, data, userId },
+          payload: { foodyId, data },
         });
       } else {
         const { data } = await clientApi.post(
           `/foodys/remove-visit/${foodyId}`
         );
         dispatch({
-          type: UNVISIT_FOODY,
-          payload: { foodyId, data, userId },
+          type: UN_VISIT_FOODY,
+          payload: { foodyId, data },
         });
       }
     } catch (error) {
-      dispatch({
-        type: VISIT_UNVISIT_ERROR,
-        payload: { msg: error.response.data.msg },
-      });
+      console.log('Visits Functionality: ', error.response.data.msg);
     }
     clearAlert();
   };
@@ -471,7 +488,6 @@ const AppProvider = ({ children }) => {
     dispatch({ type: GET_FOODY_LIKES_BEGIN });
     try {
       const { data } = await clientApi.get(`/foodys/like/${foodyId}`);
-      console.log('ctx data', data);
       dispatch({
         type: GET_FOODY_LIKES_SUCCESS,
         payload: {
@@ -630,6 +646,8 @@ const AppProvider = ({ children }) => {
         likeUnlikeFoody,
         getFoodyLikes,
         visitUnVisitFoody,
+        addComment,
+        removeComment,
       }}
     >
       {children}

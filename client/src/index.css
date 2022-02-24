@@ -358,3 +358,25 @@ ul {
     width: 80%;
   }
 }
+
+@media (min-width: 992px) {
+  .react-responsive-modal-modal {
+    width: 1000px;
+  }
+}
+@media (min-width: 500px) {
+  .react-responsive-modal-modal {
+    width: 80%;
+  }
+}
+
+@media (min-width: 370px) {
+  .react-responsive-modal-modal {
+    width: 80%;
+  }
+}
+/* @media (min-width: 700px) {
+  .react-responsive-modal-modal {
+    width: 100%;
+  }
+} */

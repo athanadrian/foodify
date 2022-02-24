@@ -5,6 +5,7 @@ const Wrapper = styled.article`
   border-top-left-radius: var(--borderRadius);
   border-bottom-left-radius: var(--borderRadius);
   display: grid;
+  border-right: 1px solid var(--grey-100);
   grid-template-rows: 1fr auto;
   //box-shadow: var(--shadow-2);
 
@@ -156,6 +157,10 @@ const Wrapper = styled.article`
     color: var(--blue-dark);
     background: var(--blue-light);
     margin-right: 0.5rem;
+    height: 30px;
+    @media (max-width: 992px) {
+      width: unset;
+    }
   }
   .edit-btn {
     color: var(--green-dark);

@@ -52,7 +52,7 @@ const FoodysContainer = ({ all }) => {
       <Wrapper>
         <h5>
           {totalFoodys} foody{foodys.length > 1 && 's'}{' '}
-          {isMyFoodys ? 'found' : 'created'}
+          {!isMyFoodys ? 'found' : 'created'}
         </h5>
         <div className='foodys'>
           {foodys.map((foody) => (

@@ -29,7 +29,6 @@ import {
   CommentsModal,
   GoogleMapsLink,
 } from '.';
-import { SiGooglemaps } from 'react-icons/si';
 
 const Foody = ({
   all,
@@ -62,7 +61,7 @@ const Foody = ({
     getFoody,
     //getFoodyLikes,
   } = useAppContext();
-  console.log('comments', comments);
+
   const [showRemarks, setShowRemarks] = useState(false);
   const [openLikesModal, setOpenLikesModal] = useState(false);
   const [openVisitsModal, setOpenVisitsModal] = useState(false);
@@ -96,14 +95,12 @@ const Foody = ({
   };
 
   const calcDistanceMyLocation = () => {
-    console.log('current');
     toggleLocation();
     if (myLocation.loaded)
       setDistance(computeDistance(myLocation.coordinates, foodyLocation));
   };
 
   const calcDistanceHomeLocation = () => {
-    console.log('home');
     toggleLocation();
     setDistance(computeDistance(homeLocation, foodyLocation));
   };
@@ -111,17 +108,21 @@ const Foody = ({
   let calculationConfig = calcLocation
     ? {
         Icon: BsFillPinMapFill,
+        tooltip: 'Distance from current location',
         TopIcon: GiPathDistance,
+        tooltipTopIcon: 'Calculate distance from home',
         iconColor: '#0369a1',
         func: calcDistanceHomeLocation,
-        text: 'CURRENT',
+        text: 'Current',
       }
     : {
         Icon: GiPathDistance,
+        tooltip: 'Distance from home',
         TopIcon: BsFillPinMapFill,
+        tooltipTopIcon: 'Calculate distance from current location',
         iconColor: '#92400e',
         func: calcDistanceMyLocation,
-        text: 'HOME',
+        text: 'Home',
       };
 
   const showFoodyDetails = () => {
@@ -152,7 +153,11 @@ const Foody = ({
                 <p>{village}</p>
               </div>
             </div>
-            <div className='location' onClick={calculationConfig.func}>
+            <div
+              title={calculationConfig.tooltipTopIcon}
+              className='location'
+              onClick={calculationConfig.func}
+            >
               <calculationConfig.TopIcon />
             </div>
             {/* <div className={`status ${status}`}>{status}</div> */}
@@ -188,9 +193,9 @@ const Foody = ({
             />
             <div className={`cost ${costObj.enum}`}>{costObj.enum}</div>
             <FoodyInfo
-              tooltip='Distance from home'
+              tooltip={calculationConfig.tooltip}
               icon={<calculationConfig.Icon size={24} />}
-              text={`${!calcLocation ? '(Home)' : '(Current)'} ${distance} Km`}
+              text={`(${calculationConfig.text}) ${distance} Km`}
             />
             <FoodyInfo
               tooltip='remarks'
@@ -290,7 +295,7 @@ const Foody = ({
               </VisitButton>
               <div className='comment-container'>
                 <div className='center'>
-                  <span className='center' onClick={showFoodyDetails}>
+                  <span className='center' onClick={toggleCommentsModal}>
                     <AiOutlineComment size={26} />
                   </span>
                   {!hasComments ? (
@@ -316,7 +321,7 @@ const Foody = ({
             <VisitsModal visits={visits} />
           </Modal>
           <Modal open={openCommentsModal} onClose={toggleCommentsModal} center>
-            <CommentsModal comments={comments} />
+            <CommentsModal foodyId={_id} comments={comments} />
           </Modal>
         </div>
       </Wrapper>

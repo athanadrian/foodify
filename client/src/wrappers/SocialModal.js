@@ -2,9 +2,15 @@ import styled from 'styled-components';
 
 const Wrapper = styled.section`
   .socials-container {
-    width: 80vw;
+    width: 100%;
     max-width: 100%;
     border-radius: var(--borderRadius);
+    @media (max-width: 572px) {
+      width: 100%;
+    }
+    @media (min-width: 992px) {
+      width: 100%;
+    }
   }
 
   .socials-container-center {
@@ -12,8 +18,9 @@ const Wrapper = styled.section`
     grid-template-columns: 1fr;
     row-gap: 0.1rem;
     background-color: var(--grey-50);
-    border: 1px solid var(--grey-100);
-    border-radius: var(--borderRadius);
+    border-top: 1px solid var(--grey-100);
+    border-bottom-left-radius: 0.19rem;
+    border-bottom-right-radius: 0.19rem;
   }
 
   .social-container {
@@ -31,7 +38,7 @@ const Wrapper = styled.section`
     height: 45px;
     display: grid;
     place-items: center;
-    background: var(--primary-500);
+    background: var(--blue-dark);
     border-radius: 50%;
     font-size: 1.5rem;
     font-weight: 700;
@@ -44,6 +51,16 @@ const Wrapper = styled.section`
     display: flex;
     align-items: end;
     justify-content: space-between;
+    place-items: center;
+    .info-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    svg {
+      color: var(--red-dark);
+    }
+
     h5 {
       margin-bottom: 0.25rem;
     }
@@ -57,6 +74,41 @@ const Wrapper = styled.section`
     }
     .social-date {
       color: var(--red-dark);
+    }
+  }
+  .comment {
+    color: var(--grey-700);
+
+    &-text {
+      margin-left: 1rem;
+      font-size: var(--small-text);
+      color: var(--grey-500);
+    }
+    &-date {
+      font-size: var(--extra-small-text);
+      color: var(--grey-300);
+    }
+    &-btn {
+      margin-top: 1rem;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border: 1px solid var(--grey-400);
+    }
+
+    &-row {
+      width: 100%;
+      margin-top: 1rem;
+    }
+    &-input {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right: 0;
+    }
+    &-form {
+      padding: 0.5rem;
+    }
+    &-delete-btn {
+      cursor: pointer;
     }
   }
 

@@ -1,10 +1,11 @@
 import { CgCloseO } from 'react-icons/cg';
 import { Modal } from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
+import Wrapper from '../wrappers/Modal';
 
 const ModalComponent = ({ open, onClose, children, classNames }) => {
   return (
-    <div>
+    <Wrapper>
       <Modal
         open={open}
         onClose={onClose}
@@ -15,7 +16,7 @@ const ModalComponent = ({ open, onClose, children, classNames }) => {
       >
         {children}
       </Modal>
-    </div>
+    </Wrapper>
   );
 };
 

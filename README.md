@@ -20,7 +20,7 @@ TODO
 
 > ~~9. Likes Implementation~~
 
-> 10. Comments Implementation ~~server~~ client
+> ~~10. Comments Implementation ~~server~~ client~~
 
 > 11. Live Chat
 
@@ -56,9 +56,9 @@ TODO
 
 # Foodify
 
-#### Track Your Cyprus Tour-Place Search
+#### Track Your Cyprus Foody-Place Search
 
-Project in Action - [Foodify](https://www.tourify.live/)
+Project in Action - [Foodify](https://foodify-tour.herokuapp.com/)
 
 #### Run The App Locally
 
@@ -67,7 +67,7 @@ npm run install-dependencies
 ```
 
 - rename .env.temp to .env
-- setup values for - MONGO_URL, JWT_SECRET, JWT_LIFETIME
+- setup values for - MONGO_URL, JWT_SECRET, JWT_EXPIRE
 
 ```sh
 npm start
