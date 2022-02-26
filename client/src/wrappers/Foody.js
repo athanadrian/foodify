@@ -118,6 +118,15 @@ const Wrapper = styled.article`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 400px) {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .detail-btn {
+        margin-bottom: 1rem;
+      }
+    }
   }
   .actions {
     display: flex;

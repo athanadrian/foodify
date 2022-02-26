@@ -372,11 +372,6 @@ ul {
 
 @media (min-width: 370px) {
   .react-responsive-modal-modal {
-    width: 80%;
+    width: 90%;
   }
 }
-/* @media (min-width: 700px) {
-  .react-responsive-modal-modal {
-    width: 100%;
-  }
-} */

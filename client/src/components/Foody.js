@@ -191,7 +191,7 @@ const Foody = ({
               icon={<AiOutlineEuro size={22} />}
               text={costObj.icon}
             />
-            <div className={`cost ${costObj.enum}`}>{costObj.enum}</div>
+            <div className={`cost ${costObj.enum} center`}>{costObj.enum}</div>
             <FoodyInfo
               tooltip={calculationConfig.tooltip}
               icon={<calculationConfig.Icon size={24} />}
