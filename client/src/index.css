@@ -370,7 +370,7 @@ ul {
   }
 }
 
-@media (min-width: 370px) {
+@media (min-width: 420px) {
   .react-responsive-modal-modal {
     width: 90%;
   }

@@ -50,7 +50,7 @@ const Wrapper = styled.article`
     align-items: center;
     justify-content: space-between;
 
-    @media (max-width: 400px) {
+    @media (max-width: 420px) {
       flex-direction: column;
       align-items: flex-start;
 
