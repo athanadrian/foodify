@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import { FaRegFlag, FaRegCalendarPlus } from 'react-icons/fa';
 import { GiPathDistance } from 'react-icons/gi';
-import { FiMapPin } from 'react-icons/fi';
 import { AiOutlineComment, AiOutlineEuro } from 'react-icons/ai';
 import { BsChevronDown, BsChevronUp, BsFillPinMapFill } from 'react-icons/bs';
 import { MdOutlineUpdate, MdOutlineRestaurant } from 'react-icons/md';
@@ -59,7 +58,6 @@ const Foody = ({
     isMyFoodys,
     toggleModal,
     getFoody,
-    //getFoodyLikes,
   } = useAppContext();
 
   const [showRemarks, setShowRemarks] = useState(false);
@@ -136,9 +134,6 @@ const Foody = ({
 
   const handleVisits = () => {
     toggleVisitsModal();
-  };
-  const handleComments = () => {
-    toggleCommentsModal();
   };
 
   return (

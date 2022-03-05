@@ -1,9 +1,16 @@
 import { useContext, createContext, useReducer } from 'react';
 import useClientApi from '../hooks/useClientApi';
-import reducer from './reducer';
+import reducer from './reducers/reducer';
 import {
   CLEAR_ALERT,
   DISPLAY_ALERT,
+  TOGGLE_MODAL,
+  CLOSE_INFO_WINDOW,
+  OPEN_INFO_WINDOW,
+  TOGGLE_SIDEBAR,
+  HANDLE_CHANGE,
+  CLEAR_VALUES,
+  GET_GOOGLE_API_KEY,
   SIGN_USER_BEGIN,
   SIGN_USER_SUCCESS,
   SIGN_USER_ERROR,
@@ -13,16 +20,12 @@ import {
   RESET_PASSWORD_BEGIN,
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_ERROR,
-  TOGGLE_SIDEBAR,
-  TOGGLE_MODAL,
-  CLOSE_INFO_WINDOW,
-  OPEN_INFO_WINDOW,
   LOGOUT_USER,
   UPDATE_USER_BEGIN,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
-  HANDLE_CHANGE,
-  CLEAR_VALUES,
+  SET_USER_CURRENT_LOCATION,
+  SET_USER_NOTIFICATIONS_TO_READ,
   ADD_FOODY_BEGIN,
   ADD_FOODY_SUCCESS,
   ADD_FOODY_ERROR,
@@ -53,10 +56,8 @@ import {
   CHANGE_PAGE,
   ADD_FOODY_MARKER,
   ADD_USER_MARKER,
-  GET_GOOGLE_API_KEY,
-  SET_USER_CURRENT_LOCATION,
   SET_FOODY_CURRENT_LOCATION,
-} from './actions';
+} from './actions/actions';
 import { costs, cuisines, foodys, statuses } from '../utils/lookup-data';
 import useGeoLocation from '../hooks/useGeolocation';
 import { MAP_CENTER } from '../utils/constants';
@@ -64,7 +65,6 @@ import { MAP_CENTER } from '../utils/constants';
 const token = localStorage.getItem('token');
 const user = localStorage.getItem('user');
 const homeLocation = localStorage.getItem('home-location');
-//const myLocation = localStorage.getItem('my-location');
 const home = localStorage.getItem('home-city');
 
 const initialState = {
@@ -194,6 +194,18 @@ const AppProvider = ({ children }) => {
   };
 
   const { clientApi } = useClientApi(logoutUser);
+
+  const setUserNotificationsToRead = async () => {
+    try {
+      await clientApi.post('/notifications');
+      dispatch({
+        type: SET_USER_NOTIFICATIONS_TO_READ,
+      });
+    } catch (error) {
+      console.log('Set Notifications error: ', error.response.data);
+      clearAlert();
+    }
+  };
 
   const getGoogleApiKey = async () => {
     try {
@@ -648,6 +660,7 @@ const AppProvider = ({ children }) => {
         visitUnVisitFoody,
         addComment,
         removeComment,
+        setUserNotificationsToRead,
       }}
     >
       {children}

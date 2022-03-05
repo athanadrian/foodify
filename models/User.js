@@ -50,6 +50,7 @@ const UserSchema = new mongoose.Schema(
       lat: { type: Number, default: 0 },
       lng: { type: Number, default: 0 },
     },
+    unreadNotification: { type: Boolean, default: false },
     resetPasswordAttempts: [{ success: Boolean, date: Date }],
     profilePicUrl: { type: String },
     resetPasswordToken: String,

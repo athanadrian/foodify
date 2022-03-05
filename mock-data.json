@@ -8,7 +8,7 @@
     "cuisine": "greek",
     "menu": "sushi",
     "remarks": "Revision of Autologous Tissue Substitute in Right Toe Phalanx, Percutaneous Endoscopic Approach",
-    "createdBy": "61f8cfaf6f65fc5b118a83ae",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-06-22T10:29:19Z",
     "location": { "lat": 30.920219, "lng": 103.620536 }
   },
@@ -21,7 +21,7 @@
     "cuisine": "mexican",
     "menu": "fish",
     "remarks": "Restriction of Right Inguinal Lymphatic with Intraluminal Device, Open Approach",
-    "createdBy": "62021d0f8cbfb009924d6505",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-07-01T21:33:52Z",
     "location": { "lat": 60.0203894, "lng": 41.0711197 }
   },
@@ -34,7 +34,7 @@
     "cuisine": "italian",
     "menu": "fish",
     "remarks": "Excision of Colic Vein, Percutaneous Endoscopic Approach",
-    "createdBy": "62021d0f8cbfb009924d6505",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-06-20T13:19:07Z",
     "location": { "lat": 29.2444816, "lng": 52.7830627 }
   },
@@ -47,7 +47,7 @@
     "cuisine": "asian",
     "menu": "grill",
     "remarks": "Repair Right Thyroid Gland Lobe, Open Approach",
-    "createdBy": "62021d0f8cbfb009924d6505",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-05-05T06:22:54Z",
     "location": { "lat": -4.5612094, "lng": -37.7688612 }
   },
@@ -60,7 +60,7 @@
     "cuisine": "italian",
     "menu": "fusion",
     "remarks": "Drainage of Left Elbow Bursa and Ligament, Percutaneous Approach, Diagnostic",
-    "createdBy": "62021d0f8cbfb009924d6505",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-10-26T01:28:55Z",
     "location": { "lat": -0.5350427, "lng": 34.4530968 }
   },
@@ -73,7 +73,7 @@
     "cuisine": "greek",
     "menu": "fish",
     "remarks": "Destruction of Left Mastoid Sinus, Percutaneous Approach",
-    "createdBy": "62021d0f8cbfb009924d6505",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-12-23T08:04:16Z",
     "location": { "lat": 46.718237, "lng": 16.0197222 }
   },
@@ -86,7 +86,7 @@
     "cuisine": "asian",
     "menu": "fast-food",
     "remarks": "Replacement of Right Renal Vein with Synthetic Substitute, Open Approach",
-    "createdBy": "62021d0f8cbfb009924d6505",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-04-25T09:40:20Z",
     "location": { "lat": 49.9594627, "lng": 15.9105476 }
   },
@@ -99,7 +99,7 @@
     "cuisine": "greek",
     "menu": "",
     "remarks": "Revision of Autologous Tissue Substitute in Upper Vein, Percutaneous Endoscopic Approach",
-    "createdBy": "62021d0f8cbfb009924d6505",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-05-16T05:24:04Z",
     "location": { "lat": 31.491169, "lng": 120.31191 }
   },
@@ -112,7 +112,7 @@
     "cuisine": "greek",
     "menu": "fusion",
     "remarks": "Inspection of Cervical Vertebral Disc, Percutaneous Approach",
-    "createdBy": "62021d0f8cbfb009924d6505",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-05-19T01:40:49Z",
     "location": { "lat": 64.0971015, "lng": 26.330507 }
   },
@@ -125,7 +125,7 @@
     "cuisine": "greek",
     "menu": "fish",
     "remarks": "Excision of Right Shoulder Tendon, Open Approach, Diagnostic",
-    "createdBy": "61f8cfaf6f65fc5b118a83ae",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-08-29T22:02:32Z",
     "location": { "lat": -6.2649072, "lng": 106.7567589 }
   },
@@ -138,7 +138,7 @@
     "cuisine": "greek",
     "menu": "sushi",
     "remarks": "Removal of Bandage on Right Hand",
-    "createdBy": "61f8cfaf6f65fc5b118a83ae",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-03-18T22:27:11Z",
     "location": { "lat": 48.3117809, "lng": 23.041894 }
   },
@@ -151,7 +151,7 @@
     "cuisine": "mexican",
     "menu": "fish",
     "remarks": "Bypass Coronary Artery, One Artery from Aorta with Autologous Venous Tissue, Percutaneous Endoscopic Approach",
-    "createdBy": "61f8cfaf6f65fc5b118a83ae",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-11-02T01:35:04Z",
     "location": { "lat": 33.8941622, "lng": 133.1395202 }
   },
@@ -164,7 +164,7 @@
     "cuisine": "italian",
     "menu": "fusion",
     "remarks": "Excision of Left Foot Skin, External Approach",
-    "createdBy": "61f8cfaf6f65fc5b118a83ae",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-11-24T03:34:54Z",
     "location": { "lat": 28.454511, "lng": 114.014752 }
   },
@@ -177,7 +177,7 @@
     "cuisine": "italian",
     "menu": "fusion",
     "remarks": "Excision of Left Subclavian Artery, Open Approach, Diagnostic",
-    "createdBy": "61f8cfaf6f65fc5b118a83ae",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-08-05T13:35:52Z",
     "location": { "lat": 41.6409278, "lng": -8.5624704 }
   },
@@ -190,7 +190,7 @@
     "cuisine": "italian",
     "menu": "",
     "remarks": "Transfer Left Lower Leg Tendon, Percutaneous Endoscopic Approach",
-    "createdBy": "61f8cfaf6f65fc5b118a83ae",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-12-23T11:56:43Z",
     "location": { "lat": 49.6556075, "lng": 6.1360677 }
   },
@@ -203,7 +203,7 @@
     "cuisine": "greek",
     "menu": "",
     "remarks": "Extraction of Right Tympanic Membrane, Percutaneous Endoscopic Approach",
-    "createdBy": "61f8cfaf6f65fc5b118a83ae",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-04-11T03:04:10Z",
     "location": { "lat": 11.183333, "lng": 42.933333 }
   },
@@ -216,7 +216,7 @@
     "cuisine": "mexican",
     "menu": "fast-food",
     "remarks": "Bursae and Ligaments, Inspection",
-    "createdBy": "61f8cfaf6f65fc5b118a83ae",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-09-30T15:18:15Z",
     "location": { "lat": 27.780089, "lng": 111.502705 }
   },
@@ -229,7 +229,7 @@
     "cuisine": "asian",
     "menu": "fast-food",
     "remarks": "Extirpation of Matter from Right Sphenoid Sinus, Open Approach",
-    "createdBy": "61f8cfaf6f65fc5b118a83ae",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-05-26T08:54:05Z",
     "location": { "lat": 50.3955793, "lng": 18.6346378 }
   },
@@ -242,7 +242,7 @@
     "cuisine": "italian",
     "menu": "grill",
     "remarks": "Irrigation of Respiratory Tract using Irrigating Substance, Via Natural or Artificial Opening Endoscopic",
-    "createdBy": "61f8cfaf6f65fc5b118a83ae",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-04-28T11:57:45Z",
     "location": { "lat": 63.071925, "lng": 27.6617536 }
   },
@@ -255,7 +255,7 @@
     "cuisine": "asian",
     "menu": "sushi",
     "remarks": "Removal of Radioactive Element from Hepatobiliary Duct, Via Natural or Artificial Opening",
-    "createdBy": "61f8cfaf6f65fc5b118a83ae",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2022-01-26T15:12:14Z",
     "location": { "lat": 43.1118267, "lng": 17.7054838 }
   },
@@ -268,7 +268,7 @@
     "cuisine": "mexican",
     "menu": "fusion",
     "remarks": "Revision of Intraluminal Device in Upper Intestinal Tract, External Approach",
-    "createdBy": "61f8cfaf6f65fc5b118a83ae",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-06-25T18:27:13Z",
     "location": { "lat": 54.0718079, "lng": 54.8763087 }
   },
@@ -281,7 +281,7 @@
     "cuisine": "italian",
     "menu": "",
     "remarks": "Drainage of Left Wrist Region with Drainage Device, Percutaneous Approach",
-    "createdBy": "61fa284eb1676a9f622981a6",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-02-28T08:42:34Z",
     "location": { "lat": 39.909214, "lng": 116.45252 }
   },
@@ -294,7 +294,7 @@
     "cuisine": "greek",
     "menu": "",
     "remarks": "Extraction of Right Kidney, Open Approach",
-    "createdBy": "61fa284eb1676a9f622981a6",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-08-03T01:59:21Z",
     "location": { "lat": 48.8295482, "lng": 107.0468263 }
   },
@@ -307,7 +307,7 @@
     "cuisine": "asian",
     "menu": "sushi",
     "remarks": "Revision of Extraluminal Device in Great Vessel, Percutaneous Approach",
-    "createdBy": "61fa284eb1676a9f622981a6",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-05-08T15:57:56Z",
     "location": { "lat": -8.2141205, "lng": -78.9768999 }
   },
@@ -320,7 +320,7 @@
     "cuisine": "greek",
     "menu": "fusion",
     "remarks": "Removal of Nonautologous Tissue Substitute from Pancreatic Duct, Open Approach",
-    "createdBy": "61fa284eb1676a9f622981a6",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-10-03T01:21:49Z",
     "location": { "lat": 52.9152117, "lng": 23.4961724 }
   },
@@ -333,7 +333,7 @@
     "cuisine": "asian",
     "menu": "fast-food",
     "remarks": "High Dose Rate (HDR) Brachytherapy of Soft Palate using Other Isotope",
-    "createdBy": "61fa284eb1676a9f622981a6",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-10-26T17:12:23Z",
     "location": { "lat": 49.6782112, "lng": 13.2227563 }
   },
@@ -346,7 +346,7 @@
     "cuisine": "italian",
     "menu": "grill",
     "remarks": "Revision of Synthetic Substitute in Right Lower Extremity, Percutaneous Endoscopic Approach",
-    "createdBy": "61fa284eb1676a9f622981a6",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-02-22T13:17:40Z",
     "location": { "lat": 37.39, "lng": -121.89 }
   },
@@ -359,7 +359,7 @@
     "cuisine": "asian",
     "menu": "fast-food",
     "remarks": "Fragmentation in Cystic Duct, Percutaneous Approach",
-    "createdBy": "61fa284eb1676a9f622981a6",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-05-22T15:43:15Z",
     "location": { "lat": 34.158997, "lng": 108.906994 }
   },
@@ -372,7 +372,7 @@
     "cuisine": "asian",
     "menu": "",
     "remarks": "Drainage of Left Subclavian Vein with Drainage Device, Percutaneous Endoscopic Approach",
-    "createdBy": "61fa284eb1676a9f622981a6",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-06-23T21:41:04Z",
     "location": { "lat": 59.2766517, "lng": 15.2072783 }
   },
@@ -385,7 +385,7 @@
     "cuisine": "italian",
     "menu": "fast-food",
     "remarks": "Excision of Left Lesser Saphenous Vein, Percutaneous Endoscopic Approach",
-    "createdBy": "61fa284eb1676a9f622981a6",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-08-15T22:02:27Z",
     "location": { "lat": 14.5706006, "lng": 121.0052221 }
   },
@@ -398,7 +398,7 @@
     "cuisine": "italian",
     "menu": "fast-food",
     "remarks": "Bypass Duodenum to Ileum, Open Approach",
-    "createdBy": "61fa284eb1676a9f622981a6",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-07-23T16:32:23Z",
     "location": { "lat": 48.1509479, "lng": 25.379971 }
   },
@@ -411,7 +411,7 @@
     "cuisine": "asian",
     "menu": "grill",
     "remarks": "Release Ileum, Percutaneous Endoscopic Approach",
-    "createdBy": "61fa284eb1676a9f622981a6",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-04-15T21:41:05Z",
     "location": { "lat": 31.686188, "lng": 104.969819 }
   },
@@ -424,7 +424,7 @@
     "cuisine": "italian",
     "menu": "",
     "remarks": "Bypass Left Common Iliac Artery to Left Internal Iliac Artery with Synthetic Substitute, Open Approach",
-    "createdBy": "61fa284eb1676a9f622981a6",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-09-06T05:59:23Z",
     "location": { "lat": -20.4967315, "lng": 57.468383 }
   },
@@ -437,7 +437,7 @@
     "cuisine": "asian",
     "menu": "fusion",
     "remarks": "Extraction of Perineum Bursa and Ligament, Open Approach",
-    "createdBy": "61fa284eb1676a9f622981a6",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-05-06T14:12:15Z",
     "location": { "lat": 44.1675867, "lng": 2.0308233 }
   },
@@ -450,7 +450,7 @@
     "cuisine": "mexican",
     "menu": "fish",
     "remarks": "Inspection of Left Ankle Joint, External Approach",
-    "createdBy": "61fa284eb1676a9f622981a6",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-11-24T19:55:31Z",
     "location": { "lat": 46.301744, "lng": 4.797057 }
   },
@@ -463,7 +463,7 @@
     "cuisine": "italian",
     "menu": "grill",
     "remarks": "Replacement of Anal Sphincter with Autologous Tissue Substitute, Percutaneous Endoscopic Approach",
-    "createdBy": "61fa284eb1676a9f622981a6",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-09-19T03:53:49Z",
     "location": { "lat": -10.9232, "lng": 122.8283 }
   },
@@ -476,7 +476,7 @@
     "cuisine": "asian",
     "menu": "fast-food",
     "remarks": "Destruction of Left Spermatic Cord, Open Approach",
-    "createdBy": "61fa284eb1676a9f622981a6",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-10-14T02:03:26Z",
     "location": { "lat": 25.015105, "lng": 102.743811 }
   },
@@ -489,7 +489,7 @@
     "cuisine": "greek",
     "menu": "grill",
     "remarks": "Fluoroscopy of Right Lower Extremity Arteries using Other Contrast, Laser Intraoperative",
-    "createdBy": "61fa284eb1676a9f622981a6",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-02-14T15:53:54Z",
     "location": { "lat": 41.4850622, "lng": -7.9607378 }
   },
@@ -502,7 +502,7 @@
     "cuisine": "italian",
     "menu": "grill",
     "remarks": "Release Left Zygomatic Bone, Percutaneous Approach",
-    "createdBy": "61fa284eb1676a9f622981a6",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-12-29T18:35:54Z",
     "location": { "lat": -6.8432007, "lng": 107.612654 }
   },
@@ -515,7 +515,7 @@
     "cuisine": "mexican",
     "menu": "fusion",
     "remarks": "Revision of Synthetic Substitute in Left Carpal Joint, Percutaneous Endoscopic Approach",
-    "createdBy": "61fa284eb1676a9f622981a6",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-09-17T13:58:49Z",
     "location": { "lat": -26.2396883, "lng": 28.3217259 }
   },
@@ -528,7 +528,7 @@
     "cuisine": "asian",
     "menu": "fusion",
     "remarks": "Immobilization of Left Lower Extremity using Splint",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-05-21T04:28:09Z",
     "location": { "lat": 49.5730119, "lng": 22.0608204 }
   },
@@ -541,7 +541,7 @@
     "cuisine": "italian",
     "menu": "grill",
     "remarks": "Bypass Cecum to Rectum with Synthetic Substitute, Percutaneous Endoscopic Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2022-01-20T04:13:08Z",
     "location": { "lat": 41.131963, "lng": 120.6976779 }
   },
@@ -554,7 +554,7 @@
     "cuisine": "greek",
     "menu": "sushi",
     "remarks": "Bypass Left Kidney Pelvis to Ileocutaneous, Open Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-03-21T05:43:20Z",
     "location": { "lat": -8.5011336, "lng": 116.9646378 }
   },
@@ -567,7 +567,7 @@
     "cuisine": "mexican",
     "menu": "",
     "remarks": "Occlusion of Right External Carotid Artery with Extraluminal Device, Open Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-05-27T23:18:23Z",
     "location": { "lat": 18.594395, "lng": -72.3074326 }
   },
@@ -580,7 +580,7 @@
     "cuisine": "mexican",
     "menu": "fish",
     "remarks": "Revision of Nonautologous Tissue Substitute in Left Metatarsal-Tarsal Joint, Percutaneous Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-09-14T03:19:02Z",
     "location": { "lat": -23.6818396, "lng": -46.620967 }
   },
@@ -593,7 +593,7 @@
     "cuisine": "mexican",
     "menu": "",
     "remarks": "Revision of Monitoring Device in Lower Artery, External Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-08-20T08:55:07Z",
     "location": { "lat": 41.6068468, "lng": 20.6036698 }
   },
@@ -606,7 +606,7 @@
     "cuisine": "greek",
     "menu": "",
     "remarks": "Low Dose Rate (LDR) Brachytherapy of Pleura using Palladium 103 (Pd-103)",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-09-06T13:28:38Z",
     "location": { "lat": 41.387384, "lng": 128.1744945 }
   },
@@ -619,7 +619,7 @@
     "cuisine": "asian",
     "menu": "fast-food",
     "remarks": "Replacement of Right Upper Leg Tendon with Nonautologous Tissue Substitute, Open Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2022-01-24T20:12:33Z",
     "location": { "lat": 19.6632775, "lng": -99.2058279 }
   },
@@ -632,7 +632,7 @@
     "cuisine": "asian",
     "menu": "fish",
     "remarks": "Revision of Synthetic Substitute in Left Ear, Percutaneous Endoscopic Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-05-12T13:38:09Z",
     "location": { "lat": -6.2839964, "lng": 106.7895416 }
   },
@@ -645,7 +645,7 @@
     "cuisine": "italian",
     "menu": "fish",
     "remarks": "Drainage of Right Sublingual Gland, Open Approach, Diagnostic",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-08-07T08:00:38Z",
     "location": { "lat": 42.7334485, "lng": 45.5737459 }
   },
@@ -658,7 +658,7 @@
     "cuisine": "italian",
     "menu": "",
     "remarks": "Release Right Internal Carotid Artery, Open Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2022-01-12T01:06:38Z",
     "location": { "lat": 38.226652, "lng": 115.510218 }
   },
@@ -671,7 +671,7 @@
     "cuisine": "mexican",
     "menu": "fish",
     "remarks": "Revision of Autologous Tissue Substitute in Left Shoulder Joint, Percutaneous Endoscopic Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-09-03T12:49:09Z",
     "location": { "lat": 30.137065, "lng": 113.509285 }
   },
@@ -684,7 +684,7 @@
     "cuisine": "asian",
     "menu": "fish",
     "remarks": "Introduction of Other Gas into Cranial Cavity and Brain, Open Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-03-07T07:08:57Z",
     "location": { "lat": 37.99, "lng": -84.52 }
   },
@@ -697,7 +697,7 @@
     "cuisine": "greek",
     "menu": "",
     "remarks": "Extirpation of Matter from Right Sclera, External Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-08-21T22:27:19Z",
     "location": { "lat": 23.11134, "lng": 89.09061 }
   },
@@ -710,7 +710,7 @@
     "cuisine": "mexican",
     "menu": "sushi",
     "remarks": "Reattachment of Right Hand Bursa and Ligament, Percutaneous Endoscopic Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-05-07T08:40:58Z",
     "location": { "lat": 53.133924, "lng": 90.4161609 }
   },
@@ -723,7 +723,7 @@
     "cuisine": "greek",
     "menu": "fish",
     "remarks": "Osteopathic Treatment of Rib Cage using Muscle Energy-Isometric Forces",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-07-13T21:43:34Z",
     "location": { "lat": 34.0683214, "lng": 72.6206912 }
   },
@@ -736,7 +736,7 @@
     "cuisine": "greek",
     "menu": "grill",
     "remarks": "Restriction of Trachea, Open Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-10-27T17:36:44Z",
     "location": { "lat": 7.1756111, "lng": 124.9231052 }
   },
@@ -749,7 +749,7 @@
     "cuisine": "italian",
     "menu": "fast-food",
     "remarks": "Transfusion of Autologous Plasma Cryoprecipitate into Central Vein, Percutaneous Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-10-07T03:29:31Z",
     "location": { "lat": -7.7580914, "lng": 113.563922 }
   },
@@ -762,7 +762,7 @@
     "cuisine": "mexican",
     "menu": "fusion",
     "remarks": "Occlusion of Small Intestine, Open Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-08-19T04:27:39Z",
     "location": { "lat": 2.886246, "lng": -75.433419 }
   },
@@ -775,7 +775,7 @@
     "cuisine": "italian",
     "menu": "fusion",
     "remarks": "Reattachment of Uterine Supporting Structure, Open Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-03-25T07:58:31Z",
     "location": { "lat": 4.809984, "lng": -74.354009 }
   },
@@ -788,7 +788,7 @@
     "cuisine": "italian",
     "menu": "grill",
     "remarks": "Occlusion of Right Peroneal Artery, Open Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-05-19T15:25:23Z",
     "location": { "lat": 38.03, "lng": -87.58 }
   },
@@ -801,7 +801,7 @@
     "cuisine": "italian",
     "menu": "fish",
     "remarks": "Fusion of Cervical Vertebral Joint with Interbody Fusion Device, Posterior Approach, Anterior Column, Open Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-07-29T07:45:03Z",
     "location": { "lat": 41.9924293, "lng": 21.4298411 }
   },
@@ -814,7 +814,7 @@
     "cuisine": "greek",
     "menu": "fish",
     "remarks": "Drainage of Lumbar Plexus with Drainage Device, Percutaneous Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-10-29T12:17:04Z",
     "location": { "lat": 67.3340943, "lng": 14.4227656 }
   },
@@ -827,7 +827,7 @@
     "cuisine": "greek",
     "menu": "",
     "remarks": "Revision of Infusion Device in Cerebral Ventricle, Percutaneous Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-04-25T21:35:22Z",
     "location": { "lat": 60.7353362, "lng": 77.6065163 }
   },
@@ -840,7 +840,7 @@
     "cuisine": "asian",
     "menu": "fusion",
     "remarks": "Insertion of Infusion Device into Right Toe Phalangeal Joint, Percutaneous Endoscopic Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-01-12T15:02:20Z",
     "location": { "lat": 23.422152, "lng": 106.681138 }
   },
@@ -853,7 +853,7 @@
     "cuisine": "asian",
     "menu": "fish",
     "remarks": "Revision of Autologous Tissue Substitute in Mouth and Throat, External Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2022-01-19T02:46:32Z",
     "location": { "lat": -8.1454945, "lng": 115.1048663 }
   },
@@ -866,7 +866,7 @@
     "cuisine": "mexican",
     "menu": "fast-food",
     "remarks": "Bypass Right Vas Deferens to Right Vas Deferens with Autologous Tissue Substitute, Open Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-07-13T00:32:14Z",
     "location": { "lat": 55.6761482, "lng": 37.6032435 }
   },
@@ -879,7 +879,7 @@
     "cuisine": "asian",
     "menu": "fish",
     "remarks": "Repair Right Ankle Joint, Open Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-09-10T09:55:57Z",
     "location": { "lat": 41.117916, "lng": 19.610198 }
   },
@@ -892,7 +892,7 @@
     "cuisine": "greek",
     "menu": "grill",
     "remarks": "Drainage of Inferior Mesenteric Artery, Percutaneous Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-01-12T10:30:02Z",
     "location": { "lat": 14.5493917, "lng": 121.0125865 }
   },
@@ -905,7 +905,7 @@
     "cuisine": "mexican",
     "menu": "fusion",
     "remarks": "Destruction of Left Metatarsal, Percutaneous Endoscopic Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-03-15T05:00:48Z",
     "location": { "lat": 26.0172503, "lng": 43.3584284 }
   },
@@ -918,7 +918,7 @@
     "cuisine": "asian",
     "menu": "fusion",
     "remarks": "Replacement of Left Trunk Tendon with Autologous Tissue Substitute, Open Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-11-11T10:25:13Z",
     "location": { "lat": 53.8638922, "lng": 34.4574753 }
   },
@@ -931,7 +931,7 @@
     "cuisine": "mexican",
     "menu": "sushi",
     "remarks": "Revision of Tracheostomy Device in Trachea, Via Natural or Artificial Opening Endoscopic",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-12-07T20:49:03Z",
     "location": { "lat": 49.9513027, "lng": 20.3412605 }
   },
@@ -944,7 +944,7 @@
     "cuisine": "mexican",
     "menu": "",
     "remarks": "Drainage of Left Wrist Bursa and Ligament with Drainage Device, Percutaneous Approach",
-    "createdBy": "61fa3f09b1676a9f622981af",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2021-06-12T16:34:30Z",
     "location": { "lat": 31.7338222, "lng": 118.8719394 }
   },
@@ -957,7 +957,7 @@
     "cuisine": "greek",
     "menu": "sushi",
     "remarks": "Supplement Upper Lip with Nonautologous Tissue Substitute, External Approach",
-    "createdBy": "61f8cfaf6f65fc5b118a83ae",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2022-01-11T10:44:03Z",
     "location": { "lat": 49.4104, "lng": 1.032621 }
   },
@@ -970,7 +970,7 @@
     "cuisine": "greek",
     "menu": "fusion",
     "remarks": "Resection of Left Vocal Cord, Open Approach",
-    "createdBy": "61f8cfaf6f65fc5b118a83ae",
+    "createdBy": "621b146e25ea1c983cf17206",
     "createdAt": "2020-06-06T22:58:53Z",
     "location": { "lat": 32.1561962, "lng": 74.1188104 }
   }

@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router-dom';
-import { AddFoody, Map } from '.';
 import { Navbar, SmallSidebar, BigSidebar } from '../../components';
 import Wrapper from '../../wrappers/DashboardLayoutPage';
 

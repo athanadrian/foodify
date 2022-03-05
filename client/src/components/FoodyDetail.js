@@ -34,6 +34,7 @@ const FoodyDetail = () => {
     toggleModal,
     showModal,
   } = useAppContext();
+
   const {
     _id,
     title,

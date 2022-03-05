@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Wrapper = styled.aside`
   display: none;
@@ -62,5 +62,13 @@ const Wrapper = styled.aside`
       color: var(--primary-500);
     }
   }
-`
-export default Wrapper
+
+  .unread {
+    color: var(--orange-light);
+  }
+
+  .unread .icon {
+    color: var(--orange-dark);
+  }
+`;
+export default Wrapper;

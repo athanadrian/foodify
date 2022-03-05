@@ -5,12 +5,12 @@ import {
   FaSignOutAlt,
 } from 'react-icons/fa';
 import Wrapper from '../wrappers/Navbar';
-import { useAppContext } from '../context/appContext';
 import { Logo } from '.';
 import { useState } from 'react';
+import { useAppContext } from 'context/appContext';
 
 const Navbar = () => {
-  const { user, toggleSidebar, logoutUser } = useAppContext();
+  const { toggleSidebar, user, logoutUser } = useAppContext();
   const [showLogout, setShowLogout] = useState(false);
   return (
     <Wrapper>

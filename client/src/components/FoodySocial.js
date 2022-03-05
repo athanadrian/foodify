@@ -38,12 +38,7 @@ const FoodySocial = () => {
           <span>Visit</span>
         </VisitButton>
       </div>
-      {/* <div className='content'>
-        <div className='content-center'> */}
       <CommentsModal foodyId={_id} comments={comments} />
-      {/* </div> 
-        <footer></footer>
-      </div>*/}
     </Wrapper>
   );
 };

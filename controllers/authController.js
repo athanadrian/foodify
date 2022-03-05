@@ -9,6 +9,7 @@ import NotFoundError from '../errors/not-found.js';
 import User from '../models/User.js';
 import Profile from '../models/Profile.js';
 import Follow from '../models/Follow.js';
+import Notification from '../models/Notification.js';
 
 const userDefaultAvatar =
   'https://res.cloudinary.com/indersingh/image/upload/v1593464618/App/user_mklcpl.png';
@@ -52,6 +53,7 @@ export const register = async (req, res, next) => {
   if (twitter) profileFields.social.twitter = twitter;
 
   await new Profile(profileFields).save();
+  await new Notification({ toUser: user._id, notifications: [] }).save();
   await new Follow({
     user: user._id,
     followers: [],

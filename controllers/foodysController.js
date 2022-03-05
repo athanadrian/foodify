@@ -8,6 +8,10 @@ import Foody from '../models/Foody.js';
 import User from '../models/User.js';
 import checkPermissions from '../utils/checkPermissions.js';
 import UnAuthenticatedError from '../errors/unauthenticated.js';
+import {
+  newNotification,
+  removeNotification,
+} from '../utils/notificationFunctions.js';
 
 //@desc         Get User foodys
 //@route        GET /api/v1/foodys
@@ -344,6 +348,9 @@ export const updateFoody = async (req, res, next) => {
   res.status(StatusCodes.OK).json({ updatedFoody });
 };
 
+//@desc         Change foody status (publish/unpublish)
+//@route        PUT /api/v1/foodys/:id/status (foodyId)
+//@access       Private
 export const changeFoodyStatus = async (req, res, next) => {
   const { id: foodyId } = req.params;
 
@@ -417,9 +424,15 @@ export const likeFoody = async (req, res) => {
   await foody.likes.unshift(like);
 
   await foody.save();
-  // if (foody.createdBy.toString() !== userId) {
-  //   await newLikeNotification(userId, foodyId, foody.user.toString());
-  // }
+
+  if (foody.createdBy.toString() !== userId) {
+    await newNotification({
+      type: 'newLike',
+      userId,
+      foodyId,
+      userToNotifyId: foody.createdBy.toString(),
+    });
+  }
 
   return res.status(StatusCodes.OK).json(foody.likes);
 };
@@ -454,9 +467,14 @@ export const unlikeFoody = async (req, res) => {
 
   await foody.save();
 
-  // if (foody.user.toString() !== userId) {
-  //   await removeLikeNotification(userId, foodyId, foody.user.toString());
-  // }
+  if (foody.createdBy.toString() !== userId) {
+    await removeNotification({
+      type: 'newLike',
+      userId,
+      foodyId,
+      userToNotifyId: foody.createdBy.toString(),
+    });
+  }
 
   return res.status(StatusCodes.OK).json(foody.likes);
 };
@@ -490,9 +508,15 @@ export const visitFoody = async (req, res) => {
   await foody.visits.unshift(visit);
 
   await foody.save();
-  // if (foody.createdBy.toString() !== userId) {
-  //   await newVisitNotification(userId, foodyId, foody.user.toString());
-  // }
+
+  if (foody.createdBy.toString() !== userId) {
+    await newNotification({
+      type: 'newVisit',
+      userId,
+      foodyId,
+      userToNotifyId: foody.createdBy.toString(),
+    });
+  }
 
   return res.status(StatusCodes.OK).json(foody.visits);
 };
@@ -527,9 +551,14 @@ export const unVisitFoody = async (req, res) => {
 
   await foody.save();
 
-  // if (foody.user.toString() !== userId) {
-  //   await removeVisitNotification(userId, foodyId, foody.user.toString());
-  // }
+  if (foody.createdBy.toString() !== userId) {
+    await removeNotification({
+      type: 'newVisit',
+      foodyId,
+      userId,
+      userToNotifyId: foody.createdBy.toString(),
+    });
+  }
 
   return res.status(StatusCodes.OK).json(foody.visits);
 };
@@ -584,15 +613,16 @@ export const addComment = async (req, res) => {
 
   await foody.save();
 
-  // if (foody.createdBy.toString() !== userId) {
-  //   await newCommentNotification(
-  //     foodyId,
-  //     newComment._id,
-  //     userId,
-  //     foody.createdBy.toString(),
-  //     text
-  //   );
-  // }
+  if (foody.createdBy.toString() !== userId) {
+    await newNotification({
+      type: 'newComment',
+      foodyId,
+      commentId: newComment._id,
+      userId,
+      userToNotifyId: foody.createdBy.toString(),
+      text,
+    });
+  }
 
   return res.status(StatusCodes.OK).json(foody.comments);
 };
@@ -626,14 +656,14 @@ export const deleteComment = async (req, res) => {
 
     await foody.save();
 
-    // if (foody.createdBy.toString() !== userId) {
-    //   await removeCommentNotification(
-    //     foodyId,
-    //     commentId,
-    //     userId,
-    //     foody.createdBy.toString()
-    //   );
-    // }
+    if (foody.createdBy.toString() !== userId) {
+      await removeNotification({
+        type: 'newComment',
+        foodyId,
+        userId,
+        userToNotifyId: foody.createdBy.toString(),
+      });
+    }
 
     return res.status(StatusCodes.OK).json('Comment Deleted');
   };

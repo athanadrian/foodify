@@ -54,6 +54,8 @@ TODO
 
 > ~~26. Open foody to google maps page~~
 
+> ~~27. Notifications ~~Server~~ Client implementation~~
+
 # Foodify
 
 #### Track Your Cyprus Foody-Place Search
@@ -2341,6 +2343,48 @@ if (action.type === HANDLE_CHANGE) {
 
 ```sh
 // eslint-disable-next-line
+```
+
+#### Notification Functions
+
+```js
+const removeLikeNotification = async (userId, foodyId, userToNotifyId) => {
+  // the owner/creator of the foody
+  const userToNotify = await Notification.findOne({ toUser: userToNotifyId });
+
+  const notificationToRemove = userToNotify.notifications.find(
+    (notification) =>
+      notification.type === 'newLike' &&
+      notification.foody.toString() === foodyId &&
+      notification.fromUser.toString() === userId
+  );
+
+  // REMOVE OBJ FROM OBJs ARRAY
+  const indexOf = userToNotify.notifications.map((notification) =>
+    notification._id.toString().indexOf(notificationToRemove._id.toString())
+  );
+
+  userToNotify.notifications.slice(indexOf, 1);
+
+  // OTHER WAY TO REMOVE WITH MONGODB OPERATOR
+  // Here we are simply using $pull operator to remove the notification from notifications array.
+  // Notice we are finding the notification inside Notifications array by adding its type, userId & foodyId
+
+  await Notification.findOneAndUpdate(
+    { user: userToNotifyId },
+    {
+      $pull: {
+        notifications: {
+          type: 'newLike',
+          user: userId,
+          post: postId,
+        },
+      },
+    }
+  );
+
+  await userToNotify.save();
+};
 ```
 
 #### Production Setup - Build Front-End Application

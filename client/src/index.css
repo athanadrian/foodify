@@ -49,6 +49,8 @@ html {
   --blue-dark: #0369a1;
   --yellow-light: #fde68a;
   --yellow-dark: #92400e;
+  --orange-light: #fdba74;
+  --orange-dark: #ea580c;
 
   /* fonts  */
   --headingFont: 'Roboto Condensed', Sans-Serif;
@@ -357,6 +359,9 @@ ul {
   .modal-page {
     width: 80%;
   }
+}
+.react-responsive-modal-modal {
+  min-width: 80%;
 }
 
 @media (min-width: 992px) {

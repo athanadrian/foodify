@@ -53,9 +53,10 @@ import {
   GET_GOOGLE_API_KEY,
   SET_USER_CURRENT_LOCATION,
   SET_FOODY_CURRENT_LOCATION,
-} from './actions';
+  SET_USER_NOTIFICATIONS_TO_READ,
+} from '../actions/actions';
 
-import { initialState } from './appContext';
+import { initialState } from '../appContext';
 
 const reducer = (state, action) => {
   if (action.type === DISPLAY_ALERT) {
@@ -150,6 +151,13 @@ const reducer = (state, action) => {
       showAlert: true,
       alertType: 'danger',
       alertText: action.payload.msg,
+    };
+  }
+
+  if (action.type === SET_USER_NOTIFICATIONS_TO_READ) {
+    return {
+      ...state,
+      user: { ...state.user, unreadNotification: false },
     };
   }
 

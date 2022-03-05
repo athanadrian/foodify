@@ -22,6 +22,7 @@ import connectDB from './db/connect.js';
 // import app routes
 import authRouter from './routes/authRoutes.js';
 import foodyRouter from './routes/foodysRoutes.js';
+import notificationRouter from './routes/notificationRoutes.js';
 
 // import middleware
 import notFoundMiddleware from './middleware/not-found.js';
@@ -62,6 +63,7 @@ app.use(xss());
 // Use routes
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/foodys', foodyRouter);
+app.use('/api/v1/notifications', notificationRouter);
 app.use('/api/v1/config/google', (req, res) => {
   res.send(process.env.GOOGLE_API_KEY || '');
 });
