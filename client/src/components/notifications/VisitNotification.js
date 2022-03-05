@@ -2,6 +2,7 @@ import { IoTrashOutline } from 'react-icons/io5';
 import { relativeDate } from 'utils/functions';
 import { useNotificationsContext } from 'context/notificationsContext';
 import { BsBookmarkPlusFill } from 'react-icons/bs';
+import { FoodyLink } from './FoodyLink';
 
 const VisitNotification = ({ notification }) => {
   const { deleteNotification } = useNotificationsContext();
@@ -9,7 +10,7 @@ const VisitNotification = ({ notification }) => {
   const {
     _id,
     fromUser: { name },
-    foody: { title },
+    foody: { title, slug },
     date,
   } = notification;
 
@@ -25,7 +26,7 @@ const VisitNotification = ({ notification }) => {
             <span className='notification-text'>
               mentioned that <span className='visit'>visited</span> your Foody
             </span>{' '}
-            <span className='foody'> {title}</span>,{' '}
+            <FoodyLink title={title} slug={slug} />,{' '}
             <span className='notification-text date'>
               {' '}
               {relativeDate(date)}

@@ -3,8 +3,8 @@ import moment from 'moment';
 import { useAppContext } from '../context/appContext';
 import Wrapper from '../wrappers/FoodySocial';
 import CommentsModal from './CommentsModal';
-import LikeButton from './LikeButton';
-import VisitButton from './VisitButton';
+import LikeButton from './social-buttons/LikeButton';
+import VisitButton from './social-buttons/VisitButton';
 
 const FoodySocial = () => {
   const { user, foodyDetail } = useAppContext();

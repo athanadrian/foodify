@@ -2,14 +2,14 @@ import { IoTrashOutline } from 'react-icons/io5';
 import { relativeDate } from 'utils/functions';
 import { useNotificationsContext } from 'context/notificationsContext';
 import { AiOutlineComment } from 'react-icons/ai';
+import { FoodyLink } from './FoodyLink';
 
 const CommentNotification = ({ notification }) => {
   const { deleteNotification } = useNotificationsContext();
-
   const {
     _id,
     fromUser: { name },
-    foody: { title },
+    foody: { title, slug },
     text,
     date,
   } = notification;
@@ -23,8 +23,11 @@ const CommentNotification = ({ notification }) => {
             <AiOutlineComment className='comment' size={14} />
             <span className='notification-text'> User </span>
             <span className='user'> {name}</span>{' '}
-            <span className='notification-text'>commented on your Foody</span>{' '}
-            <span className='foody'> {title}</span>,{' '}
+            <span className='notification-text'>
+              {' '}
+              <span className='comment'>commented</span> on your Foody
+            </span>{' '}
+            <FoodyLink title={title} slug={slug} />,{' '}
             <span className='notification-text date'>
               {' '}
               {relativeDate(date)}

@@ -2,6 +2,7 @@ import { IoTrashOutline } from 'react-icons/io5';
 import { relativeDate } from 'utils/functions';
 import { useNotificationsContext } from 'context/notificationsContext';
 import { FaHeart } from 'react-icons/fa';
+import { FoodyLink } from './FoodyLink';
 
 const LikeNotification = ({ notification }) => {
   const { deleteNotification } = useNotificationsContext();
@@ -9,7 +10,7 @@ const LikeNotification = ({ notification }) => {
   const {
     _id,
     fromUser: { name },
-    foody: { title },
+    foody: { title, slug },
     date,
   } = notification;
 
@@ -25,7 +26,7 @@ const LikeNotification = ({ notification }) => {
             <span className='notification-text'>
               <span className='like'>liked</span> your Foody
             </span>{' '}
-            <span className='foody'> {title}</span>,{' '}
+            <FoodyLink title={title} slug={slug} />,{' '}
             <span className='notification-text date'>
               {' '}
               {relativeDate(date)}

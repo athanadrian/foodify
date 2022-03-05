@@ -582,7 +582,8 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
-  const getFoody = (slug) => {
+  const getFoody = async (slug) => {
+    if (state.foodys.length === 0) await getMyFoodys();
     dispatch({ type: GET_FOODY_DETAIL, payload: { slug } });
   };
 

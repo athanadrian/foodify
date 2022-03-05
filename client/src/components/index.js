@@ -25,8 +25,9 @@ import LikesModal from './LikesModal';
 import CommentsModal from './CommentsModal';
 import VisitsModal from './VisitsModal';
 import FoodyDetail from './FoodyDetail';
-import LikeButton from './LikeButton';
-import VisitButton from './VisitButton';
+import LikeButton from './social-buttons/LikeButton';
+import VisitButton from './social-buttons/VisitButton';
+import CommentButton from './social-buttons/CommentButton';
 import GoogleMapsLink from './GoogleMapsLink';
 import { MapFoodys, MapModal } from './map';
 
@@ -60,5 +61,6 @@ export {
   FoodyDetail,
   LikeButton,
   VisitButton,
+  CommentButton,
   GoogleMapsLink,
 };

@@ -4,7 +4,7 @@ import Wrapper from '../wrappers/ChartsContainer';
 import AreaChart from './AreaChart';
 import BarChart from './BarChart';
 
-const ChartsContainer = ({ all }) => {
+const ChartsContainer = () => {
   const { monthlyCreations: data } = useAppContext();
   const [showAreaChart, setAreaChart] = useState(false);
   return (

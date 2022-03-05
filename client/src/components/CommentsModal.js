@@ -5,6 +5,7 @@ import { IoTrashOutline } from 'react-icons/io5';
 import { relativeDate } from 'utils/functions';
 import Wrapper from '../wrappers/SocialModal';
 import Alert from './Alert';
+import CommentButton from './social-buttons/CommentButton';
 import { CommentFormInput, FormIconButton } from './form-elements';
 
 const CommentsModal = ({ foodyId, comments }) => {
@@ -46,12 +47,7 @@ const CommentsModal = ({ foodyId, comments }) => {
               handleChange={handleInputChange}
               placeholder='Add comment'
             />
-            <FormIconButton
-              tooltip='Add comment'
-              type='submit'
-              className='comment-btn'
-              Icon={<HiPencilAlt size={20} />}
-            />
+            <CommentButton />
           </form>
         </div>
       </div>

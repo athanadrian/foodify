@@ -49,13 +49,30 @@ const Wrapper = styled.section`
     }
 
     h5 {
+      text-transform: none;
       font-size: 1rem;
       margin-bottom: 0rem;
       .user {
         color: var(--blue-dark);
+        text-transform: capitalize;
       }
       .foody {
         color: var(--primary-500);
+        cursor: pointer;
+        text-transform: capitalize;
+      }
+      .foody:hover {
+        text-decoration: underline;
+        color: var(--primary-400);
+      }
+
+      svg {
+        margin-right: 0.25rem;
+      }
+      .like,
+      .visit,
+      .comment {
+        font-weight: 700;
       }
       .like {
         color: var(--red-dark);
@@ -81,13 +98,6 @@ const Wrapper = styled.section`
       font-size: 0.75rem;
       letter-spacing: var(--letterSpacing);
       color: var(--grey-400);
-    }
-
-    .social-text {
-      color: var(--grey-600);
-    }
-    .social-date {
-      color: var(--red-dark);
     }
   }
   .comment {

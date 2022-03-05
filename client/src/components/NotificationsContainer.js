@@ -3,7 +3,6 @@ import { Fragment, useEffect } from 'react';
 import { Loading } from '../components';
 import { useAppContext } from '../context/appContext';
 import Wrapper from '../wrappers/NotificationsContainer';
-import { FormButton } from './form-elements';
 import PaginationContainer from './PaginationContainer';
 import Alert from './Alert';
 import CommentNotification from './notifications/CommentNotification';
@@ -11,7 +10,8 @@ import LikeNotification from './notifications/LikeNotification';
 import VisitNotification from './notifications/VisitNotification';
 
 const NotificationsContainer = () => {
-  const { setUserNotificationsToRead } = useAppContext();
+  const { setUserNotificationsToRead, getMyFoodys } = useAppContext();
+
   const {
     isLoading,
     alertType,
@@ -22,6 +22,7 @@ const NotificationsContainer = () => {
     numOfPages,
   } = useNotificationsContext();
   useEffect(() => {
+    getMyFoodys();
     setUserNotificationsToRead();
 
     // eslint-disable-next-line
