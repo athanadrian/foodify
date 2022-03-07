@@ -30,6 +30,20 @@ const Wrapper = styled.section`
     margin-top: 0rem;
   }
 
+  .username {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .form-row {
+      width: 100%;
+    }
+    svg {
+      margin-top: 2rem;
+      margin-left: 1rem;
+    }
+  }
+
   .text-area {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;

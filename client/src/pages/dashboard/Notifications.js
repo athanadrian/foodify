@@ -1,6 +1,6 @@
 import { FoodyModal, Modal } from 'components';
 import NotificationsContainer from 'components/NotificationsContainer';
-import { useNotificationsContext } from 'context/notificationsContext';
+import { useNotificationsContext } from 'context/contexts/notificationsContext';
 import { useEffect } from 'react';
 import { useAppContext } from '../../context/appContext';
 

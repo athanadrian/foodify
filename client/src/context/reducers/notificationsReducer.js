@@ -63,13 +63,6 @@ const reducer = (state, action) => {
     };
   }
 
-  // if (action.type === CHANGE_PAGE) {
-  //   return {
-  //     ...state,
-  //     page: action.payload.page,
-  //   };
-  // }
-
   throw new Error(`Error can not find action: ${action.type}`);
 };
 

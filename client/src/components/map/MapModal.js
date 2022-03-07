@@ -45,7 +45,7 @@ const MapModal = ({ profile }) => {
   const showResetButton =
     homeLocation !== initialLocation && foodyLocation !== initialLocation;
   const { isLoaded, loadError } = useJsApiLoader({
-    //id: 'google-map-script',
+    id: 'google-map-script',
     googleMapsApiKey: googleApiKey,
     libraries,
   });

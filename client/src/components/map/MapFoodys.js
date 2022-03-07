@@ -32,7 +32,7 @@ const MapFoodys = () => {
   const [selected, setSelected] = useState(null);
 
   const { isLoaded, loadError } = useJsApiLoader({
-    //id: 'google-map-script',
+    id: 'google-map-script',
     googleMapsApiKey: googleApiKey,
     libraries,
   });

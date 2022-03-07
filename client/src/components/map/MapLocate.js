@@ -1,4 +1,3 @@
-import React from 'react';
 import Compass from '../../assets/images/compass.svg';
 import { useAppContext } from '../../context/appContext';
 import Wrapper from '../../wrappers/MapLocate';

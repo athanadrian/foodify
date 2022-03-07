@@ -14,13 +14,47 @@ import Notification from '../models/Notification.js';
 const userDefaultAvatar =
   'https://res.cloudinary.com/indersingh/image/upload/v1593464618/App/user_mklcpl.png';
 
+// User's username right format
+const regexUserName = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/;
+
+//@desc         Check username availability
+//@route        POST /api/v1/auth/:username
+//@access       Public
+export const checkUsernameAvailability = async (req, res, next) => {
+  const { username } = req.params;
+
+  if (username.length < 1) {
+    throw new BadRequestError('Invalid length');
+  }
+
+  if (!regexUserName.test(username)) {
+    throw new BadRequestError('Invalid format');
+  }
+  const user = await User.findOne({ username: username.toLowerCase() });
+
+  if (user) {
+    throw new BadRequestError('Username already taken');
+  }
+
+  res.status(StatusCodes.OK).json({ msg: 'Available' });
+};
+
 //@desc         Register User
 //@route        POST /api/v1/auth/update-user
 //@access       Public
 export const register = async (req, res, next) => {
-  const { name, email, password, bio, facebook, youtube, twitter, instagram } =
-    req.body;
-  if (!name || !email || !password) {
+  const {
+    username,
+    name,
+    email,
+    password,
+    bio,
+    facebook,
+    youtube,
+    twitter,
+    instagram,
+  } = req.body;
+  if (!name || !email || !password || !username) {
     throw new BadRequestError('Please provide all values!');
   }
 
@@ -28,12 +62,17 @@ export const register = async (req, res, next) => {
     throw new BadRequestError('Invalid Email!');
   }
 
-  const userAlreadyExists = await User.findOne({ email });
+  let userAlreadyExists;
+  userAlreadyExists = await User.findOne({ email: email.toLowerCase() });
   if (userAlreadyExists) {
     throw new BadRequestError('Email already in use.');
   }
-
+  userAlreadyExists = await User.findOne({ username: username.toLowerCase() });
+  if (userAlreadyExists) {
+    throw new BadRequestError('Email already in use.');
+  }
   const user = await User.create({
+    username: username.toLowerCase(),
     name,
     email: email.toLowerCase(),
     password,
@@ -62,6 +101,7 @@ export const register = async (req, res, next) => {
 
   res.status(StatusCodes.CREATED).json({
     user: {
+      username: user.username.toLowerCase(),
       email: user.email.toLowerCase(),
       lastName: user.lastName,
       home: user.home,
@@ -84,7 +124,9 @@ export const login = async (req, res, next) => {
     throw new BadRequestError('Please provide all values');
   }
 
-  const user = await User.findOne({ email }).select('+password');
+  const user = await User.findOne({ email: email.toLowerCase() }).select(
+    '+password'
+  );
   if (!user) {
     throw new UnAuthenticatedError('Invalid Credentials!');
   }
@@ -107,12 +149,13 @@ export const login = async (req, res, next) => {
 //@route        PATCH /api/v1/auth/update-user
 //@access       Private
 export const updateUser = async (req, res, next) => {
-  const { email, name, lastName, home, location } = req.body;
-  if (!name || !email || !lastName || !home || !location) {
+  const { email, username, name, lastName, home, location } = req.body;
+  if (!name || !email || !lastName || !home || !location || !username) {
     throw new BadRequestError('Please provide all values!');
   }
   const user = await User.findById(req.user.userId);
   user.name = name;
+  user.username = username;
   user.email = email;
   user.lastName = lastName;
   user.home = home;

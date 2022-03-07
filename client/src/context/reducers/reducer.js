@@ -1,6 +1,9 @@
 import {
   CLEAR_ALERT,
   DISPLAY_ALERT,
+  CHECK_USERNAME_BEGIN,
+  CHECK_USERNAME_SUCCESS,
+  CHECK_USERNAME_ERROR,
   SIGN_USER_BEGIN,
   SIGN_USER_SUCCESS,
   SIGN_USER_ERROR,
@@ -73,6 +76,35 @@ const reducer = (state, action) => {
       showAlert: false,
       alertType: '',
       alertText: '',
+    };
+  }
+
+  if (action.type === CHECK_USERNAME_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === CHECK_USERNAME_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      isUsernameAvailable: true,
+      showUsernameAlert: false,
+      // showAlert: true,
+      // alertType: 'success',
+      //alertText: action.payload.msg,
+    };
+  }
+  if (action.type === CHECK_USERNAME_ERROR) {
+    return {
+      ...state,
+      isUsernameAvailable: false,
+      showUsernameAlert: true,
+      isLoading: false,
+      // showAlert: true,
+      // alertType: 'danger',
+      alertText: action.payload.msg,
     };
   }
   if (action.type === SIGN_USER_BEGIN) {
@@ -201,7 +233,7 @@ const reducer = (state, action) => {
       home: action.payload.home,
       showAlert: true,
       alertType: 'success',
-      alertText: 'Profile successfully updated',
+      alertText: 'User Data successfully updated',
     };
   }
 
@@ -443,6 +475,16 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === UPDATE_FOODY_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'danger',
+      alertText: action.payload.msg,
+    };
+  }
+
   if (action.type === CHANGE_FOODY_STATUS) {
     return {
       ...state,
@@ -453,15 +495,6 @@ const reducer = (state, action) => {
     };
   }
 
-  if (action.type === UPDATE_FOODY_ERROR) {
-    return {
-      ...state,
-      isLoading: false,
-      showAlert: true,
-      alertType: 'danger',
-      alertText: action.payload.msg,
-    };
-  }
   if (action.type === DELETE_FOODY_BEGIN) {
     return {
       ...state,

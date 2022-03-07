@@ -42,6 +42,20 @@ const Wrapper = styled.section`
     cursor: pointer;
     letter-spacing: var(--letterSpacing);
   }
+
+  .username {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .form-row {
+      width: 100%;
+    }
+    svg {
+      margin-top: 1rem;
+      margin-left: 1rem;
+    }
+  }
 `;
 
 export default Wrapper;

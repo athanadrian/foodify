@@ -7,6 +7,7 @@ import {
   FormTextArea,
   FormButton,
 } from './form-elements';
+import { UserForm, ProfileForm } from './profile';
 import Alert from './Alert';
 import Navbar from './Navbar';
 import SmallSidebar from './SmallSidebar';
@@ -63,4 +64,6 @@ export {
   VisitButton,
   CommentButton,
   GoogleMapsLink,
+  UserForm,
+  ProfileForm,
 };

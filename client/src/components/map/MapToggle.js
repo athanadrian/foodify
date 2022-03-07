@@ -1,4 +1,3 @@
-import React from 'react';
 import Foody from '../../assets/images/foody.svg';
 import MyFoody from '../../assets/images/my-foody.svg';
 import { useAppContext } from '../../context/appContext';

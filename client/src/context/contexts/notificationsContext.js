@@ -1,17 +1,14 @@
 import { useContext, createContext, useReducer } from 'react';
-import useClientApi from '../hooks/useClientApi';
-import reducer from './reducers/notificationsReducer';
+import useClientApi from '../../hooks/useClientApi';
+import reducer from '../reducers/notificationsReducer';
 import {
   GET_NOTIFICATIONS_BEGIN,
   GET_NOTIFICATIONS_SUCCESS,
-  //GET_NOTIFICATIONS_ERROR,
   DELETE_NOTIFICATION_BEGIN,
   DELETE_NOTIFICATION_SUCCESS,
   DELETE_NOTIFICATION_ERROR,
-  //SET_NOTIFICATIONS_TO_READ,
   CLEAR_ALERT,
-} from './actions/notificationsActions';
-import { useAppContext } from './appContext';
+} from '../actions/notificationsActions';
 
 const initialState = {
   isLoading: false,
@@ -22,7 +19,6 @@ const initialState = {
   numOfPages: 1,
   notifications: [],
   totalNotifications: 0,
-  //unreadNotification: false,
 };
 
 const NotificationsContext = createContext();
@@ -37,11 +33,6 @@ const NotificationsProvider = ({ children }) => {
     }, 3000);
   };
 
-  // const displayAlert = () => {
-  //   dispatch({ type: DISPLAY_ALERT });
-  //   clearAlert();
-  // };
-
   const getNotifications = async () => {
     dispatch({ type: GET_NOTIFICATIONS_BEGIN });
     try {
@@ -53,11 +44,6 @@ const NotificationsProvider = ({ children }) => {
       });
     } catch (error) {
       console.log('Set Notifications error: ', error.response.data);
-      //clearAlert();
-      // dispatch({
-      //   type: GET_NOTIFICATIONS_ERROR,
-      //   payload: { msg: error.response.data.msg },
-      // });
     }
     clearAlert();
   };
@@ -81,25 +67,12 @@ const NotificationsProvider = ({ children }) => {
     clearAlert();
   };
 
-  // const setNotificationsToRead = async () => {
-  //   try {
-  //     await clientApi.post('/notifications');
-  //     dispatch({
-  //       type: SET_NOTIFICATIONS_TO_READ,
-  //     });
-  //   } catch (error) {
-  //     console.log('Set Notifications error: ', error.response.data);
-  //     clearAlert();
-  //   }
-  // };
-
   return (
     <NotificationsContext.Provider
       value={{
         ...state,
         getNotifications,
         deleteNotification,
-        // setNotificationsToRead,
       }}
     >
       {children}

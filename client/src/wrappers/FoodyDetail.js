@@ -7,7 +7,6 @@ const Wrapper = styled.article`
   display: grid;
   border-right: 1px solid var(--grey-100);
   grid-template-rows: 1fr auto;
-  //box-shadow: var(--shadow-2);
 
   header {
     padding: 1rem 1.5rem;

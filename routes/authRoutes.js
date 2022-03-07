@@ -6,6 +6,7 @@ import {
   updateUser,
   forgotPassword,
   resetPassword,
+  checkUsernameAvailability,
 } from '../controllers/authController.js';
 import authenticateUser from '../middleware/authenticate.js';
 
@@ -17,6 +18,7 @@ const apiLimiter = rateLimiter({
   message: 'Too many requests from this IP, please try again after 15 minutes',
 });
 
+router.get('/:username', checkUsernameAvailability);
 router.post('/register', apiLimiter, register);
 router.post('/login', apiLimiter, login);
 router.patch('/update-user', authenticateUser, updateUser);

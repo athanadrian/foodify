@@ -11,18 +11,6 @@ const Wrapper = styled.article`
     grid-template-columns: auto 1fr;
     h5 {
       letter-spacing: 0;
-      /* ::after {
-        content: 'Creator';
-        font-size: var(--small-text);
-        color: var(--white);
-        letter-spacing: var(--letterSpacing);
-        width: 70px;
-        padding: 0.015rem 0.2rem 0 0.2rem;
-        background: var(--blue-dark);
-        position: relative;
-        top: -22px;
-        left: -247px;
-      } */
     }
   }
 

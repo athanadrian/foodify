@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { FaCheck } from 'react-icons/fa';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { Logo, FormInput, Alert } from 'components';
 import { useAppContext } from 'context/appContext';
 import Wrapper from 'wrappers/RegisterPage';
 
 const initialState = {
+  username: '',
   name: '',
   email: '',
   password: '',
@@ -13,8 +16,17 @@ const initialState = {
 
 const Register = () => {
   const navigate = useNavigate();
-  const { user, isLoading, showAlert, displayAlert, signUser } =
-    useAppContext();
+  const {
+    user,
+    signUser,
+    isLoading,
+    showAlert,
+    displayAlert,
+    checkUsernameAvailability,
+    isUsernameAvailable,
+    showUsernameAlert,
+  } = useAppContext();
+
   const [values, setValues] = useState(initialState);
 
   const handleChange = (e) => {
@@ -26,18 +38,26 @@ const Register = () => {
     setValues({ ...values, isMember: !values.isMember });
   };
 
+  useEffect(() => {
+    checkUsernameAvailability(values.username);
+    // eslint-disable-next-line
+  }, [values.username]);
+
   const handleSubmit = (e) => {
-    const { name, email, password, isMember } = values;
+    const { username, name, email, password, isMember } = values;
     e.preventDefault();
-    if (!password || !email || (!isMember && !name)) {
+    if (!password || !email || (!isMember && !username && !name)) {
       displayAlert();
       return;
     }
+
     const currentUser = {
+      username,
       name,
       email,
       password,
     };
+    console.log(currentUser);
     if (isMember) {
       signUser({ endPoint: 'login', currentUser, alertText: 'Login.....' });
     } else {
@@ -64,13 +84,34 @@ const Register = () => {
         <h3>{values.isMember ? 'Login' : 'Register'}</h3>
         {showAlert && <Alert />}
         {!values.isMember && (
-          <FormInput
-            handleChange={handleChange}
-            labelText='name'
-            name='name'
-            type='text'
-            value={values.name}
-          />
+          <>
+            <FormInput
+              handleChange={handleChange}
+              labelText='name'
+              name='name'
+              type='text'
+              value={values.name}
+            />
+            <div className='username'>
+              <FormInput
+                handleChange={handleChange}
+                labelText='username'
+                name='username'
+                type='text'
+                value={values.username}
+                hasAlert={Boolean(showUsernameAlert)}
+              />
+              {values.username && (
+                <>
+                  {isUsernameAvailable ? (
+                    <FaCheck color='teal' />
+                  ) : (
+                    <AiOutlineCloseCircle size={24} color='red' />
+                  )}
+                </>
+              )}
+            </div>
+          </>
         )}
         <FormInput
           handleChange={handleChange}
@@ -86,7 +127,11 @@ const Register = () => {
           type='password'
           value={values.password}
         />
-        <button className='btn btn-block' type='submit' disabled={isLoading}>
+        <button
+          className='btn btn-block'
+          type='submit'
+          disabled={isLoading || !isUsernameAvailable}
+        >
           {values.isMember ? 'Login' : 'Register'}
         </button>
         <>

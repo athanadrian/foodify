@@ -1,4 +1,4 @@
-import { useNotificationsContext } from 'context/notificationsContext';
+import { useNotificationsContext } from 'context/contexts/notificationsContext';
 import { Fragment, useEffect } from 'react';
 import { Loading } from '../components';
 import { useAppContext } from '../context/appContext';

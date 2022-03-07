@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 const useClientApi = (logoutUser) => {
+  const CancelTokenApi = axios.CancelToken;
+
   // axios
   const clientApi = axios.create({
     baseURL: '/api/v1',
@@ -31,6 +33,6 @@ const useClientApi = (logoutUser) => {
       return Promise.reject(error);
     }
   );
-  return { clientApi };
+  return { clientApi, CancelTokenApi };
 };
 export default useClientApi;

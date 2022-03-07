@@ -11,6 +11,9 @@ import {
   HANDLE_CHANGE,
   CLEAR_VALUES,
   GET_GOOGLE_API_KEY,
+  CHECK_USERNAME_BEGIN,
+  CHECK_USERNAME_SUCCESS,
+  CHECK_USERNAME_ERROR,
   SIGN_USER_BEGIN,
   SIGN_USER_SUCCESS,
   SIGN_USER_ERROR,
@@ -62,6 +65,7 @@ import { costs, cuisines, foodys, statuses } from '../utils/lookup-data';
 import useGeoLocation from '../hooks/useGeolocation';
 import { MAP_CENTER } from '../utils/constants';
 
+let cancel;
 const token = localStorage.getItem('token');
 const user = localStorage.getItem('user');
 const homeLocation = localStorage.getItem('home-location');
@@ -73,6 +77,8 @@ const initialState = {
   isLiking: false,
   isVisiting: false,
   isCommenting: false,
+  isUsernameAvailable: false,
+  showUsernameAlert: false,
   showAlert: false,
   showModal: false,
   showSidebar: false,
@@ -127,6 +133,9 @@ const initialState = {
     'a-z',
     'z-a',
   ],
+  profile: null,
+  showProfileAlert: false,
+  isLoadingProfile: false,
 };
 
 const AppContext = createContext();
@@ -193,7 +202,7 @@ const AppProvider = ({ children }) => {
     removeUserFromLocalStorage();
   };
 
-  const { clientApi } = useClientApi(logoutUser);
+  const { clientApi, CancelTokenApi } = useClientApi(logoutUser);
 
   const setUserNotificationsToRead = async () => {
     try {
@@ -229,6 +238,30 @@ const AppProvider = ({ children }) => {
   //   // getGoogleApiKey();
   //   // eslint-disable-next-line
   // }, []);
+
+  const checkUsernameAvailability = async (username) => {
+    dispatch({ type: CHECK_USERNAME_BEGIN });
+    try {
+      cancel && cancel();
+
+      const CancelToken = CancelTokenApi;
+
+      const options = {
+        cancelToken: new CancelToken((canceler) => {
+          cancel = canceler;
+        }),
+      };
+      const { data } = await clientApi.get(`/auth/${username}`, { options });
+      const { msg } = data;
+      dispatch({ type: CHECK_USERNAME_SUCCESS, payload: { msg } });
+    } catch (error) {
+      dispatch({
+        type: CHECK_USERNAME_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    //clearAlert();
+  };
 
   const signUser = async ({ endPoint, currentUser, alertText }) => {
     dispatch({ type: SIGN_USER_BEGIN });
@@ -662,6 +695,7 @@ const AppProvider = ({ children }) => {
         addComment,
         removeComment,
         setUserNotificationsToRead,
+        checkUsernameAvailability,
       }}
     >
       {children}

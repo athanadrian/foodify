@@ -265,6 +265,13 @@ ul {
   letter-spacing: var(--letterSpacing);
   text-transform: capitalize;
 }
+
+.form-error {
+  color: var(--red-dark);
+  letter-spacing: var(--letterSpacing);
+  text-transform: capitalize;
+  font-size: var(--small-text);
+}
 /* alert */
 
 @keyframes spinner {

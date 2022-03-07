@@ -1,6 +1,6 @@
 import { IoTrashOutline } from 'react-icons/io5';
 import { relativeDate } from 'utils/functions';
-import { useNotificationsContext } from 'context/notificationsContext';
+import { useNotificationsContext } from 'context/contexts/notificationsContext';
 import { BsBookmarkPlusFill } from 'react-icons/bs';
 import { FoodyLink } from './FoodyLink';
 

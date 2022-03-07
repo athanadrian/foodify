@@ -1,5 +1,4 @@
 import { MapFoodys } from '../../components';
-import Wrapper from '../../wrappers/DashboardLayoutPage';
 const Map = () => {
   return (
     <>
