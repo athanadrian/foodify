@@ -12,6 +12,29 @@ const Wrapper = styled.nav`
     align-items: center;
     width: 100px;
   }
+  .logo-image {
+    display: flex;
+    align-items: center;
+    width: 100px;
+  }
+  .logo-foodify {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 0.5;
+  }
+  .text-foodify {
+    color: var(--primary-500);
+    letter-spacing: 0.5rem;
+    margin: 0;
+    @media (max-width: 684px) {
+      display: none;
+    }
+  }
+  .logo-image {
+    width: 100px;
+  }
+
   .nav-center {
     display: flex;
     width: 90vw;
@@ -86,6 +109,7 @@ const Wrapper = styled.nav`
     .logo {
       display: none;
     }
+
     .logo-text {
       display: block;
     }

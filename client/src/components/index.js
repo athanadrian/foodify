@@ -7,9 +7,11 @@ import {
   FormTextArea,
   FormButton,
 } from './form-elements';
+import { Info, User, Creations, Header } from './public-profile';
 import { UserForm, ProfileForm } from './profile';
 import Alert from './Alert';
 import Navbar from './Navbar';
+import MainLayoutPage from './MainLayoutPage';
 import SmallSidebar from './SmallSidebar';
 import BigSidebar from './BigSidebar';
 import Loading from './Loading';
@@ -66,4 +68,9 @@ export {
   GoogleMapsLink,
   UserForm,
   ProfileForm,
+  MainLayoutPage,
+  Info,
+  User,
+  Creations,
+  Header,
 };

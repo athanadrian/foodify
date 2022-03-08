@@ -37,7 +37,7 @@ const ProfileForm = () => {
     const { name, value } = e.target;
     setValues((prev) => ({ ...prev, [name]: value }));
   };
-  console.log(values);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { bio, youtube, twitter, facebook, instagram } = values;

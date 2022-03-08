@@ -46,11 +46,27 @@ const ProfileProvider = ({ children }) => {
   const getUserProfile = async (username) => {
     dispatch({ type: GET_USER_PROFILE_BEGIN });
     try {
-      const { data } = await clientApi.post(`/profile/${username}`);
-      const { profile, totalFollowers, totalFollowing } = data;
+      const { data } = await clientApi.get(`/profile/${username}`);
+      const {
+        profile,
+        totalCreations,
+        totalComments,
+        totalLikes,
+        totalVisits,
+        totalFollowers,
+        totalFollowing,
+      } = data;
       dispatch({
         type: GET_USER_PROFILE_SUCCESS,
-        payload: { profile, totalFollowers, totalFollowing },
+        payload: {
+          profile,
+          totalCreations,
+          totalComments,
+          totalLikes,
+          totalVisits,
+          totalFollowers,
+          totalFollowing,
+        },
       });
     } catch (error) {
       console.log('Get User Profile Error: ', error.response.data.msg);

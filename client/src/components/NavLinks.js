@@ -4,21 +4,23 @@ import { links } from '../utils/lookup-data';
 
 const NavLinks = ({ toggleSidebar }) => {
   const {
-    user: { unreadNotification },
+    user: { username, unreadNotification },
   } = useAppContext();
 
   return (
     <div className='nav-links'>
-      {links(unreadNotification).map(({ id, path, text, icon, className }) => (
-        <NavLink
-          key={id}
-          onClick={toggleSidebar}
-          to={path}
-          className={({ isActive }) => renderLinkClass(isActive, className)}
-        >
-          <span className='icon'>{icon}</span> {text}
-        </NavLink>
-      ))}
+      {links(username, unreadNotification).map(
+        ({ id, path, text, icon, className }) => (
+          <NavLink
+            key={id}
+            onClick={toggleSidebar}
+            to={path}
+            className={({ isActive }) => renderLinkClass(isActive, className)}
+          >
+            <span className='icon'>{icon}</span> {text}
+          </NavLink>
+        )
+      )}
     </div>
   );
 };

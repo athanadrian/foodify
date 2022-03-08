@@ -2,6 +2,7 @@ import DashboardLayout from './DashboardLayout';
 import AddFoody from './AddFoody';
 import AllFoodys from './AllFoodys';
 import MyFoodys from './MyFoodys';
+import EditUser from './EditUser';
 import Profile from './Profile';
 import Stats from './Stats';
 import Map from './Map';
@@ -13,6 +14,7 @@ export {
   AllFoodys,
   MyFoodys,
   Profile,
+  EditUser,
   Stats,
   Map,
   Notifications,

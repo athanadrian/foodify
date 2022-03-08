@@ -3,13 +3,14 @@ import { relativeDate } from 'utils/functions';
 import { useNotificationsContext } from 'context/contexts/notificationsContext';
 import { FaHeart } from 'react-icons/fa';
 import { FoodyLink } from './FoodyLink';
+import { UserLink } from './UserLink';
 
 const LikeNotification = ({ notification }) => {
   const { deleteNotification } = useNotificationsContext();
 
   const {
     _id,
-    fromUser: { name },
+    fromUser: { name, username },
     foody: { title, slug },
     date,
   } = notification;
@@ -22,7 +23,7 @@ const LikeNotification = ({ notification }) => {
           <h5>
             <FaHeart className='like' size={12} />
             <span className='notification-text'> User </span>
-            <span className='user'> {name}</span>{' '}
+            <UserLink name={name} username={username} />{' '}
             <span className='notification-text'>
               <span className='like'>liked</span> your Foody
             </span>{' '}

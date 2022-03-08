@@ -289,7 +289,22 @@ ul {
   animation: spinner 2s linear infinite;
   margin-right: 1rem;
 }
+
+.loading-mid {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 5px solid var(--grey-400);
+  border-radius: 50%;
+  border-top-color: var(--primary-500);
+  animation: spinner 2s linear infinite;
+  margin-right: 1rem;
+}
+
 .loading-min-center {
+  margin: 0 auto;
+}
+
+.loading-mid-center {
   margin: 0 auto;
 }
 
@@ -303,6 +318,12 @@ ul {
 }
 .loading-center {
   margin: 0 auto;
+}
+
+.loading-text {
+  font-size: 1rem;
+  letter-spacing: var(--letterSpacing);
+  margin-left: 2rem;
 }
 /* title */
 
@@ -325,6 +346,23 @@ ul {
 }
 .full-page {
   min-height: 100vh;
+}
+
+/* section */
+.section {
+  padding: 1rem 0;
+  position: relative;
+}
+
+.section-center {
+  width: 90vw;
+  margin: 0 auto;
+  max-width: 1170px;
+}
+@media screen and (min-width: 992px) {
+  .section-center {
+    width: 95vw;
+  }
 }
 
 /* Apply General CSS  */

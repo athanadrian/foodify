@@ -20,7 +20,7 @@ const StatsContainer = ({ all }) => {
     // eslint-disable-next-line
   }, [all]);
 
-  if (isLoading) return <Loading center />;
+  if (isLoading) return <Loading center max />;
 
   return (
     <>

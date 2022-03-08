@@ -38,7 +38,7 @@ const FoodysContainer = ({ all }) => {
     sort,
   ]);
   console.log('T', totalFoodys, 'P', page, 'NP', numOfPages);
-  if (isLoading) return <Loading center />;
+  if (isLoading) return <Loading center max />;
 
   if (totalFoodys === 0)
     return (

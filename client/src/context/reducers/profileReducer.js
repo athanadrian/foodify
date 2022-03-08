@@ -47,6 +47,10 @@ const reducer = (state, action) => {
       profile: action.payload.profile,
       totalFollowers: action.payload.totalFollowers,
       totalFollowing: action.payload.totalFollowing,
+      totalCreations: action.payload.totalCreations,
+      totalComments: action.payload.totalComments,
+      totalLikes: action.payload.totalLikes,
+      totalVisits: action.payload.totalVisits,
     };
   }
 

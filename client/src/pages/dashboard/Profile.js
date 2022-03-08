@@ -1,50 +1,41 @@
 import { useProfileContext } from 'context/contexts/profileContext';
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import {
-  ChartsContainer,
-  MapModal,
-  Modal,
-  StatsContainer,
-  ProfileForm,
-  UserForm,
+  //ChartsContainer,
+  //StatsContainer,
+  Header,
+  Info,
+  User,
 } from '../../components';
-import { useAppContext } from '../../context/appContext';
-import Wrapper from '../../wrappers/DashboardFormPage';
-import StatsWrapper from '../../wrappers/StatsContainer';
+// import { useAppContext } from '../../context/appContext';
+// import StatsWrapper from '../../wrappers/StatsContainer';
 
 const Profile = () => {
-  const { showModal, monthlyCreations, toggleModal } = useAppContext();
-  const { getMyProfile } = useProfileContext();
+  //const { showModal, monthlyCreations, toggleModal } = useAppContext();
+  const { getUserProfile, profile } = useProfileContext();
 
+  const { username } = useParams();
   useEffect(() => {
-    getMyProfile();
+    getUserProfile(username);
     // eslint-disable-next-line
-  }, []);
-
+  }, [username]);
+  //console.log(profile);
   return (
     <>
       <div className='dashboard-page'>
-        <Wrapper>
-          <UserForm />
-        </Wrapper>
+        <Header />
+        <Info />
+        <User />
       </div>
-      <div className='dashboard-page'>
-        <Wrapper>
-          <ProfileForm />
-        </Wrapper>
-      </div>
-      <div className='dashboard-page'>
+
+      {/* <div className='dashboard-page'>
         <StatsWrapper>
           <h2 className='user-statistics'>My Creations</h2>
           <StatsContainer />
           {monthlyCreations.length > 0 && <ChartsContainer />}
         </StatsWrapper>
-      </div>
-      <div>
-        <Modal open={showModal} onClose={toggleModal} center>
-          <MapModal profile />
-        </Modal>
-      </div>
+      </div>*/}
     </>
   );
 };

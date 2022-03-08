@@ -3,13 +3,14 @@ import { relativeDate } from 'utils/functions';
 import { useNotificationsContext } from 'context/contexts/notificationsContext';
 import { BsBookmarkPlusFill } from 'react-icons/bs';
 import { FoodyLink } from './FoodyLink';
+import { UserLink } from './UserLink';
 
 const VisitNotification = ({ notification }) => {
   const { deleteNotification } = useNotificationsContext();
 
   const {
     _id,
-    fromUser: { name },
+    fromUser: { name, username },
     foody: { title, slug },
     date,
   } = notification;
@@ -22,7 +23,7 @@ const VisitNotification = ({ notification }) => {
           <h5>
             <BsBookmarkPlusFill className='visit' size={12} />
             <span className='notification-text'> User </span>
-            <span className='user'> {name}</span>{' '}
+            <UserLink name={name} username={username} />{' '}
             <span className='notification-text'>
               mentioned that <span className='visit'>visited</span> your Foody
             </span>{' '}

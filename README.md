@@ -56,6 +56,12 @@ TODO
 
 > ~~27. Notifications ~~Server~~ Client implementation~~
 
+> ~~28. Profile update~~
+
+> 29. Public Profile page
+
+> 30. Add Site, mobile to profile
+
 # Foodify
 
 #### Track Your Cyprus Foody-Place Search

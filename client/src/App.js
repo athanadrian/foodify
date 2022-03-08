@@ -1,3 +1,4 @@
+import PublicProfile from 'pages/PublicProfile';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {
   Error,
@@ -15,6 +16,7 @@ import {
   MyFoodys,
   Map,
   Notifications,
+  EditUser,
 } from './pages/dashboard';
 import ProtectedRoute from './pages/ProtectedRoute';
 
@@ -31,6 +33,7 @@ const App = () => {
           element={<ResetPassword />}
         />
         <Route path='/landing' element={<Landing />} />
+        {/* <Route path='/profile/:username' element={<PublicProfile />} /> */}
         <Route path='*' element={<Error />} />
         <Route
           path='/'
@@ -44,7 +47,8 @@ const App = () => {
           <Route path='all-foodys' element={<AllFoodys />} />
           <Route path='my-foodys' element={<MyFoodys />} />
           <Route path='add-foody' element={<AddFoody />} />
-          <Route path='profile' element={<Profile />} />
+          <Route path='edit' element={<EditUser />} />
+          <Route path='/profile/:username' element={<Profile />} />
           <Route path='map' element={<Map />} />
           <Route path='Notifications' element={<Notifications />} />
         </Route>

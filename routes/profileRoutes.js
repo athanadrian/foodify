@@ -10,6 +10,6 @@ const router = express.Router();
 
 router.post('/update', authenticateUser, updateProfile);
 router.post('/me', authenticateUser, getMyProfile);
-router.get('/:username', getProfile);
+router.get('/:username', authenticateUser, getProfile);
 
 export default router;

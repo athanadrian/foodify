@@ -29,7 +29,7 @@ const NotificationsContainer = () => {
   }, []);
 
   console.log('notifications', notifications);
-  if (isLoading) return <Loading center />;
+  if (isLoading) return <Loading center max />;
 
   if (totalNotifications === 0)
     return (

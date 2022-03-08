@@ -3,12 +3,13 @@ import { relativeDate } from 'utils/functions';
 import { useNotificationsContext } from 'context/contexts/notificationsContext';
 import { AiOutlineComment } from 'react-icons/ai';
 import { FoodyLink } from './FoodyLink';
+import { UserLink } from './UserLink';
 
 const CommentNotification = ({ notification }) => {
   const { deleteNotification } = useNotificationsContext();
   const {
     _id,
-    fromUser: { name },
+    fromUser: { name, username },
     foody: { title, slug },
     text,
     date,
@@ -22,7 +23,7 @@ const CommentNotification = ({ notification }) => {
           <h5>
             <AiOutlineComment className='comment' size={14} />
             <span className='notification-text'> User </span>
-            <span className='user'> {name}</span>{' '}
+            <UserLink name={name} username={username} />
             <span className='notification-text'>
               {' '}
               <span className='comment'>commented</span> on your Foody
