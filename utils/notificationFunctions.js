@@ -25,12 +25,20 @@ const newNotification = async ({
   // the owner/creator of the foody
   const userToNotify = await Notification.findOne({ toUser: userToNotifyId });
   let newNotification = {};
-  if (type !== 'newComment') {
+  if (type === 'newLike' || type === 'newVisit') {
     newNotification = {
       type,
       // the logged user
       fromUser: userId,
       foody: foodyId,
+      date: Date.now(),
+    };
+  }
+  if (type === 'newFollower') {
+    newNotification = {
+      type,
+      // the logged user
+      fromUser: userId,
       date: Date.now(),
     };
   }
@@ -60,15 +68,25 @@ const removeNotification = async ({
 }) => {
   // the owner/creator of the foody
   const userToNotify = await Notification.findOne({ toUser: userToNotifyId });
+  let notificationToRemove;
+  if (type !== 'newFollower') {
+    notificationToRemove = userToNotify.notifications.find(
+      (notification) =>
+        notification.type === type &&
+        notification.foody.toString() === foodyId &&
+        notification.fromUser.toString() === userId
+    );
+  }
 
-  const notificationToRemove = userToNotify.notifications.find(
-    (notification) =>
-      notification.type === type &&
-      notification.foody.toString() === foodyId &&
-      notification.fromUser.toString() === userId
-  );
+  if (type === 'newFollower') {
+    notificationToRemove = await userToNotify.notifications.find(
+      (notification) =>
+        notification.type === type &&
+        notification.fromUser.toString() === userId
+    );
+  }
 
-  const indexOf = userToNotify.notifications.map((notification) =>
+  const indexOf = await userToNotify.notifications.map((notification) =>
     notification._id.toString().indexOf(notificationToRemove._id.toString())
   );
 

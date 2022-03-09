@@ -1,35 +1,27 @@
-import moment from 'moment';
-
 import { useAppContext } from '../context/appContext';
 import Wrapper from '../wrappers/FoodySocial';
 import CommentsModal from './CommentsModal';
 import LikeButton from './social-buttons/LikeButton';
 import VisitButton from './social-buttons/VisitButton';
+import UserHeader from './UserHeader';
 
 const FoodySocial = () => {
   const { user, foodyDetail } = useAppContext();
-  const { _id, createdBy, likes, visits, comments } = foodyDetail;
+  const { _id, likes, visits, comments } = foodyDetail;
 
-  const { name, home, createdAt } = createdBy;
-  const registered = moment(createdAt).format('MMM Do YYYY');
   const isLiked = likes.filter((like) => like.user._id === user._id).length > 0;
   const isVisited =
     visits.filter((visit) => visit.user._id === user._id).length > 0;
 
   return (
     <Wrapper>
-      <header>
-        <div className='main-icon'>{name.charAt(0)}</div>
-        <div className='header-items'>
-          <div className='info'>
-            <h5>
-              {name}
-              <span className='comment-date'>{registered}</span>
-            </h5>
-            <p className='comment'>{home}</p>
-          </div>
-        </div>
-      </header>
+      <UserHeader
+        src={user?.profilePicUrl}
+        name={user?.name}
+        alt={user?.name}
+        username={user?.username}
+        link
+      />
       <div className='space-between'>
         <LikeButton isLiked={isLiked} foodyId={_id} userId={user._id}>
           <span>Like</span>

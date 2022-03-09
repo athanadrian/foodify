@@ -23,7 +23,7 @@ const Wrapper = styled.article`
     letter-spacing: var(--letterSpacing);
     font-size: 1rem;
   }
-  header {
+  /* header {
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
@@ -54,13 +54,14 @@ const Wrapper = styled.article`
         color: var(--white);
       }
     }
-  }
+  } */
   .bio {
     color: var(--grey-300);
   }
   .links {
     p,
     a {
+      text-transform: capitalize;
       margin-bottom: 0.25rem;
       display: flex;
       align-items: center;
@@ -70,6 +71,7 @@ const Wrapper = styled.article`
       }
     }
     a {
+      margin-top: 1rem;
       color: var(--primary-500);
       transition: var(--transition);
       svg {

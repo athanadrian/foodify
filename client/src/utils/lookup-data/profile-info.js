@@ -4,7 +4,7 @@ import { FaHeart } from 'react-icons/fa';
 import { FiUsers, FiUserPlus } from 'react-icons/fi';
 import { SiJusteat } from 'react-icons/si';
 
-export const publicProfileItems = ({
+const profileInfo = ({
   totalCreations,
   totalComments,
   totalLikes,
@@ -57,3 +57,5 @@ export const publicProfileItems = ({
     },
   ];
 };
+
+export default profileInfo;

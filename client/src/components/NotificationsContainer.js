@@ -8,6 +8,7 @@ import Alert from './Alert';
 import CommentNotification from './notifications/CommentNotification';
 import LikeNotification from './notifications/LikeNotification';
 import VisitNotification from './notifications/VisitNotification';
+import FollowNotification from './notifications/FollowNotification';
 
 const NotificationsContainer = () => {
   const { setUserNotificationsToRead, getMyFoodys } = useAppContext();
@@ -61,6 +62,9 @@ const NotificationsContainer = () => {
                 notification.foody !== null && (
                   <VisitNotification notification={notification} />
                 )}
+              {notification.type === 'newFollower' && (
+                <FollowNotification notification={notification} />
+              )}
             </Fragment>
           ))}
         </div>

@@ -3,12 +3,27 @@ import styled from 'styled-components';
 const Wrapper = styled.article`
   display: flex;
   flex-direction: column;
+  position: relative;
 
+  &::after {
+    content: 'Creator';
+    position: absolute;
+    top: 13px;
+    left: 400px;
+    transform: translateY(-100%);
+    background: var(--white);
+    color: var(--grey-500);
+    text-transform: capitalize;
+    font-weight: bold;
+    padding: 0.5rem 0.3rem 0 0.3rem;
+    letter-spacing: var(--letterSpacing);
+    font-size: 1rem;
+  }
   header {
     padding: 1rem 1.5rem;
     border-bottom: 1px solid var(--grey-100);
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 1fr 1fr;
     h5 {
       letter-spacing: 0;
     }

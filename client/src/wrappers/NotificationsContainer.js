@@ -87,6 +87,9 @@ const Wrapper = styled.section`
       .comment {
         color: var(--grey-700);
       }
+      .follow {
+        color: var(--purple-dark);
+      }
       .date {
         text-transform: none;
       }

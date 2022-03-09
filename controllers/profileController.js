@@ -1,10 +1,14 @@
 import { StatusCodes } from 'http-status-codes';
-import mongoose from 'mongoose';
 import BadRequestError from '../errors/bad-request.js';
+import NotFoundError from '../errors/not-found.js';
 import User from '../models/User.js';
 import Profile from '../models/Profile.js';
 import Follow from '../models/Follow.js';
 import Foody from '../models/Foody.js';
+import {
+  newNotification,
+  removeNotification,
+} from '../utils/notificationFunctions.js';
 
 //@desc         Get User Profile
 //@route        GET /api/v1/profile/:username
@@ -15,7 +19,7 @@ export const getProfile = async (req, res, next) => {
   const user = await User.findOne({ username: username.toLowerCase() });
 
   if (!user) {
-    throw new BadRequestError('User not found');
+    throw new NotFoundError('User not found');
   }
 
   const profile = await Profile.findOne({ user: user._id }).populate('user', [
@@ -65,7 +69,7 @@ export const getMyProfile = async (req, res, next) => {
   const profile = await Profile.findOne({ user: userId });
 
   if (!profile) {
-    throw new BadRequestError('Profile not found');
+    throw new NotFoundError('Profile not found');
   }
 
   res.status(StatusCodes.OK).json({ profile });
@@ -77,13 +81,25 @@ export const getMyProfile = async (req, res, next) => {
 export const updateProfile = async (req, res, next) => {
   const { userId } = req.user;
 
-  const { bio, facebook, youtube, twitter, instagram, profilePicUrl } =
-    req.body;
+  const {
+    bio,
+    company,
+    website,
+    mobile,
+    facebook,
+    youtube,
+    twitter,
+    instagram,
+    profilePicUrl,
+  } = req.body;
 
   let profileFields = {};
   profileFields.user = userId;
 
   profileFields.bio = bio;
+  profileFields.company = company;
+  profileFields.website = website;
+  profileFields.mobile = mobile;
 
   profileFields.social = {};
 
@@ -108,4 +124,112 @@ export const updateProfile = async (req, res, next) => {
   }
 
   res.status(StatusCodes.OK).json({ profile });
+};
+
+//@desc         GET FOLLOWERS OF USER
+//@route        POST /api/v1/profile/followers/:userId
+//@access       Private
+export const getUserFollowers = async (req, res, next) => {
+  const { userId } = req.params;
+
+  const user = await Follow.findOne({ user: userId }).populate(
+    'followers.user'
+  );
+  return res.status(StatusCodes.OK).json(user.followers);
+};
+
+//@desc         GET FOLLOWING OF USER
+//@route        POST /api/v1/profile/follow/:userToFollowId
+//@access       Private
+export const getUserFollowing = async (req, res, next) => {
+  const { userId } = req.params;
+
+  const user = await Follow.findOne({ user: userId }).populate(
+    'following.user'
+  );
+  return res.json(user.following);
+};
+
+//@desc         FOLLOW A USER
+//@route        POST /api/v1/profile/follow/:userToFollowId
+//@access       Private
+export const followUser = async (req, res, next) => {
+  const { userId } = req.user;
+  const { userToFollowId } = req.params;
+
+  const user = await Follow.findOne({ user: userId });
+  const userToFollow = await Follow.findOne({ user: userToFollowId });
+
+  if (!user || !userToFollow) {
+    throw new NotFoundError('User not found');
+  }
+
+  const isFollowing =
+    user.following.length > 0 &&
+    user.following.filter(
+      (following) => following.user.toString() === userToFollowId
+    ).length > 0;
+
+  if (isFollowing) {
+    throw new BadRequestError('User Already Followed');
+  }
+
+  await user.following.unshift({ user: userToFollowId });
+  await user.save();
+
+  await userToFollow.followers.unshift({ user: userId });
+  await userToFollow.save();
+
+  await newNotification({
+    type: 'newFollower',
+    userId,
+    userToNotifyId: userToFollowId,
+  });
+
+  return res.status(StatusCodes.OK).json({ msg: 'Followed!' });
+};
+
+//@desc         UN-FOLLOW A USER
+//@route        POST /api/v1/profile/un-follow/:userToUnFollowId
+//@access       Private
+export const unFollowUser = async (req, res, next) => {
+  const { userId } = req.user;
+  const { userToUnFollowId } = req.params;
+
+  const user = await Follow.findOne({ user: userId });
+  const userToUnFollow = await Follow.findOne({ user: userToUnFollowId });
+
+  if (!user || !userToUnFollow) {
+    throw new NotFoundError('User not found');
+  }
+
+  const isFollowing =
+    user.following.length > 0 &&
+    user.following.filter(
+      (following) => following.user.toString() === userToUnFollowId
+    ).length === 0;
+
+  if (isFollowing) {
+    throw new BadRequestError('User Not Followed before');
+  }
+
+  const removeFollowingIndex = user.following
+    .map((following) => following.user.toString())
+    .indexOf(userToUnFollowId);
+
+  await user.following.splice(removeFollowingIndex, 1);
+  await user.save();
+  const removeFollowerIndex = userToUnFollow.followers
+    .map((follower) => follower.user.toString())
+    .indexOf(userId);
+
+  await userToUnFollow.followers.splice(removeFollowerIndex, 1);
+  userToUnFollow.save();
+
+  await removeNotification({
+    type: 'newFollower',
+    userId,
+    userToNotifyId: userToUnFollowId,
+  });
+  return res.status(StatusCodes.OK).json({ msg: 'Un-followed' });
 };

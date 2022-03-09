@@ -1,7 +1,7 @@
 import React from 'react';
 import Wrapper from 'wrappers/public-profile/Info';
 
-import { publicProfileItems } from 'utils/lookup-data/public-profile-items';
+import { profileInfo } from 'utils/lookup-data';
 import { useProfileContext } from 'context/contexts/profileContext';
 
 const Info = () => {
@@ -23,14 +23,14 @@ const Info = () => {
   };
   return (
     <Wrapper>
-      {publicProfileItems(data).map((item) => {
-        return <Item key={item.id} {...item} />;
+      {profileInfo(data).map((item) => {
+        return <InfoItem key={item.id} {...item} />;
       })}
     </Wrapper>
   );
 };
 
-const Item = ({ icon, label, value, color }) => {
+const InfoItem = ({ icon, label, value, color }) => {
   return (
     <article className='item'>
       <span className={color}>{icon}</span>

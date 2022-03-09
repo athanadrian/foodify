@@ -57,7 +57,6 @@ const Register = () => {
       email,
       password,
     };
-    console.log(currentUser);
     if (isMember) {
       signUser({ endPoint: 'login', currentUser, alertText: 'Login.....' });
     } else {

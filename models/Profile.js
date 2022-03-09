@@ -5,7 +5,9 @@ const ProfileSchema = new mongoose.Schema(
     user: { type: mongoose.Types.ObjectId, ref: 'User' },
 
     bio: { type: String },
-
+    company: { type: String },
+    website: { type: String },
+    mobile: { type: String },
     social: {
       facebook: { type: String },
       twitter: { type: String },

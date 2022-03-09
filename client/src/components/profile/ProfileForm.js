@@ -15,6 +15,9 @@ const ProfileForm = () => {
   } = useProfileContext();
   const initialState = {
     bio: '',
+    company: '',
+    website: '',
+    mobile: '',
     youtube: '',
     twitter: '',
     facebook: '',
@@ -26,6 +29,9 @@ const ProfileForm = () => {
     setValues((prev) => ({
       ...prev,
       bio: profile?.bio || '',
+      company: profile?.company || '',
+      website: profile?.website || '',
+      mobile: profile?.mobile || '',
       youtube: profile?.social?.youtube || '',
       twitter: profile?.social?.twitter || '',
       facebook: profile?.social?.facebook || '',
@@ -40,9 +46,21 @@ const ProfileForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { bio, youtube, twitter, facebook, instagram } = values;
+    const {
+      bio,
+      company,
+      website,
+      mobile,
+      youtube,
+      twitter,
+      facebook,
+      instagram,
+    } = values;
     updateProfile({
       bio,
+      company,
+      website,
+      mobile,
       youtube,
       twitter,
       facebook,
@@ -63,6 +81,27 @@ const ProfileForm = () => {
         />
       </div>
       <div className='form-center'>
+        <FormInput
+          handleChange={handleChange}
+          labelText='company'
+          name='company'
+          type='text'
+          value={values.company}
+        />
+        <FormInput
+          name='website'
+          type='text'
+          value={values.website}
+          labelText='website'
+          handleChange={handleChange}
+        />
+        <FormInput
+          name='mobile'
+          type='text'
+          value={values.mobile}
+          labelText='mobile'
+          handleChange={handleChange}
+        />
         <FormInput
           handleChange={handleChange}
           labelText='instagram'
