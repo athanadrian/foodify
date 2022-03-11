@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { Foody, Loading } from '../components';
-import { useAppContext } from '../context/appContext';
-import Wrapper from '../wrappers/FoodysContainer';
+import { useFoodyContext } from 'context/contexts/foodyContext';
+import { Foody, Loading } from 'components';
+import Wrapper from 'wrappers/FoodysContainer';
 import PaginationContainer from './PaginationContainer';
 
 const FoodysContainer = ({ all }) => {
@@ -17,11 +17,11 @@ const FoodysContainer = ({ all }) => {
     sort,
     numOfPages,
     page,
-    isLoading,
+    isFoodyLoading,
     getAllFoodys,
     getMyFoodys,
     isMyFoodys,
-  } = useAppContext();
+  } = useFoodyContext();
 
   useEffect(() => {
     all ? getAllFoodys() : getMyFoodys();
@@ -37,8 +37,7 @@ const FoodysContainer = ({ all }) => {
     searchPreference,
     sort,
   ]);
-  console.log('T', totalFoodys, 'P', page, 'NP', numOfPages);
-  if (isLoading) return <Loading center max />;
+  if (isFoodyLoading) return <Loading center max />;
 
   if (totalFoodys === 0)
     return (

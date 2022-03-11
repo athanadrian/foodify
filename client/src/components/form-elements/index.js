@@ -1,4 +1,5 @@
 import FormInput from './FormInput';
+import FormUsernameInput from './FormUsernameInput';
 import CommentFormInput from './CommentFormInput';
 import FormTextArea from './FormTextArea';
 import FormSelect from './FormSelect';
@@ -10,6 +11,7 @@ import FormIconButton from './FormIconButton';
 export {
   FormEnumSelect,
   FormInput,
+  FormUsernameInput,
   CommentFormInput,
   FormSelect,
   FormRangeInput,

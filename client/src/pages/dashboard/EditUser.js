@@ -1,3 +1,4 @@
+import { useFoodyContext } from 'context/contexts/foodyContext';
 import { useProfileContext } from 'context/contexts/profileContext';
 import { useEffect } from 'react';
 import {
@@ -7,13 +8,12 @@ import {
   StatsContainer,
   ProfileForm,
   UserForm,
-} from '../../components';
-import { useAppContext } from '../../context/appContext';
-import Wrapper from '../../wrappers/DashboardFormPage';
-import StatsWrapper from '../../wrappers/StatsContainer';
+} from 'components';
+import Wrapper from 'wrappers/DashboardFormPage';
+import StatsWrapper from 'wrappers/StatsContainer';
 
-const Profile = () => {
-  const { showModal, monthlyCreations, toggleModal } = useAppContext();
+const EditUser = () => {
+  const { showModal, monthlyCreations, toggleModal } = useFoodyContext();
   const { getMyProfile } = useProfileContext();
 
   useEffect(() => {
@@ -49,4 +49,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default EditUser;

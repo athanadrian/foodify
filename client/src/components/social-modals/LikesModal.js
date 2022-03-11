@@ -1,5 +1,5 @@
 import { relativeDate } from 'utils/functions';
-import Wrapper from '../wrappers/SocialModal';
+import Wrapper from 'wrappers/SocialModal';
 
 const LikesModal = ({ likes }) => {
   return (

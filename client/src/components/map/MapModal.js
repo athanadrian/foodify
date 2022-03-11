@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react';
-import Wrapper from '../../wrappers/InfoWindow';
+import Wrapper from 'wrappers/InfoWindow';
 import {
   GoogleMap,
   useJsApiLoader,
@@ -7,14 +7,14 @@ import {
   InfoWindow,
 } from '@react-google-maps/api';
 import { FiMapPin } from 'react-icons/fi';
-import { mapStyles, libraries } from '../../utils/map-data';
-import { useAppContext } from '../../context/appContext';
-import ProfileIcon from '../../assets/images/profile.svg';
-import FoodyIcon from '../../assets/images/foody.svg';
+import { mapStyles, libraries } from 'utils/map-data';
+import ProfileIcon from 'assets/images/profile.svg';
+import FoodyIcon from 'assets/images/foody.svg';
 import CoordinateInfo from '../CoordinateInfo';
-import { MAP_CENTER, MAP_ZOOM } from '../../utils/constants';
+import { MAP_CENTER, MAP_ZOOM } from 'utils/constants';
 import MapSearch from './MapSearch';
 import MapLocate from './MapLocate';
+import { useFoodyContext } from 'context/contexts/foodyContext';
 
 const containerStyle = {
   width: '100%',
@@ -37,7 +37,7 @@ const MapModal = ({ profile }) => {
     showInfoWindow,
     closeInfoWindow,
     openInfoWindow,
-  } = useAppContext();
+  } = useFoodyContext();
   const { current: initialLocation } = useRef(
     profile ? homeLocation : foodyLocation
   );

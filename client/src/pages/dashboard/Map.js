@@ -1,4 +1,4 @@
-import { MapFoodys } from '../../components';
+import { MapFoodys } from 'components';
 const Map = () => {
   return (
     <>

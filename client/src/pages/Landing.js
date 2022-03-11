@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import main from '../assets/images/main.svg';
-import { Logo } from '../components';
-import Wrapper from '../wrappers/LandingPage';
+import main from 'assets/images/main.svg';
+import { Logo } from 'components';
+import Wrapper from 'wrappers/LandingPage';
 
 const Landing = () => {
   return (

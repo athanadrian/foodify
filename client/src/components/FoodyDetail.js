@@ -9,8 +9,8 @@ import { TiDocumentText } from 'react-icons/ti';
 import { BsFillPinMapFill } from 'react-icons/bs';
 import { MdOutlineUpdate, MdOutlineRestaurant } from 'react-icons/md';
 
-import { useAppContext } from '../context/appContext';
-import Wrapper from '../wrappers/FoodyDetail';
+import { useAppContext } from 'context/appContext';
+import Wrapper from 'wrappers/FoodyDetail';
 import FoodyInfo from './FoodyInfo';
 
 import {
@@ -18,23 +18,24 @@ import {
   //getFoodyDistance,
   //getPreciseFoodyDistance,
   computeDistance,
-} from '../utils/functions';
-import { costs, foodys } from '../utils/lookup-data';
+} from 'utils/functions';
+import { costs, foodys } from 'utils/lookup-data';
 import GoogleMapsLink from './GoogleMapsLink';
+import { useFoodyContext } from 'context/contexts/foodyContext';
 
 const FoodyDetail = () => {
+  const { homeLocation } = useAppContext();
   const {
     foodyDetail,
     setFoodyToUpdate,
     deleteFoody,
     changeFoodyStatus,
-    homeLocation,
     myLocation,
     isMyFoodys,
     toggleModal,
     showModal,
-  } = useAppContext();
-  if (foodyDetail) console.log('foodyDetail', foodyDetail);
+  } = useFoodyContext();
+
   const {
     _id,
     title,

@@ -1,4 +1,4 @@
-import { User, Info, MainLayoutPage } from 'components';
+import { User, MainLayoutPage, Info } from 'components';
 
 const PublicProfile = () => {
   return (

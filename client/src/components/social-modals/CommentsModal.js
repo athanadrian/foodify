@@ -1,10 +1,11 @@
 import { useAppContext } from 'context/appContext';
 import { IoTrashOutline } from 'react-icons/io5';
 import { relativeDate } from 'utils/functions';
-import Wrapper from '../wrappers/SocialModal';
-import Alert from './Alert';
-import CommentButton from './social-buttons/CommentButton';
-import { CommentFormInput } from './form-elements';
+import Wrapper from 'wrappers/SocialModal';
+import Alert from '../Alert';
+import CommentButton from '../social-buttons/CommentButton';
+import { CommentFormInput } from '../form-elements';
+import { useFoodyContext } from 'context/contexts/foodyContext';
 
 const CommentsModal = ({ foodyId, comments }) => {
   const {
@@ -14,7 +15,8 @@ const CommentsModal = ({ foodyId, comments }) => {
     clearValues,
     commentText,
     handleChange,
-  } = useAppContext();
+  } = useFoodyContext();
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     handleChange({ name, value });

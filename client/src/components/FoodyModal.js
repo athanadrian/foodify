@@ -1,5 +1,5 @@
 import { FoodyDetail } from '.';
-import Wrapper from '../wrappers/FoodyModal';
+import Wrapper from 'wrappers/FoodyModal';
 import FoodySocial from './FoodySocial';
 const FoodyModal = () => {
   return (

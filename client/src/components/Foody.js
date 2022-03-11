@@ -7,8 +7,8 @@ import { AiOutlineComment, AiOutlineEuro } from 'react-icons/ai';
 import { BsChevronDown, BsChevronUp, BsFillPinMapFill } from 'react-icons/bs';
 import { MdOutlineUpdate, MdOutlineRestaurant } from 'react-icons/md';
 
-import { useAppContext } from '../context/appContext';
-import Wrapper from '../wrappers/Foody';
+import { useAppContext } from 'context/appContext';
+import Wrapper from 'wrappers/Foody';
 import FoodyInfo from './FoodyInfo';
 import {
   mapEnumObject,
@@ -17,8 +17,8 @@ import {
   computeDistance,
   relativeDate,
   formatDate,
-} from '../utils/functions';
-import { costs, foodys } from '../utils/lookup-data';
+} from 'utils/functions';
+import { costs, foodys } from 'utils/lookup-data';
 import {
   LikesModal,
   VisitsModal,
@@ -28,9 +28,9 @@ import {
   CommentsModal,
   GoogleMapsLink,
 } from '.';
+import { useFoodyContext } from 'context/contexts/foodyContext';
 
 const Foody = ({
-  all,
   _id,
   title,
   village,
@@ -48,17 +48,16 @@ const Foody = ({
   comments,
   // preference,
 }) => {
+  const { user, homeLocation } = useAppContext();
   const {
-    user,
     setFoodyToUpdate,
     deleteFoody,
     changeFoodyStatus,
-    homeLocation,
     myLocation,
     isMyFoodys,
     toggleModal,
     getFoody,
-  } = useAppContext();
+  } = useFoodyContext();
 
   const [showRemarks, setShowRemarks] = useState(false);
   const [openLikesModal, setOpenLikesModal] = useState(false);

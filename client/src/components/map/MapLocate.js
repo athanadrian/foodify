@@ -1,9 +1,9 @@
-import Compass from '../../assets/images/compass.svg';
-import { useAppContext } from '../../context/appContext';
-import Wrapper from '../../wrappers/MapLocate';
+import { useFoodyContext } from 'context/contexts/foodyContext';
+import Compass from 'assets/images/compass.svg';
+import Wrapper from 'wrappers/MapLocate';
 
 const MapLocate = ({ panTo }) => {
-  const { myLocation } = useAppContext();
+  const { myLocation } = useFoodyContext();
   return (
     <Wrapper>
       <button

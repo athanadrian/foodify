@@ -1,8 +1,8 @@
-import { StatsContainer, ChartsContainer } from '../../components';
-import { useAppContext } from '../../context/appContext';
+import { useFoodyContext } from 'context/contexts/foodyContext';
+import { StatsContainer, ChartsContainer } from 'components';
 
 const Stats = () => {
-  const { monthlyCreations } = useAppContext();
+  const { monthlyCreations } = useFoodyContext();
   return (
     <div className='dashboard-page'>
       <StatsContainer all />

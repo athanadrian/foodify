@@ -1,14 +1,15 @@
-import { useAppContext } from '../context/appContext';
-import Wrapper from '../wrappers/FoodySocial';
-import CommentsModal from './CommentsModal';
+import { useAppContext } from 'context/appContext';
+import Wrapper from 'wrappers/FoodySocial';
+import CommentsModal from './social-modals/CommentsModal';
 import LikeButton from './social-buttons/LikeButton';
 import VisitButton from './social-buttons/VisitButton';
 import UserHeader from './UserHeader';
+import { useFoodyContext } from 'context/contexts/foodyContext';
 
 const FoodySocial = () => {
-  const { user, foodyDetail } = useAppContext();
+  const { user } = useAppContext();
+  const { foodyDetail } = useFoodyContext();
   const { _id, likes, visits, comments } = foodyDetail;
-
   const isLiked = likes.filter((like) => like.user._id === user._id).length > 0;
   const isVisited =
     visits.filter((visit) => visit.user._id === user._id).length > 0;
@@ -16,10 +17,12 @@ const FoodySocial = () => {
   return (
     <Wrapper>
       <UserHeader
-        src={user?.profilePicUrl}
-        name={user?.name}
-        alt={user?.name}
-        username={user?.username}
+        src={foodyDetail?.createdBy?.profilePicUrl}
+        name={foodyDetail?.createdBy?.name}
+        alt={foodyDetail?.createdBy?.name}
+        username={foodyDetail?.createdBy?.username}
+        pageId={foodyDetail?.createdBy?._id}
+        loggedUserId={user?._id}
         link
       />
       <div className='space-between'>

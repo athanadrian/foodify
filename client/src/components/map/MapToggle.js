@@ -1,10 +1,10 @@
-import Foody from '../../assets/images/foody.svg';
-import MyFoody from '../../assets/images/my-foody.svg';
-import { useAppContext } from '../../context/appContext';
-import Wrapper from '../../wrappers/MapToggle';
+import { useFoodyContext } from 'context/contexts/foodyContext';
+import Foody from 'assets/images/foody.svg';
+import MyFoody from 'assets/images/my-foody.svg';
+import Wrapper from 'wrappers/MapToggle';
 
 const MapToggle = () => {
-  const { getAllFoodys, getMyFoodys } = useAppContext();
+  const { getAllFoodys, getMyFoodys } = useFoodyContext();
   return (
     <Wrapper>
       <div className='btn-container'>

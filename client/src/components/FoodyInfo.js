@@ -1,4 +1,4 @@
-import Wrapper from '../wrappers/FoodyInfo';
+import Wrapper from 'wrappers/FoodyInfo';
 
 const FoodyInfo = ({ label, onClick, icon, tooltip, text, className }) => {
   return (

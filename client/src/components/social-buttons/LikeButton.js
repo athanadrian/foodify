@@ -1,9 +1,9 @@
-import { useAppContext } from 'context/appContext';
+import { useFoodyContext } from 'context/contexts/foodyContext';
 import { FaHeart } from 'react-icons/fa';
 import Loading from '../Loading';
 
 const LikeButton = ({ foodyId, userId, children, isLiked, size = 18 }) => {
-  const { isLiking, likeUnlikeFoody } = useAppContext();
+  const { isLiking, likeUnlikeFoody } = useFoodyContext();
 
   const handleLike = () => {
     likeUnlikeFoody({

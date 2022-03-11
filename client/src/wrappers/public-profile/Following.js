@@ -46,26 +46,32 @@ const Wrapper = styled.article`
       object-fit: cover;
     }
     h4 {
-      color: var(--grey-900);
-      font-weight: 700;
+      color: var(--grey-700);
       margin-bottom: 0;
       font-size: 1rem;
-      //line-height: 1;
+      text-transform: none;
     }
-    a {
+    .email {
       color: var(--grey-500);
-    }
-    .user {
-      color: var(--blue-dark);
-    }
-    .user:hover {
-      color: var(--blue-light);
     }
     .username {
       text-transform: none;
     }
     .full-name {
       text-transform: capitalize;
+      margin-left: 0.5rem;
+      font-weight: 700;
+    }
+  }
+  @media (min-width: 992px) {
+    .full-name {
+      display: none;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .full-name {
+      display: none;
     }
   }
 `;

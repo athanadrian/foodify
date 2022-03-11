@@ -370,6 +370,28 @@ ul {
   }
 }
 
+/* User/Foody Links css */
+
+.user-link {
+  color: var(--blue-dark);
+  letter-spacing: 0.1rem;
+}
+.user-link:hover {
+  text-decoration: underline;
+  color: var(--blue-light);
+}
+
+.foody-link {
+  color: var(--primary-500);
+  cursor: pointer;
+  text-transform: capitalize;
+  letter-spacing: var(--letterSpacing);
+}
+.foody-link:hover {
+  text-decoration: underline;
+  color: var(--primary-400);
+}
+
 /* Apply General CSS  */
 
 .center {

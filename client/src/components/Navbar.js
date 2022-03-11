@@ -1,17 +1,19 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   FaAlignLeft,
   FaUserCircle,
   FaCaretDown,
   FaSignOutAlt,
 } from 'react-icons/fa';
-import Wrapper from '../wrappers/Navbar';
+import Wrapper from 'wrappers/Navbar';
 import { Logo } from '.';
-import { useState } from 'react';
 import { useAppContext } from 'context/appContext';
-import { Link } from 'react-router-dom';
+import { useFoodyContext } from 'context/contexts/foodyContext';
 
 const Navbar = ({ publicView }) => {
-  const { toggleSidebar, user, logoutUser } = useAppContext();
+  const { user, logoutUser } = useAppContext();
+  const { toggleSidebar } = useFoodyContext();
   const [showLogout, setShowLogout] = useState(false);
   return (
     <Wrapper>

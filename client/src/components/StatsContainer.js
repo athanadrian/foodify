@@ -1,14 +1,15 @@
+import { useFoodyContext } from 'context/contexts/foodyContext';
 import { useEffect } from 'react';
 import { Loading, StatsContainerRow } from '.';
-import { useAppContext } from '../context/appContext';
 import {
   costDefaultStats,
   cuisineDefaultStats,
   foodyDefaultStats,
-} from '../utils/stats';
+} from 'utils/stats';
 
 const StatsContainer = ({ all }) => {
-  const { getAllStats, getUserStats, isLoading, stats } = useAppContext();
+  const { getAllStats, getUserStats, isFoodyLoading, stats } =
+    useFoodyContext();
   const { defaultCuisineStats, defaultCostStats, defaultFoodyStats } = stats;
 
   const cuisineStats = cuisineDefaultStats(defaultCuisineStats);
@@ -20,7 +21,7 @@ const StatsContainer = ({ all }) => {
     // eslint-disable-next-line
   }, [all]);
 
-  if (isLoading) return <Loading center max />;
+  if (isFoodyLoading) return <Loading center max />;
 
   return (
     <>

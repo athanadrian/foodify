@@ -1,9 +1,9 @@
-import { useAppContext } from 'context/appContext';
+import { useFoodyContext } from 'context/contexts/foodyContext';
 import { BsBookmarkPlusFill } from 'react-icons/bs';
 import Loading from '../Loading';
 
 const VisitButton = ({ foodyId, userId, children, isVisited, size = 18 }) => {
-  const { isVisiting, visitUnVisitFoody } = useAppContext();
+  const { isVisiting, visitUnVisitFoody } = useFoodyContext();
 
   const handleVisit = () => {
     visitUnVisitFoody({

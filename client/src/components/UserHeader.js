@@ -1,7 +1,18 @@
 import Wrapper from 'wrappers/public-profile/UserHeader';
 import { UserLink } from './notifications/UserLink';
+import { FollowButton } from './social-buttons';
 
-const UserHeader = ({ link, src, alt, name, username }) => {
+const UserHeader = ({
+  link,
+  src,
+  alt,
+  name,
+  lastName,
+  username,
+  loggedUserId,
+  pageId,
+}) => {
+  const isOwnAccount = pageId === loggedUserId;
   return (
     <Wrapper>
       <header>
@@ -10,11 +21,15 @@ const UserHeader = ({ link, src, alt, name, username }) => {
           {link ? (
             <UserLink name={name} username={username} />
           ) : (
-            <h5>{name}</h5>
+            <h5>
+              {name} {lastName}
+            </h5>
           )}
-          <p>{username}</p>
+          <p>@{username}</p>
         </div>
-        <button href={`/${username}`}>follow</button>
+        {!isOwnAccount && (
+          <FollowButton isOwnAccount={isOwnAccount} id={pageId} />
+        )}
       </header>
     </Wrapper>
   );

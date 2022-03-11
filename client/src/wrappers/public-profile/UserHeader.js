@@ -29,22 +29,6 @@ const Wrapper = styled.article`
         color: var(--blue-light);
       }
     }
-    button {
-      text-align: center;
-      color: var(--primary-500);
-      background: var(--white);
-      border: 1px solid var(--primary-500);
-      padding: 0.25rem 0.75rem;
-      border-radius: 1rem;
-      text-transform: capitalize;
-      letter-spacing: var(--letterSpacing);
-      transition: var(--transition);
-      cursor: pointer;
-      &:hover {
-        background: var(--primary-500);
-        color: var(--white);
-      }
-    }
   }
 `;
 export default Wrapper;

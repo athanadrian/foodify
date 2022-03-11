@@ -1,15 +1,15 @@
-import { useAppContext } from '../context/appContext';
-import Wrapper from '../wrappers/SearchContainer';
+import Wrapper from 'wrappers/SearchContainer';
 import {
   FormInput,
   FormSelect,
   FormEnumSelect,
   //  FormRangeInput
 } from '.';
+import { useFoodyContext } from 'context/contexts/foodyContext';
 
 const SearchContainer = ({ all }) => {
   const {
-    isLoading,
+    isFoodyLoading,
     search,
     searchCuisine,
     searchFoody,
@@ -26,10 +26,10 @@ const SearchContainer = ({ all }) => {
     sortOptions,
     handleChange,
     clearFilters,
-  } = useAppContext();
+  } = useFoodyContext();
 
   const handleSearch = (e) => {
-    if (isLoading) return;
+    if (isFoodyLoading) return;
     const { name, value } = e.target;
     handleChange({ name, value });
   };
@@ -102,7 +102,7 @@ const SearchContainer = ({ all }) => {
           )}
           <button
             className='btn btn-block btn-danger'
-            disabled={isLoading}
+            disabled={isFoodyLoading}
             onClick={handleSubmit}
           >
             clear filters

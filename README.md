@@ -16,7 +16,7 @@ TODO
 
 > ~~7. User Stats (profile page)~~
 
-> 8. Followers/Following implementation
+> ~~8. Followers/Following implementation ~~server~~, client~~
 
 > ~~9. Likes Implementation~~
 
@@ -58,9 +58,11 @@ TODO
 
 > ~~28. Profile update~~
 
-> 29. Public Profile page
+> ~~29. Profile page~~
 
-> 30. Add Site, mobile to profile
+> ~~30. Add Site,company, mobile to profile~~
+
+> 31. Remove authContext
 
 # Foodify
 

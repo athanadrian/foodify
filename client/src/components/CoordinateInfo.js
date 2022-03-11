@@ -1,4 +1,4 @@
-import Wrapper from '../wrappers/CoordinateInfo';
+import Wrapper from 'wrappers/CoordinateInfo';
 
 const CoordinateInfo = ({ onClick, coord, icon, tooltip, text, className }) => {
   return (

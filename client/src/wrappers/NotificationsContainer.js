@@ -52,14 +52,6 @@ const Wrapper = styled.section`
       text-transform: none;
       font-size: 1rem;
       margin-bottom: 0rem;
-      .user {
-        color: var(--blue-dark);
-        text-transform: capitalize;
-      }
-      .user:hover {
-        text-decoration: underline;
-        color: var(--blue-light);
-      }
       .foody {
         color: var(--primary-500);
         cursor: pointer;

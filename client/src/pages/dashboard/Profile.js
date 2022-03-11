@@ -1,19 +1,19 @@
-import { useProfileContext } from 'context/contexts/profileContext';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useProfileContext } from 'context/contexts/profileContext';
 import {
   //ChartsContainer,
   //StatsContainer,
   Header,
   Info,
   User,
-} from '../../components';
-// import { useAppContext } from '../../context/appContext';
-// import StatsWrapper from '../../wrappers/StatsContainer';
+} from 'components';
+// import { useAppContext } from 'context/appContext';
+// import StatsWrapper from 'wrappers/StatsContainer';
 
 const Profile = () => {
   //const { showModal, monthlyCreations, toggleModal } = useAppContext();
-  const { getUserProfile, profile } = useProfileContext();
+  const { getUserProfile } = useProfileContext();
 
   const { username } = useParams();
   useEffect(() => {

@@ -1,5 +1,5 @@
 import { useContext, createContext, useReducer } from 'react';
-import useClientApi from '../../hooks/useClientApi';
+import useClientApi from 'hooks/useClientApi';
 import reducer from '../reducers/notificationsReducer';
 import {
   GET_NOTIFICATIONS_BEGIN,

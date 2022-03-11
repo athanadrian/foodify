@@ -5,7 +5,7 @@ import { BsFillPinMapFill } from 'react-icons/bs';
 import { FaCheck } from 'react-icons/fa';
 import { RiRoadMapLine } from 'react-icons/ri';
 import Alert from '../Alert';
-import { FormButton, FormInput } from '../form-elements';
+import { FormButton, FormInput, FormUsernameInput } from '../form-elements';
 
 const UserForm = () => {
   const {
@@ -70,7 +70,7 @@ const UserForm = () => {
           handleChange={handleChange}
         />
         <div className='username'>
-          <FormInput
+          <FormUsernameInput
             handleChange={handleChange}
             labelText='username'
             name='username'

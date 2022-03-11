@@ -1,17 +1,19 @@
-import { useNotificationsContext } from 'context/contexts/notificationsContext';
 import { Fragment, useEffect } from 'react';
-import { Loading } from '../components';
-import { useAppContext } from '../context/appContext';
-import Wrapper from '../wrappers/NotificationsContainer';
+import { useNotificationsContext } from 'context/contexts/notificationsContext';
+import { Loading } from 'components';
+import { useAppContext } from 'context/appContext';
+import Wrapper from 'wrappers/NotificationsContainer';
 import PaginationContainer from './PaginationContainer';
 import Alert from './Alert';
 import CommentNotification from './notifications/CommentNotification';
 import LikeNotification from './notifications/LikeNotification';
 import VisitNotification from './notifications/VisitNotification';
 import FollowNotification from './notifications/FollowNotification';
+import { useFoodyContext } from 'context/contexts/foodyContext';
 
 const NotificationsContainer = () => {
-  const { setUserNotificationsToRead, getMyFoodys } = useAppContext();
+  const { getMyFoodys } = useFoodyContext();
+  const { setUserNotificationsToRead } = useAppContext();
 
   const {
     isLoading,
@@ -29,7 +31,6 @@ const NotificationsContainer = () => {
     // eslint-disable-next-line
   }, []);
 
-  console.log('notifications', notifications);
   if (isLoading) return <Loading center max />;
 
   if (totalNotifications === 0)

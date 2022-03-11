@@ -1,11 +1,13 @@
-import { Loading } from 'components';
-import UserHeader from 'components/UserHeader';
-import { useProfileContext } from 'context/contexts/profileContext';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { MdBusiness, MdLink, MdLocationOn } from 'react-icons/md';
+import { Loading } from 'components';
+import UserHeader from 'components/UserHeader';
+import { useAppContext } from 'context/appContext';
+import { useProfileContext } from 'context/contexts/profileContext';
 import Wrapper from 'wrappers/public-profile/Card';
 
 const Card = () => {
+  const { user } = useAppContext();
   const { profile, isLoadingProfile } = useProfileContext();
   const [company, mobile, website, bio] = [
     'My Company',
@@ -28,6 +30,8 @@ const Card = () => {
         name={profile?.user?.name}
         alt={profile?.user?.name}
         username={profile?.user?.username}
+        pageId={profile?.user?._id}
+        loggedUserId={user?._id}
       />
       <p className='bio'>{profile?.bio || bio}</p>
       <div className='links space-between'>

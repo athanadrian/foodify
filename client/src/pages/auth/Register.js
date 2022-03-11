@@ -2,15 +2,15 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaCheck } from 'react-icons/fa';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
-import { Logo, FormInput, Alert } from 'components';
+import { Logo, FormInput, Alert, FormUsernameInput } from 'components';
 import { useAppContext } from 'context/appContext';
 import Wrapper from 'wrappers/RegisterPage';
 
 const initialState = {
   username: '',
   name: '',
-  email: '',
-  password: '',
+  email: '@gmail.com',
+  password: '123456',
   isMember: false,
 };
 
@@ -92,7 +92,7 @@ const Register = () => {
               value={values.name}
             />
             <div className='username'>
-              <FormInput
+              <FormUsernameInput
                 handleChange={handleChange}
                 labelText='username'
                 name='username'

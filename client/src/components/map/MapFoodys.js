@@ -5,15 +5,15 @@ import {
   Marker,
   InfoWindow,
 } from '@react-google-maps/api';
-import { mapStyles, libraries } from '../../utils/map-data';
-import { useAppContext } from '../../context/appContext';
-import ProfileIcon from '../../assets/images/current-location.svg';
-import FoodyIcon from '../../assets/images/foody.svg';
-import { MAP_CENTER } from '../../utils/constants';
+import { mapStyles, libraries } from 'utils/map-data';
+import ProfileIcon from 'assets/images/current-location.svg';
+import FoodyIcon from 'assets/images/foody.svg';
+import { MAP_CENTER } from 'utils/constants';
 import MapSearch from './MapSearch';
 import MapLocate from './MapLocate';
 import MapToggle from './MapToggle';
 import { Foody } from '..';
+import { useFoodyContext } from 'context/contexts/foodyContext';
 
 const containerStyle = {
   width: '100%',
@@ -28,7 +28,7 @@ const mapOptions = {
 
 const MapFoodys = () => {
   const { foodys, googleApiKey, myLocation, getAllFoodys, isMyFoodys } =
-    useAppContext();
+    useFoodyContext();
   const [selected, setSelected] = useState(null);
 
   const { isLoaded, loadError } = useJsApiLoader({

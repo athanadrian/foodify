@@ -24,7 +24,7 @@ const Header = () => {
               <span> {profile?.user?.name.toUpperCase()}</span>,{' '}
             </strong>
           </h4>
-          {<span className='username'>#{profile?.user?.username}</span>}
+          {<span className='username'>@{profile?.user?.username}</span>}
         </>
       )}
     </Wrapper>

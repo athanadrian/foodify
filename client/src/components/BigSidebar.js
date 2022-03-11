@@ -1,10 +1,10 @@
+import { useFoodyContext } from 'context/contexts/foodyContext';
 import { Logo } from '.';
-import { useAppContext } from '../context/appContext';
-import Wrapper from '../wrappers/BigSidebar';
+import Wrapper from 'wrappers/BigSidebar';
 import NavLinks from './NavLinks';
 
 const BigSidebar = () => {
-  const { showSidebar } = useAppContext();
+  const { showSidebar } = useFoodyContext();
   return (
     <Wrapper>
       <div

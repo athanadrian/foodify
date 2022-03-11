@@ -1,4 +1,4 @@
-import Wrapper from '../wrappers/StatsItem';
+import Wrapper from 'wrappers/StatsItem';
 
 const StatItem = ({ stat, count, title, icon, color, bcg }) => {
   const isCost = stat === 'cost';

@@ -1,13 +1,13 @@
+import { useFoodyContext } from 'context/contexts/foodyContext';
 import {
   FoodyModal,
   FoodysContainer,
   Modal,
   SearchContainer,
-} from '../../components';
-import { useAppContext } from '../../context/appContext';
+} from 'components';
 
 const AllFoodies = () => {
-  const { showModal, toggleModal } = useAppContext();
+  const { showModal, toggleModal } = useFoodyContext();
   return (
     <div className='dashboard-page'>
       <SearchContainer all />

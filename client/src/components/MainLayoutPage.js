@@ -1,5 +1,5 @@
-import { Navbar, SmallSidebar, BigSidebar } from '.';
-import Wrapper from '../wrappers/MainLayoutPage';
+import { Navbar } from '.';
+import Wrapper from 'wrappers/MainLayoutPage';
 
 const MainLayoutPage = ({ children }) => {
   return (

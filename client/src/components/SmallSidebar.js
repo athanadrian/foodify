@@ -1,10 +1,10 @@
+import { useFoodyContext } from 'context/contexts/foodyContext';
 import { FaTimes } from 'react-icons/fa';
-import { useAppContext } from '../context/appContext';
-import Wrapper from '../wrappers/SmallSidebar';
+import Wrapper from 'wrappers/SmallSidebar';
 import NavLinks from './NavLinks';
 
 const SmallSidebar = () => {
-  const { showSidebar, toggleSidebar } = useAppContext();
+  const { showSidebar, toggleSidebar } = useFoodyContext();
   return (
     <Wrapper>
       <div

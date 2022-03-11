@@ -1,4 +1,4 @@
-import Wrapper from '../wrappers/StatsContainer';
+import Wrapper from 'wrappers/StatsContainer';
 import StatsItem from './StatsItem';
 
 const StatsContainerRow = ({ title, list }) => {

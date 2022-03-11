@@ -1,11 +1,10 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
-export const UserLink = ({ name, username }) => {
+export const UserLink = ({ username }) => {
   return (
-    <Link to={`/profile/${username}`} className='user'>
+    <Link to={`/profile/${username}`} className='user-link'>
       {' '}
-      {name}
+      @{username}
     </Link>
   );
 };

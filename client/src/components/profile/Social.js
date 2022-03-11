@@ -1,4 +1,3 @@
-import React from 'react';
 import Wrapper from 'wrappers/public-profile/Social';
 
 import { profileSocial } from 'utils/lookup-data';

@@ -2,13 +2,15 @@ import Logo from './Logo';
 import {
   FormEnumSelect,
   FormInput,
+  FormUsernameInput,
   FormSelect,
   FormRangeInput,
   FormTextArea,
   FormButton,
 } from './form-elements';
-import { Info, User, Creations, Header } from './public-profile';
-import { UserForm, ProfileForm } from './profile';
+import { Info, User, Creations, Header } from './profile';
+import { NoFollowData, NoFoodys } from './NoData';
+import { UserForm, ProfileForm } from './user-data';
 import Alert from './Alert';
 import Navbar from './Navbar';
 import MainLayoutPage from './MainLayoutPage';
@@ -24,19 +26,21 @@ import ChartsContainer from './ChartsContainer';
 import PaginationContainer from './PaginationContainer';
 import Modal from './Modal';
 import FoodyModal from './FoodyModal';
-import LikesModal from './LikesModal';
-import CommentsModal from './CommentsModal';
-import VisitsModal from './VisitsModal';
+import { LikesModal, CommentsModal, VisitsModal } from './social-modals';
 import FoodyDetail from './FoodyDetail';
-import LikeButton from './social-buttons/LikeButton';
-import VisitButton from './social-buttons/VisitButton';
-import CommentButton from './social-buttons/CommentButton';
+import {
+  FollowButton,
+  LikeButton,
+  VisitButton,
+  CommentButton,
+} from './social-buttons';
 import GoogleMapsLink from './GoogleMapsLink';
 import { MapFoodys, MapModal } from './map';
 
 export {
   Logo,
   FormInput,
+  FormUsernameInput,
   FormTextArea,
   FormSelect,
   FormEnumSelect,
@@ -65,6 +69,7 @@ export {
   LikeButton,
   VisitButton,
   CommentButton,
+  FollowButton,
   GoogleMapsLink,
   UserForm,
   ProfileForm,
@@ -73,4 +78,6 @@ export {
   User,
   Creations,
   Header,
+  NoFollowData,
+  NoFoodys,
 };

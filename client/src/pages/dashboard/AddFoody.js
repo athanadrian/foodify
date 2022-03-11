@@ -1,4 +1,6 @@
-import Wrapper from '../../wrappers/DashboardFormPage';
+import { BsFillPinMapFill } from 'react-icons/bs';
+import { RiRoadMapLine } from 'react-icons/ri';
+import Wrapper from 'wrappers/DashboardFormPage';
 import {
   Alert,
   FormInput,
@@ -7,15 +9,13 @@ import {
   FormButton,
   Modal,
   MapModal,
-} from '../../components';
-import { useAppContext } from '../../context/appContext';
-import { BsFillPinMapFill } from 'react-icons/bs';
-import { RiRoadMapLine } from 'react-icons/ri';
+} from 'components';
+import { useFoodyContext } from 'context/contexts/foodyContext';
 
 const AddFoody = () => {
   const {
     isEditing,
-    isLoading,
+    isFoodyLoading,
     showAlert,
     showModal,
     title,
@@ -36,7 +36,7 @@ const AddFoody = () => {
     clearValues,
     toggleModal,
     setFoodyCurrentLocation,
-  } = useAppContext();
+  } = useFoodyContext();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -138,7 +138,7 @@ const AddFoody = () => {
                 onClick={handleSubmit}
                 btnText='submit'
                 className='submit-btn'
-                disabled={isLoading}
+                disabled={isFoodyLoading}
               />
               <FormButton
                 onClick={(e) => {

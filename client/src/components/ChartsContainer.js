@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useAppContext } from '../context/appContext';
-import Wrapper from '../wrappers/ChartsContainer';
+import { useAppContext } from 'context/appContext';
+import Wrapper from 'wrappers/ChartsContainer';
 import AreaChart from './AreaChart';
 import BarChart from './BarChart';
 

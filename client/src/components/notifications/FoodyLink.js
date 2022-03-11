@@ -1,8 +1,8 @@
-import { useAppContext } from 'context/appContext';
+import { useFoodyContext } from 'context/contexts/foodyContext';
 import React from 'react';
 
 export const FoodyLink = ({ slug, title }) => {
-  const { getFoody, toggleModal } = useAppContext();
+  const { getFoody, toggleModal } = useFoodyContext();
 
   const showFoodyDetails = () => {
     getFoody(slug);

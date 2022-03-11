@@ -1,6 +1,6 @@
 import { useAppContext } from 'context/appContext';
 import { NavLink } from 'react-router-dom';
-import { links } from '../utils/lookup-data';
+import { links } from 'utils/lookup-data';
 
 const NavLinks = ({ toggleSidebar }) => {
   const {

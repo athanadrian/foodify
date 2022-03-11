@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
-import { Navbar, SmallSidebar, BigSidebar } from '../../components';
-import Wrapper from '../../wrappers/DashboardLayoutPage';
+import { Navbar, SmallSidebar, BigSidebar } from 'components';
+import Wrapper from 'wrappers/DashboardLayoutPage';
 
 const DashboardLayout = () => {
   return (

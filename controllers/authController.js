@@ -137,8 +137,10 @@ export const login = async (req, res, next) => {
 
   const token = user.createJWT();
   user.password = undefined;
+  const userFollowStats = await Follow.findOne({ user: user._id });
   res.status(StatusCodes.OK).json({
     user,
+    userFollowStats,
     token,
     home: user.home,
     location: user.location,

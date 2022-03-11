@@ -1,4 +1,4 @@
-import Wrapper from '../../wrappers/MapSearch.js';
+import Wrapper from 'wrappers/MapSearch.js';
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -11,7 +11,7 @@ import {
   ComboboxOption,
 } from '@reach/combobox';
 
-import { MAP_CENTER } from '../../utils/constants';
+import { MAP_CENTER } from 'utils/constants';
 
 const MapSearch = ({ panTo }) => {
   const {

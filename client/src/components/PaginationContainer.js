@@ -1,9 +1,9 @@
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
-import { useAppContext } from '../context/appContext';
-import Wrapper from '../wrappers/PaginationContainer';
+import { useFoodyContext } from 'context/contexts/foodyContext';
+import Wrapper from 'wrappers/PaginationContainer';
 
 const PaginationContainer = () => {
-  const { numOfPages, changePage, page } = useAppContext();
+  const { numOfPages, changePage, page } = useFoodyContext();
 
   const pages = Array.from({ length: numOfPages }, (_, index) => index + 1);
   const prevPage = () => {

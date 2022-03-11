@@ -1,12 +1,12 @@
 import { FoodyModal, Modal } from 'components';
 import NotificationsContainer from 'components/NotificationsContainer';
+import { useFoodyContext } from 'context/contexts/foodyContext';
 import { useNotificationsContext } from 'context/contexts/notificationsContext';
 import { useEffect } from 'react';
-import { useAppContext } from '../../context/appContext';
 
 const Notifications = () => {
   const { getNotifications } = useNotificationsContext();
-  const { showModal, toggleModal } = useAppContext();
+  const { showModal, toggleModal } = useFoodyContext();
   useEffect(() => {
     getNotifications();
 
