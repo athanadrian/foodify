@@ -9,7 +9,7 @@ import { TiDocumentText } from 'react-icons/ti';
 import { BsFillPinMapFill } from 'react-icons/bs';
 import { MdOutlineUpdate, MdOutlineRestaurant } from 'react-icons/md';
 
-import { useAppContext } from 'context/appContext';
+import { useAppContext } from 'context/contexts/appContext';
 import Wrapper from 'wrappers/FoodyDetail';
 import FoodyInfo from './FoodyInfo';
 

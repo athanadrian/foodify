@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { AppProvider } from 'context/appContext';
+import { AppProvider } from 'context/contexts/appContext';
 import { NotificationsProvider } from 'context/contexts/notificationsContext';
 import { ProfileProvider } from 'context/contexts/profileContext';
 import { FoodyProvider } from 'context/contexts/foodyContext';

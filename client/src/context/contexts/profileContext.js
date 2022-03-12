@@ -22,7 +22,7 @@ import {
   CLEAR_ALERT,
   MARK_CLICKED_ELEMENT,
 } from '../actions/profileActions';
-import { useAppContext } from 'context/appContext';
+import { useAppContext } from 'context/contexts/appContext';
 
 const initialState = {
   isLoadingProfile: false,

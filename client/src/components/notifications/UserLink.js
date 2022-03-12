@@ -1,10 +1,16 @@
 import { Link } from 'react-router-dom';
 
-export const UserLink = ({ username }) => {
+export const UserLink = ({ isOwnAccount, username }) => {
   return (
-    <Link to={`/profile/${username}`} className='user-link'>
-      {' '}
-      @{username}
-    </Link>
+    <>
+      {!isOwnAccount ? (
+        <Link to={`/profile/${username}`} className='user-link'>
+          {' '}
+          @{username}
+        </Link>
+      ) : (
+        <span className='user-link-own'>@{username}</span>
+      )}
+    </>
   );
 };

@@ -22,9 +22,9 @@ import {
   SET_USER_NOTIFICATIONS_TO_READ,
   ADD_FOLLOW_TO_USER_FOLLOWING_STATS,
   REMOVE_FOLLOW_FROM_USER_FOLLOWING_STATS,
-} from '../actions/actions';
+} from '../actions/appActions';
 
-import { initialState } from '../appContext';
+import { initialState } from '../contexts/appContext';
 
 const reducer = (state, action) => {
   if (action.type === DISPLAY_ALERT) {

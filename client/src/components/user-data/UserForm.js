@@ -1,4 +1,4 @@
-import { useAppContext } from 'context/appContext';
+import { useAppContext } from 'context/contexts/appContext';
 import { useEffect, useState } from 'react';
 import { AiOutlineCloseCircle, AiOutlineSave } from 'react-icons/ai';
 import { BsFillPinMapFill } from 'react-icons/bs';

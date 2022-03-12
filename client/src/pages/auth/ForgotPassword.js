@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Logo, FormInput, Alert } from 'components';
-import { useAppContext } from 'context/appContext';
+import { useAppContext } from 'context/contexts/appContext';
 import Wrapper from 'wrappers/RegisterPage';
 
 const ForgetPassword = () => {

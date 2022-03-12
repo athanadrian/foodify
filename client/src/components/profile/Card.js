@@ -2,7 +2,7 @@ import { FaPhoneAlt } from 'react-icons/fa';
 import { MdBusiness, MdLink, MdLocationOn } from 'react-icons/md';
 import { Loading } from 'components';
 import UserHeader from 'components/UserHeader';
-import { useAppContext } from 'context/appContext';
+import { useAppContext } from 'context/contexts/appContext';
 import { useProfileContext } from 'context/contexts/profileContext';
 import Wrapper from 'wrappers/public-profile/Card';
 
@@ -30,6 +30,8 @@ const Card = () => {
         name={profile?.user?.name}
         alt={profile?.user?.name}
         username={profile?.user?.username}
+        lastName={profile?.user?.lastName}
+        email={profile?.user?.email}
         pageId={profile?.user?._id}
         loggedUserId={user?._id}
       />

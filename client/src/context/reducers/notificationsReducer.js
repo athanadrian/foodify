@@ -4,6 +4,7 @@ import {
   DELETE_NOTIFICATION_BEGIN,
   DELETE_NOTIFICATION_SUCCESS,
   DELETE_NOTIFICATION_ERROR,
+  SET_NOTIFICATIONS_TO_READ,
   CLEAR_ALERT,
 } from '../actions/notificationsActions';
 
@@ -60,6 +61,12 @@ const reducer = (state, action) => {
       showAlert: true,
       alertType: 'danger',
       alertText: action.payload.msg,
+    };
+  }
+
+  if (action.type === SET_NOTIFICATIONS_TO_READ) {
+    return {
+      ...state,
     };
   }
 

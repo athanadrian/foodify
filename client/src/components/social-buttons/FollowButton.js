@@ -1,5 +1,5 @@
 import { Alert, Loading } from 'components';
-import { useAppContext } from 'context/appContext';
+import { useAppContext } from 'context/contexts/appContext';
 import { useProfileContext } from 'context/contexts/profileContext';
 import Wrapper from 'wrappers/public-profile/FollowButton';
 

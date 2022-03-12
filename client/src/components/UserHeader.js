@@ -3,10 +3,10 @@ import { UserLink } from './notifications/UserLink';
 import { FollowButton } from './social-buttons';
 
 const UserHeader = ({
-  link,
   src,
   alt,
   name,
+  email,
   lastName,
   username,
   loggedUserId,
@@ -15,21 +15,35 @@ const UserHeader = ({
   const isOwnAccount = pageId === loggedUserId;
   return (
     <Wrapper>
-      <header>
-        <img src={src} alt={alt} />
+      {/* <img src={src} alt={alt} />
         <div>
-          {link ? (
-            <UserLink name={name} username={username} />
-          ) : (
-            <h5>
-              {name} {lastName}
-            </h5>
-          )}
+          <UserLink
+            isOwnAccount={isOwnAccount}
+            name={name}
+            lastName={lastName}
+            username={username}
+          />
           <p>@{username}</p>
         </div>
         {!isOwnAccount && (
           <FollowButton isOwnAccount={isOwnAccount} id={pageId} />
-        )}
+        )} */}
+      <header>
+        <img src={src} alt={alt} />
+        <div className='user-data-container'>
+          <div className='user-data'>
+            <UserLink isOwnAccount={isOwnAccount} username={username} />
+            <span className='full-name'>
+              {name} {lastName}
+            </span>
+            <div>
+              <a className='email' href={username}>
+                {email}
+              </a>
+            </div>
+          </div>
+          <FollowButton isOwnAccount={isOwnAccount} id={pageId} />
+        </div>
       </header>
     </Wrapper>
   );

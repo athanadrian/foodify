@@ -31,6 +31,13 @@ const Wrapper = styled.article`
     gap: 1.25rem 1rem;
     padding: 1rem 2rem;
   }
+
+  .follow-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   article {
     transition: var(--transition);
     padding: 0.15rem 0.5rem;
@@ -61,6 +68,8 @@ const Wrapper = styled.article`
       text-transform: capitalize;
       margin-left: 0.5rem;
       font-weight: 700;
+    }
+    span {
     }
   }
   @media (min-width: 992px) {

@@ -1,6 +1,6 @@
 import { useContext, createContext, useReducer } from 'react';
 import useClientApi from 'hooks/useClientApi';
-import reducer from './reducers/reducer';
+import reducer from '../reducers/appReducer';
 import {
   CLEAR_ALERT,
   DISPLAY_ALERT,
@@ -25,7 +25,7 @@ import {
   SET_USER_NOTIFICATIONS_TO_READ,
   ADD_FOLLOW_TO_USER_FOLLOWING_STATS,
   REMOVE_FOLLOW_FROM_USER_FOLLOWING_STATS,
-} from './actions/actions';
+} from '../actions/appActions';
 import useGeoLocation from 'hooks/useGeolocation';
 import { MAP_CENTER } from 'utils/constants';
 
@@ -122,19 +122,13 @@ const AppProvider = ({ children }) => {
     removeUserFromLocalStorage();
   };
 
-  const { clientApi, CancelTokenApi } = useClientApi(logoutUser);
-
   const setUserNotificationsToRead = async () => {
-    try {
-      await clientApi.post('/notifications');
-      dispatch({
-        type: SET_USER_NOTIFICATIONS_TO_READ,
-      });
-    } catch (error) {
-      console.log('Set Notifications error: ', error.response.data);
-      clearAlert();
-    }
+    dispatch({
+      type: SET_USER_NOTIFICATIONS_TO_READ,
+    });
   };
+
+  const { clientApi, CancelTokenApi } = useClientApi(logoutUser);
 
   const checkUsernameAvailability = async (username) => {
     dispatch({ type: CHECK_USERNAME_BEGIN });

@@ -165,10 +165,17 @@ export const updateUser = async (req, res, next) => {
 
   await user.save();
   const token = user.createJWT();
+  const userFollowStats = await Follow.findOne({ user: user._id });
 
   res
     .status(StatusCodes.OK)
-    .json({ user, token, home: user.home, location: user.location });
+    .json({
+      user,
+      userFollowStats,
+      token,
+      home: user.home,
+      location: user.location,
+    });
 };
 
 //@desc         Forgot Password

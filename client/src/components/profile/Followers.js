@@ -1,8 +1,8 @@
-import { FollowButton, Loading, NoFollowData } from 'components';
-import { UserLink } from 'components/notifications/UserLink';
-import { useAppContext } from 'context/appContext';
+import { Loading, NoFollowData } from 'components';
+import { useAppContext } from 'context/contexts/appContext';
 import { useProfileContext } from 'context/contexts/profileContext';
 import Wrapper from 'wrappers/public-profile/Followers';
+import { FollowUser } from '.';
 
 const Followers = () => {
   const { user } = useAppContext();
@@ -23,32 +23,19 @@ const Followers = () => {
     <Wrapper>
       <div className='followers'>
         {followers.map((follower) => {
-          const {
-            _id,
-            profilePicUrl: img,
-            name,
-            lastName,
-            username,
-            email,
-          } = follower?.user;
+          const { _id, profilePicUrl, name, lastName, username, email } =
+            follower?.user;
           return (
-            <article key={_id}>
-              <img src={img} alt={username} />
-              <div className='follow-container'>
-                <div className='user-data'>
-                  <UserLink username={username} />,
-                  <span className='full-name'>
-                    {name} {lastName}
-                  </span>
-                  <div>
-                    <a className='email' href={username}>
-                      {email}
-                    </a>
-                  </div>
-                </div>
-                <FollowButton isOwnAccount={_id === user._id} id={_id} />
-              </div>
-            </article>
+            <FollowUser
+              key={_id}
+              username={username}
+              img={profilePicUrl}
+              name={name}
+              lastName={lastName}
+              email={email}
+              profileUserId={_id}
+              loggedUserId={user._id}
+            />
           );
         })}
       </div>

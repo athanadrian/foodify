@@ -1,7 +1,6 @@
 import { Fragment, useEffect } from 'react';
 import { useNotificationsContext } from 'context/contexts/notificationsContext';
 import { Loading } from 'components';
-import { useAppContext } from 'context/appContext';
 import Wrapper from 'wrappers/NotificationsContainer';
 import PaginationContainer from './PaginationContainer';
 import Alert from './Alert';
@@ -13,7 +12,7 @@ import { useFoodyContext } from 'context/contexts/foodyContext';
 
 const NotificationsContainer = () => {
   const { getMyFoodys } = useFoodyContext();
-  const { setUserNotificationsToRead } = useAppContext();
+  const { setNotificationsToRead } = useNotificationsContext();
 
   const {
     isLoading,
@@ -24,9 +23,10 @@ const NotificationsContainer = () => {
     totalNotifications,
     numOfPages,
   } = useNotificationsContext();
+
   useEffect(() => {
     getMyFoodys();
-    setUserNotificationsToRead();
+    setNotificationsToRead();
 
     // eslint-disable-next-line
   }, []);

@@ -7,8 +7,10 @@ import {
   DELETE_NOTIFICATION_BEGIN,
   DELETE_NOTIFICATION_SUCCESS,
   DELETE_NOTIFICATION_ERROR,
+  SET_NOTIFICATIONS_TO_READ,
   CLEAR_ALERT,
 } from '../actions/notificationsActions';
+import { useAppContext } from 'context/contexts/appContext';
 
 const initialState = {
   isLoading: false,
@@ -26,6 +28,7 @@ const NotificationsContext = createContext();
 const NotificationsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { clientApi } = useClientApi();
+  const { setUserNotificationsToRead } = useAppContext();
 
   const clearAlert = () => {
     setTimeout(() => {
@@ -67,12 +70,26 @@ const NotificationsProvider = ({ children }) => {
     clearAlert();
   };
 
+  const setNotificationsToRead = async () => {
+    try {
+      await clientApi.post('/notifications');
+      dispatch({
+        type: SET_NOTIFICATIONS_TO_READ,
+      });
+      setUserNotificationsToRead();
+    } catch (error) {
+      console.log('Set Notifications error: ', error.response.data);
+    }
+    clearAlert();
+  };
+
   return (
     <NotificationsContext.Provider
       value={{
         ...state,
         getNotifications,
         deleteNotification,
+        setNotificationsToRead,
       }}
     >
       {children}

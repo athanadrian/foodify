@@ -8,7 +8,7 @@ import {
 } from 'react-icons/fa';
 import Wrapper from 'wrappers/Navbar';
 import { Logo } from '.';
-import { useAppContext } from 'context/appContext';
+import { useAppContext } from 'context/contexts/appContext';
 import { useFoodyContext } from 'context/contexts/foodyContext';
 
 const Navbar = ({ publicView }) => {

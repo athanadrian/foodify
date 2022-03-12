@@ -1,4 +1,4 @@
-import { useAppContext } from 'context/appContext';
+import { useAppContext } from 'context/contexts/appContext';
 import { NavLink } from 'react-router-dom';
 import { links } from 'utils/lookup-data';
 

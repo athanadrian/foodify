@@ -7,7 +7,7 @@ import { AiOutlineComment, AiOutlineEuro } from 'react-icons/ai';
 import { BsChevronDown, BsChevronUp, BsFillPinMapFill } from 'react-icons/bs';
 import { MdOutlineUpdate, MdOutlineRestaurant } from 'react-icons/md';
 
-import { useAppContext } from 'context/appContext';
+import { useAppContext } from 'context/contexts/appContext';
 import Wrapper from 'wrappers/Foody';
 import FoodyInfo from './FoodyInfo';
 import {

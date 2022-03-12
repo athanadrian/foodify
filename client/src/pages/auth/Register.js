@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaCheck } from 'react-icons/fa';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { Logo, FormInput, Alert, FormUsernameInput } from 'components';
-import { useAppContext } from 'context/appContext';
+import { useAppContext } from 'context/contexts/appContext';
 import Wrapper from 'wrappers/RegisterPage';
 
 const initialState = {

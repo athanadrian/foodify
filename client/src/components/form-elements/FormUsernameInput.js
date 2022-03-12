@@ -1,4 +1,4 @@
-import { useAppContext } from 'context/appContext';
+import { useAppContext } from 'context/contexts/appContext';
 
 const FormUsernameInput = ({
   className,

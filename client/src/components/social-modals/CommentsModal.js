@@ -1,4 +1,4 @@
-import { useAppContext } from 'context/appContext';
+import { useAppContext } from 'context/contexts/appContext';
 import { IoTrashOutline } from 'react-icons/io5';
 import { relativeDate } from 'utils/functions';
 import Wrapper from 'wrappers/SocialModal';
