@@ -148,6 +148,8 @@ const FoodyProvider = ({ children }) => {
   };
 
   const handleChange = ({ name, value }) => {
+    console.log('ctx name', name);
+    console.log('ctx value', value);
     dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
   };
 
@@ -311,7 +313,7 @@ const FoodyProvider = ({ children }) => {
         });
       }
     } catch (error) {
-      console.log('Likes Functionality: ', error.response.data.msg);
+      console.log('😱 Error Like/Unlike Foody: ', error.response.data.msg);
     }
     clearAlert();
   };
@@ -327,7 +329,7 @@ const FoodyProvider = ({ children }) => {
       });
       dispatch({ type: CLEAR_VALUES });
     } catch (error) {
-      console.log('Add Comment Functionality: ', error.response.data.msg);
+      console.log('😱 Error Add Comment to Foody: ', error.response.data.msg);
     }
     clearAlert();
   };
@@ -450,6 +452,26 @@ const FoodyProvider = ({ children }) => {
     clearAlert();
   };
 
+  const getProfileFoodys = async ({ username, label }) => {
+    const { page } = state;
+    let url = `/foodys/${username}?action=${label}&page=${page}`;
+
+    dispatch({ type: GET_FOODYS_BEGIN });
+    try {
+      const { data } = await clientApi.put(url);
+      const { foodys, totalFoodys, numOfPages } = data;
+      dispatch({
+        type: GET_FOODYS_SUCCESS,
+        payload: { foodys, totalFoodys, numOfPages },
+      });
+      setFoodysOrigin(false);
+    } catch (error) {
+      //logoutUser();
+      console.log('error', error.response);
+    }
+    clearAlert();
+  };
+
   const getFoody = async (slug) => {
     if (state.foodys.length === 0) await getMyFoodys();
     dispatch({ type: GET_FOODY_DETAIL, payload: { slug } });
@@ -524,6 +546,7 @@ const FoodyProvider = ({ children }) => {
         visitUnVisitFoody,
         addComment,
         removeComment,
+        getProfileFoodys,
       }}
     >
       {children}

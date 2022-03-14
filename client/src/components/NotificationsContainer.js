@@ -9,6 +9,7 @@ import LikeNotification from './notifications/LikeNotification';
 import VisitNotification from './notifications/VisitNotification';
 import FollowNotification from './notifications/FollowNotification';
 import { useFoodyContext } from 'context/contexts/foodyContext';
+import { NoNotifications } from './NoData';
 
 const NotificationsContainer = () => {
   const { getMyFoodys } = useFoodyContext();
@@ -33,12 +34,7 @@ const NotificationsContainer = () => {
 
   if (isLoading) return <Loading center max />;
 
-  if (totalNotifications === 0)
-    return (
-      <Wrapper>
-        <h2> No notifications to display.</h2>
-      </Wrapper>
-    );
+  if (totalNotifications === 0) return <NoNotifications />;
 
   return (
     <>

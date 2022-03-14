@@ -2,10 +2,17 @@ import { Card, Followers, Following, Social } from '.';
 import Wrapper from 'wrappers/public-profile/User';
 import { useEffect } from 'react';
 import { useProfileContext } from 'context/contexts/profileContext';
+import { Loading } from 'components';
 
 const User = () => {
-  const { profile, getUserFollowers, getUserFollowing, isFollowing } =
-    useProfileContext();
+  const {
+    profile,
+    isLoadingProfile,
+    getUserFollowers,
+    getUserFollowing,
+    isFollowing,
+  } = useProfileContext();
+
   const profileUserId = profile?.user?._id;
 
   useEffect(() => {
@@ -16,12 +23,13 @@ const User = () => {
     // eslint-disable-next-line
   }, [profile, profileUserId, !isFollowing]);
 
+  if (isLoadingProfile) return <Loading max center />;
   return (
     <Wrapper>
-      <Card profileUserId={profileUserId} />
+      <Card />
       <Social />
-      <Followers profileUserId={profileUserId} />
-      <Following profileUserId={profileUserId} />
+      <Followers />
+      <Following />
     </Wrapper>
   );
 };

@@ -132,9 +132,10 @@ export const updateProfile = async (req, res, next) => {
 export const getUserFollowers = async (req, res, next) => {
   const { userId } = req.params;
 
-  const user = await Follow.findOne({ user: userId }).populate(
-    'followers.user'
-  );
+  const user = await Follow.findOne({ user: userId }).populate({
+    path: 'followers.user',
+    select: '-resetPasswordAttempts',
+  });
   return res.status(StatusCodes.OK).json(user.followers);
 };
 
@@ -144,9 +145,10 @@ export const getUserFollowers = async (req, res, next) => {
 export const getUserFollowing = async (req, res, next) => {
   const { userId } = req.params;
 
-  const user = await Follow.findOne({ user: userId }).populate(
-    'following.user'
-  );
+  const user = await Follow.findOne({ user: userId }).populate({
+    path: 'following.user',
+    select: '-resetPasswordAttempts',
+  });
   return res.json(user.following);
 };
 

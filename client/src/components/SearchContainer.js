@@ -7,7 +7,7 @@ import {
 } from '.';
 import { useFoodyContext } from 'context/contexts/foodyContext';
 
-const SearchContainer = ({ all }) => {
+const SearchContainer = () => {
   const {
     isFoodyLoading,
     search,
@@ -26,6 +26,7 @@ const SearchContainer = ({ all }) => {
     sortOptions,
     handleChange,
     clearFilters,
+    isMyFoodys,
   } = useFoodyContext();
 
   const handleSearch = (e) => {
@@ -90,7 +91,7 @@ const SearchContainer = ({ all }) => {
             min={min_distance}
             max={max_distance}
           /> */}
-          {!all && (
+          {isMyFoodys && (
             <FormEnumSelect
               name='searchStatus'
               value={searchStatus}

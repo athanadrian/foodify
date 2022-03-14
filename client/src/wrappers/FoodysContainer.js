@@ -8,6 +8,10 @@ const Wrapper = styled.section`
   & > h5 {
     font-weight: 700;
   }
+  .action {
+    text-transform: none !important;
+    color: ${(props) => props.color} !important;
+  }
   .foodys {
     display: grid;
     grid-template-columns: 1fr;

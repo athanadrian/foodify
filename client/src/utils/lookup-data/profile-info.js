@@ -19,6 +19,8 @@ const profileInfo = ({
       label: 'creations',
       value: totalCreations,
       color: 'green',
+      hexColor: '#2cb1bc',
+      action: 'created',
     },
     {
       id: 2,
@@ -26,6 +28,8 @@ const profileInfo = ({
       label: 'followers',
       value: totalFollowers,
       color: 'pink',
+      hexColor: '#da4a91',
+      action: 'followed',
     },
     {
       id: 3,
@@ -33,6 +37,8 @@ const profileInfo = ({
       label: 'following',
       value: totalFollowing,
       color: 'purple',
+      hexColor: '#5d55fa',
+      action: 'following',
     },
     {
       id: 4,
@@ -40,6 +46,8 @@ const profileInfo = ({
       label: 'likes',
       value: totalLikes,
       color: 'red',
+      hexColor: '#842029',
+      action: 'liked',
     },
     {
       id: 5,
@@ -47,6 +55,8 @@ const profileInfo = ({
       label: 'visits',
       value: totalVisits,
       color: 'blue',
+      hexColor: '#0369a1',
+      action: 'visited',
     },
     {
       id: 6,
@@ -54,6 +64,8 @@ const profileInfo = ({
       label: 'comments',
       value: totalComments,
       color: 'grey',
+      hexColor: '#334e68',
+      action: 'commented',
     },
   ];
 };

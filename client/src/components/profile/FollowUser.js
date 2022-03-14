@@ -23,10 +23,8 @@ const FollowUser = ({
           <span className='full-name'>
             {name} {lastName}
           </span>
-          <div>
-            <a className='email' href={username}>
-              {email}
-            </a>
+          <div className='email'>
+            <a href={username}>{email}</a>
           </div>
         </div>
         <FollowButton

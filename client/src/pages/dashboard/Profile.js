@@ -20,7 +20,6 @@ const Profile = () => {
     getUserProfile(username);
     // eslint-disable-next-line
   }, [username]);
-  //console.log(profile);
   return (
     <>
       <div className='dashboard-page'>

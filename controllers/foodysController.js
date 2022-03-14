@@ -144,6 +144,45 @@ export const getMyFoodys = async (req, res, next) => {
   res.status(StatusCodes.OK).json({ myFoodys, totalFoodys, numOfPages });
 };
 
+//@desc         Get User Profile Foodys (Liked/Visited/Commented)
+//@route        GET /api/v1/foodys/:username
+//@access       Private
+export const getProfileFoodys = async (req, res, next) => {
+  const { username } = req.params;
+  const { action } = req.query;
+  let queryObj = {};
+  const user = await User.findOne({ username: username.toLowerCase() });
+
+  if (!user) {
+    throw new NotFoundError('User not found!');
+  }
+
+  if (action === 'creations') queryObj = { createdBy: user._id };
+  if (action === 'likes') queryObj = { 'likes.user': user._id };
+  if (action === 'visits') queryObj = { 'visits.user': user._id };
+  if (action === 'comments') queryObj = { 'comments.user': user._id };
+
+  let result = Foody.find(queryObj);
+
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
+
+  result = result
+    .skip(skip)
+    .limit(limit)
+    .populate({ path: 'createdBy', select: '-resetPasswordAttempts' })
+    .populate({ path: 'likes.user', select: '-resetPasswordAttempts' })
+    .populate({ path: 'visits.user', select: '-resetPasswordAttempts' })
+    .populate({ path: 'comments.user', select: '-resetPasswordAttempts' });
+  const foodys = await result;
+
+  const totalFoodys = await Foody.countDocuments(queryObj);
+  const numOfPages = Math.ceil(totalFoodys / limit);
+
+  res.status(StatusCodes.OK).json({ foodys, totalFoodys, numOfPages });
+};
+
 //@desc         Get single foody
 //@route        GET /api/v1/foodys/:id (foodyId)
 //@access       Private
@@ -226,6 +265,7 @@ export const getAllStats = async (req, res, next) => {
 
   const fetchAllStatsByKey = async (key) => {
     let stats = await Foody.aggregate([
+      { $match: { status: 'published' } },
       { $group: { _id: `$${key}`, count: { $sum: 1 } } },
     ]);
     return arrayToObject(stats);

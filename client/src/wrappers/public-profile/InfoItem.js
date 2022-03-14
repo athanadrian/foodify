@@ -1,20 +1,16 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem 2rem;
-  @media (min-width: 640px) {
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  }
   .item {
-    border-radius: var(--radius);
+    border-top: 1px solid ${(props) => props.color};
+    border-radius: var(--borderRadius);
     padding: 1rem 2rem;
     background: var(--white);
     display: grid;
     grid-template-columns: auto 1fr;
     column-gap: 3rem;
     align-items: center;
+    line-height: 1.75 !important;
     span {
       width: 3rem;
       height: 3rem;
@@ -26,6 +22,7 @@ const Wrapper = styled.section`
       font-size: 1.5rem;
     }
     h3 {
+      color: ${(props) => props.color};
       letter-spacing: 0;
       text-transform: capitalize;
       line-height: 1.25;
@@ -38,6 +35,7 @@ const Wrapper = styled.section`
       text-transform: capitalize;
       color: var(--grey-400);
     }
+
     .pink {
       background: #ffe0f0;
       color: #da4a91;

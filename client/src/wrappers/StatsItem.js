@@ -4,11 +4,15 @@ const Wrapper = styled.article`
   padding: 2rem;
   background: var(--white);
   border-radius: var(--borderRadius);
-  border-bottom: 5px solid ${(props) => props.color};
+  border-bottom: 1px solid ${(props) => props.color};
+
   header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+  .stat-link {
+    line-height: 1.75 !important;
   }
   .count {
     display: block;
@@ -22,6 +26,7 @@ const Wrapper = styled.article`
     letter-spacing: var(--letterSpacing);
     text-align: left;
     margin-top: 0.5rem;
+    color: var(--grey-700);
   }
   .icon {
     width: 70px;

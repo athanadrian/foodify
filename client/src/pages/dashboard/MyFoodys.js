@@ -12,7 +12,7 @@ const MyFoodys = () => {
   return (
     <div className='dashboard-page'>
       <SearchContainer />
-      <FoodysContainer />
+      <FoodysContainer my />
       <Modal open={showModal} onClose={toggleModal} center>
         <FoodyModal />
       </Modal>

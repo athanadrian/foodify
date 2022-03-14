@@ -10,7 +10,7 @@ const AllFoodies = () => {
   const { showModal, toggleModal } = useFoodyContext();
   return (
     <div className='dashboard-page'>
-      <SearchContainer all />
+      <SearchContainer />
       <FoodysContainer all />
       <Modal open={showModal} onClose={toggleModal} center>
         <FoodyModal />

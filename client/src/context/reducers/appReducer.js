@@ -211,7 +211,6 @@ const reducer = (state, action) => {
   }
 
   if (action.type === UPDATE_USER_SUCCESS) {
-    console.log('edit', state);
     return {
       ...state,
       isLoading: false,

@@ -59,7 +59,9 @@ const Wrapper = styled.article`
       text-transform: none;
     }
     .email {
-      color: var(--grey-500);
+      a {
+        color: var(--grey-500);
+      }
     }
     .username {
       text-transform: none;
@@ -72,7 +74,13 @@ const Wrapper = styled.article`
   }
 
   @media (min-width: 992px) {
+    .followers {
+      padding: 0;
+    }
     .full-name {
+      display: none;
+    }
+    .email {
       display: none;
     }
   }

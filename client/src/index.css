@@ -375,6 +375,7 @@ ul {
 .user-link-own {
   color: var(--grey-500);
   letter-spacing: 0.1rem;
+  text-transform: none;
 }
 .user-link {
   color: var(--blue-dark);

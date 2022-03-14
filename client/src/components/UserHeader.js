@@ -15,19 +15,6 @@ const UserHeader = ({
   const isOwnAccount = pageId === loggedUserId;
   return (
     <Wrapper>
-      {/* <img src={src} alt={alt} />
-        <div>
-          <UserLink
-            isOwnAccount={isOwnAccount}
-            name={name}
-            lastName={lastName}
-            username={username}
-          />
-          <p>@{username}</p>
-        </div>
-        {!isOwnAccount && (
-          <FollowButton isOwnAccount={isOwnAccount} id={pageId} />
-        )} */}
       <header>
         <img src={src} alt={alt} />
         <div className='user-data-container'>

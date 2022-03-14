@@ -11,7 +11,10 @@ export const getNotifications = async (req, res, next) => {
   const { userId } = req.user;
 
   const user = await Notification.findOne({ toUser: userId })
-    .populate('notifications.fromUser')
+    .populate({
+      path: 'notifications.fromUser',
+      select: '-resetPasswordAttempts',
+    })
     .populate('notifications.foody');
 
   res.status(StatusCodes.OK).json({

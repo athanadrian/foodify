@@ -50,7 +50,7 @@ TODO
 
 > 24. Remove Geolib from server
 
-> 25. Merge reset/forgot password
+> ~~25. Merge reset/forgot password~~
 
 > ~~26. Open foody to google maps page~~
 
@@ -62,7 +62,17 @@ TODO
 
 > ~~30. Add Site,company, mobile to profile~~
 
-> 31. Remove authContext
+> ~~31. Remove authContext~~
+
+> ~~32. Fix profile-info colors~~
+
+> ~~33. Implement NoData css~~
+
+> ~~34. Remove Reset Password Attempts (populate)~~
+
+> 35. Implement Search by distance
+
+> 36. Setup Production DB
 
 # Foodify
 

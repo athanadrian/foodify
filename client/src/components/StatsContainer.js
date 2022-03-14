@@ -8,7 +8,7 @@ import {
 } from 'utils/stats';
 
 const StatsContainer = ({ all }) => {
-  const { getAllStats, getUserStats, isFoodyLoading, stats } =
+  const { getAllStats, getUserStats, isFoodyLoading, stats, clearFilters } =
     useFoodyContext();
   const { defaultCuisineStats, defaultCostStats, defaultFoodyStats } = stats;
 
@@ -21,6 +21,11 @@ const StatsContainer = ({ all }) => {
     // eslint-disable-next-line
   }, [all]);
 
+  useEffect(() => {
+    clearFilters();
+
+    // eslint-disable-next-line
+  }, []);
   if (isFoodyLoading) return <Loading center max />;
 
   return (

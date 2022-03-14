@@ -1,4 +1,4 @@
-import PublicProfile from 'pages/PublicProfile';
+//import PublicProfile from 'pages/PublicProfile';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {
   Error,
@@ -14,6 +14,7 @@ import {
   Profile,
   Stats,
   MyFoodys,
+  ProfileFoodys,
   Map,
   Notifications,
   EditUser,
@@ -46,6 +47,7 @@ const App = () => {
           <Route index element={<Stats />} />
           <Route path='all-foodys' element={<AllFoodys />} />
           <Route path='my-foodys' element={<MyFoodys />} />
+          <Route path='profile-foodys/:username' element={<ProfileFoodys />} />
           <Route path='add-foody' element={<AddFoody />} />
           <Route path='edit' element={<EditUser />} />
           <Route path='/profile/:username' element={<Profile />} />
