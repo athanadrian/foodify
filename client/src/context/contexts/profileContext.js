@@ -64,7 +64,7 @@ const ProfileProvider = ({ children }) => {
       const { profile } = data;
       dispatch({ type: GET_MY_PROFILE_SUCCESS, payload: { profile } });
     } catch (error) {
-      console.log('Get My Profile Error: ', error.response.data.msg);
+      console.log('😱 Error Get My Profile: ', error.response.data.msg);
     }
   };
 
@@ -94,7 +94,7 @@ const ProfileProvider = ({ children }) => {
         },
       });
     } catch (error) {
-      console.log('Get User Profile Error: ', error.response.data.msg);
+      console.log('😱 Error Get User Profile: ', error.response.data.msg);
     }
   };
 
@@ -124,7 +124,7 @@ const ProfileProvider = ({ children }) => {
       const { data } = await clientApi.get(`/profile/followers/${userId}`);
       dispatch({ type: GET_FOLLOWERS_SUCCESS, payload: { followers: data } });
     } catch (error) {
-      console.log('Follower user error: ', error.response.data);
+      console.log('😱 Error Follower user: ', error.response.data);
     }
   };
 
@@ -134,7 +134,7 @@ const ProfileProvider = ({ children }) => {
       const { data } = await clientApi.get(`/profile/following/${userId}`);
       dispatch({ type: GET_FOLLOWING_SUCCESS, payload: { following: data } });
     } catch (error) {
-      console.log('Following user error: ', error.response.data);
+      console.log('😱 Error Following user: ', error.response.data);
     }
   };
 
@@ -149,7 +149,7 @@ const ProfileProvider = ({ children }) => {
         type: FOLLOW_USER_ERROR,
         payload: { msg: error.response.data.msg },
       });
-      console.log('Follow user error: ', error.response.data);
+      console.log('😱 Error Follow user: ', error.response.data);
     }
   };
 
@@ -164,7 +164,7 @@ const ProfileProvider = ({ children }) => {
         type: UN_FOLLOW_USER_ERROR,
         payload: { msg: error.response.data.msg },
       });
-      console.log('Follow user error: ', error.response.data);
+      console.log('😱 Error UnFollow user: ', error.response.data);
     }
   };
 

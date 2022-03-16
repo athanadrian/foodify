@@ -7,7 +7,7 @@ import { FiMapPin } from 'react-icons/fi';
 import { AiOutlineEuro } from 'react-icons/ai';
 import { TiDocumentText } from 'react-icons/ti';
 import { BsFillPinMapFill } from 'react-icons/bs';
-import { MdOutlineUpdate, MdOutlineRestaurant } from 'react-icons/md';
+import { MdOutlineUpdate } from 'react-icons/md';
 
 import { useAppContext } from 'context/contexts/appContext';
 import Wrapper from 'wrappers/FoodyDetail';
@@ -19,7 +19,7 @@ import {
   //getPreciseFoodyDistance,
   computeDistance,
 } from 'utils/functions';
-import { costs, foodys } from 'utils/lookup-data';
+import { costs, types, foodys } from 'utils/lookup-data';
 import GoogleMapsLink from './GoogleMapsLink';
 import { useFoodyContext } from 'context/contexts/foodyContext';
 
@@ -42,6 +42,7 @@ const FoodyDetail = () => {
     village,
     cuisine,
     cost,
+    type,
     createdAt,
     updatedAt,
     foody,
@@ -53,6 +54,7 @@ const FoodyDetail = () => {
   const relativeUpdate = moment(updatedAt).startOf('day').fromNow();
   const relativeCreated = moment(createdAt).startOf('day').fromNow();
   const costObj = mapEnumObject(cost, costs);
+  const typeObj = mapEnumObject(type, types);
   const foodyObj = mapEnumObject(foody, foodys);
   const isPublished = status === 'published';
   const distanceFromMyLocation = computeDistance(
@@ -94,6 +96,12 @@ const FoodyDetail = () => {
             text={`${distanceFromHomeLocation} Km`}
           />
           <FoodyInfo
+            tooltip='Preferable for'
+            icon={typeObj.icon}
+            label='Preferable'
+            text={typeObj.text}
+          />
+          <FoodyInfo
             tooltip='Cuisine Origin'
             icon={<FaRegFlag />}
             label='Cuisine'
@@ -101,8 +109,8 @@ const FoodyDetail = () => {
           />
           <FoodyInfo
             tooltip='Type of Restaurant'
-            icon={<MdOutlineRestaurant size={20} />}
-            label='style'
+            icon={foodyObj.icon}
+            label='Menu'
             text={foodyObj.text}
           />
           <div className='cost-container'>

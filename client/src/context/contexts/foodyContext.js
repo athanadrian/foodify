@@ -44,9 +44,10 @@ import {
   SET_USER_CURRENT_LOCATION,
   GET_GOOGLE_API_KEY,
 } from '../actions/foodyActions';
-import { costs, cuisines, foodys, statuses } from 'utils/lookup-data';
+import { costs, cuisines, types, foodys, statuses } from 'utils/lookup-data';
 import useGeoLocation from 'hooks/useGeolocation';
 import { MAP_CENTER } from 'utils/constants';
+import { useAppContext } from './appContext';
 
 const initialState = {
   isFoodyLoading: false,
@@ -68,13 +69,14 @@ const initialState = {
   village: '',
   remarks: '',
   cuisine: 'greek',
+  type: 'lunch',
   foody: 'alaCarte',
   cost: 'average',
   status: 'unpublished',
-  distance: '',
   commentText: '',
   foodyLocation: MAP_CENTER,
   cuisineOptions: cuisines,
+  typeOptions: types,
   foodyOptions: foodys,
   costOptions: costs,
   statusOptions: statuses,
@@ -88,12 +90,13 @@ const initialState = {
   foodyLikes: [],
   search: '',
   searchCuisine: 'all',
+  searchType: 'all',
   searchFoody: 'all',
   searchCost: 'all',
   searchStatus: 'all',
   searchDistance: 0,
   min_distance: 0,
-  max_distance: 0,
+  max_distance: 500,
   sort: 'latest-created',
   sortOptions: [
     'latest-created',
@@ -109,7 +112,7 @@ const FoodyContext = createContext();
 
 const FoodyProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
+  const { homeLocation } = useAppContext();
   const currentLocation = useGeoLocation();
   state.myLocation = currentLocation;
 
@@ -148,8 +151,9 @@ const FoodyProvider = ({ children }) => {
   };
 
   const handleChange = ({ name, value }) => {
-    console.log('ctx name', name);
-    console.log('ctx value', value);
+    if (name === 'searchDistance') {
+      value = Number(value);
+    }
     dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
   };
 
@@ -234,6 +238,7 @@ const FoodyProvider = ({ children }) => {
         foodyLocation,
         remarks,
         cuisine,
+        type,
         foody,
         cost,
         status,
@@ -244,6 +249,7 @@ const FoodyProvider = ({ children }) => {
         location: foodyLocation,
         remarks,
         cuisine,
+        type,
         foody,
         cost,
         status,
@@ -339,7 +345,10 @@ const FoodyProvider = ({ children }) => {
       await clientApi.delete(`/foodys/${foodyId}/${commentId}`);
       dispatch({ type: REMOVE_COMMENT, payload: { foodyId, commentId } });
     } catch (error) {
-      console.log('Remove Comment Functionality: ', error.response.data.msg);
+      console.log(
+        '😱 Error Remove Comment Functionality: ',
+        error.response.data.msg
+      );
     }
   };
 
@@ -361,7 +370,7 @@ const FoodyProvider = ({ children }) => {
         });
       }
     } catch (error) {
-      console.log('Visits Functionality: ', error.response.data.msg);
+      console.log('😱 Error Visits Functionality: ', error.response.data.msg);
     }
     clearAlert();
   };
@@ -382,7 +391,7 @@ const FoodyProvider = ({ children }) => {
         type: GET_FOODY_LIKES_ERROR,
         payload: { msg: error.response.data.msg },
       });
-      console.log(error.response);
+      console.log('😱 Error Visits Functionality: ', error.response.data.msg);
     }
     clearAlert();
   };
@@ -396,10 +405,17 @@ const FoodyProvider = ({ children }) => {
   };
 
   const getAllFoodys = async () => {
-    const { search, searchCuisine, searchFoody, searchCost, sort, page } =
-      state;
+    const {
+      search,
+      searchCuisine,
+      searchType,
+      searchFoody,
+      searchCost,
+      sort,
+      page,
+    } = state;
 
-    let url = `/foodys?status=published&cuisine=${searchCuisine}&cost=${searchCost}&foody=${searchFoody}&sort=${sort}&page=${page}`;
+    let url = `/foodys?status=published&cuisine=${searchCuisine}&type=${searchType}&cost=${searchCost}&foody=${searchFoody}&sort=${sort}&page=${page}`;
     if (search) {
       url = `${url}&search=${search}`;
     }
@@ -410,12 +426,12 @@ const FoodyProvider = ({ children }) => {
       const { foodys, totalFoodys, numOfPages } = data;
       dispatch({
         type: GET_FOODYS_SUCCESS,
-        payload: { foodys, totalFoodys, numOfPages },
+        payload: { foodys, totalFoodys, numOfPages, homeLocation },
       });
       setFoodysOrigin(false);
     } catch (error) {
       //logoutUser();
-      console.log('error', error.response);
+      console.log('😱 Error Get all foodys', error.response);
     }
     clearAlert();
   };
@@ -424,15 +440,15 @@ const FoodyProvider = ({ children }) => {
     const {
       search,
       searchCuisine,
+      searchType,
       searchFoody,
       searchCost,
       searchStatus,
-      //searchPreference,
       sort,
       page,
     } = state;
 
-    let url = `/foodys/my?cuisine=${searchCuisine}&cost=${searchCost}&status=${searchStatus}&foody=${searchFoody}&sort=${sort}&page=${page}`;
+    let url = `/foodys/my?cuisine=${searchCuisine}&type=${searchType}&cost=${searchCost}&status=${searchStatus}&foody=${searchFoody}&sort=${sort}&page=${page}`;
     if (search) {
       url = `${url}&search=${search}`;
     }
@@ -442,12 +458,12 @@ const FoodyProvider = ({ children }) => {
       const { myFoodys, totalFoodys, numOfPages } = data;
       dispatch({
         type: GET_FOODYS_SUCCESS,
-        payload: { foodys: myFoodys, totalFoodys, numOfPages },
+        payload: { foodys: myFoodys, totalFoodys, numOfPages, homeLocation },
       });
       setFoodysOrigin(true);
     } catch (error) {
       //logoutUser();
-      console.log('error', error.response);
+      console.log('😱 Error Get my foodys', error.response);
     }
     clearAlert();
   };
@@ -462,12 +478,12 @@ const FoodyProvider = ({ children }) => {
       const { foodys, totalFoodys, numOfPages } = data;
       dispatch({
         type: GET_FOODYS_SUCCESS,
-        payload: { foodys, totalFoodys, numOfPages },
+        payload: { foodys, totalFoodys, numOfPages, homeLocation },
       });
       setFoodysOrigin(false);
     } catch (error) {
       //logoutUser();
-      console.log('error', error.response);
+      console.log('😱 Error Get profile foodys', error.response);
     }
     clearAlert();
   };
@@ -490,7 +506,7 @@ const FoodyProvider = ({ children }) => {
         },
       });
     } catch (error) {
-      console.log(error.response);
+      console.log('😱 Error Get foody', error.response);
     }
     clearAlert();
   };
@@ -508,7 +524,7 @@ const FoodyProvider = ({ children }) => {
         },
       });
     } catch (error) {
-      console.log(error.response);
+      console.log('😱 Error Get all stats', error.response);
     }
     clearAlert();
   };

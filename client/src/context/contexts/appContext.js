@@ -151,7 +151,6 @@ const AppProvider = ({ children }) => {
         payload: { msg: error.response.data.msg },
       });
     }
-    //clearAlert();
   };
 
   const signUser = async ({ endPoint, currentUser, alertText }) => {

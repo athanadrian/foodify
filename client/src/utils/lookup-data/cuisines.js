@@ -10,7 +10,7 @@ const cuisines = [
   },
   {
     id: 2,
-    text: 'italian',
+    text: 'Italian',
     enum: 'italian',
     icon: <FaFlag />,
     desc: 'italian',

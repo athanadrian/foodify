@@ -20,12 +20,5 @@ const costs = [
     icon: '25-35 €€€',
     desc: '25-35',
   },
-  //   {
-  //     id: 4,
-  //     text: 'very expensive',
-  //     enum: 'very expensive',
-  //     icon: '€€€€',
-  //     desc: icon: '€€€€',
-  //   },
 ];
 export default costs;

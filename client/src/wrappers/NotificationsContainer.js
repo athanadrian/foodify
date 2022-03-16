@@ -32,7 +32,6 @@ const Wrapper = styled.section`
     text-transform: uppercase;
     color: var(--white);
     margin-right: 1rem;
-    ///align-self: center;
   }
   .profile-info {
     display: flex;

@@ -5,7 +5,7 @@ import { FaRegFlag, FaRegCalendarPlus } from 'react-icons/fa';
 import { GiPathDistance } from 'react-icons/gi';
 import { AiOutlineComment, AiOutlineEuro } from 'react-icons/ai';
 import { BsChevronDown, BsChevronUp, BsFillPinMapFill } from 'react-icons/bs';
-import { MdOutlineUpdate, MdOutlineRestaurant } from 'react-icons/md';
+import { MdOutlineUpdate } from 'react-icons/md';
 
 import { useAppContext } from 'context/contexts/appContext';
 import Wrapper from 'wrappers/Foody';
@@ -18,7 +18,7 @@ import {
   relativeDate,
   formatDate,
 } from 'utils/functions';
-import { costs, foodys } from 'utils/lookup-data';
+import { costs, foodys, types } from 'utils/lookup-data';
 import {
   LikesModal,
   VisitsModal,
@@ -35,6 +35,7 @@ const Foody = ({
   title,
   village,
   cuisine,
+  type,
   cost,
   createdAt,
   updatedAt,
@@ -46,7 +47,6 @@ const Foody = ({
   likes,
   visits,
   comments,
-  // preference,
 }) => {
   const { user, homeLocation } = useAppContext();
   const {
@@ -69,6 +69,7 @@ const Foody = ({
   );
   const costObj = mapEnumObject(cost, costs);
   const foodyObj = mapEnumObject(foody, foodys);
+  const typeObj = mapEnumObject(type, types);
   const isPublished = status === 'published';
   const isLiked = likes.filter((like) => like.user._id === user._id).length > 0;
   const isVisited =
@@ -154,7 +155,6 @@ const Foody = ({
             >
               <calculationConfig.TopIcon />
             </div>
-            {/* <div className={`status ${status}`}>{status}</div> */}
           </div>
         </header>
         <div className='content'>
@@ -177,7 +177,7 @@ const Foody = ({
             />
             <FoodyInfo
               tooltip='Type of Restaurant'
-              icon={<MdOutlineRestaurant size={20} />}
+              icon={foodyObj.icon}
               text={foodyObj.text}
             />
             <FoodyInfo
@@ -190,6 +190,11 @@ const Foody = ({
               tooltip={calculationConfig.tooltip}
               icon={<calculationConfig.Icon size={24} />}
               text={`(${calculationConfig.text}) ${distance} Km`}
+            />
+            <FoodyInfo
+              tooltip={calculationConfig.tooltip}
+              icon={typeObj.icon}
+              text={typeObj.text}
             />
             <FoodyInfo
               tooltip='remarks'

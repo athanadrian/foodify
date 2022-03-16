@@ -4,15 +4,22 @@ import { Loading, StatsContainerRow } from '.';
 import {
   costDefaultStats,
   cuisineDefaultStats,
+  typeDefaultStats,
   foodyDefaultStats,
 } from 'utils/stats';
 
 const StatsContainer = ({ all }) => {
   const { getAllStats, getUserStats, isFoodyLoading, stats, clearFilters } =
     useFoodyContext();
-  const { defaultCuisineStats, defaultCostStats, defaultFoodyStats } = stats;
+  const {
+    defaultCuisineStats,
+    defaultTypeStats,
+    defaultCostStats,
+    defaultFoodyStats,
+  } = stats;
 
   const cuisineStats = cuisineDefaultStats(defaultCuisineStats);
+  const typeStats = typeDefaultStats(defaultTypeStats);
   const costStats = costDefaultStats(defaultCostStats);
   const foodyStats = foodyDefaultStats(defaultFoodyStats);
 
@@ -31,6 +38,7 @@ const StatsContainer = ({ all }) => {
   return (
     <>
       <StatsContainerRow title='cuisine' list={cuisineStats} />
+      <StatsContainerRow title='Preferable' list={typeStats} />
       <StatsContainerRow title='foody' list={foodyStats} />
       <StatsContainerRow title='cost' list={costStats} />
     </>

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFoodyContext } from 'context/contexts/foodyContext';
 import { Foody, Loading } from 'components';
 import Wrapper from 'wrappers/FoodysContainer';
@@ -23,10 +23,11 @@ const FoodysContainer = ({
     totalFoodys,
     search,
     searchCuisine,
+    searchType,
     searchFoody,
     searchCost,
     searchStatus,
-    searchPreference,
+    searchDistance,
     sort,
     numOfPages,
     page,
@@ -41,7 +42,7 @@ const FoodysContainer = ({
   const { state } = useLocation();
 
   const isOwnAccount = profileUserId === user?._id;
-
+  const [filterFoodys, setFilterFoodys] = useState(foodys);
   useEffect(() => {
     if (state?.category && state?.enumQuery)
       handleChange({
@@ -51,22 +52,6 @@ const FoodysContainer = ({
 
     // eslint-disable-next-line
   }, [state?.enumQuery, state?.category]);
-
-  const renderNoFoodys = (status) => {
-    return (
-      <>
-        {(status === all || status === my) && (
-          <h2> No foodys {all ? 'to display' : 'created yet'}...</h2>
-        )}
-        {status === profile && (
-          <h2>
-            <UserLink isOwnAccount={isOwnAccount} username={username} />{' '}
-            <span className='action'>{action}</span> : 0 Foodys!
-          </h2>
-        )}
-      </>
-    );
-  };
 
   useEffect(() => {
     if (all) getAllFoodys();
@@ -81,14 +66,36 @@ const FoodysContainer = ({
     page,
     search,
     searchCuisine,
+    searchType,
     searchFoody,
     searchCost,
     searchStatus,
-    searchPreference,
     sort,
     state?.enumQuery,
     state?.category,
   ]);
+
+  const filterFoodysByDistance = () => {
+    let tempFoodys = [...foodys];
+    tempFoodys = tempFoodys.filter(
+      (foody) => foody.distanceFromCurrentLocation <= searchDistance
+    );
+    return tempFoodys;
+  };
+
+  useEffect(() => {
+    if (searchDistance === 0) {
+      setFilterFoodys(foodys);
+    } else {
+      setFilterFoodys(filterFoodysByDistance());
+    }
+    // eslint-disable-next-line
+  }, [searchDistance, foodys]);
+
+  useEffect(() => {
+    setFilterFoodys(foodys);
+  }, [foodys]);
+
   if (isFoodyLoading) return <Loading center max />;
 
   if (totalFoodys === 0)
@@ -115,11 +122,11 @@ const FoodysContainer = ({
               <span className='action'>{action}</span>:{' '}
             </>
           )}
-          {totalFoodys} foody{foodys.length > 1 && 's'}{' '}
+          {filterFoodys.length} foody{filterFoodys.length > 1 && 's'}{' '}
           {!profile && <>{!isMyFoodys ? 'found' : 'created'}</>}
         </h5>
         <div className='foodys'>
-          {foodys.map((foody) => (
+          {filterFoodys.map((foody) => (
             <Foody key={foody._id} {...foody} />
           ))}
         </div>

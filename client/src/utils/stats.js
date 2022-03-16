@@ -1,4 +1,4 @@
-import { costs, foodys, cuisines } from './lookup-data';
+import { costs, types, foodys, cuisines } from './lookup-data';
 
 export const cuisineDefaultStats = (stats) => {
   return [
@@ -8,8 +8,8 @@ export const cuisineDefaultStats = (stats) => {
       category: 'Cuisine',
       count: stats?.greek || 1,
       icon: cuisines[0].icon,
-      color: '#1e40af',
-      bcg: '#60a5fa',
+      color: '#0369a1',
+      bcg: '#7dd3fc',
     },
     {
       title: cuisines[1].text,
@@ -17,8 +17,8 @@ export const cuisineDefaultStats = (stats) => {
       category: 'Cuisine',
       count: stats?.italian || 0,
       icon: cuisines[1].icon,
-      color: '#486581',
-      bcg: '#54d1db',
+      color: '#0f5132',
+      bcg: '#d1e7dd',
     },
     {
       title: cuisines[2].text,
@@ -40,6 +40,55 @@ export const cuisineDefaultStats = (stats) => {
     },
   ];
 };
+export const typeDefaultStats = (stats) => {
+  return [
+    {
+      title: types[0].text,
+      enumQuery: types[0].enum,
+      category: 'Type',
+      count: stats?.breakfast || 0,
+      icon: types[0].icon,
+      color: '#0369a1',
+      bcg: '#7dd3fc',
+    },
+    {
+      title: types[1].text,
+      enumQuery: types[1].enum,
+      category: 'Type',
+      count: stats?.brunch || 0,
+      icon: types[1].icon,
+      color: '#0f5132',
+      bcg: '#d1e7dd',
+    },
+    {
+      title: types[2].text,
+      enumQuery: types[2].enum,
+      category: 'Type',
+      count: stats?.lunch || 0,
+      icon: types[2].icon,
+      color: '#d66a6a',
+      bcg: '#ffeeee',
+    },
+    {
+      title: types[3].text,
+      enumQuery: types[3].enum,
+      category: 'Type',
+      count: stats?.dinner || 0,
+      icon: types[3].icon,
+      color: '#f0b429',
+      bcg: '#fffbea',
+    },
+    {
+      title: types[4].text,
+      enumQuery: types[4].enum,
+      category: 'Type',
+      count: stats?.drink || 0,
+      icon: types[4].icon,
+      color: '#da4a91',
+      bcg: '#ffe0f0',
+    },
+  ];
+};
 
 export const costDefaultStats = (stats) => {
   return [
@@ -49,8 +98,8 @@ export const costDefaultStats = (stats) => {
       category: 'Cost',
       count: stats?.cheap || 0,
       icon: `${costs[0].desc} €`,
-      color: '#e9b949',
-      bcg: '#fcefc7',
+      color: '#f0b429',
+      bcg: '#fffbea',
     },
     {
       title: costs[1].text,
@@ -58,8 +107,8 @@ export const costDefaultStats = (stats) => {
       category: 'Cost',
       count: stats?.average || 0,
       icon: `${costs[1].desc} €€`,
-      color: '#486581',
-      bcg: '#54d1db',
+      color: '#0f5132',
+      bcg: '#d1e7dd',
     },
     {
       title: costs[2].text,
@@ -81,8 +130,8 @@ export const foodyDefaultStats = (stats) => {
       category: 'Foody',
       count: stats?.meze || 0,
       icon: foodys[0].icon,
-      color: '#e9b949',
-      bcg: '#fcefc7',
+      color: '#f0b429',
+      bcg: '#fffbea',
     },
     {
       title: foodys[1].text,
@@ -90,8 +139,8 @@ export const foodyDefaultStats = (stats) => {
       category: 'Foody',
       count: stats?.alaCarte || 0,
       icon: foodys[1].icon,
-      color: '#486581',
-      bcg: '#54d1db',
+      color: '#0f5132',
+      bcg: '#d1e7dd',
     },
     {
       title: foodys[2].text,

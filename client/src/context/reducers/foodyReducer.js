@@ -1,3 +1,4 @@
+import { computeDistance } from 'utils/functions';
 import {
   DISPLAY_ALERT,
   CLEAR_ALERT,
@@ -102,8 +103,6 @@ const reducer = (state, action) => {
   }
 
   if (action.type === HANDLE_CHANGE) {
-    console.log('reducer name', action.payload.name);
-    console.log('reducer value', action.payload.value);
     return {
       ...state,
       page: 1,
@@ -139,10 +138,21 @@ const reducer = (state, action) => {
   }
 
   if (action.type === GET_FOODYS_SUCCESS) {
+    const distanceFoodys = action.payload.foodys.map((foody) => ({
+      ...foody,
+      distanceFromCurrentLocation: computeDistance(
+        state.myLocation.coordinates,
+        foody.location
+      ),
+      distanceFromHomeLocation: computeDistance(
+        action.payload.homeLocation,
+        foody.location
+      ),
+    }));
     return {
       ...state,
       isFoodyLoading: false,
-      foodys: action.payload.foodys,
+      foodys: distanceFoodys,
       totalFoodys: action.payload.totalFoodys,
       numOfPages: action.payload.numOfPages,
     };
@@ -376,6 +386,7 @@ const reducer = (state, action) => {
       ...state,
       search: '',
       searchCuisine: 'all',
+      searchType: 'all',
       searchFoody: 'all',
       searchCost: 'all',
       searchStatus: 'all',

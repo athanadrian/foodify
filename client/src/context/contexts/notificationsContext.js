@@ -46,7 +46,7 @@ const NotificationsProvider = ({ children }) => {
         payload: { totalNotifications, notifications },
       });
     } catch (error) {
-      console.log('Set Notifications error: ', error.response.data);
+      console.log('😱 Error Get Notifications: ', error.response.data);
     }
     clearAlert();
   };
@@ -78,7 +78,7 @@ const NotificationsProvider = ({ children }) => {
       });
       setUserNotificationsToRead();
     } catch (error) {
-      console.log('Set Notifications error: ', error.response.data);
+      console.log('😱 Error Set Notifications: ', error.response.data);
     }
     clearAlert();
   };

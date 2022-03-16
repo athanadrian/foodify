@@ -14,7 +14,12 @@ const Wrapper = styled.main`
     min-height: calc(100vh - var(--nav-height));
     display: grid;
     align-items: center;
-    margin-top: -3rem;
+  }
+
+  .important {
+    color: var(--primary-500);
+    letter-spacing: var(--letterSpacing);
+    font-weight: 700 !important;
   }
 
   h1 {

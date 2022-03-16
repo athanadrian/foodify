@@ -31,6 +31,24 @@ const Wrapper = styled.section`
     margin-bottom: 0.5rem;
   }
 
+  .icon-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .clear-btn {
+    margin-top: 0px;
+  }
+
+  .icon {
+    svg {
+      vertical-align: middle;
+      color: var(--grey-900);
+      font-size: 1.2rem;
+    }
+  }
+
   .distance-value {
     margin-left: 0.5rem;
     letter-spacing: var(--letterSpacing);
@@ -46,8 +64,14 @@ const Wrapper = styled.section`
     .form-center {
       grid-template-columns: 1fr 1fr 1fr;
     }
-    .btn-block {
-      //margin-top: 0;
+  }
+  @media (max-width: 768px) {
+    .icon {
+      display: none;
+    }
+
+    .icon-btn {
+      margin-top: 1rem;
     }
   }
 `;

@@ -3,9 +3,11 @@ import {
   FormInput,
   FormSelect,
   FormEnumSelect,
-  //  FormRangeInput
+  FormButton,
+  FormRangeInput,
 } from '.';
 import { useFoodyContext } from 'context/contexts/foodyContext';
+import { RiFilterOffFill } from 'react-icons/ri';
 
 const SearchContainer = () => {
   const {
@@ -15,14 +17,16 @@ const SearchContainer = () => {
     searchFoody,
     searchCost,
     searchStatus,
-    //searchDistance,
-    //min_distance,
-    //max_distance,
+    searchType,
+    searchDistance,
+    min_distance,
+    max_distance,
     sort,
     statusOptions,
     costOptions,
     foodyOptions,
     cuisineOptions,
+    typeOptions,
     sortOptions,
     handleChange,
     clearFilters,
@@ -37,7 +41,6 @@ const SearchContainer = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     clearFilters();
   };
 
@@ -59,6 +62,14 @@ const SearchContainer = () => {
             labelText='cuisine'
             handleChange={handleSearch}
             list={cuisineOptions}
+            allOption
+          />
+          <FormEnumSelect
+            name='searchType'
+            value={searchType}
+            labelText='preferable'
+            handleChange={handleSearch}
+            list={typeOptions}
             allOption
           />
           <FormEnumSelect
@@ -84,13 +95,14 @@ const SearchContainer = () => {
             handleChange={handleSearch}
             list={sortOptions}
           />
-          {/* <FormRangeInput
-            name='distance'
+          <FormRangeInput
+            name='searchDistance'
+            labelText='Distance'
             value={searchDistance}
-            handleChange={handleChange}
+            handleChange={handleSearch}
             min={min_distance}
             max={max_distance}
-          /> */}
+          />
           {isMyFoodys && (
             <FormEnumSelect
               name='searchStatus'
@@ -101,13 +113,14 @@ const SearchContainer = () => {
               allOption
             />
           )}
-          <button
-            className='btn btn-block btn-danger'
+          <FormButton
+            type='submit'
+            Icon={RiFilterOffFill}
+            btnText='clear filters'
             disabled={isFoodyLoading}
+            className='btn-danger clear-btn'
             onClick={handleSubmit}
-          >
-            clear filters
-          </button>
+          />
         </div>
       </form>
     </Wrapper>

@@ -37,6 +37,15 @@ const FoodySchema = new mongoose.Schema(
       },
       default: 'a la carte',
     },
+    type: {
+      type: String,
+      required: [true, 'Type is required.'],
+      enum: {
+        values: ['breakfast', 'brunch', 'lunch', 'dinner', 'drink'],
+        message: 'Foody type is either breakfast, brunch, lunch, dinner, drink',
+      },
+      default: 'lunch',
+    },
     cost: {
       type: String,
       required: [true, 'Cost is required.'],

@@ -184,7 +184,7 @@ const Wrapper = styled.article`
     background: var(--grey-200);
   }
   .unpublish-btn {
-    color: var(--yellow-dark); //#e9b949;
+    color: var(--yellow-dark);
     background: #fcefc7;
   }
 `;

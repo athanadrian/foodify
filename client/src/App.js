@@ -1,4 +1,3 @@
-//import PublicProfile from 'pages/PublicProfile';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {
   Error,
@@ -34,7 +33,6 @@ const App = () => {
           element={<ResetPassword />}
         />
         <Route path='/landing' element={<Landing />} />
-        {/* <Route path='/profile/:username' element={<PublicProfile />} /> */}
         <Route path='*' element={<Error />} />
         <Route
           path='/'

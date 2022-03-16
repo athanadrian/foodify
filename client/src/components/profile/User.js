@@ -16,7 +16,7 @@ const User = () => {
   const profileUserId = profile?.user?._id;
 
   useEffect(() => {
-    if (profile) {
+    if (profileUserId) {
       getUserFollowing(profileUserId);
       getUserFollowers(profileUserId);
     }

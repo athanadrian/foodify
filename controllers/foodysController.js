@@ -17,7 +17,7 @@ import {
 //@route        GET /api/v1/foodys
 //@access       Private
 export const getAllFoodys = async (req, res, next) => {
-  const { status, cost, foody, cuisine, sort, search } = req.query;
+  const { status, type, cost, foody, cuisine, sort, search } = req.query;
 
   const queryObj = { status };
 
@@ -31,6 +31,9 @@ export const getAllFoodys = async (req, res, next) => {
 
   if (cuisine !== 'all') {
     queryObj.cuisine = cuisine;
+  }
+  if (type !== 'all') {
+    queryObj.type = type;
   }
 
   if (search) {
@@ -81,7 +84,7 @@ export const getAllFoodys = async (req, res, next) => {
 //@route        GET /api/v1/foodys/my
 //@access       Private
 export const getMyFoodys = async (req, res, next) => {
-  const { status, cost, foody, cuisine, sort, search } = req.query;
+  const { status, type, cost, foody, cuisine, sort, search } = req.query;
 
   const queryObj = { createdBy: req.user.userId };
 
@@ -99,6 +102,10 @@ export const getMyFoodys = async (req, res, next) => {
 
   if (cuisine !== 'all') {
     queryObj.cuisine = cuisine;
+  }
+
+  if (type !== 'all') {
+    queryObj.type = type;
   }
 
   if (search) {
@@ -222,6 +229,16 @@ const fetchCuisineStats = (stats) => {
   };
 };
 
+const fetchTypeStats = (stats) => {
+  return {
+    breakfast: stats.breakfast || 0,
+    brunch: stats.brunch || 0,
+    lunch: stats.lunch || 0,
+    dinner: stats.dinner || 0,
+    drink: stats.drink || 0,
+  };
+};
+
 const fetchCostStats = (stats) => {
   return {
     cheap: stats.cheap || 0,
@@ -274,10 +291,12 @@ export const getAllStats = async (req, res, next) => {
   const defaultCuisineStats = fetchCuisineStats(
     await fetchAllStatsByKey('cuisine')
   );
+  const defaultTypeStats = fetchTypeStats(await fetchAllStatsByKey('type'));
   const defaultCostStats = fetchCostStats(await fetchAllStatsByKey('cost'));
   const defaultFoodyStats = fetchFoodyStats(await fetchAllStatsByKey('foody'));
   defaultAllStats = {
     defaultCuisineStats,
+    defaultTypeStats,
     defaultCostStats,
     defaultFoodyStats,
   };
@@ -319,10 +338,12 @@ export const getUserStats = async (req, res, next) => {
   const defaultCuisineStats = fetchCuisineStats(
     await fetchUserStatsByKey('cuisine')
   );
+  const defaultTypeStats = fetchTypeStats(await fetchAllStatsByKey('type'));
   const defaultCostStats = fetchCostStats(await fetchUserStatsByKey('cost'));
   const defaultFoodyStats = fetchFoodyStats(await fetchUserStatsByKey('foody'));
   defaultUserStats = {
     defaultCuisineStats,
+    defaultTypeStats,
     defaultCostStats,
     defaultFoodyStats,
   };

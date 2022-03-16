@@ -25,10 +25,12 @@ const AddFoody = () => {
     cost,
     status,
     cuisine,
+    type,
     statusOptions,
     costOptions,
     foodyOptions,
     cuisineOptions,
+    typeOptions,
     handleChange,
     displayAlert,
     createFoody,
@@ -93,6 +95,13 @@ const AddFoody = () => {
                 }
                 btnText='set current position!'
                 className='current-btn'
+              />
+              <FormEnumSelect
+                name='type'
+                value={type}
+                labelText='Preferable'
+                handleChange={handleInputChange}
+                list={typeOptions}
               />
               <FormEnumSelect
                 name='cuisine'

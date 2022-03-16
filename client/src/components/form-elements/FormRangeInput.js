@@ -12,15 +12,16 @@ const FormRangeInput = ({
     <div className='form-row'>
       <label htmlFor={name} className='form-label'>
         <p className='distance'>
-          {labelText || name} <span className='distance-value'>{value} </span>
+          Foodys
+          <span className='distance-value'>{value}</span> Km from me
         </p>
       </label>
       <input
-        className='form-input'
+        className='range'
         type='range'
         name={name}
-        min={min} //{min_distance}
-        max={max} //{max_distance}
+        min={min}
+        max={max}
         onChange={handleChange}
         value={value}
         {...rest}

@@ -58,7 +58,6 @@ const Wrapper = styled.article`
     color: #d66a6a;
     background: #ffeeee;
   }
-  //.visited,
   .cheap,
   .published {
     color: var(--grey-600);
@@ -150,6 +149,7 @@ const Wrapper = styled.article`
     text-align: center;
     width: 100px;
     height: 30px;
+    margin-top: 0.5rem;
   }
   .remarks-container {
     border-radius: var(--borderRadius);
@@ -191,7 +191,7 @@ const Wrapper = styled.article`
     background: var(--grey-200);
   }
   .unpublish-btn {
-    color: var(--yellow-dark); //#e9b949;
+    color: var(--yellow-dark);
     background: #fcefc7;
   }
 
@@ -270,7 +270,6 @@ const Wrapper = styled.article`
       display: none;
     }
     @media (max-width: 992px) {
-      //display: none;
       display: block;
     }
   }
