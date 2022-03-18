@@ -7,8 +7,11 @@ import {
   typeDefaultStats,
   foodyDefaultStats,
 } from 'utils/stats';
+import { useParams } from 'react-router-dom';
 
-const StatsContainer = ({ all }) => {
+const StatsContainer = ({ all, profile }) => {
+  const { username } = useParams();
+
   const { getAllStats, getUserStats, isFoodyLoading, stats, clearFilters } =
     useFoodyContext();
   const {
@@ -24,21 +27,22 @@ const StatsContainer = ({ all }) => {
   const foodyStats = foodyDefaultStats(defaultFoodyStats);
 
   useEffect(() => {
-    all ? getAllStats() : getUserStats();
+    if (all) getAllStats();
+    if (profile) getUserStats(username);
     // eslint-disable-next-line
-  }, [all]);
+  }, [all, profile, username]);
 
   useEffect(() => {
     clearFilters();
-
     // eslint-disable-next-line
   }, []);
+
   if (isFoodyLoading) return <Loading center max />;
 
   return (
     <>
       <StatsContainerRow title='cuisine' list={cuisineStats} />
-      <StatsContainerRow title='Preferable' list={typeStats} />
+      <StatsContainerRow title='Preferable for' list={typeStats} />
       <StatsContainerRow title='foody' list={foodyStats} />
       <StatsContainerRow title='cost' list={costStats} />
     </>

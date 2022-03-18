@@ -7,6 +7,8 @@ const Wrapper = styled.div`
   @media (min-width: 992px) {
     grid-template-columns: 1fr 1fr;
   }
-  /* align-items: start; */
+  @media (max-width: 420px) {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
 `;
 export default Wrapper;

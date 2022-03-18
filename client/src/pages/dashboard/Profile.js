@@ -2,17 +2,18 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useProfileContext } from 'context/contexts/profileContext';
 import {
-  //ChartsContainer,
-  //StatsContainer,
+  ChartsContainer,
   Header,
   Info,
+  StatsContainer,
   User,
 } from 'components';
-// import { useAppContext } from 'context/appContext';
-// import StatsWrapper from 'wrappers/StatsContainer';
+import { useFoodyContext } from 'context/contexts/foodyContext';
+import StatsWrapper from 'wrappers/StatsContainer';
+import { UserLink } from 'components/notifications/UserLink';
 
 const Profile = () => {
-  //const { showModal, monthlyCreations, toggleModal } = useAppContext();
+  const { monthlyCreations } = useFoodyContext();
   const { getUserProfile } = useProfileContext();
 
   const { username } = useParams();
@@ -28,13 +29,15 @@ const Profile = () => {
         <User />
       </div>
 
-      {/* <div className='dashboard-page'>
+      <div className='dashboard-page'>
         <StatsWrapper>
-          <h2 className='user-statistics'>My Creations</h2>
-          <StatsContainer />
+          <h2 className='user-statistics'>
+            <UserLink username={username} isOwnAccount={true} /> Creations
+          </h2>
+          <StatsContainer profile />
           {monthlyCreations.length > 0 && <ChartsContainer />}
         </StatsWrapper>
-      </div>*/}
+      </div>
     </>
   );
 };

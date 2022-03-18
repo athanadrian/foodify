@@ -16,9 +16,9 @@ const Landing = () => {
           </h1>
           <p>
             At the end of November my wife with her business partners and I
-            visited restaurant "<span className='important'>foody...</span>" to
+            visited restaurant "<span className='important'>title...</span>" to
             have our "<span className='important'>dinner...</span>". It was
-            located on the "<span className='important'>village...</span>". It
+            located at the "<span className='important'>village...</span>". It
             is built in the style of a huntsman's hut. This restaurant was
             chosen for its unique "<span className='important'>cuisine...</span>
             " that can satisfy the guests and for its quiet setting where we
@@ -32,8 +32,10 @@ const Landing = () => {
           </p>
           <p>
             The uniqueness of the restaurant lies in that you end up having an
-            excellent dinner without have to spend a large amount of money cause
-            the "<span className='important'>cost...</span>" was..........
+            excellent "<span className='important'>dinner...</span>" without
+            have to spend a large amount of money cause the "
+            <span className='important'>cost...</span>" is "
+            <span className='important'>average...</span>"
           </p>
           <p>
             Use <span className='important'>Foodify</span> as your journal to
@@ -43,10 +45,12 @@ const Landing = () => {
             <span className='important'>commented</span>! Keep them private or "
             <span className='important'>publish...</span>" and share them with
             other users to help them enjoy their "
-            <span className='important'>breakfast...</span> /{' '}
-            <span className='important'>brunch...</span> /{' '}
-            <span className='important'> lunch...</span> /{' '}
-            <span className='important'>dinner...</span>, as you did.
+            <span className='important'>breakfast...</span>,{' '}
+            <span className='important'>brunch...</span>,{' '}
+            <span className='important'> lunch...</span>,{' '}
+            <span className='important'>dinner...</span>,{' '}
+            <span className='important'>drink...</span>, as you did. You just
+            have to...
           </p>
           <Link to='/register' className='btn btn-hero'>
             login/register

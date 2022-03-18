@@ -1,4 +1,3 @@
-import { getDistance, getPreciseDistance } from 'geolib';
 import moment from 'moment';
 
 export const mapEnumObject = (label, enumList) => {
@@ -11,24 +10,6 @@ export const mapEnumObject = (label, enumList) => {
   }
   return obj;
 };
-
-export const getFoodyDistance = (user, foody) => {
-  return getDistance(
-    { latitude: user.lat, longitude: user.lng },
-    { latitude: foody.lat, longitude: foody.lng }
-  );
-};
-
-export const getPreciseFoodyDistance = (user, foody) => {
-  return getPreciseDistance(
-    { latitude: user.lat, longitude: user.lng },
-    { latitude: foody.lat, longitude: foody.lng }
-  );
-};
-
-// Calculate radius using radians
-// Divide distance by radius of Earth
-// Earth radius = 3,963 mi / 6,378 km
 
 export const computeDistance = (user, foody) => {
   const prevLatInRad = toRad(user.lat);

@@ -11,7 +11,7 @@ const types = [
     id: 1,
     text: 'Breakfast',
     enum: 'breakfast',
-    icon: <MdOutlineBreakfastDining size={20} />,
+    icon: <MdOutlineBreakfastDining />,
     desc: 'breakfast',
   },
   {
@@ -25,7 +25,7 @@ const types = [
     id: 3,
     text: 'Lunch',
     enum: 'lunch',
-    icon: <MdOutlineLunchDining size={20} />,
+    icon: <MdOutlineLunchDining />,
     desc: 'lunch',
   },
   {

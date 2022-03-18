@@ -40,7 +40,6 @@ import {
   SET_FOODY_CURRENT_LOCATION,
   ADD_USER_MARKER,
   SET_USER_CURRENT_LOCATION,
-  GET_GOOGLE_API_KEY,
 } from '../actions/foodyActions';
 
 const reducer = (state, action) => {
@@ -432,13 +431,6 @@ const reducer = (state, action) => {
     return {
       ...state,
       showInfoWindow: false,
-    };
-  }
-
-  if (action.type === GET_GOOGLE_API_KEY) {
-    return {
-      ...state,
-      googleApiKey: action.payload.key,
     };
   }
 

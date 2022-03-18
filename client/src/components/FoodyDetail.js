@@ -13,12 +13,7 @@ import { useAppContext } from 'context/contexts/appContext';
 import Wrapper from 'wrappers/FoodyDetail';
 import FoodyInfo from './FoodyInfo';
 
-import {
-  mapEnumObject,
-  //getFoodyDistance,
-  //getPreciseFoodyDistance,
-  computeDistance,
-} from 'utils/functions';
+import { mapEnumObject, computeDistance } from 'utils/functions';
 import { costs, types, foodys } from 'utils/lookup-data';
 import GoogleMapsLink from './GoogleMapsLink';
 import { useFoodyContext } from 'context/contexts/foodyContext';
@@ -71,7 +66,6 @@ const FoodyDetail = () => {
             <h5>{title}</h5>
             <p>{village}</p>
           </div>
-          {/* <div className={`status ${status}`}>{status}</div> */}
         </div>
       </header>
       <div className='content'>
@@ -116,7 +110,7 @@ const FoodyDetail = () => {
           <div className='cost-container'>
             <FoodyInfo
               tooltip='Cost'
-              icon={<AiOutlineEuro size={22} />}
+              icon={<AiOutlineEuro />}
               label='cost'
               text={costObj.icon}
             />
@@ -124,7 +118,7 @@ const FoodyDetail = () => {
           </div>
           <FoodyInfo
             tooltip='remarks'
-            icon={<TiDocumentText size={22} />}
+            icon={<TiDocumentText />}
             text='remarks'
           />
         </div>
@@ -140,7 +134,7 @@ const FoodyDetail = () => {
           text={relativeCreated}
         />
         <FoodyInfo
-          icon={<MdOutlineUpdate size={18} />}
+          icon={<MdOutlineUpdate />}
           label='Updated'
           text={relativeUpdate}
           tooltip='Updated'

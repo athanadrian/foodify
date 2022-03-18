@@ -11,6 +11,7 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     svg {
+      font-size: 1.2rem;
       color: var(--grey-400);
     }
   }

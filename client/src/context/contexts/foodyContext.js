@@ -42,7 +42,6 @@ import {
   SET_FOODY_CURRENT_LOCATION,
   ADD_USER_MARKER,
   SET_USER_CURRENT_LOCATION,
-  GET_GOOGLE_API_KEY,
 } from '../actions/foodyActions';
 import { costs, cuisines, types, foodys, statuses } from 'utils/lookup-data';
 import useGeoLocation from 'hooks/useGeolocation';
@@ -159,15 +158,6 @@ const FoodyProvider = ({ children }) => {
 
   const { clientApi } = useClientApi();
 
-  const getGoogleApiKey = async () => {
-    try {
-      const { data } = await clientApi.get('/config/google');
-      dispatch({ type: GET_GOOGLE_API_KEY, payload: { key: data } });
-    } catch (error) {
-      console.log('Google API Key Error: ', error);
-    }
-  };
-
   const setUserCurrentLocation = ({ alertText }) => {
     dispatch({ type: SET_USER_CURRENT_LOCATION, payload: { alertText } });
     clearAlert();
@@ -176,11 +166,6 @@ const FoodyProvider = ({ children }) => {
     dispatch({ type: SET_FOODY_CURRENT_LOCATION, payload: { alertText } });
     clearAlert();
   };
-
-  // useEffect(() => {
-  //   // getGoogleApiKey();
-  //   // eslint-disable-next-line
-  // }, []);
 
   const createFoody = async () => {
     dispatch({ type: ADD_FOODY_BEGIN });
@@ -493,10 +478,10 @@ const FoodyProvider = ({ children }) => {
     dispatch({ type: GET_FOODY_DETAIL, payload: { slug } });
   };
 
-  const getUserStats = async () => {
+  const getUserStats = async (username) => {
     dispatch({ type: SHOW_STATS_BEGIN });
     try {
-      const { data } = await clientApi.get('/foodys/user-stats');
+      const { data } = await clientApi.get(`/foodys/stats/${username}`);
       const { defaultUserStats, monthlyUserCreations } = data;
       dispatch({
         type: SHOW_STATS_SUCCESS,
@@ -554,7 +539,6 @@ const FoodyProvider = ({ children }) => {
         changePage,
         addFoodyLocation,
         addUserLocation,
-        getGoogleApiKey,
         setUserCurrentLocation,
         setFoodyCurrentLocation,
         likeUnlikeFoody,

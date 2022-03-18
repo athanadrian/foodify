@@ -32,7 +32,7 @@ router.post('/remove-visit/:id', authenticateUser, unVisitFoody);
 router.post('/comment/:id', authenticateUser, addComment);
 router.delete('/:foodyId/:commentId', authenticateUser, deleteComment);
 router.get('/my', authenticateUser, getMyFoodys);
-router.get('/user-stats', authenticateUser, getUserStats);
+router.get('/stats/:username', authenticateUser, getUserStats);
 router.get('/all-stats', getAllStats);
 router
   .route('/:id')

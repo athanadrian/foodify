@@ -321,15 +321,23 @@ export const getAllStats = async (req, res, next) => {
 };
 
 //@desc         Get User statistics
-//@route        GET /api/v1/foodys/my-stats
+//@route        GET /api/v1/foodys/stats/:username
 //@access       Private
 export const getUserStats = async (req, res, next) => {
+  const { username } = req.params;
+
+  const user = await User.findOne({ username });
+
+  if (!user) {
+    throw new NotFoundError('User not found');
+  }
+
   let defaultUserStats = {};
   let monthlyUserCreations = [];
 
   const fetchUserStatsByKey = async (key) => {
     let stats = await Foody.aggregate([
-      { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
+      { $match: { createdBy: mongoose.Types.ObjectId(user._id) } },
       { $group: { _id: `$${key}`, count: { $sum: 1 } } },
     ]);
     return arrayToObject(stats);
@@ -338,7 +346,7 @@ export const getUserStats = async (req, res, next) => {
   const defaultCuisineStats = fetchCuisineStats(
     await fetchUserStatsByKey('cuisine')
   );
-  const defaultTypeStats = fetchTypeStats(await fetchAllStatsByKey('type'));
+  const defaultTypeStats = fetchTypeStats(await fetchUserStatsByKey('type'));
   const defaultCostStats = fetchCostStats(await fetchUserStatsByKey('cost'));
   const defaultFoodyStats = fetchFoodyStats(await fetchUserStatsByKey('foody'));
   defaultUserStats = {

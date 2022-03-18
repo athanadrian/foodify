@@ -112,7 +112,6 @@ const MapModal = ({ profile }) => {
         options={mapOptions}
         onClick={markLocation}
       >
-        {/* Child components, such as markers, info windows, etc. */}
         <>
           <Marker
             icon={{

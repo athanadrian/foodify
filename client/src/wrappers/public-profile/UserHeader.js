@@ -43,28 +43,6 @@ const Wrapper = styled.article`
       letter-spacing: var(--letterSpacing);
       font-weight: 700;
     }
-    /* img {
-      width: 75px;
-      height: 75px;
-      border-radius: 50%;
-    }
-    h4 {
-      margin-bottom: 0.25rem;
-    }
-    p {
-      margin-bottom: 0;
-    }
-    a {
-      color: var(--blue-dark);
-      text-transform: capitalize;
-      letter-spacing: var(--letterSpacing);
-      transition: var(--transition);
-      cursor: pointer;
-      &:hover {
-        text-decoration: underline;
-        color: var(--blue-light);
-      }
-    } */
   }
 `;
 export default Wrapper;

@@ -9,7 +9,6 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.25.0",
-    "geolib": "^3.3.3",
     "history": "^5.2.0",
     "moment": "^2.29.1",
     "normalize.css": "^8.0.1",

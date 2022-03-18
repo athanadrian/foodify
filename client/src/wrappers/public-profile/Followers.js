@@ -89,5 +89,10 @@ const Wrapper = styled.article`
       display: none;
     }
   }
+  @media (max-width: 420px) {
+    .email {
+      display: none;
+    }
+  }
 `;
 export default Wrapper;

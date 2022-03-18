@@ -42,7 +42,6 @@ const Wrapper = styled.article`
       letter-spacing: var(--letterSpacing);
     }
   }
-  /* Preference */
   .pending {
     background: #fcefc7;
     color: #e9b949;

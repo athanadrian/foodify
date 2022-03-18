@@ -63,7 +63,6 @@ const Wrapper = styled.article`
     align-items: center;
     justify-content: center;
   }
-  /* Preference */
   .pending {
     background: #fcefc7;
     color: #e9b949;

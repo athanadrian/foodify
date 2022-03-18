@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { FaRegFlag, FaRegCalendarPlus } from 'react-icons/fa';
+import { FaRegCalendarPlus } from 'react-icons/fa';
 import { GiPathDistance } from 'react-icons/gi';
 import { AiOutlineComment, AiOutlineEuro } from 'react-icons/ai';
 import { BsChevronDown, BsChevronUp, BsFillPinMapFill } from 'react-icons/bs';
@@ -12,13 +12,11 @@ import Wrapper from 'wrappers/Foody';
 import FoodyInfo from './FoodyInfo';
 import {
   mapEnumObject,
-  //getFoodyDistance,
-  //getPreciseFoodyDistance,
   computeDistance,
   relativeDate,
   formatDate,
 } from 'utils/functions';
-import { costs, foodys, types } from 'utils/lookup-data';
+import { costs, foodys, types, cuisines } from 'utils/lookup-data';
 import {
   LikesModal,
   VisitsModal,
@@ -70,6 +68,7 @@ const Foody = ({
   const costObj = mapEnumObject(cost, costs);
   const foodyObj = mapEnumObject(foody, foodys);
   const typeObj = mapEnumObject(type, types);
+  const cuisineObj = mapEnumObject(cuisine, cuisines);
   const isPublished = status === 'published';
   const isLiked = likes.filter((like) => like.user._id === user._id).length > 0;
   const isVisited =
@@ -166,14 +165,14 @@ const Foody = ({
               text={formatDate(createdAt)}
             />
             <FoodyInfo
-              icon={<MdOutlineUpdate size={22} />}
+              icon={<MdOutlineUpdate />}
               text={relativeDate(updatedAt)}
               tooltip='Updated'
             />
             <FoodyInfo
               tooltip='Cuisine Origin'
-              icon={<FaRegFlag />}
-              text={cuisine}
+              icon={cuisineObj.icon}
+              text={cuisineObj.text}
             />
             <FoodyInfo
               tooltip='Type of Restaurant'
@@ -182,13 +181,13 @@ const Foody = ({
             />
             <FoodyInfo
               tooltip='Cost'
-              icon={<AiOutlineEuro size={22} />}
+              icon={<AiOutlineEuro />}
               text={costObj.icon}
             />
             <div className={`cost ${costObj.enum} center`}>{costObj.enum}</div>
             <FoodyInfo
               tooltip={calculationConfig.tooltip}
-              icon={<calculationConfig.Icon size={24} />}
+              icon={<calculationConfig.Icon />}
               text={`(${calculationConfig.text}) ${distance} Km`}
             />
             <FoodyInfo
