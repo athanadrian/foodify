@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
-import { FaRegFlag, FaRegCalendarPlus } from 'react-icons/fa';
+import { FaRegCalendarPlus } from 'react-icons/fa';
 import { GiPathDistance } from 'react-icons/gi';
 import { FiMapPin } from 'react-icons/fi';
 import { AiOutlineEuro } from 'react-icons/ai';

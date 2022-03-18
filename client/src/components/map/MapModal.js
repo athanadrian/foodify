@@ -15,6 +15,7 @@ import { MAP_CENTER, MAP_ZOOM } from 'utils/constants';
 import MapSearch from './MapSearch';
 import MapLocate from './MapLocate';
 import { useFoodyContext } from 'context/contexts/foodyContext';
+import { useAppContext } from 'context/contexts/appContext';
 
 const containerStyle = {
   width: '100%',
@@ -32,12 +33,13 @@ const MapModal = ({ profile }) => {
     googleApiKey,
     addFoodyLocation,
     addUserLocation,
-    homeLocation,
     foodyLocation,
     showInfoWindow,
     closeInfoWindow,
     openInfoWindow,
   } = useFoodyContext();
+  const { homeLocation } = useAppContext();
+
   const { current: initialLocation } = useRef(
     profile ? homeLocation : foodyLocation
   );

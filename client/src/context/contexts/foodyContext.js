@@ -73,7 +73,7 @@ const initialState = {
   cost: 'average',
   status: 'unpublished',
   commentText: '',
-  menuLocation: MAP_CENTER,
+  foodyLocation: MAP_CENTER,
   cuisineOptions: cuisines,
   typeOptions: types,
   menuOptions: menus,

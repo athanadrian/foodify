@@ -2335,7 +2335,10 @@ export const computeDistance = (user, foody) => {
 
 ```js
 // SERVER
-
+// server.js
+app.use('/api/v1/config/google', (req, res) => {
+  res.send(process.env.GOOGLE_API_KEY || '');
+});
 // CLIENT
 
 //foodyContext
