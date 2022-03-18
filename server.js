@@ -9,7 +9,7 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
-//import helmet from 'helmet';
+import helmet from 'helmet';
 import xss from 'xss-clean';
 import mongoSanitize from 'express-mongo-sanitize';
 
@@ -56,7 +56,7 @@ app.use(express.json());
 app.use(mongoSanitize());
 
 // Set Security headers
-// app.use(helmet());
+app.use(helmet());
 // app.use(
 //   helmet.contentSecurityPolicy({
 //     useDefaults: true,

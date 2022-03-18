@@ -11,9 +11,11 @@ import {
 } from 'components';
 import Wrapper from 'wrappers/DashboardFormPage';
 import StatsWrapper from 'wrappers/StatsContainer';
+import { useAppContext } from 'context/contexts/appContext';
 
 const EditUser = () => {
-  const { showModal, monthlyCreations, toggleModal } = useFoodyContext();
+  const { monthlyCreations } = useFoodyContext();
+  const { showModal, toggleModal } = useAppContext();
   const { getMyProfile } = useProfileContext();
 
   useEffect(() => {
