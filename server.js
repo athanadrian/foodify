@@ -58,8 +58,12 @@ app.use(mongoSanitize());
 // Set Security headers
 app.use(helmet());
 app.use(
-  helmet({
-    contentSecurityPolicy: false,
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      'script-src': ["'self'", "'unsafe-inline'", 'example.com'],
+      'img-src': ["'self'", 'data:', 'https://res.cloudinary.com'],
+    },
   })
 );
 
