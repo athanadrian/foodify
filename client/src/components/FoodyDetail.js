@@ -14,7 +14,7 @@ import Wrapper from 'wrappers/FoodyDetail';
 import FoodyInfo from './FoodyInfo';
 
 import { mapEnumObject, computeDistance } from 'utils/functions';
-import { costs, types, foodys } from 'utils/lookup-data';
+import { costs, types, cuisines, menus } from 'utils/lookup-data';
 import GoogleMapsLink from './GoogleMapsLink';
 import { useFoodyContext } from 'context/contexts/foodyContext';
 
@@ -40,7 +40,7 @@ const FoodyDetail = () => {
     type,
     createdAt,
     updatedAt,
-    foody,
+    menu,
     status,
     remarks,
     location: foodyLocation,
@@ -50,7 +50,8 @@ const FoodyDetail = () => {
   const relativeCreated = moment(createdAt).startOf('day').fromNow();
   const costObj = mapEnumObject(cost, costs);
   const typeObj = mapEnumObject(type, types);
-  const foodyObj = mapEnumObject(foody, foodys);
+  const menuObj = mapEnumObject(menu, menus);
+  const cuisineObj = mapEnumObject(cuisine, cuisines);
   const isPublished = status === 'published';
   const distanceFromMyLocation = computeDistance(
     myLocation.coordinates,
@@ -97,15 +98,15 @@ const FoodyDetail = () => {
           />
           <FoodyInfo
             tooltip='Cuisine Origin'
-            icon={<FaRegFlag />}
+            icon={cuisineObj.icon}
             label='Cuisine'
-            text={cuisine}
+            text={cuisineObj.text}
           />
           <FoodyInfo
             tooltip='Type of Restaurant'
-            icon={foodyObj.icon}
+            icon={menuObj.icon}
             label='Menu'
-            text={foodyObj.text}
+            text={menuObj.text}
           />
           <div className='cost-container'>
             <FoodyInfo

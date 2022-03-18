@@ -21,14 +21,14 @@ const AddFoody = () => {
     title,
     village,
     remarks,
-    foody,
+    menu,
     cost,
     status,
     cuisine,
     type,
     statusOptions,
     costOptions,
-    foodyOptions,
+    menuOptions,
     cuisineOptions,
     typeOptions,
     handleChange,
@@ -111,11 +111,11 @@ const AddFoody = () => {
                 list={cuisineOptions}
               />
               <FormEnumSelect
-                name='foody'
-                value={foody}
-                labelText='foody type'
+                name='menu'
+                value={menu}
+                labelText='menu type'
                 handleChange={handleInputChange}
-                list={foodyOptions}
+                list={menuOptions}
               />
               <FormEnumSelect
                 name='cost'

@@ -1,5 +1,5 @@
 import costs from './costs';
-import foodys from './foodys';
+import menus from './menus';
 import cuisines from './cuisines';
 import types from './types';
 import preferences from './preferences';
@@ -10,7 +10,7 @@ import profileInfo from './profile-info';
 
 export {
   costs,
-  foodys,
+  menus,
   cuisines,
   types,
   preferences,

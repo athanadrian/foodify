@@ -5,7 +5,7 @@ import {
   costDefaultStats,
   cuisineDefaultStats,
   typeDefaultStats,
-  foodyDefaultStats,
+  menuDefaultStats,
 } from 'utils/stats';
 import { useParams } from 'react-router-dom';
 
@@ -18,13 +18,13 @@ const StatsContainer = ({ all, profile }) => {
     defaultCuisineStats,
     defaultTypeStats,
     defaultCostStats,
-    defaultFoodyStats,
+    defaultMenuStats,
   } = stats;
 
   const cuisineStats = cuisineDefaultStats(defaultCuisineStats);
   const typeStats = typeDefaultStats(defaultTypeStats);
   const costStats = costDefaultStats(defaultCostStats);
-  const foodyStats = foodyDefaultStats(defaultFoodyStats);
+  const menuStats = menuDefaultStats(defaultMenuStats);
 
   useEffect(() => {
     if (all) getAllStats();
@@ -43,7 +43,7 @@ const StatsContainer = ({ all, profile }) => {
     <>
       <StatsContainerRow title='cuisine' list={cuisineStats} />
       <StatsContainerRow title='Preferable for' list={typeStats} />
-      <StatsContainerRow title='foody' list={foodyStats} />
+      <StatsContainerRow title='menu' list={menuStats} />
       <StatsContainerRow title='cost' list={costStats} />
     </>
   );

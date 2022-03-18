@@ -17,7 +17,7 @@ import {
 //@route        GET /api/v1/foodys
 //@access       Private
 export const getAllFoodys = async (req, res, next) => {
-  const { status, type, cost, foody, cuisine, sort, search } = req.query;
+  const { status, type, cost, menu, cuisine, sort, search } = req.query;
 
   const queryObj = { status };
 
@@ -25,8 +25,8 @@ export const getAllFoodys = async (req, res, next) => {
     queryObj.cost = cost;
   }
 
-  if (foody !== 'all') {
-    queryObj.foody = foody;
+  if (menu !== 'all') {
+    queryObj.menu = menu;
   }
 
   if (cuisine !== 'all') {
@@ -84,7 +84,7 @@ export const getAllFoodys = async (req, res, next) => {
 //@route        GET /api/v1/foodys/my
 //@access       Private
 export const getMyFoodys = async (req, res, next) => {
-  const { status, type, cost, foody, cuisine, sort, search } = req.query;
+  const { status, type, cost, menu, cuisine, sort, search } = req.query;
 
   const queryObj = { createdBy: req.user.userId };
 
@@ -97,7 +97,7 @@ export const getMyFoodys = async (req, res, next) => {
   }
 
   if (foody !== 'all') {
-    queryObj.foody = foody;
+    queryObj.menu = menu;
   }
 
   if (cuisine !== 'all') {
@@ -247,7 +247,7 @@ const fetchCostStats = (stats) => {
   };
 };
 
-const fetchFoodyStats = (stats) => {
+const fetchMenuStats = (stats) => {
   return {
     meze: stats.meze || 0,
     alaCarte: stats.alaCarte || 0,
@@ -293,12 +293,12 @@ export const getAllStats = async (req, res, next) => {
   );
   const defaultTypeStats = fetchTypeStats(await fetchAllStatsByKey('type'));
   const defaultCostStats = fetchCostStats(await fetchAllStatsByKey('cost'));
-  const defaultFoodyStats = fetchFoodyStats(await fetchAllStatsByKey('foody'));
+  const defaultMenuStats = fetchMenuStats(await fetchAllStatsByKey('menu'));
   defaultAllStats = {
     defaultCuisineStats,
     defaultTypeStats,
     defaultCostStats,
-    defaultFoodyStats,
+    defaultMenuStats,
   };
 
   monthlyAllCreations = await Foody.aggregate([
@@ -348,12 +348,12 @@ export const getUserStats = async (req, res, next) => {
   );
   const defaultTypeStats = fetchTypeStats(await fetchUserStatsByKey('type'));
   const defaultCostStats = fetchCostStats(await fetchUserStatsByKey('cost'));
-  const defaultFoodyStats = fetchFoodyStats(await fetchUserStatsByKey('foody'));
+  const defaultMenuStats = fetchMenuStats(await fetchUserStatsByKey('menu'));
   defaultUserStats = {
     defaultCuisineStats,
     defaultTypeStats,
     defaultCostStats,
-    defaultFoodyStats,
+    defaultMenuStats,
   };
 
   monthlyUserCreations = await Foody.aggregate([

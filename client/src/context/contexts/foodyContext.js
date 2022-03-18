@@ -43,7 +43,7 @@ import {
   ADD_USER_MARKER,
   SET_USER_CURRENT_LOCATION,
 } from '../actions/foodyActions';
-import { costs, cuisines, types, foodys, statuses } from 'utils/lookup-data';
+import { costs, cuisines, types, menus, statuses } from 'utils/lookup-data';
 import useGeoLocation from 'hooks/useGeolocation';
 import { MAP_CENTER } from 'utils/constants';
 import { useAppContext } from './appContext';
@@ -69,14 +69,14 @@ const initialState = {
   remarks: '',
   cuisine: 'greek',
   type: 'lunch',
-  foody: 'alaCarte',
+  menu: 'alaCarte',
   cost: 'average',
   status: 'unpublished',
   commentText: '',
-  foodyLocation: MAP_CENTER,
+  menuLocation: MAP_CENTER,
   cuisineOptions: cuisines,
   typeOptions: types,
-  foodyOptions: foodys,
+  menuOptions: menus,
   costOptions: costs,
   statusOptions: statuses,
   foodys: [],
@@ -90,7 +90,7 @@ const initialState = {
   search: '',
   searchCuisine: 'all',
   searchType: 'all',
-  searchFoody: 'all',
+  searchMenu: 'all',
   searchCost: 'all',
   searchStatus: 'all',
   searchDistance: 0,
@@ -176,7 +176,7 @@ const FoodyProvider = ({ children }) => {
         foodyLocation,
         remarks,
         cuisine,
-        foody,
+        menu,
         cost,
         status,
       } = state;
@@ -186,7 +186,7 @@ const FoodyProvider = ({ children }) => {
         location: foodyLocation,
         remarks,
         cuisine,
-        foody,
+        menu,
         cost,
         status,
       });
@@ -224,7 +224,7 @@ const FoodyProvider = ({ children }) => {
         remarks,
         cuisine,
         type,
-        foody,
+        menu,
         cost,
         status,
       } = state;
@@ -235,7 +235,7 @@ const FoodyProvider = ({ children }) => {
         remarks,
         cuisine,
         type,
-        foody,
+        menu,
         cost,
         status,
       });
@@ -394,13 +394,13 @@ const FoodyProvider = ({ children }) => {
       search,
       searchCuisine,
       searchType,
-      searchFoody,
+      searchMenu,
       searchCost,
       sort,
       page,
     } = state;
 
-    let url = `/foodys?status=published&cuisine=${searchCuisine}&type=${searchType}&cost=${searchCost}&foody=${searchFoody}&sort=${sort}&page=${page}`;
+    let url = `/foodys?status=published&cuisine=${searchCuisine}&type=${searchType}&cost=${searchCost}&menu=${searchMenu}&sort=${sort}&page=${page}`;
     if (search) {
       url = `${url}&search=${search}`;
     }
@@ -426,14 +426,14 @@ const FoodyProvider = ({ children }) => {
       search,
       searchCuisine,
       searchType,
-      searchFoody,
+      searchMenu,
       searchCost,
       searchStatus,
       sort,
       page,
     } = state;
 
-    let url = `/foodys/my?cuisine=${searchCuisine}&type=${searchType}&cost=${searchCost}&status=${searchStatus}&foody=${searchFoody}&sort=${sort}&page=${page}`;
+    let url = `/foodys/my?cuisine=${searchCuisine}&type=${searchType}&cost=${searchCost}&status=${searchStatus}&menu=${searchMenu}&sort=${sort}&page=${page}`;
     if (search) {
       url = `${url}&search=${search}`;
     }

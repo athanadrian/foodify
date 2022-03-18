@@ -2,7 +2,7 @@ import { AiOutlineTable } from 'react-icons/ai';
 import { BiFoodMenu } from 'react-icons/bi';
 import { MdOutlineRestaurantMenu } from 'react-icons/md';
 
-const foodys = [
+const menus = [
   {
     id: 1,
     text: 'Meze',
@@ -25,4 +25,4 @@ const foodys = [
     desc: 'buffet',
   },
 ];
-export default foodys;
+export default menus;

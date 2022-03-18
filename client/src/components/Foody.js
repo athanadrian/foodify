@@ -16,7 +16,7 @@ import {
   relativeDate,
   formatDate,
 } from 'utils/functions';
-import { costs, foodys, types, cuisines } from 'utils/lookup-data';
+import { costs, menus, types, cuisines } from 'utils/lookup-data';
 import {
   LikesModal,
   VisitsModal,
@@ -37,7 +37,7 @@ const Foody = ({
   cost,
   createdAt,
   updatedAt,
-  foody,
+  menu,
   status,
   remarks,
   slug,
@@ -66,7 +66,7 @@ const Foody = ({
     computeDistance(homeLocation, foodyLocation)
   );
   const costObj = mapEnumObject(cost, costs);
-  const foodyObj = mapEnumObject(foody, foodys);
+  const menuObj = mapEnumObject(menu, menus);
   const typeObj = mapEnumObject(type, types);
   const cuisineObj = mapEnumObject(cuisine, cuisines);
   const isPublished = status === 'published';
@@ -176,8 +176,8 @@ const Foody = ({
             />
             <FoodyInfo
               tooltip='Type of Restaurant'
-              icon={foodyObj.icon}
-              text={foodyObj.text}
+              icon={menuObj.icon}
+              text={menuObj.text}
             />
             <FoodyInfo
               tooltip='Cost'

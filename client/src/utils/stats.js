@@ -1,4 +1,4 @@
-import { costs, types, foodys, cuisines } from './lookup-data';
+import { costs, types, menus, cuisines } from './lookup-data';
 
 export const cuisineDefaultStats = (stats) => {
   return [
@@ -122,32 +122,32 @@ export const costDefaultStats = (stats) => {
   ];
 };
 
-export const foodyDefaultStats = (stats) => {
+export const menuDefaultStats = (stats) => {
   return [
     {
-      title: foodys[0].text,
-      enumQuery: foodys[0].enum,
-      category: 'Foody',
+      title: menus[0].text,
+      enumQuery: menus[0].enum,
+      category: 'menu',
       count: stats?.meze || 0,
-      icon: foodys[0].icon,
+      icon: menus[0].icon,
       color: '#f0b429',
       bcg: '#fffbea',
     },
     {
-      title: foodys[1].text,
-      enumQuery: foodys[1].enum,
-      category: 'Foody',
+      title: menus[1].text,
+      enumQuery: menus[1].enum,
+      category: 'menu',
       count: stats?.alaCarte || 0,
-      icon: foodys[1].icon,
+      icon: menus[1].icon,
       color: '#0f5132',
       bcg: '#d1e7dd',
     },
     {
-      title: foodys[2].text,
-      enumQuery: foodys[2].enum,
-      category: 'Foody',
+      title: menus[2].text,
+      enumQuery: menus[2].enum,
+      category: 'menu',
       count: stats?.buffet || 0,
-      icon: foodys[2].icon,
+      icon: menus[2].icon,
       color: '#d66a6a',
       bcg: '#ffeeee',
     },
