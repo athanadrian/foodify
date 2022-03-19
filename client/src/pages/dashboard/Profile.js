@@ -14,13 +14,13 @@ import { UserLink } from 'components/notifications/UserLink';
 
 const Profile = () => {
   const { monthlyCreations } = useFoodyContext();
-  const { getUserProfile } = useProfileContext();
+  const { getUserProfile, isFollow, isUnFollow } = useProfileContext();
 
   const { username } = useParams();
   useEffect(() => {
     getUserProfile(username);
     // eslint-disable-next-line
-  }, [username]);
+  }, [username, isFollow, isUnFollow]);
   return (
     <>
       <div className='dashboard-page'>

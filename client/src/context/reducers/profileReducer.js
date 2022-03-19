@@ -128,6 +128,7 @@ const reducer = (state, action) => {
   if (action.type === FOLLOW_USER_SUCCESS) {
     return {
       ...state,
+      isFollow: true,
       isFollowing: false,
     };
   }
@@ -150,6 +151,7 @@ const reducer = (state, action) => {
   if (action.type === UN_FOLLOW_USER_SUCCESS) {
     return {
       ...state,
+      isUnFollow: true,
       isFollowing: false,
     };
   }

@@ -30,6 +30,8 @@ const initialState = {
   isLoadingFollowing: false,
   showProfileAlert: false,
   isFollowing: false,
+  isFollow: false,
+  isUnFollow: false,
   isFetching: false,
   markedElementId: '',
   alertType: '',
