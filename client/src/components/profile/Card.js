@@ -9,7 +9,6 @@ import Wrapper from 'wrappers/public-profile/Card';
 const Card = () => {
   const { user } = useAppContext();
   const { profile, isLoadingProfile } = useProfileContext();
-  console.log('profile', profile);
   const [company, mobile, website, bio] = [
     'My Company',
     'My mobile',
