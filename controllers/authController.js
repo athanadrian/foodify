@@ -12,7 +12,7 @@ import Follow from '../models/Follow.js';
 import Notification from '../models/Notification.js';
 
 const userDefaultAvatar =
-  'https://res.cloudinary.com/indersingh/image/upload/v1593464618/App/user_mklcpl.png';
+  'https://res.cloudinary.com/atana/image/upload/v1621327671/default_avatar.png';
 
 // User's username right format
 const regexUserName = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/;
@@ -167,15 +167,13 @@ export const updateUser = async (req, res, next) => {
   const token = user.createJWT();
   const userFollowStats = await Follow.findOne({ user: user._id });
 
-  res
-    .status(StatusCodes.OK)
-    .json({
-      user,
-      userFollowStats,
-      token,
-      home: user.home,
-      location: user.location,
-    });
+  res.status(StatusCodes.OK).json({
+    user,
+    userFollowStats,
+    token,
+    home: user.home,
+    location: user.location,
+  });
 };
 
 //@desc         Forgot Password
