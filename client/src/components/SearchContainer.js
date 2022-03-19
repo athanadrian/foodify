@@ -14,7 +14,7 @@ const SearchContainer = () => {
     isFoodyLoading,
     search,
     searchCuisine,
-    searchFoody,
+    searchMenu,
     searchCost,
     searchStatus,
     searchType,
@@ -24,7 +24,7 @@ const SearchContainer = () => {
     sort,
     statusOptions,
     costOptions,
-    foodyOptions,
+    menuOptions,
     cuisineOptions,
     typeOptions,
     sortOptions,
@@ -73,11 +73,11 @@ const SearchContainer = () => {
             allOption
           />
           <FormEnumSelect
-            name='searchFoody'
-            value={searchFoody}
-            labelText='foody type'
+            name='searchMenu'
+            value={searchMenu}
+            labelText='menu type'
             handleChange={handleSearch}
-            list={foodyOptions}
+            list={menuOptions}
             allOption
           />
           <FormEnumSelect
