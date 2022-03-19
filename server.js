@@ -57,21 +57,21 @@ app.use(mongoSanitize());
 
 // Set Security headers
 app.use(helmet());
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     useDefaults: true,
-//     directives: {
-//       'default-src': ["'self'"],
-//       'base-uri': ["'self'"],
-//       'font-src': ["'self'", 'https:', 'data:'],
-//       'frame-ancestors': ["'self'"],
-//       'img-src': ["'self'", 'data:', 'http://res.cloudinary.com'],
-//       'script-src': ["'self'"],
-//       'script-src-attr': ["'none'"],
-//       'style-src': ["'self'", 'https:', "'unsafe-inline'"],
-//     },
-//   })
-// );
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      'default-src': ["'self'"],
+      'base-uri': ["'self'"],
+      'font-src': ["'self'", 'https:', 'data:'],
+      'frame-ancestors': ["'self'"],
+      'img-src': ["'self'", 'data:', 'http://res.cloudinary.com'],
+      'script-src': ["'self'"],
+      'script-src-attr': ["'none'"],
+      'style-src': ["'self'", 'https:', "'unsafe-inline'"],
+    },
+  })
+);
 
 // Prevent xss attacks
 app.use(xss());
