@@ -28,8 +28,8 @@ const User = () => {
     <Wrapper>
       <Card />
       <Social />
-      <Followers />
-      <Following />
+      {/* <Followers />
+      <Following /> */}
     </Wrapper>
   );
 };
