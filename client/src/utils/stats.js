@@ -6,7 +6,7 @@ export const cuisineDefaultStats = (stats) => {
       title: cuisines[0].text,
       enumQuery: cuisines[0].enum,
       category: 'Cuisine',
-      count: stats?.greek || 1,
+      count: stats?.greek || 0,
       icon: cuisines[0].icon,
       color: '#0369a1',
       bcg: '#7dd3fc',

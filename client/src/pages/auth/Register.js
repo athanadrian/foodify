@@ -9,8 +9,8 @@ import Wrapper from 'wrappers/RegisterPage';
 const initialState = {
   username: '',
   name: '',
-  email: '@gmail.com',
-  password: '123456',
+  email: '',
+  password: '',
   isMember: false,
 };
 
