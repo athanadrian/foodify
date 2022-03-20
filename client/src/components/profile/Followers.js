@@ -3,6 +3,7 @@ import { useAppContext } from 'context/contexts/appContext';
 import { useProfileContext } from 'context/contexts/profileContext';
 import Wrapper from 'wrappers/public-profile/Followers';
 import { FollowUser } from '.';
+import DefaultAvatar from 'assets/images/avatar.png';
 
 const Followers = () => {
   const { user } = useAppContext();
@@ -29,7 +30,7 @@ const Followers = () => {
             <FollowUser
               key={_id}
               username={username}
-              img={profilePicUrl}
+              img={profilePicUrl || DefaultAvatar}
               name={name}
               lastName={lastName}
               email={email}

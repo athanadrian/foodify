@@ -1,6 +1,7 @@
 import { Loading } from 'components';
 import { useProfileContext } from 'context/contexts/profileContext';
 import Wrapper from 'wrappers/public-profile/Header';
+import DefaultAvatar from 'assets/images/avatar.png';
 
 const Header = () => {
   const { profile, isLoadingProfile } = useProfileContext();
@@ -13,15 +14,16 @@ const Header = () => {
     );
   return (
     <Wrapper>
-      {profile?.user?.profilePicUrl && (
-        <img src={profile?.user?.profilePicUrl} alt={profile?.user?.name} />
-      )}
+      <img
+        src={profile?.user?.profilePicUrl || DefaultAvatar}
+        alt={profile?.user?.name}
+      />
       {profile?.user?.name && (
         <>
           <h4>
-            Profile:{' '}
+            Profile: "
             <strong>
-              <span> {profile?.user?.name.toUpperCase()}</span>,{' '}
+              <span>{profile?.user?.name.toUpperCase()}</span>"{' '}
             </strong>
           </h4>
           {<span className='username'>@{profile?.user?.username}</span>}

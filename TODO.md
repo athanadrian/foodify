@@ -28,7 +28,7 @@ TODO
 
 > 13. Users Tab
 
-> 14. Implement ~~Visited~~ -Interested
+> ~~14. Implement ~~Visited~~
 
 > ~~15. Lookup-Data fix.~~
 
@@ -48,7 +48,7 @@ TODO
 
 > ~~23. Remove MapContainer, MapModal_original ?~~
 
-> 24. Remove Geolib from server
+> ~~24. Remove Geolib from server~~
 
 > ~~25. Merge reset/forgot password~~
 

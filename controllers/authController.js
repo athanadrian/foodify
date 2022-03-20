@@ -11,9 +11,6 @@ import Profile from '../models/Profile.js';
 import Follow from '../models/Follow.js';
 import Notification from '../models/Notification.js';
 
-const userDefaultAvatar =
-  'https://res.cloudinary.com/atana/image/upload/v1621327671/default_avatar.png';
-
 // User's username right format
 const regexUserName = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/;
 
@@ -76,7 +73,7 @@ export const register = async (req, res, next) => {
     name,
     email: email.toLowerCase(),
     password,
-    profilePicUrl: req.body.profilePicUrl || userDefaultAvatar,
+    profilePicUrl: req.body.profilePicUrl || '',
   });
   const token = user.createJWT();
 

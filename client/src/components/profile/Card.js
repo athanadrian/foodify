@@ -5,6 +5,7 @@ import UserHeader from 'components/UserHeader';
 import { useAppContext } from 'context/contexts/appContext';
 import { useProfileContext } from 'context/contexts/profileContext';
 import Wrapper from 'wrappers/public-profile/Card';
+import DefaultAvatar from 'assets/images/avatar.png';
 
 const Card = () => {
   const { user } = useAppContext();
@@ -26,7 +27,7 @@ const Card = () => {
   return (
     <Wrapper>
       <UserHeader
-        src={profile?.user?.profilePicUrl}
+        src={profile?.user?.profilePicUrl || DefaultAvatar}
         name={profile?.user?.name}
         alt={profile?.user?.name}
         username={profile?.user?.username}

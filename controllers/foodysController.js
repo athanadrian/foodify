@@ -96,7 +96,7 @@ export const getMyFoodys = async (req, res, next) => {
     queryObj.cost = cost;
   }
 
-  if (foody !== 'all') {
+  if (menu !== 'all') {
     queryObj.menu = menu;
   }
 
