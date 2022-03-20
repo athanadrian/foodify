@@ -16,8 +16,8 @@ const Landing = () => {
           </h1>
           <p>
             At the end of November my wife with her business partners and I
-            visited restaurant "<span className='important'>title...</span>" to
-            have our "<span className='important'>dinner...</span>". It was
+            visited the restaurant "<span className='important'>title...</span>"
+            to have our "<span className='important'>dinner...</span>". It was
             located at the "<span className='important'>village...</span>". It
             is built in the style of a huntsman's hut. This restaurant was
             chosen for its unique "<span className='important'>cuisine...</span>
@@ -27,13 +27,13 @@ const Landing = () => {
           <p>
             At first, the "<span className='important'>menu...</span>" itself
             surprised our guests – it looked like a newspaper and no one guessed
-            to look into it. Several newspapers were lying at our tables not
+            to look at it. Several newspapers were lying at our tables not
             catching our attention.
           </p>
           <p>
             The uniqueness of the restaurant lies in that you end up having an
             excellent "<span className='important'>dinner...</span>" without
-            have to spend a large amount of money cause the "
+            having to spend a large amount of money cause the "
             <span className='important'>cost...</span>" is "
             <span className='important'>average...</span>"
           </p>
