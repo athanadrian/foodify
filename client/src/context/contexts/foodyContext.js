@@ -41,7 +41,6 @@ import {
   ADD_FOODY_MARKER,
   SET_FOODY_CURRENT_LOCATION,
   ADD_USER_MARKER,
-  SET_USER_CURRENT_LOCATION,
 } from '../actions/foodyActions';
 import { costs, cuisines, types, menus, statuses } from 'utils/lookup-data';
 import useGeoLocation from 'hooks/useGeolocation';
@@ -158,10 +157,6 @@ const FoodyProvider = ({ children }) => {
 
   const { clientApi } = useClientApi();
 
-  const setUserCurrentLocation = ({ alertText }) => {
-    dispatch({ type: SET_USER_CURRENT_LOCATION, payload: { alertText } });
-    clearAlert();
-  };
   const setFoodyCurrentLocation = ({ alertText }) => {
     dispatch({ type: SET_FOODY_CURRENT_LOCATION, payload: { alertText } });
     clearAlert();
@@ -539,7 +534,6 @@ const FoodyProvider = ({ children }) => {
         changePage,
         addFoodyLocation,
         addUserLocation,
-        setUserCurrentLocation,
         setFoodyCurrentLocation,
         likeUnlikeFoody,
         getFoodyLikes,

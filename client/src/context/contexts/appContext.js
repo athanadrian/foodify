@@ -22,6 +22,7 @@ import {
   UPDATE_USER_BEGIN,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
+  SET_USER_CURRENT_LOCATION,
   SET_USER_NOTIFICATIONS_TO_READ,
   ADD_FOLLOW_TO_USER_FOLLOWING_STATS,
   REMOVE_FOLLOW_FROM_USER_FOLLOWING_STATS,
@@ -120,6 +121,11 @@ const AppProvider = ({ children }) => {
   const logoutUser = () => {
     dispatch({ type: LOGOUT_USER });
     removeUserFromLocalStorage();
+  };
+
+  const setUserCurrentLocation = ({ alertText }) => {
+    dispatch({ type: SET_USER_CURRENT_LOCATION, payload: { alertText } });
+    clearAlert();
   };
 
   const setUserNotificationsToRead = async () => {
@@ -245,6 +251,7 @@ const AppProvider = ({ children }) => {
         checkUsernameAvailability,
         addFollowToUserFollowingStats,
         removeFollowToUserFollowingStats,
+        setUserCurrentLocation,
       }}
     >
       {children}

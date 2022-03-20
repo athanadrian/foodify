@@ -39,6 +39,10 @@ const Register = () => {
   };
 
   useEffect(() => {
+    setValues(initialState);
+  }, []);
+
+  useEffect(() => {
     checkUsernameAvailability(values.username);
     // eslint-disable-next-line
   }, [values.username]);

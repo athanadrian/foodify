@@ -39,7 +39,6 @@ import {
   ADD_FOODY_MARKER,
   SET_FOODY_CURRENT_LOCATION,
   ADD_USER_MARKER,
-  SET_USER_CURRENT_LOCATION,
 } from '../actions/foodyActions';
 
 const reducer = (state, action) => {
@@ -431,19 +430,6 @@ const reducer = (state, action) => {
     return {
       ...state,
       showInfoWindow: false,
-    };
-  }
-
-  if (action.type === SET_USER_CURRENT_LOCATION) {
-    return {
-      ...state,
-      homeLocation: {
-        lat: state.myLocation.coordinates.lat,
-        lng: state.myLocation.coordinates.lng,
-      },
-      showAlert: true,
-      alertType: 'success',
-      alertText: action.payload.alertText,
     };
   }
 

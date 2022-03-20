@@ -19,6 +19,7 @@ import {
   UPDATE_USER_BEGIN,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
+  SET_USER_CURRENT_LOCATION,
   SET_USER_NOTIFICATIONS_TO_READ,
   ADD_FOLLOW_TO_USER_FOLLOWING_STATS,
   REMOVE_FOLLOW_FROM_USER_FOLLOWING_STATS,
@@ -170,6 +171,19 @@ const reducer = (state, action) => {
       showAlert: true,
       alertType: 'danger',
       alertText: action.payload.msg,
+    };
+  }
+
+  if (action.type === SET_USER_CURRENT_LOCATION) {
+    return {
+      ...state,
+      homeLocation: {
+        lat: state.myLocation.coordinates.lat,
+        lng: state.myLocation.coordinates.lng,
+      },
+      showAlert: true,
+      alertType: 'success',
+      alertText: action.payload.alertText,
     };
   }
 
