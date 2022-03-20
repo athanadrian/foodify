@@ -11,7 +11,7 @@ const Wrapper = styled.article`
     .user-data-container {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: end;
     }
 
     .user-data {

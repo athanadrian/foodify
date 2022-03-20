@@ -83,7 +83,7 @@ const AddFoody = () => {
               <FormButton
                 Icon={RiRoadMapLine}
                 onClick={toggleModal}
-                btnText='Pin it on Map!'
+                btnText='Pin Foody on Map!'
                 className='map-btn'
               />
               <FormButton

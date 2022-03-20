@@ -35,6 +35,7 @@ const Card = () => {
         email={profile?.user?.email}
         pageId={profile?.user?._id}
         loggedUserId={user?._id}
+        profile
       />
       <p className='bio'>{profile?.bio || bio}</p>
       <div className='links space-between'>

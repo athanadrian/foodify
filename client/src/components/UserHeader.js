@@ -11,24 +11,29 @@ const UserHeader = ({
   username,
   loggedUserId,
   pageId,
+  profile,
 }) => {
   const isOwnAccount = pageId === loggedUserId;
   return (
     <Wrapper>
       <header>
         <img src={src} alt={alt} />
+        <div className='user-data'>
+          <UserLink isOwnAccount={isOwnAccount} username={username} />
+          {profile && (
+            <>
+              <span className='full-name'>
+                {name} {lastName}
+              </span>
+              <div>
+                <a className='email' href={username}>
+                  {email}
+                </a>
+              </div>
+            </>
+          )}
+        </div>
         <div className='user-data-container'>
-          <div className='user-data'>
-            <UserLink isOwnAccount={isOwnAccount} username={username} />
-            <span className='full-name'>
-              {name} {lastName}
-            </span>
-            <div>
-              <a className='email' href={username}>
-                {email}
-              </a>
-            </div>
-          </div>
           <FollowButton isOwnAccount={isOwnAccount} id={pageId} />
         </div>
       </header>

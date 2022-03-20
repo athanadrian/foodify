@@ -112,7 +112,7 @@ const UserForm = () => {
         <FormButton
           Icon={RiRoadMapLine}
           onClick={toggleModal}
-          btnText='Pin it on Map!'
+          btnText='Pin Home on Map!'
           className='map-btn'
         />
         <FormButton

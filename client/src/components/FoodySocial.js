@@ -5,6 +5,7 @@ import LikeButton from './social-buttons/LikeButton';
 import VisitButton from './social-buttons/VisitButton';
 import UserHeader from './UserHeader';
 import { useFoodyContext } from 'context/contexts/foodyContext';
+import DefaultAvatar from 'assets/images/avatar.png';
 
 const FoodySocial = () => {
   const { user } = useAppContext();
@@ -13,11 +14,11 @@ const FoodySocial = () => {
   const isLiked = likes.filter((like) => like.user._id === user._id).length > 0;
   const isVisited =
     visits.filter((visit) => visit.user._id === user._id).length > 0;
-
+  console.log('foodyDetail', foodyDetail);
   return (
     <Wrapper>
       <UserHeader
-        src={foodyDetail?.createdBy?.profilePicUrl}
+        src={foodyDetail?.createdBy?.profilePicUrl || DefaultAvatar}
         name={foodyDetail?.createdBy?.name}
         alt={foodyDetail?.createdBy?.name}
         username={foodyDetail?.createdBy?.username}
