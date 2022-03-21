@@ -88,7 +88,8 @@ const Wrapper = styled.article`
   }
 
   @media (max-width: 560px) {
-    .full-name {
+    .full-name,
+    .email {
       display: none;
     }
   }

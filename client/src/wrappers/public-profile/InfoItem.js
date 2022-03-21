@@ -11,6 +11,7 @@ const Wrapper = styled.section`
     column-gap: 3rem;
     align-items: center;
     line-height: 1.75 !important;
+
     span {
       width: 3rem;
       height: 3rem;
@@ -63,6 +64,11 @@ const Wrapper = styled.section`
     .grey {
       background: var(--grey-100);
       color: var(--grey-700);
+    }
+  }
+  @media (max-width: 540px) {
+    .item {
+      column-gap: 2rem;
     }
   }
 `;
