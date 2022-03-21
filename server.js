@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 //import cors from 'cors';
 import 'colors';
+import compression from 'compression';
+
 import 'express-async-errors';
 
 import { dirname } from 'path';
@@ -41,6 +43,11 @@ const app = express();
 if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'));
 }
+
+// For compression responses
+
+app.use(compression());
+
 // Prevent CORS conflict
 //app.use(cors());
 
