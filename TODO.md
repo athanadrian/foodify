@@ -72,7 +72,7 @@ TODO
 
 > ~~35. Implement Search by distance~~
 
-> 36. Setup Production DB
+> ~~36. Setup Production DB~~
 
 > 37. Add translation
 

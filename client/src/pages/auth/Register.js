@@ -29,6 +29,13 @@ const Register = () => {
 
   const [values, setValues] = useState(initialState);
 
+  const clearValues = () => {
+    setValues((prev) => ({
+      ...prev,
+      username: '',
+    }));
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues((prev) => ({ ...prev, [name]: value }));
@@ -36,6 +43,7 @@ const Register = () => {
 
   const handleToggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
+    clearValues();
   };
 
   useEffect(() => {
@@ -54,7 +62,6 @@ const Register = () => {
       displayAlert();
       return;
     }
-
     const currentUser = {
       username,
       name,
