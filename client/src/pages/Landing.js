@@ -14,7 +14,7 @@ const Landing = () => {
           <h1>
             foody <span>touring</span> app
           </h1>
-          {/* <p>
+          <p>
             At the end of November my wife with her business partners and I
             visited the restaurant "<span className='important'>title...</span>"
             to have our "<span className='important'>dinner...</span>". It was
@@ -36,7 +36,7 @@ const Landing = () => {
             having to spend a large amount of money cause the "
             <span className='important'>cost...</span>" is "
             <span className='important'>average...</span>"
-          </p> */}
+          </p>
           <p>
             Use <span className='important'>Foodify</span> as your journal to
             keep track of the restaurants you have{' '}
