@@ -1,20 +1,10 @@
-import { useFoodyContext } from 'context/contexts/foodyContext';
 import { useProfileContext } from 'context/contexts/profileContext';
 import { useEffect } from 'react';
-import {
-  ChartsContainer,
-  MapModal,
-  Modal,
-  StatsContainer,
-  ProfileForm,
-  UserForm,
-} from 'components';
+import { MapModal, Modal, ProfileForm, UserForm } from 'components';
 import Wrapper from 'wrappers/DashboardFormPage';
-import StatsWrapper from 'wrappers/StatsContainer';
 import { useAppContext } from 'context/contexts/appContext';
 
 const EditUser = () => {
-  const { monthlyCreations } = useFoodyContext();
   const { showModal, toggleModal } = useAppContext();
   const { getMyProfile } = useProfileContext();
 
@@ -34,13 +24,6 @@ const EditUser = () => {
         <Wrapper>
           <ProfileForm />
         </Wrapper>
-      </div>
-      <div className='dashboard-page'>
-        <StatsWrapper>
-          <h2 className='user-statistics'>My Creations</h2>
-          <StatsContainer />
-          {monthlyCreations.length > 0 && <ChartsContainer />}
-        </StatsWrapper>
       </div>
       <div>
         <Modal open={showModal} onClose={toggleModal} center>
