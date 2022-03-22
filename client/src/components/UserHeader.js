@@ -26,9 +26,18 @@ const UserHeader = ({
                 {name} {lastName}
               </span>
               <div>
-                <a className='email' href={username}>
-                  {email}
-                </a>
+                {!isOwnAccount ? (
+                  <a
+                    className='email'
+                    href={`mailto:${email}`}
+                    target='_blank'
+                    rel='noreferrer noopener'
+                  >
+                    {email}
+                  </a>
+                ) : (
+                  <span className='email'>{email}</span>
+                )}
               </div>
             </>
           )}

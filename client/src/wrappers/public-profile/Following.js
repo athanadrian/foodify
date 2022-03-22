@@ -59,7 +59,8 @@ const Wrapper = styled.article`
       text-transform: none;
     }
     .email {
-      a {
+      a,
+      span {
         color: var(--grey-500);
       }
     }

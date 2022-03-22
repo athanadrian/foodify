@@ -10,21 +10,28 @@ const FollowUser = ({
   email,
   loggedUserId,
 }) => {
+  const isOwnAccount = profileUserId === loggedUserId;
   return (
     <article key={profileUserId}>
       <img src={img} alt={username} />
       <div className='follow-container'>
         <div className='user-data'>
-          <UserLink
-            isOwnAccount={profileUserId === loggedUserId}
-            username={username}
-          />
-          ,
+          <UserLink isOwnAccount={isOwnAccount} username={username} />,
           <span className='full-name'>
             {name} {lastName}
           </span>
           <div className='email'>
-            <a href={username}>{email}</a>
+            {!isOwnAccount ? (
+              <a
+                href={`mailto:${email}`}
+                target='_blank'
+                rel='noreferrer noopener'
+              >
+                {email}
+              </a>
+            ) : (
+              <span>{email}</span>
+            )}
           </div>
         </div>
         <FollowButton
