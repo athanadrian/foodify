@@ -73,7 +73,7 @@ app.use(
       'img-src': [
         "'self'",
         'data:',
-        'https://res.cloudinary.com',
+        //'https://res.cloudinary.com',
         'https://maps.googleapis.com',
       ],
       'script-src': ["'self'", 'data:', 'https://maps.googleapis.com'],
