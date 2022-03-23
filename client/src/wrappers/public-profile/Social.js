@@ -27,13 +27,13 @@ const Wrapper = styled.article`
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
   }
 
   .underline {
     width: 100%;
     height: 0.05rem;
-    background: var(--primary-500);
+    background: var(--grey-200);
     margin-left: auto;
     margin-right: auto;
     @media (max-width: 992px) {
@@ -45,6 +45,10 @@ const Wrapper = styled.article`
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+  .message {
+    margin-top: 2rem;
+    //justify-content: space-around;
   }
   .social-icons .social-icon {
     font-size: 2.5rem;
@@ -66,6 +70,18 @@ const Wrapper = styled.article`
   }
   .instagram-icon {
     color: #fc5345;
+  }
+  .messenger-icon {
+    color: #006aff;
+  }
+  .whatsApp-icon {
+    color: #25d366;
+  }
+  .viber-icon {
+    color: #59267c;
+  }
+  .mobile-icon {
+    color: #deac1af7;
   }
 `;
 export default Wrapper;

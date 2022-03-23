@@ -5,26 +5,34 @@ import { useProfileContext } from 'context/contexts/profileContext';
 
 const Social = () => {
   const { profile } = useProfileContext();
-
   return (
     <Wrapper>
       <div className='underline' />
       <div className='hero-info'>
         <div className='social-icons'>
-          {profileSocial(profile?.social).map((icon) => {
-            return <SocialItem key={icon.id} {...icon} />;
-          })}
+          {profileSocial(profile?.social, profile?.mobile)
+            .slice(0, 4)
+            .map((icon) => {
+              return <SocialItem key={icon.id} {...icon} />;
+            })}
+        </div>
+        <div className='social-icons message'>
+          {profileSocial(profile?.social, profile?.mobile)
+            .slice(4, 8)
+            .map((icon) => {
+              return <SocialItem key={icon.id} {...icon} />;
+            })}
         </div>
       </div>
     </Wrapper>
   );
 };
 
-const SocialItem = ({ Icon, url, iconClass }) => {
+const SocialItem = ({ Icon, url, className, iconClass, size }) => {
   return (
-    <div>
-      <a href={url}>
-        <Icon className={`social-icon ${iconClass}`} />
+    <div className={className}>
+      <a href={url} target='_blank' rel='noreferrer noopener'>
+        <Icon className={`social-icon ${iconClass}`} size={size} />
       </a>
     </div>
   );

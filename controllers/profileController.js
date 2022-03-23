@@ -90,6 +90,9 @@ export const updateProfile = async (req, res, next) => {
     youtube,
     twitter,
     instagram,
+    messenger,
+    whatsApp,
+    viber,
     profilePicUrl,
   } = req.body;
 
@@ -110,6 +113,9 @@ export const updateProfile = async (req, res, next) => {
   if (instagram) profileFields.social.instagram = instagram;
 
   if (twitter) profileFields.social.twitter = twitter;
+  if (messenger) profileFields.social.messenger = messenger;
+  if (whatsApp) profileFields.social.whatsApp = whatsApp;
+  if (viber) profileFields.social.viber = viber;
 
   const profile = await Profile.findOneAndUpdate(
     { user: userId },

@@ -50,6 +50,9 @@ export const register = async (req, res, next) => {
     youtube,
     twitter,
     instagram,
+    messenger,
+    whatsApp,
+    viber,
   } = req.body;
   if (!name || !email || !password || !username) {
     throw new BadRequestError('Please provide all values!');
@@ -87,6 +90,9 @@ export const register = async (req, res, next) => {
   if (youtube) profileFields.social.youtube = youtube;
   if (instagram) profileFields.social.instagram = instagram;
   if (twitter) profileFields.social.twitter = twitter;
+  if (messenger) profileFields.social.messenger = messenger;
+  if (whatsApp) profileFields.social.whatsApp = whatsApp;
+  if (viber) profileFields.social.viber = viber;
 
   await new Profile(profileFields).save();
   await new Notification({ toUser: user._id, notifications: [] }).save();

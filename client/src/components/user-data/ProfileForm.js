@@ -22,6 +22,9 @@ const ProfileForm = () => {
     twitter: '',
     facebook: '',
     instagram: '',
+    messenger: '',
+    whatsApp: '',
+    viber: '',
   };
   const [values, setValues] = useState(initialState);
 
@@ -36,6 +39,9 @@ const ProfileForm = () => {
       twitter: profile?.social?.twitter || '',
       facebook: profile?.social?.facebook || '',
       instagram: profile?.social?.instagram || '',
+      messenger: profile?.social?.messenger || '',
+      whatsApp: profile?.social?.whatsApp || '',
+      viber: profile?.social?.viber || '',
     }));
   }, [profile]);
 
@@ -55,6 +61,9 @@ const ProfileForm = () => {
       twitter,
       facebook,
       instagram,
+      messenger,
+      whatsApp,
+      viber,
     } = values;
     updateProfile({
       bio,
@@ -65,6 +74,9 @@ const ProfileForm = () => {
       twitter,
       facebook,
       instagram,
+      messenger,
+      whatsApp,
+      viber,
     });
   };
   return (
@@ -128,6 +140,29 @@ const ProfileForm = () => {
           type='text'
           value={values.youtube}
           labelText='youtube'
+          handleChange={handleChange}
+        />
+        <FormInput
+          name='messenger'
+          type='text'
+          value={values.messenger}
+          labelText='messenger'
+          handleChange={handleChange}
+        />
+        <FormInput
+          name='whatsApp'
+          type='text'
+          value={values.whatsApp}
+          placeholder='whatsapp number, +......'
+          labelText='whatsApp'
+          handleChange={handleChange}
+        />
+        <FormInput
+          name='viber'
+          type='text'
+          value={values.viber}
+          placeholder='viber number, +......'
+          labelText='viber'
           handleChange={handleChange}
         />
         <FormButton

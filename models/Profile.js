@@ -10,6 +10,9 @@ const ProfileSchema = new mongoose.Schema(
     mobile: { type: String },
     social: {
       facebook: { type: String },
+      messenger: { type: String },
+      whatsApp: { type: String },
+      viber: { type: String },
       twitter: { type: String },
       youtube: { type: String },
       instagram: { type: String },
