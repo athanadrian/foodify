@@ -90,7 +90,7 @@ const MapModal = ({ profile }) => {
     };
     panTo(markedLocation);
     profile
-      ? addUserLocation(markedLocation)
+      ? addUserLocation(markedLocation, 'User home location registered!')
       : addFoodyLocation(markedLocation);
   };
 

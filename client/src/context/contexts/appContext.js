@@ -22,7 +22,8 @@ import {
   UPDATE_USER_BEGIN,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
-  SET_USER_CURRENT_LOCATION,
+  SET_USER_HOME_CURRENT_LOCATION,
+  SET_USER_HOME_LOCATION,
   SET_USER_NOTIFICATIONS_TO_READ,
   ADD_FOLLOW_TO_USER_FOLLOWING_STATS,
   REMOVE_FOLLOW_FROM_USER_FOLLOWING_STATS,
@@ -123,8 +124,16 @@ const AppProvider = ({ children }) => {
     removeUserFromLocalStorage();
   };
 
-  const setUserCurrentLocation = ({ alertText }) => {
-    dispatch({ type: SET_USER_CURRENT_LOCATION, payload: { alertText } });
+  const setUserHomeCurrentLocation = ({ alertText }) => {
+    dispatch({ type: SET_USER_HOME_CURRENT_LOCATION, payload: { alertText } });
+    clearAlert();
+  };
+
+  const setUserHomeLocation = ({ alertText, location }) => {
+    dispatch({
+      type: SET_USER_HOME_LOCATION,
+      payload: { alertText, location },
+    });
     clearAlert();
   };
 
@@ -251,7 +260,8 @@ const AppProvider = ({ children }) => {
         checkUsernameAvailability,
         addFollowToUserFollowingStats,
         removeFollowToUserFollowingStats,
-        setUserCurrentLocation,
+        setUserHomeCurrentLocation,
+        setUserHomeLocation,
       }}
     >
       {children}

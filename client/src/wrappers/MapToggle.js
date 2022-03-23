@@ -41,6 +41,8 @@ const Wrapper = styled.section`
     .btn-container {
       height: 100px;
       flex-direction: column;
+      top: 1.3rem;
+      left: -1rem;
     }
   }
 `;

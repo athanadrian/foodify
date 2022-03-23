@@ -8,7 +8,7 @@ import { MdOutlineUpdate } from 'react-icons/md';
 import { RiMapPinUserLine } from 'react-icons/ri';
 
 import { useAppContext } from 'context/contexts/appContext';
-import Wrapper from 'wrappers/Foody';
+import Wrapper from 'wrappers/MapFoody';
 import FoodyInfo from './FoodyInfo';
 import {
   mapEnumObject,
@@ -28,7 +28,7 @@ import {
 } from '.';
 import { useFoodyContext } from 'context/contexts/foodyContext';
 
-const Foody = ({
+const MapFoody = ({
   map,
   _id,
   title,
@@ -142,94 +142,93 @@ const Foody = ({
   return (
     <>
       <Wrapper iconColor={calculationConfig.iconColor}>
-        <header>
-          <div className='main-icon'>{title.charAt(0)}</div>
-          <div className='header-items'>
-            <div className='info center'>
-              <div>
-                <h5>{title}</h5>
-                <p>{village}</p>
+        <div className='map-container'>
+          <header>
+            <div className='main-icon'>{title.charAt(0)}</div>
+            <div className='header-items'>
+              <div className='info center'>
+                <div>
+                  <h5>{title}</h5>
+                  <p>{village}</p>
+                </div>
+              </div>
+              <div
+                title={calculationConfig.tooltipTopIcon}
+                className='location'
+                onClick={calculationConfig.func}
+              >
+                <calculationConfig.TopIcon />
               </div>
             </div>
-            <div
-              title={calculationConfig.tooltipTopIcon}
-              className='location'
-              onClick={calculationConfig.func}
-            >
-              <calculationConfig.TopIcon />
-            </div>
-          </div>
-        </header>
-        <div className='content'>
-          <GoogleMapsLink lat={foodyLocation.lat} lng={foodyLocation.lng} />
-          <div className='content-center'>
-            {!map && (
-              <>
-                <FoodyInfo
-                  tooltip='Created'
-                  icon={<FaRegCalendarPlus />}
-                  text={formatDate(createdAt)}
-                />
-                <FoodyInfo
-                  icon={<MdOutlineUpdate />}
-                  text={relativeDate(updatedAt)}
-                  tooltip='Updated'
-                />
-              </>
-            )}
-            <FoodyInfo
-              tooltip='Cuisine Origin'
-              icon={cuisineObj.icon}
-              text={cuisineObj.text}
-            />
-            <FoodyInfo
-              tooltip='Type of Restaurant'
-              icon={menuObj.icon}
-              text={menuObj.text}
-            />
-            <FoodyInfo
-              tooltip='Cost'
-              icon={<AiOutlineEuro />}
-              text={costObj.icon}
-            />
-            <div className={`cost ${costObj.enum} center`}>{costObj.enum}</div>
-            <FoodyInfo
-              tooltip={calculationConfig.tooltip}
-              icon={<calculationConfig.Icon />}
-              text={renderDistanceText(
-                notSetFoodyLocation,
-                calculationConfig,
-                distance
+          </header>
+          <div className='content'>
+            <GoogleMapsLink lat={foodyLocation.lat} lng={foodyLocation.lng} />
+            <div className='content-center'>
+              {!map && (
+                <>
+                  <FoodyInfo
+                    tooltip='Created'
+                    icon={<FaRegCalendarPlus />}
+                    text={formatDate(createdAt)}
+                  />
+                  <FoodyInfo
+                    icon={<MdOutlineUpdate />}
+                    text={relativeDate(updatedAt)}
+                    tooltip='Updated'
+                  />
+                </>
               )}
-            />
-            <FoodyInfo
-              tooltip={calculationConfig.tooltip}
-              icon={typeObj.icon}
-              text={typeObj.text}
-            />
-            {!map && (
               <FoodyInfo
-                tooltip='remarks'
-                icon={
-                  showRemarks ? (
-                    <BsChevronUp size={22} />
-                  ) : (
-                    <BsChevronDown size={22} />
-                  )
-                }
-                text='remarks'
-                onClick={() => setShowRemarks(!showRemarks)}
+                tooltip='Cuisine Origin'
+                icon={cuisineObj.icon}
+                text={cuisineObj.text}
               />
-            )}
-          </div>
-          {showRemarks && (
-            <div className='remarks-container'>
-              <p className='remarks-text'>
-                {remarks.length > 0 ? remarks : 'no remarks yet'}
-              </p>
+              <FoodyInfo
+                tooltip='Type of Restaurant'
+                icon={menuObj.icon}
+                text={menuObj.text}
+              />
+              <FoodyInfo
+                tooltip='Cost'
+                icon={<AiOutlineEuro />}
+                text={costObj.icon}
+              />
+              <div className={`cost ${costObj.enum} center`}>
+                {costObj.enum}
+              </div>
+              <FoodyInfo
+                tooltip={calculationConfig.tooltip}
+                icon={<calculationConfig.Icon />}
+                text={renderDistanceText(notSetFoodyLocation, distance)}
+              />
+              <FoodyInfo
+                tooltip={calculationConfig.tooltip}
+                icon={typeObj.icon}
+                text={typeObj.text}
+              />
+              {!map && (
+                <FoodyInfo
+                  tooltip='remarks'
+                  icon={
+                    showRemarks ? (
+                      <BsChevronUp size={22} />
+                    ) : (
+                      <BsChevronDown size={22} />
+                    )
+                  }
+                  text='remarks'
+                  onClick={() => setShowRemarks(!showRemarks)}
+                />
+              )}
             </div>
-          )}
-          {!map && (
+            {showRemarks && (
+              <div className='remarks-container'>
+                <p className='remarks-text'>
+                  {remarks.length > 0 ? remarks : 'no remarks yet'}
+                </p>
+              </div>
+            )}
+            {/* {!map && ( */}
             <footer>
               <div className='actions-container'>
                 <button onClick={showFoodyDetails} className='btn detail-btn'>
@@ -269,90 +268,91 @@ const Foody = ({
                 )}
               </div>
             </footer>
-          )}
+            {/* )} */}
 
-          <div className='like-container'>
-            <div className={'space-between'}>
-              <LikeButton
-                size={22}
-                isLiked={isLiked}
-                foodyId={_id}
-                userId={user._id}
-              >
-                {!hasLikes ? (
-                  <span className='action-label'> No likes</span>
-                ) : (
-                  <span
-                    className='likes-btn action-label'
-                    onClick={handleLikes}
-                  >
-                    {likes.length} Like{renderText(likes.length)}
-                  </span>
-                )}
-              </LikeButton>
-              <VisitButton
-                size={22}
-                isVisited={isVisited}
-                foodyId={_id}
-                userId={user._id}
-              >
-                {!hasVisits ? (
-                  <span className='action-label'> No Visits</span>
-                ) : (
-                  <span
-                    className='visits-btn action-label'
-                    onClick={handleVisits}
-                  >
-                    {visits.length} Visit{renderText(visits.length)}
-                  </span>
-                )}
-              </VisitButton>
-              <div className='comment-container'>
-                <div className='center'>
-                  <span className='center' onClick={toggleCommentsModal}>
-                    <AiOutlineComment size={26} />
-                  </span>
-                  {!hasComments ? (
-                    <span className='action-label'> No Comments</span>
+            <div className='like-container map-social'>
+              <div className='social-btn-container'>
+                <LikeButton
+                  size={22}
+                  isLiked={isLiked}
+                  foodyId={_id}
+                  userId={user._id}
+                >
+                  {!hasLikes ? (
+                    <span className='action-label'> No likes</span>
                   ) : (
                     <span
-                      className='comments-btn action-label'
-                      onClick={toggleCommentsModal}
+                      className='likes-btn action-label'
+                      onClick={handleLikes}
                     >
-                      {comments.length} Comment{renderText(comments.length)}
+                      {likes.length} Like{renderText(likes.length)}
                     </span>
                   )}
+                </LikeButton>
+                <VisitButton
+                  size={22}
+                  isVisited={isVisited}
+                  foodyId={_id}
+                  userId={user._id}
+                >
+                  {!hasVisits ? (
+                    <span className='action-label'> No Visits</span>
+                  ) : (
+                    <span
+                      className='visits-btn action-label'
+                      onClick={handleVisits}
+                    >
+                      {visits.length} Visit{renderText(visits.length)}
+                    </span>
+                  )}
+                </VisitButton>
+                <div className='comment-container'>
+                  <div className='center'>
+                    <span className='center' onClick={toggleCommentsModal}>
+                      <AiOutlineComment size={26} />
+                    </span>
+                    {!hasComments ? (
+                      <span className='action-label'> No Comments</span>
+                    ) : (
+                      <span
+                        className='comments-btn action-label'
+                        onClick={toggleCommentsModal}
+                      >
+                        {comments.length} Comment{renderText(comments.length)}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div>
-          <Modal open={openLikesModal} onClose={toggleLikesModal} center>
-            <LikesModal likes={likes} />
-          </Modal>
-          <Modal open={openVisitsModal} onClose={toggleVisitsModal} center>
-            <VisitsModal visits={visits} />
-          </Modal>
-          <Modal open={openCommentsModal} onClose={toggleCommentsModal} center>
-            <CommentsModal foodyId={_id} comments={comments} />
-          </Modal>
+          <div>
+            <Modal open={openLikesModal} onClose={toggleLikesModal} center>
+              <LikesModal likes={likes} />
+            </Modal>
+            <Modal open={openVisitsModal} onClose={toggleVisitsModal} center>
+              <VisitsModal visits={visits} />
+            </Modal>
+            <Modal
+              open={openCommentsModal}
+              onClose={toggleCommentsModal}
+              center
+            >
+              <CommentsModal foodyId={_id} comments={comments} />
+            </Modal>
+          </div>
         </div>
       </Wrapper>
     </>
   );
 };
-export default Foody;
+export default MapFoody;
 
 const renderText = (num) => {
   return num === 1 ? '' : 's';
 };
 
-const renderDistanceText = (
-  notSetFoodyLocation,
-  calculationConfig,
-  distance
-) => {
+const renderDistanceText = (notSetFoodyLocation, distance) => {
   let text = '';
   if (notSetFoodyLocation) {
     text = 'Set foody location';

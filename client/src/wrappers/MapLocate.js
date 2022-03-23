@@ -23,5 +23,10 @@ const Wrapper = styled.section`
     justify-content: center;
     cursor: pointer;
   }
+  @media (max-width: 574px) {
+    .locate {
+      right: 0.5rem;
+    }
+  }
 `;
 export default Wrapper;

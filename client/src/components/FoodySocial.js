@@ -14,7 +14,6 @@ const FoodySocial = () => {
   const isLiked = likes.filter((like) => like.user._id === user._id).length > 0;
   const isVisited =
     visits.filter((visit) => visit.user._id === user._id).length > 0;
-  console.log('foodyDetail', foodyDetail);
   return (
     <Wrapper>
       <UserHeader

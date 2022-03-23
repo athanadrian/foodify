@@ -16,7 +16,7 @@ const UserForm = () => {
     updateUser,
     isLoading,
     toggleModal,
-    setUserCurrentLocation,
+    setUserHomeCurrentLocation,
     checkUsernameAvailability,
     showUsernameAlert,
     isUsernameAvailable,
@@ -30,7 +30,6 @@ const UserForm = () => {
     home: user?.home,
   };
   const [values, setValues] = useState(initialState);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues((prev) => ({ ...prev, [name]: value }));
@@ -112,17 +111,17 @@ const UserForm = () => {
         <FormButton
           Icon={RiRoadMapLine}
           onClick={toggleModal}
-          btnText='Pin Home on Map!'
+          btnText='Pin Home on Map'
           className='map-btn'
         />
         <FormButton
           Icon={BsFillPinMapFill}
           onClick={() =>
-            setUserCurrentLocation({
-              alertText: 'User set to current location!',
+            setUserHomeCurrentLocation({
+              alertText: 'User home set to current location!',
             })
           }
-          btnText='use current position!'
+          btnText='set home current position'
           className='current-btn'
         />
         <FormButton

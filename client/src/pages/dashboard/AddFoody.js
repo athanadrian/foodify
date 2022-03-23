@@ -17,6 +17,8 @@ const AddFoody = () => {
     isEditing,
     isFoodyLoading,
     showAlert,
+    alertText,
+    alertType,
     showModal,
     title,
     village,
@@ -64,7 +66,7 @@ const AddFoody = () => {
         <Wrapper>
           <form className='form'>
             <h3>{`${isEditing ? 'Edit' : 'Add'} Foody`}</h3>
-            {showAlert && <Alert />}
+            {showAlert && <Alert type={alertType} text={alertText} />}
             <div className='form-center'>
               <FormInput
                 name='title'
@@ -83,7 +85,7 @@ const AddFoody = () => {
               <FormButton
                 Icon={RiRoadMapLine}
                 onClick={toggleModal}
-                btnText='Pin Foody on Map!'
+                btnText='Pin Foody on Map'
                 className='map-btn'
               />
               <FormButton
@@ -93,7 +95,7 @@ const AddFoody = () => {
                     alertText: 'Foody set to current location!',
                   })
                 }
-                btnText='set current position!'
+                btnText='set foody current position'
                 className='current-btn'
               />
               <FormEnumSelect

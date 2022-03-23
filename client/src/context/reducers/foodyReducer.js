@@ -410,6 +410,7 @@ const reducer = (state, action) => {
   if (action.type === ADD_USER_MARKER) {
     return {
       ...state,
+      showInfoWindow: true,
       homeLocation: action.payload.homeLocation,
     };
   }

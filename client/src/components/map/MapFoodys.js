@@ -7,6 +7,7 @@ import {
 } from '@react-google-maps/api';
 import { mapStyles, libraries } from 'utils/map-data';
 import ProfileIcon from 'assets/images/current-location.svg';
+import HomeIcon from 'assets/images/home.svg';
 import FoodyIcon from 'assets/images/foody.svg';
 import { MAP_CENTER } from 'utils/constants';
 import MapSearch from './MapSearch';
@@ -14,6 +15,8 @@ import MapLocate from './MapLocate';
 import MapToggle from './MapToggle';
 import { Foody } from '..';
 import { useFoodyContext } from 'context/contexts/foodyContext';
+import { useAppContext } from 'context/contexts/appContext';
+import MapFoody from 'components/MapFoody';
 
 const containerStyle = {
   width: '100%',
@@ -28,6 +31,7 @@ const mapOptions = {
 
 const MapFoodys = () => {
   const { foodys, googleApiKey, myLocation, getAllFoodys } = useFoodyContext();
+  const { homeLocation } = useAppContext();
   const [selected, setSelected] = useState(null);
 
   const { isLoaded, loadError } = useJsApiLoader({
@@ -105,6 +109,22 @@ const MapFoodys = () => {
               />
             </div>
           )}
+          {homeLocation && (
+            <div style={{ zIndex: -1 }}>
+              <Marker
+                icon={{
+                  url: HomeIcon,
+                  origin: new window.google.maps.Point(0, 0),
+                  anchor: new window.google.maps.Point(20, 20),
+                  scaledSize: new window.google.maps.Size(30, 30),
+                }}
+                position={{
+                  lat: homeLocation.lat,
+                  lng: homeLocation.lng,
+                }}
+              />
+            </div>
+          )}
         </>
         {selected ? (
           <InfoWindow
@@ -114,7 +134,7 @@ const MapFoodys = () => {
             }}
             onCloseClick={() => setSelected(null)}
           >
-            <Foody key={selected._id} {...selected} />
+            <MapFoody map key={selected._id} {...selected} />
           </InfoWindow>
         ) : null}
       </GoogleMap>

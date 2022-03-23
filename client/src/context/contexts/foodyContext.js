@@ -110,7 +110,7 @@ const FoodyContext = createContext();
 
 const FoodyProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { homeLocation } = useAppContext();
+  const { setUserHomeLocation, homeLocation } = useAppContext();
   const currentLocation = useGeoLocation();
   state.myLocation = currentLocation;
 
@@ -201,8 +201,9 @@ const FoodyProvider = ({ children }) => {
     dispatch({ type: SET_EDIT_FOODY, payload: { id } });
   };
 
-  const addUserLocation = (location) => {
-    dispatch({ type: ADD_USER_MARKER, payload: { homeLocation: location } });
+  const addUserLocation = (location, alertText) => {
+    dispatch({ type: ADD_USER_MARKER, payload: { alertText } });
+    setUserHomeLocation({ location, alertText: state.alertText });
   };
   const addFoodyLocation = (location) => {
     dispatch({ type: ADD_FOODY_MARKER, payload: { foodyLocation: location } });
