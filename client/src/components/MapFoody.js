@@ -164,20 +164,19 @@ const MapFoody = ({
           <div className='content'>
             <GoogleMapsLink lat={foodyLocation.lat} lng={foodyLocation.lng} />
             <div className='content-center'>
-              {!map && (
-                <>
-                  <FoodyInfo
-                    tooltip='Created'
-                    icon={<FaRegCalendarPlus />}
-                    text={formatDate(createdAt)}
-                  />
-                  <FoodyInfo
-                    icon={<MdOutlineUpdate />}
-                    text={relativeDate(updatedAt)}
-                    tooltip='Updated'
-                  />
-                </>
-              )}
+              <>
+                <FoodyInfo
+                  tooltip='Created'
+                  icon={<FaRegCalendarPlus />}
+                  text={formatDate(createdAt)}
+                />
+                <FoodyInfo
+                  icon={<MdOutlineUpdate />}
+                  text={relativeDate(updatedAt)}
+                  tooltip='Updated'
+                  end
+                />
+              </>
               <FoodyInfo
                 tooltip='Cuisine Origin'
                 icon={cuisineObj.icon}
@@ -187,6 +186,18 @@ const MapFoody = ({
                 tooltip='Type of Restaurant'
                 icon={menuObj.icon}
                 text={menuObj.text}
+                end
+              />
+              <FoodyInfo
+                tooltip={calculationConfig.tooltip}
+                icon={<calculationConfig.Icon />}
+                text={renderDistanceText(notSetFoodyLocation, distance)}
+              />
+              <FoodyInfo
+                tooltip={calculationConfig.tooltip}
+                icon={typeObj.icon}
+                text={typeObj.text}
+                end
               />
               <FoodyInfo
                 tooltip='Cost'
@@ -197,29 +208,17 @@ const MapFoody = ({
                 {costObj.enum}
               </div>
               <FoodyInfo
-                tooltip={calculationConfig.tooltip}
-                icon={<calculationConfig.Icon />}
-                text={renderDistanceText(notSetFoodyLocation, distance)}
+                tooltip='remarks'
+                icon={
+                  showRemarks ? (
+                    <BsChevronUp size={22} />
+                  ) : (
+                    <BsChevronDown size={22} />
+                  )
+                }
+                text='remarks'
+                onClick={() => setShowRemarks(!showRemarks)}
               />
-              <FoodyInfo
-                tooltip={calculationConfig.tooltip}
-                icon={typeObj.icon}
-                text={typeObj.text}
-              />
-              {!map && (
-                <FoodyInfo
-                  tooltip='remarks'
-                  icon={
-                    showRemarks ? (
-                      <BsChevronUp size={22} />
-                    ) : (
-                      <BsChevronDown size={22} />
-                    )
-                  }
-                  text='remarks'
-                  onClick={() => setShowRemarks(!showRemarks)}
-                />
-              )}
             </div>
             {showRemarks && (
               <div className='remarks-container'>
@@ -228,7 +227,6 @@ const MapFoody = ({
                 </p>
               </div>
             )}
-            {/* {!map && ( */}
             <footer>
               <div className='actions-container'>
                 <button onClick={showFoodyDetails} className='btn detail-btn'>
@@ -268,8 +266,6 @@ const MapFoody = ({
                 )}
               </div>
             </footer>
-            {/* )} */}
-
             <div className='like-container map-social'>
               <div className='social-btn-container'>
                 <LikeButton

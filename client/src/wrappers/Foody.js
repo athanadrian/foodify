@@ -164,6 +164,7 @@ const Wrapper = styled.article`
   footer {
     margin-top: 1.5rem;
   }
+  .detail-btn,
   .edit-btn,
   .delete-btn,
   .publish-btn,

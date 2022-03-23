@@ -161,6 +161,7 @@ const Wrapper = styled.article`
     width: 100px;
     height: 30px;
     margin-top: 0.5rem;
+    margin-left: auto;
   }
   .remarks-container {
     border-radius: var(--borderRadius);
@@ -175,6 +176,7 @@ const Wrapper = styled.article`
   footer {
     margin-top: 1.5rem;
   }
+  .detail-btn,
   .edit-btn,
   .delete-btn,
   .publish-btn,

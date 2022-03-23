@@ -13,7 +13,6 @@ import { MAP_CENTER } from 'utils/constants';
 import MapSearch from './MapSearch';
 import MapLocate from './MapLocate';
 import MapToggle from './MapToggle';
-import { Foody } from '..';
 import { useFoodyContext } from 'context/contexts/foodyContext';
 import { useAppContext } from 'context/contexts/appContext';
 import MapFoody from 'components/MapFoody';
@@ -85,7 +84,6 @@ const MapFoodys = () => {
                 anchor: new window.google.maps.Point(15, 15),
                 scaledSize: new window.google.maps.Size(30, 30),
               }}
-              draggable
               position={{
                 lat: foody.location.lat,
                 lng: foody.location.lng,

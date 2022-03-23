@@ -1,8 +1,8 @@
 import Wrapper from 'wrappers/FoodyInfo';
 
-const FoodyInfo = ({ label, onClick, icon, tooltip, text, className }) => {
+const FoodyInfo = ({ end, label, onClick, icon, tooltip, text, className }) => {
   return (
-    <Wrapper className={className} onClick={onClick}>
+    <Wrapper justify={end ? 'end' : 'start'} onClick={onClick}>
       <span title={tooltip} className='icon'>
         {icon}
       </span>

@@ -18,8 +18,14 @@ const Wrapper = styled.article`
     padding: 0.5rem 0.3rem 0 0.3rem;
     letter-spacing: var(--letterSpacing);
     font-size: 1rem;
+    @media (max-width: 1200px) {
+      left: 200px;
+    }
     @media (max-width: 600px) {
       left: 300px;
+    }
+    @media (max-width: 440px) {
+      left: 200px;
     }
   }
   header {

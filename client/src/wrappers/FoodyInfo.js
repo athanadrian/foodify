@@ -4,7 +4,10 @@ const Wrapper = styled.div`
   margin-top: 0.5rem;
   display: flex;
   align-items: center;
-
+  justify-content: ${(props) => props.justify};
+  /* .info-end {
+    justify-content: end;
+  } */
   .icon {
     font-size: 1rem;
     margin-right: 1rem;
