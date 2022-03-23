@@ -66,11 +66,16 @@ app.use(
   helmet.contentSecurityPolicy({
     useDefaults: true,
     directives: {
-      'default-src': ["'self'"],
+      'default-src': ["'self'", 'data:', 'https://maps.googleapis.com'],
       'base-uri': ["'self'"],
       'font-src': ["'self'", 'https:', 'data:'],
       'frame-ancestors': ["'self'"],
-      'img-src': ["'self'", 'data:', 'https://res.cloudinary.com'],
+      'img-src': [
+        "'self'",
+        'data:',
+        'https://res.cloudinary.com',
+        'https://maps.googleapis.com',
+      ],
       'script-src': ["'self'", 'data:', 'https://maps.googleapis.com'],
       'script-src-attr': ["'none'"],
       'style-src': ["'self'", 'https:', "'unsafe-inline'"],
