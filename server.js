@@ -76,6 +76,7 @@ app.use(
         'http://www.w3.org/2000/svg',
         'https://res.cloudinary.com',
         'https://maps.googleapis.com',
+        'https://maps.gstatic.com',
       ],
       'script-src': ["'self'", 'data:', 'https://maps.googleapis.com'],
       'script-src-attr': ["'none'"],
