@@ -73,7 +73,8 @@ app.use(
       'img-src': [
         "'self'",
         'data:',
-        //'https://res.cloudinary.com',
+        'http://www.w3.org/2000/svg',
+        'https://res.cloudinary.com',
         'https://maps.googleapis.com',
       ],
       'script-src': ["'self'", 'data:', 'https://maps.googleapis.com'],
