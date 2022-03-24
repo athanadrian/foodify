@@ -81,7 +81,16 @@ const Wrapper = styled.article`
     color: #59267c;
   }
   .mobile-icon {
+    width: 38px;
+    height: 38px;
     color: #deac1af7;
+    border: 2px solid #deac1af7;
+    border-radius: 50%;
+    padding: 0.4rem;
+  }
+  .mobile-icon:hover {
+    border: 2px solid var(--primary-500);
+    transform: translateY(-10%);
   }
 `;
 export default Wrapper;

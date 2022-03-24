@@ -1,17 +1,15 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
-  .locate {
+  .btn-container {
     position: absolute;
     top: 1.3rem;
     right: 1.2rem;
-    background: none;
-    border: none;
-    z-index: 10;
-  }
-  .locate img {
-    width: 30px;
-    cursor: pointer;
+    width: 100px;
+    max-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   .btn-cover {
     width: 45px;
@@ -23,9 +21,22 @@ const Wrapper = styled.section`
     justify-content: center;
     cursor: pointer;
   }
+  .locate-current,
+  .locate-home {
+    background: none;
+    border: none;
+    z-index: 10;
+    img {
+      width: 25px;
+    }
+  }
+
   @media (max-width: 574px) {
-    .locate {
-      right: 0.5rem;
+    .btn-container {
+      height: 100px;
+      flex-direction: column;
+      top: 1.3rem;
+      right: -1rem;
     }
   }
 `;

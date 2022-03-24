@@ -21,14 +21,7 @@ const Wrapper = styled.section`
     justify-content: center;
     cursor: pointer;
   }
-  .all-foodys {
-    background: none;
-    border: none;
-    z-index: 10;
-    img {
-      width: 25px;
-    }
-  }
+  .all-foodys,
   .my-foodys {
     background: none;
     border: none;
@@ -37,6 +30,7 @@ const Wrapper = styled.section`
       width: 25px;
     }
   }
+
   @media (max-width: 574px) {
     .btn-container {
       height: 100px;
