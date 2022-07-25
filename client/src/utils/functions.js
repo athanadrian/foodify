@@ -12,10 +12,10 @@ export const mapEnumObject = (label, enumList) => {
 };
 
 export const computeDistance = (user, foody) => {
-  const prevLatInRad = toRad(user.lat);
-  const prevLongInRad = toRad(user.lng);
-  const latInRad = toRad(foody.lat);
-  const longInRad = toRad(foody.lng);
+  const prevLatInRad = toRad(user?.lat);
+  const prevLongInRad = toRad(user?.lng);
+  const latInRad = toRad(foody?.lat);
+  const longInRad = toRad(foody?.lng);
 
   const distance =
     // In kilometers
