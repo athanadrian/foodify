@@ -77,7 +77,7 @@ const MapFoodys = () => {
         <>
           {foodys.map((foody) => (
             <Marker
-              key={foody._id}
+              key={foody?._id}
               icon={{
                 url: FoodyIcon,
                 origin: new window.google.maps.Point(0, 0),
@@ -85,8 +85,8 @@ const MapFoodys = () => {
                 scaledSize: new window.google.maps.Size(30, 30),
               }}
               position={{
-                lat: foody.location.lat,
-                lng: foody.location.lng,
+                lat: foody?.location.lat,
+                lng: foody?.location.lng,
               }}
               onClick={() => setSelected(foody)}
             />
@@ -101,8 +101,8 @@ const MapFoodys = () => {
                   scaledSize: new window.google.maps.Size(30, 30),
                 }}
                 position={{
-                  lat: myLocation.coordinates.lat,
-                  lng: myLocation.coordinates.lng,
+                  lat: myLocation?.coordinates?.lat,
+                  lng: myLocation?.coordinates?.lng,
                 }}
               />
             </div>
@@ -117,8 +117,8 @@ const MapFoodys = () => {
                   scaledSize: new window.google.maps.Size(30, 30),
                 }}
                 position={{
-                  lat: homeLocation.lat,
-                  lng: homeLocation.lng,
+                  lat: homeLocation?.lat,
+                  lng: homeLocation?.lng,
                 }}
               />
             </div>
