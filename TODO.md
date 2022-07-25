@@ -76,4 +76,4 @@ TODO
 
 > 37. Add translation
 
-> 38. Update README file
+> ~~38. Update README file~~
