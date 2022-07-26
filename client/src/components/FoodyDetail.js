@@ -67,11 +67,12 @@ const FoodyDetail = () => {
           <div className='info'>
             <h5>{title}</h5>
             <p className='center'>
-              {village} -
+              {village}{' '}
               {phone && (
-                <span style={{ verticalAlign: 'middle' }}>
-                  {phone} <BsFillTelephoneFill />
-                </span>
+                <a className='phone-number' href={`tel:${phone}`}>
+                  {' '}
+                  - {phone} <BsFillTelephoneFill />
+                </a>
               )}
             </p>
           </div>

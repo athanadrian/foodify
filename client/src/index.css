@@ -432,6 +432,19 @@ input[type='range']::-webkit-slider-thumb {
   color: var(--primary-400);
 }
 
+.phone-number {
+  color: var(--primary-500) !important;
+  cursor: pointer;
+  letter-spacing: var(--letterSpacing);
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
+.phone-number:hover {
+  text-decoration: underline;
+  color: var(--primary-400);
+}
+
 /* Apply General CSS  */
 
 .center {
