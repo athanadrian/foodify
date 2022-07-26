@@ -61,28 +61,36 @@ app.use(express.json());
 app.use(mongoSanitize());
 
 // Set Security headers
-app.use(helmet());
+//app.use(helmet());
 app.use(
-  helmet.contentSecurityPolicy({
-    useDefaults: true,
-    directives: {
-      'default-src': ["'self'", 'data:', 'https://maps.googleapis.com'],
-      'base-uri': ["'self'"],
-      'font-src': ["'self'", 'https:', 'data:'],
-      'frame-ancestors': ["'self'"],
-      'img-src': [
-        "'self'",
-        'data:',
-        'http://www.w3.org/2000/svg',
-        'https://res.cloudinary.com',
-        'https://maps.googleapis.com',
-        'https://maps.gstatic.com',
-      ],
-      'script-src': ["'self'", 'data:', 'https://maps.googleapis.com'],
-      'script-src-attr': ["'none'"],
-      'style-src': ["'self'", 'https:', "'unsafe-inline'"],
-    },
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
+    // crossOriginResourcePolicy: 'cross-origin',
+    // contentSecurityPolicy: {
+    //   useDefaults: true,
+    //   directives: {
+    //     'default-src': ["'self'", 'data:', 'https://maps.googleapis.com'],
+    //     'base-uri': ["'self'"],
+    //     'font-src': ["'self'", 'https:', 'data:'],
+    //     'frame-ancestors': ["'self'"],
+    //     'img-src': [
+    //       "'self'",
+    //       'data:',
+    //       'http://www.w3.org/2000/svg',
+    //       'https://res.cloudinary.com',
+    //       'https://maps.googleapis.com',
+    //       'https://maps.gstatic.com',
+    //     ],
+    //     'script-src': ["'self'", 'data:', 'https://maps.googleapis.com'],
+    //     'script-src-attr': ["'none'"],
+    //     'style-src': ["'self'", 'https:', "'unsafe-inline'"],
+    //   },
+    // },
   })
+  // helmet.contentSecurityPolicy({
+
+  // })
 );
 
 // Prevent xss attacks
