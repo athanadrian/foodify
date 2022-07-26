@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 
 import { FaRegCalendarPlus } from 'react-icons/fa';
 import { AiOutlineComment, AiOutlineEuro, AiOutlineHome } from 'react-icons/ai';
-import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
+import {
+  BsChevronDown,
+  BsChevronUp,
+  BsFillTelephoneFill,
+} from 'react-icons/bs';
 import { MdOutlineUpdate } from 'react-icons/md';
 import { RiMapPinUserLine } from 'react-icons/ri';
 
@@ -33,6 +37,7 @@ const MapFoody = ({
   _id,
   title,
   village,
+  phone,
   cuisine,
   type,
   cost,
@@ -149,7 +154,14 @@ const MapFoody = ({
               <div className='info center'>
                 <div>
                   <h5>{title}</h5>
-                  <p>{village}</p>
+                  <p className='center'>
+                    {village} -
+                    {phone && (
+                      <span style={{ verticalAlign: 'middle' }}>
+                        {phone} <BsFillTelephoneFill />
+                      </span>
+                    )}
+                  </p>
                 </div>
               </div>
               <div

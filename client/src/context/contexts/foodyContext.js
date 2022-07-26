@@ -65,6 +65,7 @@ const initialState = {
   editFoodyId: '',
   title: '',
   village: '',
+  phone: '',
   remarks: '',
   cuisine: 'greek',
   type: 'lunch',
@@ -168,6 +169,7 @@ const FoodyProvider = ({ children }) => {
       const {
         title,
         village,
+        phone,
         foodyLocation,
         remarks,
         cuisine,
@@ -178,6 +180,7 @@ const FoodyProvider = ({ children }) => {
       await clientApi.post('/foodys', {
         title,
         village,
+        phone,
         location: foodyLocation,
         remarks,
         cuisine,
@@ -216,6 +219,7 @@ const FoodyProvider = ({ children }) => {
         editFoodyId,
         title,
         village,
+        phone,
         foodyLocation,
         remarks,
         cuisine,
@@ -227,6 +231,7 @@ const FoodyProvider = ({ children }) => {
       await clientApi.patch(`/foodys/${editFoodyId}`, {
         title,
         village,
+        phone,
         location: foodyLocation,
         remarks,
         cuisine,

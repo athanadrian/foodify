@@ -6,7 +6,7 @@ import { GiPathDistance } from 'react-icons/gi';
 import { FiMapPin } from 'react-icons/fi';
 import { AiOutlineEuro } from 'react-icons/ai';
 import { TiDocumentText } from 'react-icons/ti';
-import { BsFillPinMapFill } from 'react-icons/bs';
+import { BsFillPinMapFill, BsFillTelephoneFill } from 'react-icons/bs';
 import { MdOutlineUpdate } from 'react-icons/md';
 
 import { useAppContext } from 'context/contexts/appContext';
@@ -35,6 +35,7 @@ const FoodyDetail = () => {
     _id,
     title,
     village,
+    phone,
     cuisine,
     cost,
     type,
@@ -65,7 +66,14 @@ const FoodyDetail = () => {
         <div className='header-items'>
           <div className='info'>
             <h5>{title}</h5>
-            <p>{village}</p>
+            <p className='center'>
+              {village} -
+              {phone && (
+                <span style={{ verticalAlign: 'middle' }}>
+                  {phone} <BsFillTelephoneFill />
+                </span>
+              )}
+            </p>
           </div>
         </div>
       </header>

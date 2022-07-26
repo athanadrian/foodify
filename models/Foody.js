@@ -5,6 +5,7 @@ const FoodySchema = new mongoose.Schema(
   {
     title: { type: String, required: [true, 'Please provide title.'] },
     village: { type: String, required: [true, 'Please provide village.'] },
+    phone: { type: String },
     remarks: { type: String },
     cuisine: {
       type: String,

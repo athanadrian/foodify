@@ -115,6 +115,7 @@ const reducer = (state, action) => {
       placeEditId: '',
       title: '',
       village: '',
+      phone: '',
       foodyLocation: {
         lat: 0,
         lng: 0,
@@ -164,6 +165,7 @@ const reducer = (state, action) => {
       _id,
       title,
       village,
+      phone,
       location,
       cuisine,
       foody,
@@ -178,6 +180,7 @@ const reducer = (state, action) => {
       editFoodyId: _id,
       title,
       village,
+      phone,
       foodyLocation: location,
       cuisine,
       foody,

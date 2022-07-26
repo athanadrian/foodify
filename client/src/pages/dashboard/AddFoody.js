@@ -22,6 +22,7 @@ const AddFoody = () => {
     showModal,
     title,
     village,
+    phone,
     remarks,
     menu,
     cost,
@@ -80,6 +81,13 @@ const AddFoody = () => {
                 type='text'
                 value={village}
                 labelText='village'
+                handleChange={handleInputChange}
+              />
+              <FormInput
+                name='phone'
+                type='text'
+                value={phone}
+                labelText='phone'
                 handleChange={handleInputChange}
               />
               <FormButton
