@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
-// import cors from 'cors';
+import cors from 'cors';
 import 'colors';
 import compression from 'compression';
 
@@ -47,7 +47,7 @@ if (process.env.NODE_ENV !== 'production') {
 app.use(compression());
 
 // Prevent CORS conflict
-//app.use(cors());
+app.use(cors());
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
